@@ -3,7 +3,7 @@ package wbdata
 type RegionsService service
 
 type Region struct {
-	Name     string
+	ID       string
 	Code     string
 	Iso2Code string
 }

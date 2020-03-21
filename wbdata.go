@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
@@ -92,4 +93,44 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 	}
 
 	return req, nil
+}
+
+
+func (c *Client) do(req *http.Request) (*http.Response, error) {
+	resp, err := c.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if err := checkRes(resp); err != nil {
+		return resp, err
+	}
+
+	return resp, err
+}
+
+type ErrorResponse struct {
+	Message []struct {
+		Id    string
+		Key   string
+		Value string
+	}
+}
+
+func (r *ErrorResponse) Error() string {
+	return fmt.Sprintf("%+v", r.Message)
+}
+
+func checkRes(r *http.Response) error {
+	if c := r.StatusCode; 200 <= c && c <= 299 {
+		return nil
+	}
+
+	errRes := &ErrorResponse{}
+	data, err := ioutil.ReadAll(r.Body)
+	if err != nil && data != nil {
+		json.Unmarshal(data, errRes)
+	}
+	return errRes
 }
