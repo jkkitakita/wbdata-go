@@ -1,6 +1,7 @@
 package wbdata
 
 import (
+	"fmt"
 	"strconv"
 )
 
@@ -48,4 +49,22 @@ func (c *CountriesService) ListCountries(pages PageParams) (PageSummary, []Count
 	}
 
 	return summary, countries, nil
+}
+
+func (c *CountriesService) GetCountry(countryID string) (PageSummary, Country, error) {
+	summary := PageSummary{}
+	country := []Country{}
+
+	s := fmt.Sprintf("countries/%v", countryID)
+	req, err := c.client.NewRequest("GET", s, nil)
+	if err != nil {
+		return PageSummary{}, Country{}, err
+	}
+
+	_, err = c.client.do(req, &[]interface{}{&summary, &country})
+	if err != nil {
+		return PageSummary{}, Country{}, err
+	}
+
+	return summary, country[0], nil
 }
