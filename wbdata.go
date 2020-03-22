@@ -105,6 +105,7 @@ func (c *Client) do(req *http.Request, v *[]interface{}) (*http.Response, error)
 		return nil, err
 	}
 	defer resp.Body.Close()
+	// log.Printf(`req: %+v`, req)
 
 	if err := checkStatusCode(resp); err != nil {
 		return nil, err
