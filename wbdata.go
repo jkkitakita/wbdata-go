@@ -13,9 +13,10 @@ import (
 )
 
 const (
-	defaultBaseURL = "https://api.worldbank.org/"
+	defaultBaseURL = "http://api.worldbank.org/"
 	apiVersion     = "v2"
 	userAgent      = "wbdata"
+	defaultFormat  = "json"
 )
 
 // A Client manages communication with the World Bank Open Data API.
@@ -50,7 +51,7 @@ func NewClient(httpClient *http.Client) *Client {
 	if httpClient == nil {
 		httpClient = &http.Client{}
 	}
-	baseURL, _ := url.Parse(defaultBaseURL)
+	baseURL, _ := url.Parse(defaultBaseURL + apiVersion + "/")
 	c := &Client{client: httpClient, BaseURL: baseURL, UserAgent: userAgent}
 	c.Countries = &CountriesService{client: c}
 	c.Sources = &SourcesService{client: c}
@@ -65,10 +66,13 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 	if !strings.HasSuffix(c.BaseURL.Path, "/") {
 		return nil, fmt.Errorf("BaseURL must have a trailing slash, but %q does not", c.BaseURL)
 	}
+	v := url.Values{}
+	v.Set("format", defaultFormat)
 	u, err := c.BaseURL.Parse(urlStr)
 	if err != nil {
 		return nil, err
 	}
+	url := fmt.Sprintf("%s?%s", u, v.Encode())
 
 	var buf io.ReadWriter
 	if body != nil {
@@ -80,7 +84,7 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 		}
 	}
 
-	req, err := http.NewRequest(method, u.String()+apiVersion, buf)
+	req, err := http.NewRequest(method, url, buf)
 	if err != nil {
 		return nil, err
 	}
@@ -95,42 +99,53 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 	return req, nil
 }
 
-
-func (c *Client) do(req *http.Request) (*http.Response, error) {
+func (c *Client) do(req *http.Request, v *[]interface{}) (*http.Response, error) {
 	resp, err := c.client.Do(req)
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
 
-	if err := checkRes(resp); err != nil {
-		return resp, err
+	if err := checkStatusCode(resp); err != nil {
+		return nil, err
 	}
 
-	return resp, err
-}
-
-type ErrorResponse struct {
-	Message []struct {
-		Id    string
-		Key   string
-		Value string
+	data, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
 	}
+
+	var errReses []ErrorResponse
+	if err := json.Unmarshal(data, &errReses); err != io.EOF && err != nil {
+		// intialize []ErrorResponse
+		if len(errReses) != 0 {
+			errReses = []ErrorResponse{}
+		}
+
+		if err := json.Unmarshal(data, v); err != io.EOF && err != nil {
+			return nil, err
+		}
+	}
+
+	if len(errReses) != 0 {
+		return nil, &errReses[0]
+	}
+
+	return resp, nil
 }
 
-func (r *ErrorResponse) Error() string {
-	return fmt.Sprintf("%+v", r.Message)
-}
-
-func checkRes(r *http.Response) error {
-	if c := r.StatusCode; 200 <= c && c <= 299 {
+func checkStatusCode(resp *http.Response) error {
+	// NOTE: StatusCode is 'always' 200 Eeven if ErrorMessage exists.
+	if c := resp.StatusCode; 200 <= c && c <= 299 {
 		return nil
 	}
 
-	errRes := &ErrorResponse{}
-	data, err := ioutil.ReadAll(r.Body)
-	if err != nil && data != nil {
-		json.Unmarshal(data, errRes)
+	if c := resp.StatusCode; 500 <= c && c <= 599 {
+		return &APIError{
+			Status:       resp.StatusCode,
+			ErrorMessage: ErrInvalidServer,
+		}
 	}
-	return errRes
+
+	return nil
 }
