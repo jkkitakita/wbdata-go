@@ -8,16 +8,16 @@ import (
 type CountriesService service
 
 type Country struct {
-	ID           string
-	Name         string
-	CapitalCity  string
-	Iso2Code     string
-	Longitude    string
-	Latitude     string
-	Region       Region
-	IncomeLevels IncomeLevel
-	LendingType  LendingType
-	AdminRegion  struct {
+	ID          string
+	Name        string
+	CapitalCity string
+	Iso2Code    string
+	Longitude   string
+	Latitude    string
+	Region      Region
+	IncomeLevel IncomeLevel
+	LendingType LendingType
+	AdminRegion struct {
 		ID       string
 		Iso2Code string
 		Value    string
