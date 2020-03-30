@@ -5,5 +5,5 @@ type RegionsService service
 type Region struct {
 	ID       string
 	Iso2Code string
-	Code     string
+	Value    string
 }
