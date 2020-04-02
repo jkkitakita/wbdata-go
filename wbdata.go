@@ -70,7 +70,7 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 	v.Set("format", defaultFormat)
 	u, err := c.BaseURL.Parse(urlStr)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to parse from %s: %v", urlStr, err)
 	}
 	url := fmt.Sprintf("%s?%s", u, v.Encode())
 
@@ -80,7 +80,7 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 		enc := json.NewEncoder(buf)
 		enc.SetEscapeHTML(false)
 		if err := enc.Encode(body); err != nil {
-			return nil, err
+			return nil, fmt.Errorf("failed to encode from %s: %v", string(url), err)
 		}
 	}
 
@@ -105,7 +105,6 @@ func (c *Client) do(req *http.Request, v *[]interface{}) (*http.Response, error)
 		return nil, err
 	}
 	defer resp.Body.Close()
-	// log.Printf(`req: %+v`, req)
 
 	if err := checkStatusCode(resp); err != nil {
 		return nil, err
@@ -113,22 +112,23 @@ func (c *Client) do(req *http.Request, v *[]interface{}) (*http.Response, error)
 
 	data, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("failed to read all from %q: %v", req.URL, err)
 	}
 
 	var errReses []ErrorResponse
 	if err := json.Unmarshal(data, &errReses); err != io.EOF && err != nil {
-		// intialize []ErrorResponse
 		if len(errReses) != 0 {
 			errReses = []ErrorResponse{}
 		}
 
 		if err := json.Unmarshal(data, v); err != io.EOF && err != nil {
-			return nil, err
+			return nil, fmt.Errorf("failed to unmarshal from %q", req.URL)
 		}
 	}
 
 	if len(errReses) != 0 {
+		errReses[0].URL = req.URL.String()
+		errReses[0].Code = resp.StatusCode
 		return nil, &errReses[0]
 	}
 
@@ -142,10 +142,7 @@ func checkStatusCode(resp *http.Response) error {
 	}
 
 	if c := resp.StatusCode; 500 <= c && c <= 599 {
-		return &APIError{
-			Status:       resp.StatusCode,
-			ErrorMessage: ErrInvalidServer,
-		}
+		return NewAPIError(resp.Request.URL.String(), resp.StatusCode, ErrInvalidServer)
 	}
 
 	return nil

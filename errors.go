@@ -1,30 +1,45 @@
 package wbdata
 
-import "fmt"
+import (
+	"fmt"
+)
 
 const (
 	ErrInvalidServer = "Invalid Server Error"
 )
 
-type ErrorResponse struct {
-	Message []ErrorMessage `json:"message"`
+type (
+	ErrorResponse struct {
+		URL     string
+		Code    int
+		Message []ErrorMessage `json:"message"`
+	}
+
+	ErrorMessage struct {
+		ID    string `json:"id"`
+		Key   string `json:"key"`
+		Value string `json:"value"`
+	}
+
+	APIError struct {
+		URL     string
+		Code    int
+		Message string
+	}
+)
+
+func (e *ErrorResponse) Error() string {
+	return fmt.Sprintf("msg: %s, code: %d, URL: %s", e.Message, e.Code, e.URL)
 }
 
-type ErrorMessage struct {
-	ID    string `json:"id"`
-	Key   string `json:"key"`
-	Value string `json:"value"`
+func (ae *APIError) Error() string {
+	return fmt.Sprintf("%s returned status code %d: %s", ae.URL, ae.Code, ae.Message)
 }
 
-func (r *ErrorResponse) Error() string {
-	return fmt.Sprintf("%+v", r.Message)
-}
-
-type APIError struct {
-	Status       int
-	ErrorMessage string
-}
-
-func (a APIError) Error() string {
-	return fmt.Sprintf("%d: %s", a.Status, a.ErrorMessage)
+func NewAPIError(url string, code int, msg string) *APIError {
+	return &APIError{
+		URL:     url,
+		Code:    code,
+		Message: msg,
+	}
 }

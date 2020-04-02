@@ -2,23 +2,47 @@ package wbdata
 
 import (
 	"encoding/json"
+	"errors"
+	"net/http"
 	"regexp"
 	"strconv"
 	"strings"
 )
 
-type intOrString int
+type (
+	intOrString int
 
-type PageParams struct {
-	Page    int
-	PerPage int
-}
+	PageParams struct {
+		Page    int
+		PerPage int
+	}
 
-type PageSummary struct {
-	Page    intOrString `json:"page"`
-	Pages   intOrString `json:"pages"`
-	PerPage intOrString `json:"per_page"`
-	Total   intOrString `json:"total"`
+	PageSummary struct {
+		Page    intOrString `json:"page"`
+		Pages   intOrString `json:"pages"`
+		PerPage intOrString `json:"per_page"`
+		Total   intOrString `json:"total"`
+	}
+)
+
+func (pages *PageParams) pageParams(req *http.Request) error {
+	params := req.URL.Query()
+
+	if pages.Page > 0 {
+		params.Add(`page`, strconv.Itoa(int(pages.Page)))
+	} else {
+		return errors.New("page of params should be larger than 0")
+	}
+
+	if pages.PerPage > 0 {
+		params.Add(`per_page`, strconv.Itoa(int(pages.PerPage)))
+	} else {
+		return errors.New("per_page of params should be larger than 0")
+	}
+
+	req.URL.RawQuery = params.Encode()
+
+	return nil
 }
 
 func (ios *intOrString) UnmarshalJSON(data []byte) error {
