@@ -17,12 +17,12 @@ func main() {
 	if err != nil {
 		fmt.Printf("failed to list incomelevels: %+v\n", err)
 	}
-	fmt.Printf("ListIncomeLevels, summary: %+v, incomeLevels: %+v\n", summary, incomeLevels)
+	fmt.Printf("ListIncomeLevels, summary: %+v, incomeLevels[0]: %+v\n", summary, incomeLevels[0])
 
-	// GetCountry
+	// GetIncomeLevel
 	_, incomeLevel, err := client.IncomeLevels.GetIncomeLevel("hic")
 	if err != nil {
 		fmt.Printf("failed to get incomeLevel: %+v\n", err)
 	}
-	fmt.Printf("GetIncomeLevel, summary: %+v, incomeLevel: %+v\n", summary, incomeLevel)
+	fmt.Printf("GetIncomeLevel, incomeLevel: %+v\n", incomeLevel)
 }

@@ -25,9 +25,9 @@ type (
 	}
 )
 
-func (c *CountriesService) ListCountries(pages PageParams) (*PageSummary, *[]Country, error) {
-	summary := PageSummary{}
-	countries := []Country{}
+func (c *CountriesService) ListCountries(pages PageParams) (*PageSummary, []*Country, error) {
+	summary := &PageSummary{}
+	countries := []*Country{}
 
 	req, err := c.client.NewRequest("GET", "countries", nil)
 	if err != nil {
@@ -38,17 +38,17 @@ func (c *CountriesService) ListCountries(pages PageParams) (*PageSummary, *[]Cou
 		return nil, nil, err
 	}
 
-	_, err = c.client.do(req, &[]interface{}{&summary, &countries})
+	_, err = c.client.do(req, &[]interface{}{summary, &countries})
 	if err != nil {
 		return nil, nil, err
 	}
 
-	return &summary, &countries, nil
+	return summary, countries, nil
 }
 
 func (c *CountriesService) GetCountry(countryID string) (*PageSummary, *Country, error) {
-	summary := PageSummary{}
-	country := []Country{}
+	summary := &PageSummary{}
+	country := []*Country{}
 
 	s := fmt.Sprintf("countries/%v", countryID)
 	req, err := c.client.NewRequest("GET", s, nil)
@@ -56,10 +56,10 @@ func (c *CountriesService) GetCountry(countryID string) (*PageSummary, *Country,
 		return nil, nil, err
 	}
 
-	_, err = c.client.do(req, &[]interface{}{&summary, &country})
+	_, err = c.client.do(req, &[]interface{}{summary, &country})
 	if err != nil {
 		return nil, nil, err
 	}
 
-	return &summary, &country[0], nil
+	return summary, country[0], nil
 }

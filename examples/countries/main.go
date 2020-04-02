@@ -17,7 +17,7 @@ func main() {
 	if err != nil {
 		fmt.Printf("failed to list countries: %+v\n", err)
 	}
-	fmt.Printf("ListCountries, summary: %+v, countries: %+v\n", summary, countries)
+	fmt.Printf("ListCountries, summary: %+v, countries[0]: %+v\n", summary, countries[0])
 
 	// GetCountry
 	_, country, err := client.Countries.GetCountry("jpn")

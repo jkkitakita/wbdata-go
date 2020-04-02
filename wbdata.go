@@ -59,6 +59,7 @@ func NewClient(httpClient *http.Client) *Client {
 	c.Indicators = &IndicatorsService{client: c}
 	c.IncomeLevels = &IncomeLevelsService{client: c}
 	c.LendingTypes = &LendingTypesService{client: c}
+	c.Regions = &RegionsService{client: c}
 	return c
 }
 

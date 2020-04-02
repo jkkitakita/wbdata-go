@@ -14,9 +14,9 @@ type (
 	}
 )
 
-func (i *IncomeLevelsService) ListIncomeLevels(pages PageParams) (*PageSummary, *[]IncomeLevel, error) {
-	summary := PageSummary{}
-	incomeLevels := []IncomeLevel{}
+func (i *IncomeLevelsService) ListIncomeLevels(pages PageParams) (*PageSummary, []*IncomeLevel, error) {
+	summary := &PageSummary{}
+	incomeLevels := []*IncomeLevel{}
 
 	req, err := i.client.NewRequest("GET", "incomeLevels", nil)
 	if err != nil {
@@ -27,17 +27,17 @@ func (i *IncomeLevelsService) ListIncomeLevels(pages PageParams) (*PageSummary, 
 		return nil, nil, err
 	}
 
-	_, err = i.client.do(req, &[]interface{}{&summary, &incomeLevels})
+	_, err = i.client.do(req, &[]interface{}{summary, &incomeLevels})
 	if err != nil {
 		return nil, nil, err
 	}
 
-	return &summary, &incomeLevels, err
+	return summary, incomeLevels, err
 }
 
 func (i *IncomeLevelsService) GetIncomeLevel(incomeLevelID string) (*PageSummary, *IncomeLevel, error) {
-	summary := PageSummary{}
-	incomeLevels := []IncomeLevel{}
+	summary := &PageSummary{}
+	incomeLevels := []*IncomeLevel{}
 
 	s := fmt.Sprintf("incomeLevels/%v", incomeLevelID)
 	req, err := i.client.NewRequest("GET", s, nil)
@@ -45,10 +45,10 @@ func (i *IncomeLevelsService) GetIncomeLevel(incomeLevelID string) (*PageSummary
 		return nil, nil, err
 	}
 
-	_, err = i.client.do(req, &[]interface{}{&summary, &incomeLevels})
+	_, err = i.client.do(req, &[]interface{}{summary, &incomeLevels})
 	if err != nil {
 		return nil, nil, err
 	}
 
-	return &summary, &incomeLevels[0], nil
+	return summary, incomeLevels[0], nil
 }
