@@ -31,8 +31,7 @@ jobs:
       - name: Build
         run: go build -v .
       - name: install lint
-        run: |
-          go get -u github.com/golangci/golangci-lint/cmd/golangci-lint@1.24.0
+        run: go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.23.8
       - name: lint
         run: golangci-lint run
       - name: test
