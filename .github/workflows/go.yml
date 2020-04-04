@@ -2,39 +2,37 @@ name: Go
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
-
   build:
     name: Build
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Go 1.14.1
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.14
+        id: go
 
-    - name: Set up Go 1.14.1
-      uses: actions/setup-go@v1
-      with:
-        go-version: 1.14.1
-      id: go
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v2
 
-    - name: Check out code into the Go module directory
-      uses: actions/checkout@v2
+      - name: cache
+        uses: actions/cache@v1
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
 
-    - name: cache
-      uses: actions/cache@v1
-      with:
-        path: ~/go/pkg/mod
-        key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-        restore-keys: |
-          ${{ runner.os }}-go-
-
-    - name: Build
-      run: go build -v .
-    - name: install lint
-      run: curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.23.8
-    - name: lint
-      run: golangci-lint run
-    - name: test
-      run: go test ./... -v
+      - name: Build
+        run: go build -v .
+      - name: install lint
+        run: curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.23.8
+      - name: lint
+        run: golangci-lint run
+      - name: test
+        run: go test ./... -v
