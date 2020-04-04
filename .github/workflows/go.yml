@@ -1,20 +1,29 @@
 name: Go
-
 on:
   push:
-    branches: [master]
+    branches:
+      - master
+    paths-ignore:
+      - "**/README.md"
   pull_request:
-    branches: [master]
+    paths-ignore:
+      - "**/README.md"
+strategy:
+  matrix:
+    os: [ubuntu-latest]
+    go-version: [1.14.1]
+env:
+  GOLANGCI_LINT_VERSION: v1.23.8
 
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.platform }}
     steps:
-      - name: Set up Go 1.14.1
+      - name: Set up Go ${{ matrix.go-version }}
         uses: actions/setup-go@v2-beta
         with:
-          go-version: 1.14.1
+          go-version: ${{ matrix.go-version }}
         id: go
 
       - name: Check out code into the Go module directory
@@ -31,8 +40,8 @@ jobs:
       - name: Build
         run: go build -v .
       - name: install lint
-        run: go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.23.8
+        run: go get github.com/golangci/golangci-lint/cmd/golangci-lint@${GOLANGCI_LINT_VERSION}
       - name: lint
-        run: golangci-lint run
+        run: golangci-lint run ./... -v
       - name: test
         run: go test ./... -v
