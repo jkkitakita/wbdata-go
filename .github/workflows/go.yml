@@ -44,4 +44,4 @@ jobs:
       - name: lint
         run: golangci-lint run ./... -v
       - name: test
-        run: go test ./... -update true -v
+        run: go test ./... -v -update true
