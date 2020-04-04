@@ -43,7 +43,7 @@ type Client struct {
 }
 
 type service struct {
-	client *Client
+	client *Client //nolint:structcheck
 }
 
 // NewClient returns a new World Bank Open Data API client.
