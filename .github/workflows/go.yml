@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Go 1.14.1
-        uses: actions/setup-go@v1
+        uses: actions/setup-go@v2-beta
         with:
           go-version: 1.14.1
         id: go
@@ -32,8 +32,7 @@ jobs:
         run: go build -v .
       - name: install lint
         run: |
-          export PATH=$PATH:$(go env GOPATH)/bin # See https://github.com/actions/setup-go/issues/14
-          go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
+          go get -u github.com/golangci/golangci-lint/cmd/golangci-lint@1.24.0
       - name: lint
         run: golangci-lint run
       - name: test
