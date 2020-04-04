@@ -7,9 +7,8 @@ type (
 
 	Region struct {
 		ID       string
-		Code     string
 		Iso2Code string
-		Name     string
+		Value    string
 	}
 )
 

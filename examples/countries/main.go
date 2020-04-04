@@ -20,9 +20,9 @@ func main() {
 	fmt.Printf("ListCountries, summary: %+v, countries[0]: %+v\n", summary, countries[0])
 
 	// GetCountry
-	_, country, err := client.Countries.GetCountry("jpn")
+	summary, country, err := client.Countries.GetCountry("jpn")
 	if err != nil {
 		fmt.Printf("failed to get country: %+v\n", err)
 	}
-	fmt.Printf("GetCountry, country: %+v\n", country)
+	fmt.Printf("GetCountry, summary: %+v, country: %+v\n", summary, country)
 }

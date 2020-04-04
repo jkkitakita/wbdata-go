@@ -1,0 +1,175 @@
+package wbdata
+
+import (
+	"flag"
+	"reflect"
+	"testing"
+)
+
+var update = flag.Bool("update", false, "update fixtures")
+
+func TestCountriesService_ListCountries(t *testing.T) {
+	defaultPage := 1
+	defaultPerPage := 10
+
+	client, save := NewTestClient(t, *update)
+	defer save()
+
+	type args struct {
+		pages PageParams
+	}
+	tests := []struct {
+		name               string
+		args               args
+		want               *PageSummary
+		wantCountriesCount int
+		wantErr            bool
+	}{
+		{
+			name: "success",
+			args: args{
+				pages: PageParams{
+					Page:    defaultPage,
+					PerPage: defaultPerPage,
+				},
+			},
+			want: &PageSummary{
+				Page:    intOrString(defaultPage),
+				PerPage: intOrString(defaultPerPage),
+			},
+			wantCountriesCount: defaultPage * defaultPerPage,
+			wantErr:            false,
+		},
+		{
+			name: "failure because Page is less than 1",
+			args: args{
+				pages: PageParams{
+					Page:    0,
+					PerPage: defaultPerPage,
+				},
+			},
+			want:               nil,
+			wantCountriesCount: 0,
+			wantErr:            true,
+		},
+		{
+			name: "failure because PerPage is less than 1",
+			args: args{
+				pages: PageParams{
+					Page:    defaultPage,
+					PerPage: 0,
+				},
+			},
+			want:               nil,
+			wantCountriesCount: 0,
+			wantErr:            true,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c := &CountriesService{
+				client: client,
+			}
+
+			got, got1, err := c.ListCountries(tt.args.pages)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("CountriesService.ListCountries() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if tt.want != nil {
+				if got.Page != tt.want.Page || got.PerPage != tt.want.PerPage {
+					t.Errorf("CountriesService.ListCountries() got = %v, want %v", got, tt.want)
+				}
+			}
+			if len(got1) != tt.wantCountriesCount {
+				t.Errorf("CountriesService.ListCountries() got1 = %v, want %v", got1, tt.wantCountriesCount)
+			}
+		})
+	}
+}
+
+func TestCountriesService_GetCountry(t *testing.T) {
+	client, save := NewTestClient(t, *update)
+	defer save()
+
+	type args struct {
+		countryID string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    *PageSummary
+		want1   *Country
+		wantErr bool
+	}{
+		{
+			name: "success",
+			args: args{
+				countryID: "JPN",
+			},
+			want: &PageSummary{
+				Page:    1,
+				Pages:   1,
+				PerPage: 50,
+				Total:   1,
+			},
+			want1: &Country{
+				ID:          "JPN",
+				Name:        "Japan",
+				CapitalCity: "Tokyo",
+				Iso2Code:    "JP",
+				Longitude:   "139.77",
+				Latitude:    "35.67",
+				Region: Region{
+					ID:       "EAS",
+					Iso2Code: "Z4",
+					Value:    "East Asia & Pacific",
+				},
+				IncomeLevel: IncomeLevel{
+					ID:       "HIC",
+					Iso2Code: "XD",
+					Value:    "High income",
+				},
+				LendingType: LendingType{
+					ID:       "LNX",
+					Iso2Code: "XX",
+					Value:    "Not classified",
+				},
+				AdminRegion: Region{
+					ID:       "",
+					Iso2Code: "",
+					Value:    "",
+				},
+			},
+			wantErr: false,
+		},
+		{
+			name: "failure because countryID is invalid",
+			args: args{
+				countryID: "ABCDEFG",
+			},
+			want:    nil,
+			want1:   nil,
+			wantErr: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c := &CountriesService{
+				client: client,
+			}
+			got, got1, err := c.GetCountry(tt.args.countryID)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("CountriesService.GetCountry() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("CountriesService.GetCountry() got = %v, want %v", got, tt.want)
+			}
+			if !reflect.DeepEqual(got1, tt.want1) {
+				t.Errorf("CountriesService.GetCountry() got1 = %v, want %v", got1, tt.want1)
+			}
+		})
+	}
+}

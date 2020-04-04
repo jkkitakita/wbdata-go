@@ -17,11 +17,7 @@ type (
 		Region      Region
 		IncomeLevel IncomeLevel
 		LendingType LendingType
-		AdminRegion struct {
-			ID       string
-			Iso2Code string
-			Value    string
-		}
+		AdminRegion Region
 	}
 )
 
