@@ -14,7 +14,7 @@ jobs:
       - name: Set up Go 1.14.1
         uses: actions/setup-go@v1
         with:
-          go-version: 1.14
+          go-version: 1.14.1
         id: go
 
       - name: Check out code into the Go module directory
@@ -31,7 +31,9 @@ jobs:
       - name: Build
         run: go build -v .
       - name: install lint
-        run: curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.23.8
+        run: |
+          export PATH=$PATH:$(go env GOPATH)/bin # See https://github.com/actions/setup-go/issues/14
+          go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
       - name: lint
         run: golangci-lint run
       - name: test
