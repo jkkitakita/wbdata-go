@@ -90,6 +90,8 @@ func TestCountriesService_ListCountries(t *testing.T) {
 }
 
 func TestCountriesService_GetCountry(t *testing.T) {
+	invalidCountryID := "ABCDEFG"
+
 	client, save := NewTestClient(t, *update)
 	defer save()
 
@@ -97,11 +99,12 @@ func TestCountriesService_GetCountry(t *testing.T) {
 		countryID string
 	}
 	tests := []struct {
-		name    string
-		args    args
-		want    *PageSummary
-		want1   *Country
-		wantErr bool
+		name       string
+		args       args
+		want       *PageSummary
+		want1      *Country
+		wantErr    bool
+		wantErrRes *ErrorResponse
 	}{
 		{
 			name: "success",
@@ -142,16 +145,28 @@ func TestCountriesService_GetCountry(t *testing.T) {
 					Value:    "",
 				},
 			},
-			wantErr: false,
+			wantErr:    false,
+			wantErrRes: nil,
 		},
 		{
 			name: "failure because countryID is invalid",
 			args: args{
-				countryID: "ABCDEFG",
+				countryID: invalidCountryID,
 			},
 			want:    nil,
 			want1:   nil,
 			wantErr: true,
+			wantErrRes: &ErrorResponse{
+				URL:  defaultBaseURL + apiVersion + "/countries/" + invalidCountryID + "?format=json",
+				Code: 200,
+				Message: []ErrorMessage{
+					{
+						ID:    "120",
+						Key:   "Invalid value",
+						Value: "The provided parameter value is not valid",
+					},
+				},
+			},
 		},
 	}
 	for _, tt := range tests {
@@ -163,6 +178,11 @@ func TestCountriesService_GetCountry(t *testing.T) {
 			if (err != nil) != tt.wantErr {
 				t.Errorf("CountriesService.GetCountry() error = %v, wantErr %v", err, tt.wantErr)
 				return
+			}
+			if err != nil {
+				if !reflect.DeepEqual(err, tt.wantErrRes) {
+					t.Errorf("CountriesService.GetCountry() err = %v, wantErrRes %v", err, tt.wantErrRes)
+				}
 			}
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("CountriesService.GetCountry() got = %v, want %v", got, tt.want)
