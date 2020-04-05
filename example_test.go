@@ -25,7 +25,7 @@ func ExampleListCountries() {
 	fmt.Printf("Countries[0] is: %#v\n", countries[0])
 	// Output:
 	// Summary is: &wbdata.PageSummary{Page:1, Pages:31, PerPage:10, Total:304}
-	// Countries[0] is: &wbdata.Country{ID:"ABW", Name:"Aruba", CapitalCity:"Oranjestad", Iso2Code:"AW", Longitude:"-70.0167", Latitude:"12.5167", Region:wbdata.Region{ID:"LCN", Code:"", Iso2Code:"ZJ", Value:"Latin America & Caribbean "}, IncomeLevel:wbdata.IncomeLevel{ID:"HIC", Iso2Code:"XD", Value:"High income"}, LendingType:wbdata.LendingType{ID:"LNX", Iso2Code:"XX", Value:"Not classified"}, AdminRegion:wbdata.Region{ID:"", Code:"", Iso2Code:"", Value:""}}
+	// Countries[0] is: &wbdata.Country{ID:"ABW", Name:"Aruba", CapitalCity:"Oranjestad", Iso2Code:"AW", Longitude:"-70.0167", Latitude:"12.5167", Region:wbdata.CountryRegion{ID:"LCN", Iso2Code:"ZJ", Value:"Latin America & Caribbean "}, IncomeLevel:wbdata.IncomeLevel{ID:"HIC", Iso2Code:"XD", Value:"High income"}, LendingType:wbdata.LendingType{ID:"LNX", Iso2Code:"XX", Value:"Not classified"}, AdminRegion:wbdata.CountryRegion{ID:"", Iso2Code:"", Value:""}}
 }
 
 func ExampleGetCountry() {
@@ -37,7 +37,7 @@ func ExampleGetCountry() {
 	fmt.Printf("Country is: %#v\n", country)
 	// Output:
 	// Summary is: &wbdata.PageSummary{Page:1, Pages:1, PerPage:50, Total:1}
-	// Country is: &wbdata.Country{ID:"JPN", Name:"Japan", CapitalCity:"Tokyo", Iso2Code:"JP", Longitude:"139.77", Latitude:"35.67", Region:wbdata.Region{ID:"EAS", Code:"", Iso2Code:"Z4", Value:"East Asia & Pacific"}, IncomeLevel:wbdata.IncomeLevel{ID:"HIC", Iso2Code:"XD", Value:"High income"}, LendingType:wbdata.LendingType{ID:"LNX", Iso2Code:"XX", Value:"Not classified"}, AdminRegion:wbdata.Region{ID:"", Code:"", Iso2Code:"", Value:""}}
+	// Country is: &wbdata.Country{ID:"JPN", Name:"Japan", CapitalCity:"Tokyo", Iso2Code:"JP", Longitude:"139.77", Latitude:"35.67", Region:wbdata.CountryRegion{ID:"EAS", Iso2Code:"Z4", Value:"East Asia & Pacific"}, IncomeLevel:wbdata.IncomeLevel{ID:"HIC", Iso2Code:"XD", Value:"High income"}, LendingType:wbdata.LendingType{ID:"LNX", Iso2Code:"XX", Value:"Not classified"}, AdminRegion:wbdata.CountryRegion{ID:"", Iso2Code:"", Value:""}}
 }
 
 func ExampleListIncomeLevels() {
@@ -139,7 +139,7 @@ func ExampleListRegions() {
 	fmt.Printf("Regions[0] is: %#v\n", regions[0])
 	// Output:
 	// Summary is: &wbdata.PageSummary{Page:1, Pages:5, PerPage:10, Total:48}
-	// Regions[0] is: &wbdata.Region{ID:"", Code:"AFR", Iso2Code:"A9", Value:""}
+	// Regions[0] is: &wbdata.Region{ID:"", Code:"AFR", Iso2Code:"A9", Name:"Africa"}
 }
 
 func ExampleGetRegion() {
@@ -151,7 +151,7 @@ func ExampleGetRegion() {
 	fmt.Printf("Region is: %#v\n", region)
 	// Output:
 	// Summary is: &wbdata.PageSummary{Page:1, Pages:1, PerPage:50, Total:1}
-	// Region is: &wbdata.Region{ID:"", Code:"XZN", Iso2Code:"A5", Value:""}
+	// Region is: &wbdata.Region{ID:"", Code:"XZN", Iso2Code:"A5", Name:"Sub-Saharan Africa excluding South Africa and Nigeria"}
 }
 
 func ExampleListSources() {

@@ -16,10 +16,10 @@ type (
 		Iso2Code    string
 		Longitude   string
 		Latitude    string
-		Region      Region
+		Region      CountryRegion
 		IncomeLevel IncomeLevel
 		LendingType LendingType
-		AdminRegion Region
+		AdminRegion CountryRegion
 	}
 )
 

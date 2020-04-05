@@ -9,6 +9,12 @@ type (
 		ID       string
 		Code     string
 		Iso2Code string
+		Name     string
+	}
+
+	CountryRegion struct {
+		ID       string
+		Iso2Code string
 		Value    string
 	}
 )

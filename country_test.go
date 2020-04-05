@@ -132,7 +132,7 @@ func TestCountriesService_GetCountry(t *testing.T) {
 				Iso2Code:    "JP",
 				Longitude:   "139.77",
 				Latitude:    "35.67",
-				Region: Region{
+				Region: CountryRegion{
 					ID:       "EAS",
 					Iso2Code: "Z4",
 					Value:    "East Asia & Pacific",
@@ -147,7 +147,7 @@ func TestCountriesService_GetCountry(t *testing.T) {
 					Iso2Code: "XX",
 					Value:    "Not classified",
 				},
-				AdminRegion: Region{
+				AdminRegion: CountryRegion{
 					ID:       "",
 					Iso2Code: "",
 					Value:    "",
