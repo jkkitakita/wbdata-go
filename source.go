@@ -5,8 +5,10 @@ import (
 )
 
 type (
+	// SourcesService ...
 	SourcesService service
 
+	// Source contains information for a source field
 	Source struct {
 		ID                   string
 		LastUpdated          string
@@ -20,6 +22,7 @@ type (
 	}
 )
 
+// ListSources returns a Response's Summary and Sources
 func (s *SourcesService) ListSources(pages PageParams) (*PageSummary, []*Source, error) {
 	summary := &PageSummary{}
 	sources := []*Source{}
@@ -40,6 +43,7 @@ func (s *SourcesService) ListSources(pages PageParams) (*PageSummary, []*Source,
 	return summary, sources, nil
 }
 
+// GetSource returns a Response's Summary and a Source
 func (s *SourcesService) GetSource(sourceID string) (*PageSummary, *Source, error) {
 	summary := &PageSummary{}
 	source := []*Source{}

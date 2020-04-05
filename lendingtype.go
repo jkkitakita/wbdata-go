@@ -3,8 +3,10 @@ package wbdata
 import "fmt"
 
 type (
+	// LendingTypesService ...
 	LendingTypesService service
 
+	// LendingType contains information for a lending type field
 	LendingType struct {
 		ID       string
 		Iso2Code string
@@ -12,6 +14,7 @@ type (
 	}
 )
 
+// ListLendingTypes returns a Response's Summary and LendingTypes
 func (lt *LendingTypesService) ListLendingTypes(pages PageParams) (*PageSummary, []*LendingType, error) {
 	summary := &PageSummary{}
 	lendingTypes := []*LendingType{}
@@ -32,6 +35,7 @@ func (lt *LendingTypesService) ListLendingTypes(pages PageParams) (*PageSummary,
 	return summary, lendingTypes, nil
 }
 
+// GetLendingType returns a Response's Summary and a LendingType
 func (lt *LendingTypesService) GetLendingType(lendingTypeID string) (*PageSummary, *LendingType, error) {
 	summary := &PageSummary{}
 	lendingType := []*LendingType{}

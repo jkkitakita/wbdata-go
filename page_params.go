@@ -12,11 +12,13 @@ import (
 type (
 	intOrString int
 
+	// PageParams is a struct for API's query params about pages
 	PageParams struct {
 		Page    int
 		PerPage int
 	}
 
+	// PageSummary is a struct for a Summary about pages
 	PageSummary struct {
 		Page    intOrString `json:"page"`
 		Pages   intOrString `json:"pages"`

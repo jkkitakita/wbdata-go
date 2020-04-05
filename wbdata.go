@@ -19,7 +19,7 @@ import (
 const (
 	defaultBaseURL = "http://api.worldbank.org/"
 	apiVersion     = "v2"
-	userAgent      = "wbdata"
+	userAgent      = "wbdata-go"
 	defaultFormat  = "json"
 )
 
@@ -67,7 +67,7 @@ func NewClient(httpClient *http.Client) *Client {
 	return c
 }
 
-// NewClient returns a new World Bank Open Data API http request.
+// NewRequest returns a new World Bank Open Data API http request.
 func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Request, error) {
 	if !strings.HasSuffix(c.BaseURL.Path, "/") {
 		return nil, fmt.Errorf("BaseURL must have a trailing slash, but %q does not", c.BaseURL)
@@ -154,6 +154,7 @@ func checkStatusCode(resp *http.Response) error {
 	return nil
 }
 
+// NewTestClient returns a new World Bank Open Data API client for Test using go-vcr.
 func NewTestClient(t testing.TB, update bool) (*Client, func()) {
 	fixtureDir := filepath.Join("testdata", "fixtures")
 	cassette := filepath.Join(fixtureDir, t.Name())

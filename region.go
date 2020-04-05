@@ -3,8 +3,10 @@ package wbdata
 import "fmt"
 
 type (
+	// RegionsService ...
 	RegionsService service
 
+	// Region is a struct for region
 	Region struct {
 		ID       string
 		Code     string
@@ -12,6 +14,7 @@ type (
 		Name     string
 	}
 
+	// CountryRegion is a struct for region when using the Countries API
 	CountryRegion struct {
 		ID       string
 		Iso2Code string
@@ -19,6 +22,7 @@ type (
 	}
 )
 
+// ListRegions returns a Response's Summary and Regions
 func (r *RegionsService) ListRegions(pages PageParams) (*PageSummary, []*Region, error) {
 	summary := &PageSummary{}
 	regions := []*Region{}
@@ -39,6 +43,7 @@ func (r *RegionsService) ListRegions(pages PageParams) (*PageSummary, []*Region,
 	return summary, regions, nil
 }
 
+// GetRegion returns a Response's Summary and a Region
 func (r *RegionsService) GetRegion(code string) (*PageSummary, *Region, error) {
 	summary := &PageSummary{}
 	region := []*Region{}

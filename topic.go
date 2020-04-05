@@ -3,8 +3,10 @@ package wbdata
 import "fmt"
 
 type (
+	// TopicsService ...
 	TopicsService service
 
+	// Topic contains information for an topic field
 	Topic struct {
 		ID         string
 		Value      string
@@ -12,6 +14,7 @@ type (
 	}
 )
 
+// ListTopics returns a Response's Summary and Topics
 func (t *TopicsService) ListTopics(pages PageParams) (*PageSummary, []*Topic, error) {
 	summary := &PageSummary{}
 	topics := []*Topic{}
@@ -32,6 +35,7 @@ func (t *TopicsService) ListTopics(pages PageParams) (*PageSummary, []*Topic, er
 	return summary, topics, nil
 }
 
+// GetTopic returns a Response's Summary and a Topic
 func (t *TopicsService) GetTopic(topicID string) (*PageSummary, *Topic, error) {
 	summary := &PageSummary{}
 	topic := []*Topic{}
