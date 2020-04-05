@@ -5,8 +5,10 @@ import (
 )
 
 type (
+	// CountriesService ...
 	CountriesService service
 
+	// Country contains information for an country field
 	Country struct {
 		ID          string
 		Name        string
@@ -21,6 +23,7 @@ type (
 	}
 )
 
+// ListCountries returns summary and countries
 func (c *CountriesService) ListCountries(pages PageParams) (*PageSummary, []*Country, error) {
 	summary := &PageSummary{}
 	countries := []*Country{}
@@ -42,6 +45,7 @@ func (c *CountriesService) ListCountries(pages PageParams) (*PageSummary, []*Cou
 	return summary, countries, nil
 }
 
+// GetCountry returns summary and a country
 func (c *CountriesService) GetCountry(countryID string) (*PageSummary, *Country, error) {
 	summary := &PageSummary{}
 	country := []*Country{}

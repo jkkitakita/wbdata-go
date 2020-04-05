@@ -1,0 +1,84 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata
+    url: http://api.worldbank.org/v2/countries/jpn?format=json
+    method: GET
+  response:
+    body: '[{"page":1,"pages":1,"per_page":"50","total":1},[{"id":"JPN","iso2Code":"JP","name":"Japan","region":{"id":"EAS","iso2code":"Z4","value":"East
+      Asia & Pacific"},"adminregion":{"id":"","iso2code":"","value":""},"incomeLevel":{"id":"HIC","iso2code":"XD","value":"High
+      income"},"lendingType":{"id":"LNX","iso2code":"XX","value":"Not classified"},"capitalCity":"Tokyo","longitude":"139.77","latitude":"35.67"}]]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "406"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sun, 05 Apr 2020 07:04:46 GMT
+      Set-Cookie:
+      - TS01fa65e4=01359ee9763a43bfe6691963a62a76ec9db1827a690658b0a6066a7fac6e9af1f21f3ff20bb45b00f5c4a1c97ae3effeb31910b21b;
+        Path=/
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata
+    url: http://api.worldbank.org/v2/countries/ABCDEFG?format=json
+    method: GET
+  response:
+    body: '[{"message":[{"id":"120","key":"Invalid value","value":"The provided parameter
+      value is not valid"}]}]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "102"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sun, 05 Apr 2020 07:04:46 GMT
+      Set-Cookie:
+      - TS01fa65e4=01359ee976c6a7785d5e79c3d67cb3fb469c913225bfc9802693d93544a513b336f82388e1a6545e48573790e6325c2ce5a1cfce93;
+        Path=/
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 200 OK
+    code: 200
+    duration: ""

@@ -1,0 +1,115 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata
+    url: http://api.worldbank.org/v2/topics?format=json&page=1&per_page=10
+    method: GET
+  response:
+    body: '[{"page":1,"pages":3,"per_page":"10","total":21},[{"id":"1","value":"Agriculture
+      & Rural Development","sourceNote":"For the 70 percent of the world''s poor who
+      live in rural areas, agriculture is the main source of income and employment.
+      But depletion and degradation of land and water pose serious challenges to producing
+      enough food and other agricultural products to sustain livelihoods here and
+      meet the needs of urban populations. Data presented here include measures of
+      agricultural inputs, outputs, and productivity compiled by the UN''s Food and
+      Agriculture Organization."},{"id":"2","value":"Aid Effectiveness","sourceNote":"Aid
+      effectiveness is the impact that aid has in reducing poverty and inequality,
+      increasing growth, building capacity, and accelerating achievement of the Millennium
+      Development Goals set by the international community. Indicators here cover
+      aid received as well as progress in reducing poverty and improving education,
+      health, and other measures of human welfare."},{"id":"3","value":"Economy &
+      Growth","sourceNote":"Economic growth is central to economic development. When
+      national income grows, real people benefit. While there is no known formula
+      for stimulating economic growth, data can help policy-makers better understand
+      their countries'' economic situations and guide any work toward improvement.
+      Data here covers measures of economic growth, such as gross domestic product
+      (GDP) and gross national income (GNI). It also includes indicators representing
+      factors known to be relevant to economic growth, such as capital stock, employment,
+      investment, savings, consumption, government spending, imports, and exports."},{"id":"4","value":"Education","sourceNote":"Education
+      is one of the most powerful instruments for reducing poverty and inequality
+      and lays a foundation for sustained economic growth. The World Bank compiles
+      data on education inputs, participation, efficiency, and outcomes. Data on education
+      are compiled by the United Nations Educational, Scientific, and Cultural Organization
+      (UNESCO) Institute for Statistics from official responses to surveys and from
+      reports provided by education authorities in each country."},{"id":"5","value":"Energy
+      & Mining","sourceNote":"The world economy needs ever-increasing amounts of energy
+      to sustain economic growth, raise living standards, and reduce poverty. But
+      today''s trends in energy use are not sustainable. As the world''s population
+      grows and economies become more industrialized, nonrenewable energy sources
+      will become scarcer and more costly. Data here on energy production, use, dependency,
+      and efficiency are compiled by the World Bank from the International Energy
+      Agency and the Carbon Dioxide Information Analysis Center."},{"id":"6","value":"Environment","sourceNote":"Natural
+      and man-made environmental resources – fresh water, clean air, forests, grasslands,
+      marine resources, and agro-ecosystems – provide sustenance and a foundation
+      for social and economic development.  The need to safeguard these resources
+      crosses all borders.  Today, the World Bank is one of the key promoters and
+      financiers of environmental upgrading in the developing world. Data here cover
+      forests, biodiversity, emissions, and pollution. Other indicators relevant to
+      the environment are found under data pages for Agriculture & Rural Development,
+      Energy & Mining, Infrastructure, and Urban Development."},{"id":"7","value":"Financial
+      Sector","sourceNote":"An economy''s financial markets are critical to its overall
+      development. Banking systems and stock markets enhance growth, the main factor
+      in poverty reduction. Strong financial systems provide reliable and accessible
+      information that lowers transaction costs, which in turn bolsters resource allocation
+      and economic growth. Indicators here include the size and liquidity of stock
+      markets; the accessibility, stability, and efficiency of financial systems;
+      and international migration and workers\\ remittances, which affect growth and
+      social welfare in both sending and receiving countries."},{"id":"8","value":"Health","sourceNote":"Improving
+      health is central to the Millennium Development Goals, and the public sector
+      is the main provider of health care in developing countries. To reduce inequities,
+      many countries have emphasized primary health care, including immunization,
+      sanitation, access to safe drinking water, and safe motherhood initiatives.  Data
+      here cover health systems, disease prevention, reproductive health, nutrition,
+      and population dynamics. Data are from the United Nations Population Division,
+      World Health Organization, United Nations Children''s Fund, the Joint United
+      Nations Programme on HIV\/AIDS, and various other sources."},{"id":"9","value":"Infrastructure","sourceNote":"Infrastructure
+      helps determine the success of manufacturing and agricultural activities. Investments
+      in water, sanitation, energy, housing, and transport also improve lives and
+      help reduce poverty. And new information and communication technologies promote
+      growth, improve delivery of health and other services, expand the reach of education,
+      and support social and cultural advances. Data here are compiled from such sources
+      as the International Road Federation, Containerisation International, the International
+      Civil Aviation Organization, the International Energy Association, and the International
+      Telecommunications Union."},{"id":"10","value":"Social Protection & Labor","sourceNote":"The
+      supply of labor available in an economy includes people who are employed, those
+      who are unemployed but seeking work, and first-time job-seekers. Not everyone
+      who works is included: unpaid workers, family workers, and students are often
+      omitted, while some countries do not count members of the armed forces. Data
+      on labor and employment are compiled by the International Labour Organization
+      (ILO) from labor force surveys, censuses, establishment censuses and surveys,
+      and administrative records such as employment exchange registers and unemployment
+      insurance schemes."}]]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "6025"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sun, 05 Apr 2020 07:04:48 GMT
+      Set-Cookie:
+      - TS019266c8=017189f947fd93d108aba9078f92704c85572daebf2fe041a55164ee969478f5a1c52855c0e894e62f7047954cd60ef66f3cb70122;
+        Path=/
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 200 OK
+    code: 200
+    duration: ""

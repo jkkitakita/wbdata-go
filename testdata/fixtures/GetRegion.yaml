@@ -1,0 +1,43 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata
+    url: http://api.worldbank.org/v2/regions/xzn?format=json
+    method: GET
+  response:
+    body: '[{"page":"1","pages":"1","per_page":"50","total":"1"},[{"id":"","code":"XZN","iso2code":"A5","name":"Sub-Saharan
+      Africa excluding South Africa and Nigeria"}]]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "158"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sun, 05 Apr 2020 07:04:47 GMT
+      Set-Cookie:
+      - TS019266c8=017189f947bf05e16699e6bdc28c031aeab153c8db85bcd5163541d64d7f09065056304c1eb91952481fb221d02420da239e550746;
+        Path=/
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 200 OK
+    code: 200
+    duration: ""

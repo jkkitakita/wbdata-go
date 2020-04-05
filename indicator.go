@@ -11,7 +11,7 @@ type (
 		Source             *Source
 		SourceNote         string
 		SourceOrganization string
-		Topicss            []*Topic
+		Topics             []*Topic
 	}
 )
 

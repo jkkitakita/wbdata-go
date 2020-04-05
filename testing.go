@@ -2,20 +2,22 @@ package wbdata
 
 import (
 	"net/http"
-	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/dnaeon/go-vcr/recorder"
 )
 
+const (
+	TestDefaultPage    = 1
+	TestDefaultPerPage = 10
+)
+
 func NewTestClient(t testing.TB, update bool) (*Client, func()) {
-	cassete := filepath.Join("./fixtures/", t.Name())
-	if update {
-		if err := os.Remove(cassete + ".yaml"); err != nil {
-			t.Fatal(err)
-		}
-	}
+	funcName := strings.Split(t.Name(), "_")
+	fixtureDir := filepath.Join("testdata", "fixtures")
+	cassete := filepath.Join(fixtureDir, funcName[1])
 
 	r, err := recorder.New(cassete)
 	if err != nil {

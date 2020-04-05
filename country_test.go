@@ -2,16 +2,31 @@ package wbdata
 
 import (
 	"flag"
+	"fmt"
+	"os"
+	"path/filepath"
 	"reflect"
 	"testing"
 )
 
-var update = flag.Bool("update", false, "update fixtures")
+var (
+	update     = flag.Bool("update", false, "update fixtures")
+	fixtureDir = filepath.Join("testdata", "fixtures")
+)
+
+func init() {
+	testing.Init()
+	flag.Parse()
+	if *update {
+		fixtureDir := filepath.Join("testdata", "fixtures")
+		os.RemoveAll(fixtureDir)
+		if err := os.MkdirAll(fixtureDir, 0755); err != nil {
+			panic(fmt.Sprintf("failed to create fixture dirs: %s", err))
+		}
+	}
+}
 
 func TestCountriesService_ListCountries(t *testing.T) {
-	defaultPage := 1
-	defaultPerPage := 10
-
 	client, save := NewTestClient(t, *update)
 	defer save()
 
@@ -29,15 +44,15 @@ func TestCountriesService_ListCountries(t *testing.T) {
 			name: "success",
 			args: args{
 				pages: PageParams{
-					Page:    defaultPage,
-					PerPage: defaultPerPage,
+					Page:    TestDefaultPage,
+					PerPage: TestDefaultPerPage,
 				},
 			},
 			want: &PageSummary{
-				Page:    intOrString(defaultPage),
-				PerPage: intOrString(defaultPerPage),
+				Page:    intOrString(TestDefaultPage),
+				PerPage: intOrString(TestDefaultPerPage),
 			},
-			wantCountriesCount: defaultPage * defaultPerPage,
+			wantCountriesCount: TestDefaultPage * TestDefaultPerPage,
 			wantErr:            false,
 		},
 		{
@@ -45,7 +60,7 @@ func TestCountriesService_ListCountries(t *testing.T) {
 			args: args{
 				pages: PageParams{
 					Page:    0,
-					PerPage: defaultPerPage,
+					PerPage: TestDefaultPerPage,
 				},
 			},
 			want:               nil,
@@ -56,7 +71,7 @@ func TestCountriesService_ListCountries(t *testing.T) {
 			name: "failure because PerPage is less than 1",
 			args: args{
 				pages: PageParams{
-					Page:    defaultPage,
+					Page:    TestDefaultPage,
 					PerPage: 0,
 				},
 			},
@@ -109,7 +124,7 @@ func TestCountriesService_GetCountry(t *testing.T) {
 		{
 			name: "success",
 			args: args{
-				countryID: "JPN",
+				countryID: "jpn",
 			},
 			want: &PageSummary{
 				Page:    1,

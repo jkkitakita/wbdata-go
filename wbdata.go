@@ -19,7 +19,7 @@ const (
 	defaultFormat  = "json"
 )
 
-// A Client manages communication with the World Bank Open Data API.
+// A Client manages communication with the World Bank Open Data API
 type Client struct {
 	client *http.Client
 
@@ -29,10 +29,10 @@ type Client struct {
 	// Logger
 	Logger *log.Logger
 
-	// User agent used when communicating with the GitHub API.
+	// User agent used when communicating with the World Bank Open Data API
 	UserAgent string
 
-	//Services to talk to different APIs
+	// Services to talk to different APIs
 	Countries    *CountriesService
 	Indicators   *IndicatorsService
 	IncomeLevels *IncomeLevelsService
@@ -63,6 +63,7 @@ func NewClient(httpClient *http.Client) *Client {
 	return c
 }
 
+// NewClient returns a new World Bank Open Data API http request.
 func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Request, error) {
 	if !strings.HasSuffix(c.BaseURL.Path, "/") {
 		return nil, fmt.Errorf("BaseURL must have a trailing slash, but %q does not", c.BaseURL)

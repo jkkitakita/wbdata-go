@@ -7,6 +7,7 @@ type (
 
 	Region struct {
 		ID       string
+		Code     string
 		Iso2Code string
 		Value    string
 	}

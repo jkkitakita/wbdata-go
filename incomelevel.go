@@ -5,8 +5,10 @@ import (
 )
 
 type (
+	// IncomeLevelsService ...
 	IncomeLevelsService service
 
+	// IncomeLevel contains information for an incomelevel field
 	IncomeLevel struct {
 		ID       string
 		Iso2Code string

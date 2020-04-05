@@ -1,0 +1,43 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata
+    url: http://api.worldbank.org/v2/incomeLevels/hic?format=json
+    method: GET
+  response:
+    body: '[{"page":"1","pages":"1","per_page":"50","total":"1"},[{"id":"HIC","iso2code":"XD","value":"High
+      income"}]]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "107"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sun, 05 Apr 2020 07:04:46 GMT
+      Set-Cookie:
+      - TS019266c8=017189f9474ff29105e8c4288f79d1be6caeb78180fa84b40b2cad5cdb31f0154a11b35c558b35a5ac7779140bfa358e5830c3cac2;
+        Path=/
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 200 OK
+    code: 200
+    duration: ""
