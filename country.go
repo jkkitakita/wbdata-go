@@ -37,8 +37,7 @@ func (c *CountriesService) ListCountries(pages PageParams) (*PageSummary, []*Cou
 		return nil, nil, err
 	}
 
-	_, err = c.client.do(req, &[]interface{}{summary, &countries})
-	if err != nil {
+	if err = c.client.do(req, &[]interface{}{summary, &countries}); err != nil {
 		return nil, nil, err
 	}
 
@@ -50,14 +49,13 @@ func (c *CountriesService) GetCountry(countryID string) (*PageSummary, *Country,
 	summary := &PageSummary{}
 	country := []*Country{}
 
-	s := fmt.Sprintf("countries/%v", countryID)
-	req, err := c.client.NewRequest("GET", s, nil)
+	path := fmt.Sprintf("countries/%v", countryID)
+	req, err := c.client.NewRequest("GET", path, nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	_, err = c.client.do(req, &[]interface{}{summary, &country})
-	if err != nil {
+	if err = c.client.do(req, &[]interface{}{summary, &country}); err != nil {
 		return nil, nil, err
 	}
 

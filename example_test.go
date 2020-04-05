@@ -6,7 +6,9 @@ import (
 	"path/filepath"
 
 	"github.com/dnaeon/go-vcr/recorder"
+
 	"github.com/jkkitakita/wbdata-go"
+	"github.com/jkkitakita/wbdata-go/testutils"
 )
 
 // var update = flag.Bool("update", false, "update fixtures")
@@ -15,8 +17,8 @@ func ExampleListCountries() {
 	client, save := newExampleClient("ListCountries")
 	defer save()
 	summary, countries, _ := client.Countries.ListCountries(wbdata.PageParams{
-		Page:    wbdata.TestDefaultPage,
-		PerPage: wbdata.TestDefaultPerPage,
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestDefaultPerPage,
 	})
 
 	fmt.Printf("Summary is: %#v\n", summary)
@@ -42,8 +44,8 @@ func ExampleListIncomeLevels() {
 	client, save := newExampleClient("ListIncomeLevels")
 	defer save()
 	summary, incomeLevels, _ := client.IncomeLevels.ListIncomeLevels(wbdata.PageParams{
-		Page:    wbdata.TestDefaultPage,
-		PerPage: wbdata.TestDefaultPerPage,
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestDefaultPerPage,
 	})
 
 	fmt.Printf("Summary is: %#v\n", summary)
@@ -69,8 +71,8 @@ func ExampleListIndicators() {
 	client, save := newExampleClient("ListIndicators")
 	defer save()
 	summary, indicators, _ := client.Indicators.ListIndicators(wbdata.PageParams{
-		Page:    wbdata.TestDefaultPage,
-		PerPage: wbdata.TestDefaultPerPage,
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestDefaultPerPage,
 	})
 
 	indicators[0].Source = nil
@@ -102,8 +104,8 @@ func ExampleListLendingTypes() {
 	client, save := newExampleClient("ListLendingTypes")
 	defer save()
 	summary, lendingTypes, _ := client.LendingTypes.ListLendingTypes(wbdata.PageParams{
-		Page:    wbdata.TestDefaultPage,
-		PerPage: wbdata.TestDefaultPerPage,
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestDefaultPerPage,
 	})
 
 	fmt.Printf("Summary is: %#v\n", summary)
@@ -129,8 +131,8 @@ func ExampleListRegions() {
 	client, save := newExampleClient("ListRegions")
 	defer save()
 	summary, regions, _ := client.Regions.ListRegions(wbdata.PageParams{
-		Page:    wbdata.TestDefaultPage,
-		PerPage: wbdata.TestDefaultPerPage,
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestDefaultPerPage,
 	})
 
 	fmt.Printf("Summary is: %#v\n", summary)
@@ -156,8 +158,8 @@ func ExampleListSources() {
 	client, save := newExampleClient("ListSources")
 	defer save()
 	summary, sources, _ := client.Sources.ListSources(wbdata.PageParams{
-		Page:    wbdata.TestDefaultPage,
-		PerPage: wbdata.TestDefaultPerPage,
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestDefaultPerPage,
 	})
 
 	fmt.Printf("Summary is: %#v\n", summary)
@@ -183,8 +185,8 @@ func ExampleListTopics() {
 	client, save := newExampleClient("ListTopics")
 	defer save()
 	summary, topics, _ := client.Topics.ListTopics(wbdata.PageParams{
-		Page:    wbdata.TestDefaultPage,
-		PerPage: wbdata.TestDefaultPerPage,
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestDefaultPerPage,
 	})
 
 	fmt.Printf("Summary is: %#v\n", summary)
@@ -207,9 +209,9 @@ func ExampleGetTopic() {
 }
 
 func newExampleClient(name string) (*wbdata.Client, func()) {
-	cassete := filepath.Join("./testdata/fixtures", name)
+	cassette := filepath.Join("./testdata/fixtures", name)
 
-	r, err := recorder.New(cassete)
+	r, err := recorder.New(cassette)
 	if err != nil {
 		panic(err)
 	}

@@ -13,11 +13,11 @@ type (
 	}
 )
 
-func (c *RegionsService) ListRegions(pages PageParams) (*PageSummary, []*Region, error) {
+func (r *RegionsService) ListRegions(pages PageParams) (*PageSummary, []*Region, error) {
 	summary := &PageSummary{}
 	regions := []*Region{}
 
-	req, err := c.client.NewRequest("GET", "regions", nil)
+	req, err := r.client.NewRequest("GET", "regions", nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -26,26 +26,24 @@ func (c *RegionsService) ListRegions(pages PageParams) (*PageSummary, []*Region,
 		return nil, nil, err
 	}
 
-	_, err = c.client.do(req, &[]interface{}{summary, &regions})
-	if err != nil {
+	if err = r.client.do(req, &[]interface{}{summary, &regions}); err != nil {
 		return nil, nil, err
 	}
 
 	return summary, regions, nil
 }
 
-func (c *RegionsService) GetRegion(code string) (*PageSummary, *Region, error) {
+func (r *RegionsService) GetRegion(code string) (*PageSummary, *Region, error) {
 	summary := &PageSummary{}
 	region := []*Region{}
 
-	s := fmt.Sprintf("regions/%v", code)
-	req, err := c.client.NewRequest("GET", s, nil)
+	path := fmt.Sprintf("regions/%v", code)
+	req, err := r.client.NewRequest("GET", path, nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	_, err = c.client.do(req, &[]interface{}{summary, &region})
-	if err != nil {
+	if err = r.client.do(req, &[]interface{}{summary, &region}); err != nil {
 		return nil, nil, err
 	}
 

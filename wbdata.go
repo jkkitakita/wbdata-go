@@ -9,7 +9,11 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"path/filepath"
 	"strings"
+	"testing"
+
+	"github.com/dnaeon/go-vcr/recorder"
 )
 
 const (
@@ -82,7 +86,7 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 		enc := json.NewEncoder(buf)
 		enc.SetEscapeHTML(false)
 		if err := enc.Encode(body); err != nil {
-			return nil, fmt.Errorf("failed to encode from %s: %v", string(url), err)
+			return nil, fmt.Errorf("failed to encode from %s: %v", url, err)
 		}
 	}
 
@@ -101,20 +105,20 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 	return req, nil
 }
 
-func (c *Client) do(req *http.Request, v *[]interface{}) (*http.Response, error) {
+func (c *Client) do(req *http.Request, v *[]interface{}) error {
 	resp, err := c.client.Do(req)
 	if err != nil {
-		return nil, err
+		return err
 	}
 	defer resp.Body.Close()
 
 	if err := checkStatusCode(resp); err != nil {
-		return nil, err
+		return err
 	}
 
 	data, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return nil, fmt.Errorf("failed to read all from %q: %v", req.URL, err)
+		return fmt.Errorf("failed to read all from %q: %v", req.URL, err)
 	}
 
 	var errReses []ErrorResponse
@@ -124,17 +128,17 @@ func (c *Client) do(req *http.Request, v *[]interface{}) (*http.Response, error)
 		}
 
 		if err := json.Unmarshal(data, v); err != io.EOF && err != nil {
-			return nil, fmt.Errorf("failed to unmarshal from %q", req.URL)
+			return fmt.Errorf("failed to unmarshal from %q", req.URL)
 		}
 	}
 
 	if len(errReses) != 0 {
 		errReses[0].URL = req.URL.String()
 		errReses[0].Code = resp.StatusCode
-		return nil, &errReses[0]
+		return &errReses[0]
 	}
 
-	return resp, nil
+	return nil
 }
 
 func checkStatusCode(resp *http.Response) error {
@@ -148,4 +152,24 @@ func checkStatusCode(resp *http.Response) error {
 	}
 
 	return nil
+}
+
+func NewTestClient(t testing.TB, update bool) (*Client, func()) {
+	funcName := strings.Split(t.Name(), "_")
+	fixtureDir := filepath.Join("testdata", "fixtures")
+	cassette := filepath.Join(fixtureDir, funcName[1])
+
+	r, err := recorder.New(cassette)
+	if err != nil {
+		t.Fatal(err)
+	}
+	customHTTPClient := &http.Client{
+		Transport: r,
+	}
+
+	return NewClient(customHTTPClient), func() {
+		if err := r.Stop(); err != nil {
+			t.Errorf("failed to update fixtures: %s", err)
+		}
+	}
 }

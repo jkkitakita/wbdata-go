@@ -12,11 +12,11 @@ type (
 	}
 )
 
-func (c *TopicsService) ListTopics(pages PageParams) (*PageSummary, []*Topic, error) {
+func (t *TopicsService) ListTopics(pages PageParams) (*PageSummary, []*Topic, error) {
 	summary := &PageSummary{}
 	topics := []*Topic{}
 
-	req, err := c.client.NewRequest("GET", "topics", nil)
+	req, err := t.client.NewRequest("GET", "topics", nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -25,26 +25,24 @@ func (c *TopicsService) ListTopics(pages PageParams) (*PageSummary, []*Topic, er
 		return nil, nil, err
 	}
 
-	_, err = c.client.do(req, &[]interface{}{summary, &topics})
-	if err != nil {
+	if err = t.client.do(req, &[]interface{}{summary, &topics}); err != nil {
 		return nil, nil, err
 	}
 
 	return summary, topics, nil
 }
 
-func (c *TopicsService) GetTopic(topicID string) (*PageSummary, *Topic, error) {
+func (t *TopicsService) GetTopic(topicID string) (*PageSummary, *Topic, error) {
 	summary := &PageSummary{}
 	topic := []*Topic{}
 
-	s := fmt.Sprintf("topics/%v", topicID)
-	req, err := c.client.NewRequest("GET", s, nil)
+	path := fmt.Sprintf("topics/%v", topicID)
+	req, err := t.client.NewRequest("GET", path, nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	_, err = c.client.do(req, &[]interface{}{summary, &topic})
-	if err != nil {
+	if err = t.client.do(req, &[]interface{}{summary, &topic}); err != nil {
 		return nil, nil, err
 	}
 

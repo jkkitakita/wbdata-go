@@ -15,11 +15,11 @@ type (
 	}
 )
 
-func (c *IndicatorsService) ListIndicators(pages PageParams) (*PageSummary, []*Indicator, error) {
+func (i *IndicatorsService) ListIndicators(pages PageParams) (*PageSummary, []*Indicator, error) {
 	summary := &PageSummary{}
 	indicators := []*Indicator{}
 
-	req, err := c.client.NewRequest("GET", "indicators", nil)
+	req, err := i.client.NewRequest("GET", "indicators", nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -28,26 +28,24 @@ func (c *IndicatorsService) ListIndicators(pages PageParams) (*PageSummary, []*I
 		return nil, nil, err
 	}
 
-	_, err = c.client.do(req, &[]interface{}{summary, &indicators})
-	if err != nil {
+	if err = i.client.do(req, &[]interface{}{summary, &indicators}); err != nil {
 		return nil, nil, err
 	}
 
 	return summary, indicators, nil
 }
 
-func (c *IndicatorsService) GetIndicator(indicatorID string) (*PageSummary, *Indicator, error) {
+func (i *IndicatorsService) GetIndicator(indicatorID string) (*PageSummary, *Indicator, error) {
 	summary := &PageSummary{}
 	indicator := []*Indicator{}
 
-	s := fmt.Sprintf("indicators/%v", indicatorID)
-	req, err := c.client.NewRequest("GET", s, nil)
+	path := fmt.Sprintf("indicators/%v", indicatorID)
+	req, err := i.client.NewRequest("GET", path, nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	_, err = c.client.do(req, &[]interface{}{summary, &indicator})
-	if err != nil {
+	if err = i.client.do(req, &[]interface{}{summary, &indicator}); err != nil {
 		return nil, nil, err
 	}
 

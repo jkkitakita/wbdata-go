@@ -20,11 +20,11 @@ type (
 	}
 )
 
-func (c *SourcesService) ListSources(pages PageParams) (*PageSummary, []*Source, error) {
+func (s *SourcesService) ListSources(pages PageParams) (*PageSummary, []*Source, error) {
 	summary := &PageSummary{}
 	sources := []*Source{}
 
-	req, err := c.client.NewRequest("GET", "sources", nil)
+	req, err := s.client.NewRequest("GET", "sources", nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -33,26 +33,24 @@ func (c *SourcesService) ListSources(pages PageParams) (*PageSummary, []*Source,
 		return nil, nil, err
 	}
 
-	_, err = c.client.do(req, &[]interface{}{summary, &sources})
-	if err != nil {
+	if err = s.client.do(req, &[]interface{}{summary, &sources}); err != nil {
 		return nil, nil, err
 	}
 
 	return summary, sources, nil
 }
 
-func (c *SourcesService) GetSource(sourceID string) (*PageSummary, *Source, error) {
+func (s *SourcesService) GetSource(sourceID string) (*PageSummary, *Source, error) {
 	summary := &PageSummary{}
 	source := []*Source{}
 
-	s := fmt.Sprintf("sources/%v", sourceID)
-	req, err := c.client.NewRequest("GET", s, nil)
+	path := fmt.Sprintf("sources/%v", sourceID)
+	req, err := s.client.NewRequest("GET", path, nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	_, err = c.client.do(req, &[]interface{}{summary, &source})
-	if err != nil {
+	if err = s.client.do(req, &[]interface{}{summary, &source}); err != nil {
 		return nil, nil, err
 	}
 

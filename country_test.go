@@ -2,28 +2,21 @@ package wbdata
 
 import (
 	"flag"
-	"fmt"
 	"os"
-	"path/filepath"
 	"reflect"
 	"testing"
+
+	"github.com/jkkitakita/wbdata-go/testutils"
 )
 
 var (
-	update     = flag.Bool("update", false, "update fixtures")
-	fixtureDir = filepath.Join("testdata", "fixtures")
+	update = flag.Bool("update", false, "update fixtures")
 )
 
-func init() {
-	testing.Init()
+func TestMain(m *testing.M) {
 	flag.Parse()
-	if *update {
-		fixtureDir := filepath.Join("testdata", "fixtures")
-		os.RemoveAll(fixtureDir)
-		if err := os.MkdirAll(fixtureDir, 0755); err != nil {
-			panic(fmt.Sprintf("failed to create fixture dirs: %s", err))
-		}
-	}
+	testutils.UpdateFixture(update)
+	os.Exit(m.Run())
 }
 
 func TestCountriesService_ListCountries(t *testing.T) {
@@ -44,15 +37,15 @@ func TestCountriesService_ListCountries(t *testing.T) {
 			name: "success",
 			args: args{
 				pages: PageParams{
-					Page:    TestDefaultPage,
-					PerPage: TestDefaultPerPage,
+					Page:    testutils.TestDefaultPage,
+					PerPage: testutils.TestDefaultPerPage,
 				},
 			},
 			want: &PageSummary{
-				Page:    intOrString(TestDefaultPage),
-				PerPage: intOrString(TestDefaultPerPage),
+				Page:    intOrString(testutils.TestDefaultPage),
+				PerPage: intOrString(testutils.TestDefaultPerPage),
 			},
-			wantCountriesCount: TestDefaultPage * TestDefaultPerPage,
+			wantCountriesCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
 			wantErr:            false,
 		},
 		{
@@ -60,7 +53,7 @@ func TestCountriesService_ListCountries(t *testing.T) {
 			args: args{
 				pages: PageParams{
 					Page:    0,
-					PerPage: TestDefaultPerPage,
+					PerPage: testutils.TestDefaultPerPage,
 				},
 			},
 			want:               nil,
@@ -71,7 +64,7 @@ func TestCountriesService_ListCountries(t *testing.T) {
 			name: "failure because PerPage is less than 1",
 			args: args{
 				pages: PageParams{
-					Page:    TestDefaultPage,
+					Page:    testutils.TestDefaultPage,
 					PerPage: 0,
 				},
 			},

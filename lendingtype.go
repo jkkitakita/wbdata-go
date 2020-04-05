@@ -12,11 +12,11 @@ type (
 	}
 )
 
-func (c *LendingTypesService) ListLendingTypes(pages PageParams) (*PageSummary, []*LendingType, error) {
+func (lt *LendingTypesService) ListLendingTypes(pages PageParams) (*PageSummary, []*LendingType, error) {
 	summary := &PageSummary{}
 	lendingTypes := []*LendingType{}
 
-	req, err := c.client.NewRequest("GET", "lendingTypes", nil)
+	req, err := lt.client.NewRequest("GET", "lendingTypes", nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -25,26 +25,24 @@ func (c *LendingTypesService) ListLendingTypes(pages PageParams) (*PageSummary, 
 		return nil, nil, err
 	}
 
-	_, err = c.client.do(req, &[]interface{}{summary, &lendingTypes})
-	if err != nil {
+	if err = lt.client.do(req, &[]interface{}{summary, &lendingTypes}); err != nil {
 		return nil, nil, err
 	}
 
 	return summary, lendingTypes, nil
 }
 
-func (c *LendingTypesService) GetLendingType(lendingTypeID string) (*PageSummary, *LendingType, error) {
+func (lt *LendingTypesService) GetLendingType(lendingTypeID string) (*PageSummary, *LendingType, error) {
 	summary := &PageSummary{}
 	lendingType := []*LendingType{}
 
-	s := fmt.Sprintf("lendingTypes/%v", lendingTypeID)
-	req, err := c.client.NewRequest("GET", s, nil)
+	path := fmt.Sprintf("lendingTypes/%v", lendingTypeID)
+	req, err := lt.client.NewRequest("GET", path, nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	_, err = c.client.do(req, &[]interface{}{summary, &lendingType})
-	if err != nil {
+	if err = lt.client.do(req, &[]interface{}{summary, &lendingType}); err != nil {
 		return nil, nil, err
 	}
 
