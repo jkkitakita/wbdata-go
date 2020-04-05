@@ -155,9 +155,8 @@ func checkStatusCode(resp *http.Response) error {
 }
 
 func NewTestClient(t testing.TB, update bool) (*Client, func()) {
-	funcName := strings.Split(t.Name(), "_")
 	fixtureDir := filepath.Join("testdata", "fixtures")
-	cassette := filepath.Join(fixtureDir, funcName[1])
+	cassette := filepath.Join(fixtureDir, t.Name())
 
 	r, err := recorder.New(cassette)
 	if err != nil {

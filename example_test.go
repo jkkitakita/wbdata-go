@@ -2,21 +2,15 @@ package wbdata_test
 
 import (
 	"fmt"
-	"net/http"
-	"path/filepath"
-
-	"github.com/dnaeon/go-vcr/recorder"
 
 	"github.com/jkkitakita/wbdata-go"
-	"github.com/jkkitakita/wbdata-go/testutils"
 )
 
 func ExampleCountriesService_ListCountries() {
-	client, save := newExampleClient("ListCountries")
-	defer save()
+	client := wbdata.NewClient(nil)
 	summary, countries, _ := client.Countries.ListCountries(wbdata.PageParams{
-		Page:    testutils.TestDefaultPage,
-		PerPage: testutils.TestDefaultPerPage,
+		Page:    1,
+		PerPage: 10,
 	})
 
 	fmt.Printf("Summary is: %#v\n", summary)
@@ -27,8 +21,7 @@ func ExampleCountriesService_ListCountries() {
 }
 
 func ExampleCountriesService_GetCountry() {
-	client, save := newExampleClient("GetCountry")
-	defer save()
+	client := wbdata.NewClient(nil)
 	summary, country, _ := client.Countries.GetCountry("jpn")
 
 	fmt.Printf("Summary is: %#v\n", summary)
@@ -39,11 +32,10 @@ func ExampleCountriesService_GetCountry() {
 }
 
 func ExampleIncomeLevelsService_ListIncomeLevels() {
-	client, save := newExampleClient("ListIncomeLevels")
-	defer save()
+	client := wbdata.NewClient(nil)
 	summary, incomeLevels, _ := client.IncomeLevels.ListIncomeLevels(wbdata.PageParams{
-		Page:    testutils.TestDefaultPage,
-		PerPage: testutils.TestDefaultPerPage,
+		Page:    1,
+		PerPage: 10,
 	})
 
 	fmt.Printf("Summary is: %#v\n", summary)
@@ -54,8 +46,7 @@ func ExampleIncomeLevelsService_ListIncomeLevels() {
 }
 
 func ExampleIncomeLevelsService_GetIncomeLevel() {
-	client, save := newExampleClient("GetIncomeLevel")
-	defer save()
+	client := wbdata.NewClient(nil)
 	summary, incomeLevel, _ := client.IncomeLevels.GetIncomeLevel("hic")
 
 	fmt.Printf("Summary is: %#v\n", summary)
@@ -66,11 +57,10 @@ func ExampleIncomeLevelsService_GetIncomeLevel() {
 }
 
 func ExampleIndicatorsService_ListIndicators() {
-	client, save := newExampleClient("ListIndicators")
-	defer save()
+	client := wbdata.NewClient(nil)
 	summary, indicators, _ := client.Indicators.ListIndicators(wbdata.PageParams{
-		Page:    testutils.TestDefaultPage,
-		PerPage: testutils.TestDefaultPerPage,
+		Page:    1,
+		PerPage: 10,
 	})
 
 	indicators[0].Source = nil
@@ -84,8 +74,7 @@ func ExampleIndicatorsService_ListIndicators() {
 }
 
 func ExampleIndicatorsService_GetIndicator() {
-	client, save := newExampleClient("GetIndicator")
-	defer save()
+	client := wbdata.NewClient(nil)
 	summary, indicator, _ := client.Indicators.GetIndicator("1.0.hcount.1.90usd")
 
 	indicator.Source = nil
@@ -99,11 +88,10 @@ func ExampleIndicatorsService_GetIndicator() {
 }
 
 func ExampleLendingTypesService_ListLendingTypes() {
-	client, save := newExampleClient("ListLendingTypes")
-	defer save()
+	client := wbdata.NewClient(nil)
 	summary, lendingTypes, _ := client.LendingTypes.ListLendingTypes(wbdata.PageParams{
-		Page:    testutils.TestDefaultPage,
-		PerPage: testutils.TestDefaultPerPage,
+		Page:    1,
+		PerPage: 10,
 	})
 
 	fmt.Printf("Summary is: %#v\n", summary)
@@ -114,8 +102,7 @@ func ExampleLendingTypesService_ListLendingTypes() {
 }
 
 func ExampleLendingTypesService_GetLendingType() {
-	client, save := newExampleClient("GetLendingType")
-	defer save()
+	client := wbdata.NewClient(nil)
 	summary, lendingType, _ := client.LendingTypes.GetLendingType("ibd")
 
 	fmt.Printf("Summary is: %#v\n", summary)
@@ -126,11 +113,10 @@ func ExampleLendingTypesService_GetLendingType() {
 }
 
 func ExampleRegionsService_ListRegions() {
-	client, save := newExampleClient("ListRegions")
-	defer save()
+	client := wbdata.NewClient(nil)
 	summary, regions, _ := client.Regions.ListRegions(wbdata.PageParams{
-		Page:    testutils.TestDefaultPage,
-		PerPage: testutils.TestDefaultPerPage,
+		Page:    1,
+		PerPage: 10,
 	})
 
 	fmt.Printf("Summary is: %#v\n", summary)
@@ -141,8 +127,7 @@ func ExampleRegionsService_ListRegions() {
 }
 
 func ExampleRegionsService_GetRegion() {
-	client, save := newExampleClient("GetRegion")
-	defer save()
+	client := wbdata.NewClient(nil)
 	summary, region, _ := client.Regions.GetRegion("xzn")
 
 	fmt.Printf("Summary is: %#v\n", summary)
@@ -153,11 +138,10 @@ func ExampleRegionsService_GetRegion() {
 }
 
 func ExampleSourcesService_ListSources() {
-	client, save := newExampleClient("ListSources")
-	defer save()
+	client := wbdata.NewClient(nil)
 	summary, sources, _ := client.Sources.ListSources(wbdata.PageParams{
-		Page:    testutils.TestDefaultPage,
-		PerPage: testutils.TestDefaultPerPage,
+		Page:    1,
+		PerPage: 10,
 	})
 
 	fmt.Printf("Summary is: %#v\n", summary)
@@ -168,8 +152,7 @@ func ExampleSourcesService_ListSources() {
 }
 
 func ExampleSourcesService_GetSource() {
-	client, save := newExampleClient("GetSource")
-	defer save()
+	client := wbdata.NewClient(nil)
 	summary, source, _ := client.Sources.GetSource("1")
 
 	fmt.Printf("Summary is: %#v\n", summary)
@@ -180,11 +163,10 @@ func ExampleSourcesService_GetSource() {
 }
 
 func ExampleTopicsService_ListTopics() {
-	client, save := newExampleClient("ListTopics")
-	defer save()
+	client := wbdata.NewClient(nil)
 	summary, topics, _ := client.Topics.ListTopics(wbdata.PageParams{
-		Page:    testutils.TestDefaultPage,
-		PerPage: testutils.TestDefaultPerPage,
+		Page:    1,
+		PerPage: 10,
 	})
 
 	fmt.Printf("Summary is: %#v\n", summary)
@@ -195,8 +177,7 @@ func ExampleTopicsService_ListTopics() {
 }
 
 func ExampleTopicsService_GetTopic() {
-	client, save := newExampleClient("GetTopic")
-	defer save()
+	client := wbdata.NewClient(nil)
 	summary, topic, _ := client.Topics.GetTopic("1")
 
 	fmt.Printf("Summary is: %#v\n", summary)
@@ -204,22 +185,4 @@ func ExampleTopicsService_GetTopic() {
 	// Output:
 	// Summary is: &wbdata.PageSummary{Page:1, Pages:1, PerPage:50, Total:1}
 	// Topic is: &wbdata.Topic{ID:"1", Value:"Agriculture & Rural Development", SourceNote:"For the 70 percent of the world's poor who live in rural areas, agriculture is the main source of income and employment. But depletion and degradation of land and water pose serious challenges to producing enough food and other agricultural products to sustain livelihoods here and meet the needs of urban populations. Data presented here include measures of agricultural inputs, outputs, and productivity compiled by the UN's Food and Agriculture Organization."}
-}
-
-func newExampleClient(name string) (*wbdata.Client, func()) {
-	cassette := filepath.Join("./testdata/fixtures", name)
-
-	r, err := recorder.New(cassette)
-	if err != nil {
-		panic(err)
-	}
-	customHTTPClient := &http.Client{
-		Transport: r,
-	}
-
-	return wbdata.NewClient(customHTTPClient), func() {
-		if err := r.Stop(); err != nil {
-			panic(err)
-		}
-	}
 }
