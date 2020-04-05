@@ -44,4 +44,14 @@ jobs:
       - name: lint
         run: golangci-lint run ./... -v
       - name: test
-        run: go test ./... -v -update true
+        run: go test -coverprofile coverage.out -covermode atomic ./... -v -update true
+      - name: Convert coverage to lcov
+        uses: jandelgado/gcov2lcov-action@v1.0.0
+        with:
+          infile: coverage.out
+          outfile: coverage.lcov
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+          path-to-lcov: coverage.lcov
