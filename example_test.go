@@ -11,9 +11,7 @@ import (
 	"github.com/jkkitakita/wbdata-go/testutils"
 )
 
-// var update = flag.Bool("update", false, "update fixtures")
-
-func ExampleListCountries() {
+func ExampleCountriesService_ListCountries() {
 	client, save := newExampleClient("ListCountries")
 	defer save()
 	summary, countries, _ := client.Countries.ListCountries(wbdata.PageParams{
@@ -28,7 +26,7 @@ func ExampleListCountries() {
 	// Countries[0] is: &wbdata.Country{ID:"ABW", Name:"Aruba", CapitalCity:"Oranjestad", Iso2Code:"AW", Longitude:"-70.0167", Latitude:"12.5167", Region:wbdata.CountryRegion{ID:"LCN", Iso2Code:"ZJ", Value:"Latin America & Caribbean "}, IncomeLevel:wbdata.IncomeLevel{ID:"HIC", Iso2Code:"XD", Value:"High income"}, LendingType:wbdata.LendingType{ID:"LNX", Iso2Code:"XX", Value:"Not classified"}, AdminRegion:wbdata.CountryRegion{ID:"", Iso2Code:"", Value:""}}
 }
 
-func ExampleGetCountry() {
+func ExampleCountriesService_GetCountry() {
 	client, save := newExampleClient("GetCountry")
 	defer save()
 	summary, country, _ := client.Countries.GetCountry("jpn")
@@ -40,7 +38,7 @@ func ExampleGetCountry() {
 	// Country is: &wbdata.Country{ID:"JPN", Name:"Japan", CapitalCity:"Tokyo", Iso2Code:"JP", Longitude:"139.77", Latitude:"35.67", Region:wbdata.CountryRegion{ID:"EAS", Iso2Code:"Z4", Value:"East Asia & Pacific"}, IncomeLevel:wbdata.IncomeLevel{ID:"HIC", Iso2Code:"XD", Value:"High income"}, LendingType:wbdata.LendingType{ID:"LNX", Iso2Code:"XX", Value:"Not classified"}, AdminRegion:wbdata.CountryRegion{ID:"", Iso2Code:"", Value:""}}
 }
 
-func ExampleListIncomeLevels() {
+func ExampleIncomeLevelsService_ListIncomeLevels() {
 	client, save := newExampleClient("ListIncomeLevels")
 	defer save()
 	summary, incomeLevels, _ := client.IncomeLevels.ListIncomeLevels(wbdata.PageParams{
@@ -55,7 +53,7 @@ func ExampleListIncomeLevels() {
 	// IncomeLevels[0] is: &wbdata.IncomeLevel{ID:"HIC", Iso2Code:"XD", Value:"High income"}
 }
 
-func ExampleGetIncomeLevel() {
+func ExampleIncomeLevelsService_GetIncomeLevel() {
 	client, save := newExampleClient("GetIncomeLevel")
 	defer save()
 	summary, incomeLevel, _ := client.IncomeLevels.GetIncomeLevel("hic")
@@ -67,7 +65,7 @@ func ExampleGetIncomeLevel() {
 	// IncomeLevel is: &wbdata.IncomeLevel{ID:"HIC", Iso2Code:"XD", Value:"High income"}
 }
 
-func ExampleListIndicators() {
+func ExampleIndicatorsService_ListIndicators() {
 	client, save := newExampleClient("ListIndicators")
 	defer save()
 	summary, indicators, _ := client.Indicators.ListIndicators(wbdata.PageParams{
@@ -85,7 +83,7 @@ func ExampleListIndicators() {
 	// Indicators[0] without Source and Topics is: &wbdata.Indicator{ID:"1.0.HCount.1.90usd", Name:"Poverty Headcount ($1.90 a day)", Source:(*wbdata.Source)(nil), SourceNote:"The poverty headcount index measures the proportion of the population with daily per capita income (in 2011 PPP) below the poverty line.", SourceOrganization:"LAC Equity Lab tabulations of SEDLAC (CEDLAS and the World Bank).", Topics:[]*wbdata.Topic(nil)}
 }
 
-func ExampleGetIndicator() {
+func ExampleIndicatorsService_GetIndicator() {
 	client, save := newExampleClient("GetIndicator")
 	defer save()
 	summary, indicator, _ := client.Indicators.GetIndicator("1.0.hcount.1.90usd")
@@ -100,7 +98,7 @@ func ExampleGetIndicator() {
 	// Indicator without Source and Topics is: &wbdata.Indicator{ID:"1.0.HCount.1.90usd", Name:"Poverty Headcount ($1.90 a day)", Source:(*wbdata.Source)(nil), SourceNote:"The poverty headcount index measures the proportion of the population with daily per capita income (in 2011 PPP) below the poverty line.", SourceOrganization:"LAC Equity Lab tabulations of SEDLAC (CEDLAS and the World Bank).", Topics:[]*wbdata.Topic(nil)}
 }
 
-func ExampleListLendingTypes() {
+func ExampleLendingTypesService_ListLendingTypes() {
 	client, save := newExampleClient("ListLendingTypes")
 	defer save()
 	summary, lendingTypes, _ := client.LendingTypes.ListLendingTypes(wbdata.PageParams{
@@ -115,7 +113,7 @@ func ExampleListLendingTypes() {
 	// LendingTypes[0] is: &wbdata.LendingType{ID:"IBD", Iso2Code:"XF", Value:"IBRD"}
 }
 
-func ExampleGetLendingType() {
+func ExampleLendingTypesService_GetLendingType() {
 	client, save := newExampleClient("GetLendingType")
 	defer save()
 	summary, lendingType, _ := client.LendingTypes.GetLendingType("ibd")
@@ -127,7 +125,7 @@ func ExampleGetLendingType() {
 	// LendingType is: &wbdata.LendingType{ID:"IBD", Iso2Code:"XF", Value:"IBRD"}
 }
 
-func ExampleListRegions() {
+func ExampleRegionsService_ListRegions() {
 	client, save := newExampleClient("ListRegions")
 	defer save()
 	summary, regions, _ := client.Regions.ListRegions(wbdata.PageParams{
@@ -142,7 +140,7 @@ func ExampleListRegions() {
 	// Regions[0] is: &wbdata.Region{ID:"", Code:"AFR", Iso2Code:"A9", Name:"Africa"}
 }
 
-func ExampleGetRegion() {
+func ExampleRegionsService_GetRegion() {
 	client, save := newExampleClient("GetRegion")
 	defer save()
 	summary, region, _ := client.Regions.GetRegion("xzn")
@@ -154,7 +152,7 @@ func ExampleGetRegion() {
 	// Region is: &wbdata.Region{ID:"", Code:"XZN", Iso2Code:"A5", Name:"Sub-Saharan Africa excluding South Africa and Nigeria"}
 }
 
-func ExampleListSources() {
+func ExampleSourcesService_ListSources() {
 	client, save := newExampleClient("ListSources")
 	defer save()
 	summary, sources, _ := client.Sources.ListSources(wbdata.PageParams{
@@ -169,7 +167,7 @@ func ExampleListSources() {
 	// Sources[0] is: &wbdata.Source{ID:"1", LastUpdated:"2019-10-23", Name:"Doing Business", Code:"DBS", Description:"", URL:"", DataAvailability:"Y", MetadataAvailability:"Y", Concepts:"3"}
 }
 
-func ExampleGetSource() {
+func ExampleSourcesService_GetSource() {
 	client, save := newExampleClient("GetSource")
 	defer save()
 	summary, source, _ := client.Sources.GetSource("1")
@@ -181,7 +179,7 @@ func ExampleGetSource() {
 	// Source is: &wbdata.Source{ID:"1", LastUpdated:"2019-10-23", Name:"Doing Business", Code:"DBS", Description:"", URL:"", DataAvailability:"Y", MetadataAvailability:"Y", Concepts:"3"}
 }
 
-func ExampleListTopics() {
+func ExampleTopicsService_ListTopics() {
 	client, save := newExampleClient("ListTopics")
 	defer save()
 	summary, topics, _ := client.Topics.ListTopics(wbdata.PageParams{
@@ -196,7 +194,7 @@ func ExampleListTopics() {
 	// Topics[0] is: &wbdata.Topic{ID:"1", Value:"Agriculture & Rural Development", SourceNote:"For the 70 percent of the world's poor who live in rural areas, agriculture is the main source of income and employment. But depletion and degradation of land and water pose serious challenges to producing enough food and other agricultural products to sustain livelihoods here and meet the needs of urban populations. Data presented here include measures of agricultural inputs, outputs, and productivity compiled by the UN's Food and Agriculture Organization."}
 }
 
-func ExampleGetTopic() {
+func ExampleTopicsService_GetTopic() {
 	client, save := newExampleClient("GetTopic")
 	defer save()
 	summary, topic, _ := client.Topics.GetTopic("1")
