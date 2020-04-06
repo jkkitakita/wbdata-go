@@ -8,7 +8,7 @@ import (
 
 const (
 	// TestDefaultPage is the default number of pages for testing
-	TestDefaultPage    = 1
+	TestDefaultPage = 1
 	// TestDefaultPerPage is the default number of pages per page for testing
 	TestDefaultPerPage = 10
 )
