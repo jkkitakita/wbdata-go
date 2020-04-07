@@ -23,8 +23,8 @@ type (
 	}
 )
 
-// ListCountries returns summary and countries
-func (c *CountriesService) ListCountries(pages PageParams) (*PageSummary, []*Country, error) {
+// List returns summary and countries
+func (c *CountriesService) List(pages PageParams) (*PageSummary, []*Country, error) {
 	summary := &PageSummary{}
 	countries := []*Country{}
 
@@ -44,8 +44,8 @@ func (c *CountriesService) ListCountries(pages PageParams) (*PageSummary, []*Cou
 	return summary, countries, nil
 }
 
-// GetCountry returns summary and a country
-func (c *CountriesService) GetCountry(countryID string) (*PageSummary, *Country, error) {
+// Get returns summary and a country
+func (c *CountriesService) Get(countryID string) (*PageSummary, *Country, error) {
 	summary := &PageSummary{}
 	country := []*Country{}
 

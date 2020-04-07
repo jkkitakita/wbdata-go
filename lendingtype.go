@@ -14,8 +14,8 @@ type (
 	}
 )
 
-// ListLendingTypes returns a Response's Summary and LendingTypes
-func (lt *LendingTypesService) ListLendingTypes(pages PageParams) (*PageSummary, []*LendingType, error) {
+// List returns a Response's Summary and LendingTypes
+func (lt *LendingTypesService) List(pages PageParams) (*PageSummary, []*LendingType, error) {
 	summary := &PageSummary{}
 	lendingTypes := []*LendingType{}
 
@@ -35,8 +35,8 @@ func (lt *LendingTypesService) ListLendingTypes(pages PageParams) (*PageSummary,
 	return summary, lendingTypes, nil
 }
 
-// GetLendingType returns a Response's Summary and a LendingType
-func (lt *LendingTypesService) GetLendingType(lendingTypeID string) (*PageSummary, *LendingType, error) {
+// Get returns a Response's Summary and a LendingType
+func (lt *LendingTypesService) Get(lendingTypeID string) (*PageSummary, *LendingType, error) {
 	summary := &PageSummary{}
 	lendingType := []*LendingType{}
 

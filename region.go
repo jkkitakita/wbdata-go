@@ -22,8 +22,8 @@ type (
 	}
 )
 
-// ListRegions returns a Response's Summary and Regions
-func (r *RegionsService) ListRegions(pages PageParams) (*PageSummary, []*Region, error) {
+// List returns a Response's Summary and Regions
+func (r *RegionsService) List(pages PageParams) (*PageSummary, []*Region, error) {
 	summary := &PageSummary{}
 	regions := []*Region{}
 
@@ -43,8 +43,8 @@ func (r *RegionsService) ListRegions(pages PageParams) (*PageSummary, []*Region,
 	return summary, regions, nil
 }
 
-// GetRegion returns a Response's Summary and a Region
-func (r *RegionsService) GetRegion(code string) (*PageSummary, *Region, error) {
+// Get returns a Response's Summary and a Region
+func (r *RegionsService) Get(code string) (*PageSummary, *Region, error) {
 	summary := &PageSummary{}
 	region := []*Region{}
 

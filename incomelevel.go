@@ -16,8 +16,8 @@ type (
 	}
 )
 
-// ListIncomeLevels returns a Response's Summary and IncomeLevels
-func (il *IncomeLevelsService) ListIncomeLevels(pages PageParams) (*PageSummary, []*IncomeLevel, error) {
+// List returns a Response's Summary and IncomeLevels
+func (il *IncomeLevelsService) List(pages PageParams) (*PageSummary, []*IncomeLevel, error) {
 	summary := &PageSummary{}
 	incomeLevels := []*IncomeLevel{}
 
@@ -37,8 +37,8 @@ func (il *IncomeLevelsService) ListIncomeLevels(pages PageParams) (*PageSummary,
 	return summary, incomeLevels, err
 }
 
-// GetIncomeLevel returns a Response's Summary and an IncomeLevel
-func (il *IncomeLevelsService) GetIncomeLevel(incomeLevelID string) (*PageSummary, *IncomeLevel, error) {
+// Get returns a Response's Summary and an IncomeLevel
+func (il *IncomeLevelsService) Get(incomeLevelID string) (*PageSummary, *IncomeLevel, error) {
 	summary := &PageSummary{}
 	incomeLevels := []*IncomeLevel{}
 

@@ -22,8 +22,8 @@ type (
 	}
 )
 
-// ListSources returns a Response's Summary and Sources
-func (s *SourcesService) ListSources(pages PageParams) (*PageSummary, []*Source, error) {
+// List returns a Response's Summary and Sources
+func (s *SourcesService) List(pages PageParams) (*PageSummary, []*Source, error) {
 	summary := &PageSummary{}
 	sources := []*Source{}
 
@@ -43,8 +43,8 @@ func (s *SourcesService) ListSources(pages PageParams) (*PageSummary, []*Source,
 	return summary, sources, nil
 }
 
-// GetSource returns a Response's Summary and a Source
-func (s *SourcesService) GetSource(sourceID string) (*PageSummary, *Source, error) {
+// Get returns a Response's Summary and a Source
+func (s *SourcesService) Get(sourceID string) (*PageSummary, *Source, error) {
 	summary := &PageSummary{}
 	source := []*Source{}
 

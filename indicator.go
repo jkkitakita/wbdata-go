@@ -17,8 +17,8 @@ type (
 	}
 )
 
-// ListIndicators returns a Response's Summary and Indicators
-func (i *IndicatorsService) ListIndicators(pages PageParams) (*PageSummary, []*Indicator, error) {
+// List returns a Response's Summary and Indicators
+func (i *IndicatorsService) List(pages PageParams) (*PageSummary, []*Indicator, error) {
 	summary := &PageSummary{}
 	indicators := []*Indicator{}
 
@@ -38,8 +38,8 @@ func (i *IndicatorsService) ListIndicators(pages PageParams) (*PageSummary, []*I
 	return summary, indicators, nil
 }
 
-// GetIndicator returns a Response's Summary and an Indicator
-func (i *IndicatorsService) GetIndicator(indicatorID string) (*PageSummary, *Indicator, error) {
+// Get returns a Response's Summary and an Indicator
+func (i *IndicatorsService) Get(indicatorID string) (*PageSummary, *Indicator, error) {
 	summary := &PageSummary{}
 	indicator := []*Indicator{}
 

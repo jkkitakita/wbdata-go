@@ -22,7 +22,7 @@ import (
 
 func main() {
 	client := wbdata.NewClient(nil)
-	summary, countries, _ := client.Countries.ListCountries(wbdata.PageParams{
+	summary, countries, _ := client.Countries.List(wbdata.PageParams{
 		Page:    1,
 		PerPage: 1,
 	})

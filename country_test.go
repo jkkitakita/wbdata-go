@@ -19,7 +19,7 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
-func TestCountriesService_ListCountries(t *testing.T) {
+func TestCountriesService_List(t *testing.T) {
 	client, save := NewTestClient(t, *update)
 	defer save()
 
@@ -80,24 +80,24 @@ func TestCountriesService_ListCountries(t *testing.T) {
 				client: client,
 			}
 
-			got, got1, err := c.ListCountries(tt.args.pages)
+			got, got1, err := c.List(tt.args.pages)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("CountriesService.ListCountries() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("CountriesService.List() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if tt.want != nil {
 				if got.Page != tt.want.Page || got.PerPage != tt.want.PerPage {
-					t.Errorf("CountriesService.ListCountries() got = %v, want %v", got, tt.want)
+					t.Errorf("CountriesService.List() got = %v, want %v", got, tt.want)
 				}
 			}
 			if len(got1) != tt.wantCountriesCount {
-				t.Errorf("CountriesService.ListCountries() got1 = %v, want %v", got1, tt.wantCountriesCount)
+				t.Errorf("CountriesService.List() got1 = %v, want %v", got1, tt.wantCountriesCount)
 			}
 		})
 	}
 }
 
-func TestCountriesService_GetCountry(t *testing.T) {
+func TestCountriesService_Get(t *testing.T) {
 	invalidCountryID := "ABCDEFG"
 
 	client, save := NewTestClient(t, *update)
@@ -182,21 +182,21 @@ func TestCountriesService_GetCountry(t *testing.T) {
 			c := &CountriesService{
 				client: client,
 			}
-			got, got1, err := c.GetCountry(tt.args.countryID)
+			got, got1, err := c.Get(tt.args.countryID)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("CountriesService.GetCountry() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("CountriesService.Get() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if err != nil {
 				if !reflect.DeepEqual(err, tt.wantErrRes) {
-					t.Errorf("CountriesService.GetCountry() err = %v, wantErrRes %v", err, tt.wantErrRes)
+					t.Errorf("CountriesService.Get() err = %v, wantErrRes %v", err, tt.wantErrRes)
 				}
 			}
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("CountriesService.GetCountry() got = %v, want %v", got, tt.want)
+				t.Errorf("CountriesService.Get() got = %v, want %v", got, tt.want)
 			}
 			if !reflect.DeepEqual(got1, tt.want1) {
-				t.Errorf("CountriesService.GetCountry() got1 = %v, want %v", got1, tt.want1)
+				t.Errorf("CountriesService.Get() got1 = %v, want %v", got1, tt.want1)
 			}
 		})
 	}
