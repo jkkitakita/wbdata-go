@@ -7,33 +7,14 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries?format=json&page=1&per_page=10
+    url: http://api.worldbank.org/v2/countries?format=json&page=1&per_page=2
     method: GET
   response:
-    body: '[{"page":1,"pages":31,"per_page":"10","total":304},[{"id":"ABW","iso2Code":"AW","name":"Aruba","region":{"id":"LCN","iso2code":"ZJ","value":"Latin
+    body: '[{"page":1,"pages":152,"per_page":"2","total":304},[{"id":"ABW","iso2Code":"AW","name":"Aruba","region":{"id":"LCN","iso2code":"ZJ","value":"Latin
       America & Caribbean "},"adminregion":{"id":"","iso2code":"","value":""},"incomeLevel":{"id":"HIC","iso2code":"XD","value":"High
       income"},"lendingType":{"id":"LNX","iso2code":"XX","value":"Not classified"},"capitalCity":"Oranjestad","longitude":"-70.0167","latitude":"12.5167"},{"id":"AFG","iso2Code":"AF","name":"Afghanistan","region":{"id":"SAS","iso2code":"8S","value":"South
       Asia"},"adminregion":{"id":"SAS","iso2code":"8S","value":"South Asia"},"incomeLevel":{"id":"LIC","iso2code":"XM","value":"Low
-      income"},"lendingType":{"id":"IDX","iso2code":"XI","value":"IDA"},"capitalCity":"Kabul","longitude":"69.1761","latitude":"34.5228"},{"id":"AFR","iso2Code":"A9","name":"Africa","region":{"id":"NA","iso2code":"NA","value":"Aggregates"},"adminregion":{"id":"","iso2code":"","value":""},"incomeLevel":{"id":"NA","iso2code":"NA","value":"Aggregates"},"lendingType":{"id":"","iso2code":"","value":"Aggregates"},"capitalCity":"","longitude":"","latitude":""},{"id":"AGO","iso2Code":"AO","name":"Angola","region":{"id":"SSF","iso2code":"ZG","value":"Sub-Saharan
-      Africa "},"adminregion":{"id":"SSA","iso2code":"ZF","value":"Sub-Saharan Africa
-      (excluding high income)"},"incomeLevel":{"id":"LMC","iso2code":"XN","value":"Lower
-      middle income"},"lendingType":{"id":"IBD","iso2code":"XF","value":"IBRD"},"capitalCity":"Luanda","longitude":"13.242","latitude":"-8.81155"},{"id":"ALB","iso2Code":"AL","name":"Albania","region":{"id":"ECS","iso2code":"Z7","value":"Europe
-      & Central Asia"},"adminregion":{"id":"ECA","iso2code":"7E","value":"Europe &
-      Central Asia (excluding high income)"},"incomeLevel":{"id":"UMC","iso2code":"XT","value":"Upper
-      middle income"},"lendingType":{"id":"IBD","iso2code":"XF","value":"IBRD"},"capitalCity":"Tirane","longitude":"19.8172","latitude":"41.3317"},{"id":"AND","iso2Code":"AD","name":"Andorra","region":{"id":"ECS","iso2code":"Z7","value":"Europe
-      & Central Asia"},"adminregion":{"id":"","iso2code":"","value":""},"incomeLevel":{"id":"HIC","iso2code":"XD","value":"High
-      income"},"lendingType":{"id":"LNX","iso2code":"XX","value":"Not classified"},"capitalCity":"Andorra
-      la Vella","longitude":"1.5218","latitude":"42.5075"},{"id":"ANR","iso2Code":"L5","name":"Andean
-      Region","region":{"id":"NA","iso2code":"NA","value":"Aggregates"},"adminregion":{"id":"","iso2code":"","value":""},"incomeLevel":{"id":"NA","iso2code":"NA","value":"Aggregates"},"lendingType":{"id":"","iso2code":"","value":"Aggregates"},"capitalCity":"","longitude":"","latitude":""},{"id":"ARB","iso2Code":"1A","name":"Arab
-      World","region":{"id":"NA","iso2code":"NA","value":"Aggregates"},"adminregion":{"id":"","iso2code":"","value":""},"incomeLevel":{"id":"NA","iso2code":"NA","value":"Aggregates"},"lendingType":{"id":"","iso2code":"","value":"Aggregates"},"capitalCity":"","longitude":"","latitude":""},{"id":"ARE","iso2Code":"AE","name":"United
-      Arab Emirates","region":{"id":"MEA","iso2code":"ZQ","value":"Middle East & North
-      Africa"},"adminregion":{"id":"","iso2code":"","value":""},"incomeLevel":{"id":"HIC","iso2code":"XD","value":"High
-      income"},"lendingType":{"id":"LNX","iso2code":"XX","value":"Not classified"},"capitalCity":"Abu
-      Dhabi","longitude":"54.3705","latitude":"24.4764"},{"id":"ARG","iso2Code":"AR","name":"Argentina","region":{"id":"LCN","iso2code":"ZJ","value":"Latin
-      America & Caribbean "},"adminregion":{"id":"LAC","iso2code":"XJ","value":"Latin
-      America & Caribbean (excluding high income)"},"incomeLevel":{"id":"UMC","iso2code":"XT","value":"Upper
-      middle income"},"lendingType":{"id":"IBD","iso2code":"XF","value":"IBRD"},"capitalCity":"Buenos
-      Aires","longitude":"-58.4173","latitude":"-34.6118"}]]'
+      income"},"lendingType":{"id":"IDX","iso2code":"XI","value":"IDA"},"capitalCity":"Kabul","longitude":"69.1761","latitude":"34.5228"}]]'
     headers:
       Access-Control-Allow-Headers:
       - X-Requested-With
@@ -44,13 +25,13 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - "3762"
+      - "784"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 07 Apr 2020 17:33:04 GMT
+      - Tue, 28 Apr 2020 18:34:14 GMT
       Set-Cookie:
-      - TS019266c8=017189f947aab2b491d188bcc5c1bb76804ed7b604df9d2b6798163b64d046d7ddf3d40a2b0f2fa5fa4ee896aba909947f0f349acb;
+      - TS019266c8=017189f947ac0e01783ba7f7763af01691e6cc40ce72be6ed70052da84b9df7f183feb40c3a2d4fb4182646dda76ddcd9f7dac9c21;
         Path=/
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains

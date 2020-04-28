@@ -7,12 +7,17 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries/jpn?format=json
+    url: http://api.worldbank.org/v2/topics/1?format=json
     method: GET
   response:
-    body: '[{"page":1,"pages":1,"per_page":"50","total":1},[{"id":"JPN","iso2Code":"JP","name":"Japan","region":{"id":"EAS","iso2code":"Z4","value":"East
-      Asia & Pacific"},"adminregion":{"id":"","iso2code":"","value":""},"incomeLevel":{"id":"HIC","iso2code":"XD","value":"High
-      income"},"lendingType":{"id":"LNX","iso2code":"XX","value":"Not classified"},"capitalCity":"Tokyo","longitude":"139.77","latitude":"35.67"}]]'
+    body: '[{"page":1,"pages":1,"per_page":"50","total":1},[{"id":"1","value":"Agriculture
+      & Rural Development","sourceNote":"For the 70 percent of the world''s poor who
+      live in rural areas, agriculture is the main source of income and employment.
+      But depletion and degradation of land and water pose serious challenges to producing
+      enough food and other agricultural products to sustain livelihoods here and
+      meet the needs of urban populations. Data presented here include measures of
+      agricultural inputs, outputs, and productivity compiled by the UN''s Food and
+      Agriculture Organization."}]]'
     headers:
       Access-Control-Allow-Headers:
       - X-Requested-With
@@ -23,13 +28,13 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - "406"
+      - "580"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 28 Apr 2020 18:34:14 GMT
+      - Tue, 28 Apr 2020 18:34:18 GMT
       Set-Cookie:
-      - TS01fa65e4=01359ee97682f1326817bb6ef71540ecab040c40cb4a91ab4e2cd93d210179c0d10f1db0da4169f87634bc0e735d5874df67c4fc0b;
+      - TS01fa65e4=01359ee9764225d88a4503736b19705b86e46fa6b55129d29e6b0623eb0478a4a47a5900d861bf127d7a8f7f1699ca013d12c41d20;
         Path=/
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
@@ -48,7 +53,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries/ABCDEFG?format=json
+    url: http://api.worldbank.org/v2/topics/ABCDEFG?format=json
     method: GET
   response:
     body: '[{"message":[{"id":"120","key":"Invalid value","value":"The provided parameter
@@ -67,9 +72,9 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 28 Apr 2020 18:34:14 GMT
+      - Tue, 28 Apr 2020 18:34:18 GMT
       Set-Cookie:
-      - TS01fa65e4=01359ee9769b601de3608be5f70212433a4f87b11b529c147283fc5da9bd87f4c91c4caeb66d4524075a7c88b6f9ea142f095cc606;
+      - TS019266c8=017189f94780c8cd6a7e2cf883205e66b35b555530736b1dbf963faaae6e214a010ac72d047da569334739a3ba697b189a47a1c10c;
         Path=/
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains

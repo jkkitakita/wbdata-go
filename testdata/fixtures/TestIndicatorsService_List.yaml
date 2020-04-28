@@ -1,0 +1,51 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/indicators?format=json&page=1&per_page=2
+    method: GET
+  response:
+    body: '[{"page":1,"pages":8675,"per_page":"2","total":17349},[{"id":"1.0.HCount.1.90usd","name":"Poverty
+      Headcount ($1.90 a day)","unit":"","source":{"id":"37","value":"LAC Equity Lab"},"sourceNote":"The
+      poverty headcount index measures the proportion of the population with daily
+      per capita income (in 2011 PPP) below the poverty line.","sourceOrganization":"LAC
+      Equity Lab tabulations of SEDLAC (CEDLAS and the World Bank).","topics":[{"id":"11","value":"Poverty
+      "}]},{"id":"1.0.HCount.2.5usd","name":"Poverty Headcount ($2.50 a day)","unit":"","source":{"id":"37","value":"LAC
+      Equity Lab"},"sourceNote":"The poverty headcount index measures the proportion
+      of the population with daily per capita income (in 2005 PPP) below the poverty
+      line.","sourceOrganization":"LAC Equity Lab tabulations of SEDLAC (CEDLAS and
+      the World Bank).","topics":[{"id":"11","value":"Poverty "}]}]]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "871"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 28 Apr 2020 18:34:15 GMT
+      Set-Cookie:
+      - TS01fa65e4=01359ee976fa16b0eb25d61cb3486057722a93c48e78355a38661ae0a164dc4a5dd2866f53cbb835443081b2fac4e8eacfd07bcddc;
+        Path=/
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 200 OK
+    code: 200
+    duration: ""

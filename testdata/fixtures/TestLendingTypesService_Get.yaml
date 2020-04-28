@@ -7,12 +7,10 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries/jpn?format=json
+    url: http://api.worldbank.org/v2/lendingTypes/ibd?format=json
     method: GET
   response:
-    body: '[{"page":1,"pages":1,"per_page":"50","total":1},[{"id":"JPN","iso2Code":"JP","name":"Japan","region":{"id":"EAS","iso2code":"Z4","value":"East
-      Asia & Pacific"},"adminregion":{"id":"","iso2code":"","value":""},"incomeLevel":{"id":"HIC","iso2code":"XD","value":"High
-      income"},"lendingType":{"id":"LNX","iso2code":"XX","value":"Not classified"},"capitalCity":"Tokyo","longitude":"139.77","latitude":"35.67"}]]'
+    body: '[{"page":"1","pages":"1","per_page":"50","total":"1"},[{"id":"IBD","iso2code":"XF","value":"IBRD"}]]'
     headers:
       Access-Control-Allow-Headers:
       - X-Requested-With
@@ -23,13 +21,13 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - "406"
+      - "100"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 28 Apr 2020 18:34:14 GMT
+      - Tue, 28 Apr 2020 18:34:16 GMT
       Set-Cookie:
-      - TS01fa65e4=01359ee97682f1326817bb6ef71540ecab040c40cb4a91ab4e2cd93d210179c0d10f1db0da4169f87634bc0e735d5874df67c4fc0b;
+      - TS019266c8=017189f947baf8f348a103fd25817122f8d402731ddc11f01a775505e18935960ad1e75f41a7f3ac610d484e4a9feabc1ef53546b8;
         Path=/
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
@@ -48,7 +46,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries/ABCDEFG?format=json
+    url: http://api.worldbank.org/v2/lendingTypes/ABCDEFG?format=json
     method: GET
   response:
     body: '[{"message":[{"id":"120","key":"Invalid value","value":"The provided parameter
@@ -67,9 +65,9 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 28 Apr 2020 18:34:14 GMT
+      - Tue, 28 Apr 2020 18:34:16 GMT
       Set-Cookie:
-      - TS01fa65e4=01359ee9769b601de3608be5f70212433a4f87b11b529c147283fc5da9bd87f4c91c4caeb66d4524075a7c88b6f9ea142f095cc606;
+      - TS01fa65e4=01359ee9762fc1efdfd5141b3ab7bed6eb25997934b3ae13ef64b7b78985c59d24f10135d800e7c6d4f68a0546681d43133c302271;
         Path=/
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains

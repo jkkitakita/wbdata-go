@@ -7,12 +7,11 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries/jpn?format=json
+    url: http://api.worldbank.org/v2/sources/11?format=json
     method: GET
   response:
-    body: '[{"page":1,"pages":1,"per_page":"50","total":1},[{"id":"JPN","iso2Code":"JP","name":"Japan","region":{"id":"EAS","iso2code":"Z4","value":"East
-      Asia & Pacific"},"adminregion":{"id":"","iso2code":"","value":""},"incomeLevel":{"id":"HIC","iso2code":"XD","value":"High
-      income"},"lendingType":{"id":"LNX","iso2code":"XX","value":"Not classified"},"capitalCity":"Tokyo","longitude":"139.77","latitude":"35.67"}]]'
+    body: '[{"page":"1","pages":"1","per_page":"50","total":"1"},[{"id":"11","lastupdated":"2013-02-22","name":"Africa
+      Development Indicators","code":"ADI","description":"","url":"","dataavailability":"Y","metadataavailability":"Y","concepts":"3"}]]'
     headers:
       Access-Control-Allow-Headers:
       - X-Requested-With
@@ -23,13 +22,13 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - "406"
+      - "238"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 28 Apr 2020 18:34:14 GMT
+      - Tue, 28 Apr 2020 18:34:17 GMT
       Set-Cookie:
-      - TS01fa65e4=01359ee97682f1326817bb6ef71540ecab040c40cb4a91ab4e2cd93d210179c0d10f1db0da4169f87634bc0e735d5874df67c4fc0b;
+      - TS019266c8=017189f947aab41ff6a873370d5e72010dd1792d4494ea2c593c7e1818a631eb8e763bf7bb19e63329fcb81facb2a26f10f319417c;
         Path=/
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
@@ -48,7 +47,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries/ABCDEFG?format=json
+    url: http://api.worldbank.org/v2/sources/ABCDEFG?format=json
     method: GET
   response:
     body: '[{"message":[{"id":"120","key":"Invalid value","value":"The provided parameter
@@ -67,9 +66,9 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 28 Apr 2020 18:34:14 GMT
+      - Tue, 28 Apr 2020 18:34:17 GMT
       Set-Cookie:
-      - TS01fa65e4=01359ee9769b601de3608be5f70212433a4f87b11b529c147283fc5da9bd87f4c91c4caeb66d4524075a7c88b6f9ea142f095cc606;
+      - TS019266c8=017189f94703a15c897de02d03405bee50c58dfe1bd6f71b0224bc674fccfe34bb8fe7ede7e018a24d8c0b5a05ef02f28b27c91388;
         Path=/
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains

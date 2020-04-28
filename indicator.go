@@ -10,10 +10,16 @@ type (
 	Indicator struct {
 		ID                 string
 		Name               string
-		Source             *Source
+		Unit               string
+		Source             *IDAndValue
 		SourceNote         string
 		SourceOrganization string
-		Topics             []*Topic
+		Topics             []*IDAndValue
+	}
+
+	IDAndValue struct {
+		ID    string
+		Value string
 	}
 )
 

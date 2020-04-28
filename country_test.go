@@ -9,6 +9,10 @@ import (
 	"github.com/jkkitakita/wbdata-go/testutils"
 )
 
+const (
+	invalidID = "ABCDEFG"
+)
+
 var (
 	update = flag.Bool("update", false, "update fixtures")
 )
@@ -98,8 +102,6 @@ func TestCountriesService_List(t *testing.T) {
 }
 
 func TestCountriesService_Get(t *testing.T) {
-	invalidCountryID := "ABCDEFG"
-
 	client, save := NewTestClient(t, *update)
 	defer save()
 
@@ -159,13 +161,13 @@ func TestCountriesService_Get(t *testing.T) {
 		{
 			name: "failure because countryID is invalid",
 			args: args{
-				countryID: invalidCountryID,
+				countryID: invalidID,
 			},
 			want:    nil,
 			want1:   nil,
 			wantErr: true,
 			wantErrRes: &ErrorResponse{
-				URL:  defaultBaseURL + apiVersion + "/countries/" + invalidCountryID + "?format=json",
+				URL:  defaultBaseURL + apiVersion + "/countries/" + invalidID + "?format=json",
 				Code: 200,
 				Message: []ErrorMessage{
 					{

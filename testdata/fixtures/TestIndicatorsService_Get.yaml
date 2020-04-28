@@ -7,12 +7,15 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries/jpn?format=json
+    url: http://api.worldbank.org/v2/indicators/1.0.hcount.1.90usd?format=json
     method: GET
   response:
-    body: '[{"page":1,"pages":1,"per_page":"50","total":1},[{"id":"JPN","iso2Code":"JP","name":"Japan","region":{"id":"EAS","iso2code":"Z4","value":"East
-      Asia & Pacific"},"adminregion":{"id":"","iso2code":"","value":""},"incomeLevel":{"id":"HIC","iso2code":"XD","value":"High
-      income"},"lendingType":{"id":"LNX","iso2code":"XX","value":"Not classified"},"capitalCity":"Tokyo","longitude":"139.77","latitude":"35.67"}]]'
+    body: '[{"page":1,"pages":1,"per_page":"50","total":1},[{"id":"1.0.HCount.1.90usd","name":"Poverty
+      Headcount ($1.90 a day)","unit":"","source":{"id":"37","value":"LAC Equity Lab"},"sourceNote":"The
+      poverty headcount index measures the proportion of the population with daily
+      per capita income (in 2011 PPP) below the poverty line.","sourceOrganization":"LAC
+      Equity Lab tabulations of SEDLAC (CEDLAS and the World Bank).","topics":[{"id":"11","value":"Poverty
+      "}]}]]'
     headers:
       Access-Control-Allow-Headers:
       - X-Requested-With
@@ -23,13 +26,13 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - "406"
+      - "458"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 28 Apr 2020 18:34:14 GMT
+      - Tue, 28 Apr 2020 18:34:15 GMT
       Set-Cookie:
-      - TS01fa65e4=01359ee97682f1326817bb6ef71540ecab040c40cb4a91ab4e2cd93d210179c0d10f1db0da4169f87634bc0e735d5874df67c4fc0b;
+      - TS01fa65e4=01359ee976c4415783e1619ea5071643c8386169c3d3e67feb8002e0967b14410fa64751518950e2541ae62d58d7fa688c102f132a;
         Path=/
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
@@ -48,7 +51,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries/ABCDEFG?format=json
+    url: http://api.worldbank.org/v2/indicators/ABCDEFG?format=json
     method: GET
   response:
     body: '[{"message":[{"id":"120","key":"Invalid value","value":"The provided parameter
@@ -67,9 +70,9 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 28 Apr 2020 18:34:14 GMT
+      - Tue, 28 Apr 2020 18:34:15 GMT
       Set-Cookie:
-      - TS01fa65e4=01359ee9769b601de3608be5f70212433a4f87b11b529c147283fc5da9bd87f4c91c4caeb66d4524075a7c88b6f9ea142f095cc606;
+      - TS01fa65e4=01359ee976e79553b0aaec2ff4900ddcd42c6642bd5d010118217a7c6d3608afcde7ff35ed6731c837def57f44afd0b0d048293e45;
         Path=/
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains

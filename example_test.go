@@ -69,8 +69,8 @@ func ExampleIndicatorsService_List() {
 	fmt.Printf("Summary is: %#v\n", summary)
 	fmt.Printf("Indicators[0] without Source and Topics is: %#v\n", indicators[0])
 	// Output:
-	// Summary is: &wbdata.PageSummary{Page:1, Pages:1734, PerPage:10, Total:17338}
-	// Indicators[0] without Source and Topics is: &wbdata.Indicator{ID:"1.0.HCount.1.90usd", Name:"Poverty Headcount ($1.90 a day)", Source:(*wbdata.Source)(nil), SourceNote:"The poverty headcount index measures the proportion of the population with daily per capita income (in 2011 PPP) below the poverty line.", SourceOrganization:"LAC Equity Lab tabulations of SEDLAC (CEDLAS and the World Bank).", Topics:[]*wbdata.Topic(nil)}
+	// Summary is: &wbdata.PageSummary{Page:1, Pages:1735, PerPage:10, Total:17349}
+	// Indicators[0] without Source and Topics is: &wbdata.Indicator{ID:"1.0.HCount.1.90usd", Name:"Poverty Headcount ($1.90 a day)", Unit:"", Source:(*wbdata.IDAndValue)(nil), SourceNote:"The poverty headcount index measures the proportion of the population with daily per capita income (in 2011 PPP) below the poverty line.", SourceOrganization:"LAC Equity Lab tabulations of SEDLAC (CEDLAS and the World Bank).", Topics:[]*wbdata.IDAndValue(nil)}
 }
 
 func ExampleIndicatorsService_Get() {
@@ -84,7 +84,7 @@ func ExampleIndicatorsService_Get() {
 	fmt.Printf("Indicator without Source and Topics is: %#v\n", indicator)
 	// Output:
 	// Summary is: &wbdata.PageSummary{Page:1, Pages:1, PerPage:50, Total:1}
-	// Indicator without Source and Topics is: &wbdata.Indicator{ID:"1.0.HCount.1.90usd", Name:"Poverty Headcount ($1.90 a day)", Source:(*wbdata.Source)(nil), SourceNote:"The poverty headcount index measures the proportion of the population with daily per capita income (in 2011 PPP) below the poverty line.", SourceOrganization:"LAC Equity Lab tabulations of SEDLAC (CEDLAS and the World Bank).", Topics:[]*wbdata.Topic(nil)}
+	// Indicator without Source and Topics is: &wbdata.Indicator{ID:"1.0.HCount.1.90usd", Name:"Poverty Headcount ($1.90 a day)", Unit:"", Source:(*wbdata.IDAndValue)(nil), SourceNote:"The poverty headcount index measures the proportion of the population with daily per capita income (in 2011 PPP) below the poverty line.", SourceOrganization:"LAC Equity Lab tabulations of SEDLAC (CEDLAS and the World Bank).", Topics:[]*wbdata.IDAndValue(nil)}
 }
 
 func ExampleLendingTypesService_List() {

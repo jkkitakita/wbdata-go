@@ -1,0 +1,42 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/lendingTypes?format=json&page=1&per_page=2
+    method: GET
+  response:
+    body: '[{"page":"1","pages":"2","per_page":"2","total":"4"},[{"id":"IBD","iso2code":"XF","value":"IBRD"},{"id":"IDB","iso2code":"XH","value":"Blend"}]]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "144"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 28 Apr 2020 18:34:15 GMT
+      Set-Cookie:
+      - TS01fa65e4=01359ee976b98cd3489f6e5a4d89ab252fafbaafe971bbbb2133be6a3394ccf9a61974bfc1110d7ef99c6faf7c660c669c8b3964a8;
+        Path=/
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 200 OK
+    code: 200
+    duration: ""
