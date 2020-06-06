@@ -8,11 +8,12 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
+
+	"github.com/jkkitakita/wbdata-go/testutils"
 )
 
 func TestNewClient(t *testing.T) {
 	baseURL, _ := url.Parse(defaultBaseURL + apiVersion + "/")
-	jaLang := "ja"
 	defaultClient := &Client{
 		client:        &http.Client{},
 		BaseURL:       baseURL,
@@ -23,7 +24,7 @@ func TestNewClient(t *testing.T) {
 	jaClient := &Client{
 		client:        &http.Client{},
 		BaseURL:       baseURL,
-		LocalLanguage: jaLang,
+		LocalLanguage: testutils.JaLocalLanguage,
 		Logger:        nil,
 		UserAgent:     userAgent,
 	}
@@ -60,7 +61,7 @@ func TestNewClient(t *testing.T) {
 			args: args{
 				httpClient: &http.Client{},
 				options: []func(*Client){
-					LocalLanguage(jaLang),
+					LocalLanguage(testutils.JaLocalLanguage),
 				},
 			},
 			want: jaClient,
@@ -78,10 +79,9 @@ func TestNewClient(t *testing.T) {
 
 func TestClient_NewRequest(t *testing.T) {
 	baseURL, _ := url.Parse(fmt.Sprintf("%s%s/", defaultBaseURL, apiVersion))
-	jaLang := "ja"
 	urlStr := "countries"
 	defaultRequestURL, _ := url.Parse(fmt.Sprintf("%s%s?format=%s", baseURL, urlStr, defaultFormat))
-	jaRequestURL, _ := url.Parse(fmt.Sprintf("%s%s/%s?format=%s", baseURL, jaLang, urlStr, defaultFormat))
+	jaRequestURL, _ := url.Parse(fmt.Sprintf("%s%s/%s?format=%s", baseURL, testutils.JaLocalLanguage, urlStr, defaultFormat))
 
 	defaultClient := &Client{
 		client:        &http.Client{},
@@ -93,7 +93,7 @@ func TestClient_NewRequest(t *testing.T) {
 	jaClient := &Client{
 		client:        &http.Client{},
 		BaseURL:       baseURL,
-		LocalLanguage: jaLang,
+		LocalLanguage: testutils.JaLocalLanguage,
 		Logger:        nil,
 		UserAgent:     userAgent,
 	}
