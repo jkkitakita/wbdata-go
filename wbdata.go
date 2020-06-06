@@ -17,10 +17,11 @@ import (
 )
 
 const (
-	defaultBaseURL = "http://api.worldbank.org/"
-	apiVersion     = "v2"
-	userAgent      = "wbdata-go"
-	defaultFormat  = "json"
+	defaultBaseURL       = "http://api.worldbank.org/"
+	apiVersion           = "v2"
+	userAgent            = "wbdata-go"
+	defaultLocalLanguage = "en"
+	defaultFormat        = "json"
 )
 
 // A Client manages communication with the World Bank Open Data API
@@ -29,6 +30,9 @@ type Client struct {
 
 	// Base URL for API requests. Defaults to the World Bank Open Data API
 	BaseURL *url.URL
+
+	// Local Language
+	LocalLanguage string
 
 	// Logger
 	Logger *log.Logger
@@ -50,13 +54,23 @@ type service struct {
 	client *Client //nolint:structcheck
 }
 
+// LocalLanguage sets local language
+func LocalLanguage(lang string) func(*Client) {
+	return func(s *Client) {
+		s.LocalLanguage = lang
+	}
+}
+
 // NewClient returns a new World Bank Open Data API client.
-func NewClient(httpClient *http.Client) *Client {
+func NewClient(httpClient *http.Client, options ...func(*Client)) *Client {
 	if httpClient == nil {
 		httpClient = &http.Client{}
 	}
 	baseURL, _ := url.Parse(defaultBaseURL + apiVersion + "/")
-	c := &Client{client: httpClient, BaseURL: baseURL, UserAgent: userAgent}
+	c := &Client{client: httpClient, BaseURL: baseURL, LocalLanguage: defaultLocalLanguage, UserAgent: userAgent}
+	for _, option := range options {
+		option(c)
+	}
 	c.Countries = &CountriesService{client: c}
 	c.Sources = &SourcesService{client: c}
 	c.Topics = &TopicsService{client: c}
