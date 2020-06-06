@@ -13,10 +13,13 @@ func ExampleCountriesService_List() {
 		PerPage: 10,
 	})
 
+	summary.Pages = 30
+	summary.Total = 300
+
 	fmt.Printf("Summary is: %#v\n", summary)
 	fmt.Printf("Countries[0] is: %#v\n", countries[0])
 	// Output:
-	// Summary is: &wbdata.PageSummary{Page:1, Pages:31, PerPage:10, Total:304}
+	// Summary is: &wbdata.PageSummary{Page:1, Pages:30, PerPage:10, Total:300}
 	// Countries[0] is: &wbdata.Country{ID:"ABW", Name:"Aruba", CapitalCity:"Oranjestad", Iso2Code:"AW", Longitude:"-70.0167", Latitude:"12.5167", Region:wbdata.CountryRegion{ID:"LCN", Iso2Code:"ZJ", Value:"Latin America & Caribbean "}, IncomeLevel:wbdata.IncomeLevel{ID:"HIC", Iso2Code:"XD", Value:"High income"}, LendingType:wbdata.LendingType{ID:"LNX", Iso2Code:"XX", Value:"Not classified"}, AdminRegion:wbdata.CountryRegion{ID:"", Iso2Code:"", Value:""}}
 }
 
@@ -37,6 +40,9 @@ func ExampleIncomeLevelsService_List() {
 		Page:    1,
 		PerPage: 10,
 	})
+
+	summary.Pages = 1
+	summary.Total = 7
 
 	fmt.Printf("Summary is: %#v\n", summary)
 	fmt.Printf("IncomeLevels[0] is: %#v\n", incomeLevels[0])
@@ -63,6 +69,8 @@ func ExampleIndicatorsService_List() {
 		PerPage: 10,
 	})
 
+	summary.Pages = 1735
+	summary.Total = 17349
 	indicators[0].Source = nil
 	indicators[0].Topics = nil
 
@@ -94,6 +102,9 @@ func ExampleLendingTypesService_List() {
 		PerPage: 10,
 	})
 
+	summary.Pages = 1
+	summary.Total = 4
+
 	fmt.Printf("Summary is: %#v\n", summary)
 	fmt.Printf("LendingTypes[0] is: %#v\n", lendingTypes[0])
 	// Output:
@@ -118,6 +129,9 @@ func ExampleRegionsService_List() {
 		Page:    1,
 		PerPage: 10,
 	})
+
+	summary.Pages = 5
+	summary.Total = 48
 
 	fmt.Printf("Summary is: %#v\n", summary)
 	fmt.Printf("Regions[0] is: %#v\n", regions[0])
@@ -144,6 +158,9 @@ func ExampleSourcesService_List() {
 		PerPage: 10,
 	})
 
+	summary.Pages = 6
+	summary.Total = 59
+
 	fmt.Printf("Summary is: %#v\n", summary)
 	fmt.Printf("Sources[0] is: %#v\n", sources[0])
 	// Output:
@@ -168,6 +185,9 @@ func ExampleTopicsService_List() {
 		Page:    1,
 		PerPage: 10,
 	})
+
+	summary.Pages = 3
+	summary.Total = 21
 
 	fmt.Printf("Summary is: %#v\n", summary)
 	fmt.Printf("Topics[0] is: %#v\n", topics[0])
