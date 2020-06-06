@@ -17,10 +17,12 @@ import (
 )
 
 const (
-	defaultBaseURL = "http://api.worldbank.org/"
-	apiVersion     = "v2"
-	userAgent      = "wbdata-go"
-	defaultFormat  = "json"
+	defaultProtocol = "http"
+	defaultHost     = "api.worldbank.org"
+	defaultBaseURL  = defaultProtocol + "://" + defaultHost + "/"
+	apiVersion      = "v2"
+	userAgent       = "wbdata-go"
+	defaultFormat   = "json"
 )
 
 // A Client manages communication with the World Bank Open Data API
@@ -29,6 +31,9 @@ type Client struct {
 
 	// Base URL for API requests. Defaults to the World Bank Open Data API
 	BaseURL *url.URL
+
+	// Local Language
+	LocalLanguage string
 
 	// Logger
 	Logger *log.Logger
@@ -50,13 +55,23 @@ type service struct {
 	client *Client //nolint:structcheck
 }
 
+// LocalLanguage sets local language
+func LocalLanguage(lang string) func(*Client) {
+	return func(s *Client) {
+		s.LocalLanguage = lang
+	}
+}
+
 // NewClient returns a new World Bank Open Data API client.
-func NewClient(httpClient *http.Client) *Client {
+func NewClient(httpClient *http.Client, options ...func(*Client)) *Client {
 	if httpClient == nil {
 		httpClient = &http.Client{}
 	}
 	baseURL, _ := url.Parse(defaultBaseURL + apiVersion + "/")
 	c := &Client{client: httpClient, BaseURL: baseURL, UserAgent: userAgent}
+	for _, option := range options {
+		option(c)
+	}
 	c.Countries = &CountriesService{client: c}
 	c.Sources = &SourcesService{client: c}
 	c.Topics = &TopicsService{client: c}
@@ -74,6 +89,10 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 	}
 	v := url.Values{}
 	v.Set("format", defaultFormat)
+	// Set Local language
+	if c.LocalLanguage != `` {
+		urlStr = fmt.Sprintf("%s/%s", c.LocalLanguage, urlStr)
+	}
 	u, err := c.BaseURL.Parse(urlStr)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse from %s: %v", urlStr, err)
