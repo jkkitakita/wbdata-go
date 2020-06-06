@@ -17,11 +17,12 @@ import (
 )
 
 const (
-	defaultBaseURL       = "http://api.worldbank.org/"
-	apiVersion           = "v2"
-	userAgent            = "wbdata-go"
-	defaultLocalLanguage = "en"
-	defaultFormat        = "json"
+	defaultProtocol = "http"
+	defaultHost     = "api.worldbank.org"
+	defaultBaseURL  = defaultProtocol + "://" + defaultHost + "/"
+	apiVersion      = "v2"
+	userAgent       = "wbdata-go"
+	defaultFormat   = "json"
 )
 
 // A Client manages communication with the World Bank Open Data API
@@ -67,7 +68,7 @@ func NewClient(httpClient *http.Client, options ...func(*Client)) *Client {
 		httpClient = &http.Client{}
 	}
 	baseURL, _ := url.Parse(defaultBaseURL + apiVersion + "/")
-	c := &Client{client: httpClient, BaseURL: baseURL, LocalLanguage: defaultLocalLanguage, UserAgent: userAgent}
+	c := &Client{client: httpClient, BaseURL: baseURL, UserAgent: userAgent}
 	for _, option := range options {
 		option(c)
 	}
@@ -88,6 +89,10 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 	}
 	v := url.Values{}
 	v.Set("format", defaultFormat)
+	// Set Local language
+	if c.LocalLanguage != `` {
+		urlStr = fmt.Sprintf("%s/%s", c.LocalLanguage, urlStr)
+	}
 	u, err := c.BaseURL.Parse(urlStr)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse from %s: %v", urlStr, err)
