@@ -3,6 +3,7 @@ package wbdata
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -71,10 +72,8 @@ func SetLanguage(lang *Language) func(*Client) {
 // SetOutputFormat sets local language to request URL
 func SetOutputFormat(format OutputFormat, prefix string) func(*Client) {
 	return func(s *Client) {
-		if format == OutputFormatJSONP {
-			s.PrefixParam = prefix
-		}
 		s.OutputFormat = format
+		s.PrefixParam = prefix
 	}
 }
 
@@ -132,13 +131,9 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 
 func (c *Client) buildRequestURL(urlStr string) (string, error) {
 	// Set format
-	v := url.Values{}
-	v.Set("format", c.OutputFormat.String())
-	if c.OutputFormat == OutputFormatJSONP {
-		if c.PrefixParam == "" {
-			return "", fmt.Errorf("prefix parameter must be specified for JSONP format. urlStr: %s", urlStr)
-		}
-		v.Set("prefix", c.PrefixParam)
+	v, err := buildQueryParam(c)
+	if err != nil {
+		return "", err
 	}
 	// Set local language
 	if c.Language != "" {
@@ -146,10 +141,28 @@ func (c *Client) buildRequestURL(urlStr string) (string, error) {
 	}
 	u, err := c.BaseURL.Parse(urlStr)
 	if err != nil {
-		return ``, fmt.Errorf("failed to parse from %s: %v", urlStr, err)
+		return "", fmt.Errorf("failed to parse from %s: %v", urlStr, err)
 	}
 
 	return fmt.Sprintf("%s?%s", u, v.Encode()), nil
+}
+
+func buildQueryParam(c *Client) (url.Values, error) {
+	v := url.Values{}
+	v.Set("format", c.OutputFormat.String())
+
+	if c.OutputFormat != OutputFormatJSONP && c.PrefixParam != "" {
+		return nil, errors.New(fmt.Sprint("prefix parameter must NOT be specified for NOT JSONP format"))
+	}
+
+	if c.OutputFormat == OutputFormatJSONP {
+		if c.PrefixParam == "" {
+			return nil, errors.New(fmt.Sprint("prefix parameter must be specified for JSONP format"))
+		}
+		v.Set("prefix", c.PrefixParam)
+	}
+
+	return v, nil
 }
 
 func setHeader(c *Client, req *http.Request, body interface{}) {
