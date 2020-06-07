@@ -22,7 +22,6 @@ const (
 	defaultBaseURL  = defaultProtocol + "://" + defaultHost + "/"
 	apiVersion      = "v2"
 	userAgent       = "wbdata-go"
-	defaultFormat   = "json"
 )
 
 // A Client manages communication with the World Bank Open Data API
@@ -34,6 +33,9 @@ type Client struct {
 
 	// Language is Local Language for response
 	Language string
+
+	// OutputFormat is output format
+	OutputFormat OutputFormat
 
 	// Logger
 	Logger *log.Logger
@@ -63,13 +65,20 @@ func SetLanguage(lang *Language) func(*Client) {
 	}
 }
 
+// SetOutputFormat sets local language to request URL
+func SetOutputFormat(format OutputFormat) func(*Client) {
+	return func(s *Client) {
+		s.OutputFormat = format
+	}
+}
+
 // NewClient returns a new World Bank Open Data API client.
 func NewClient(httpClient *http.Client, options ...func(*Client)) *Client {
 	if httpClient == nil {
 		httpClient = &http.Client{}
 	}
 	baseURL, _ := url.Parse(defaultBaseURL + apiVersion + "/")
-	c := &Client{client: httpClient, BaseURL: baseURL, UserAgent: userAgent}
+	c := &Client{client: httpClient, BaseURL: baseURL, OutputFormat: OutputFormatJSON, UserAgent: userAgent}
 	for _, option := range options {
 		option(c)
 	}
@@ -118,7 +127,7 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 func (c *Client) buildRequestURL(urlStr string) (string, error) {
 	// Set format
 	v := url.Values{}
-	v.Set("format", defaultFormat)
+	v.Set("format", c.OutputFormat.String())
 	// Set local language
 	if c.Language != "" {
 		urlStr = fmt.Sprintf("%s/%s", c.Language, urlStr)
