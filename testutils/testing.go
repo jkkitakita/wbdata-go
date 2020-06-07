@@ -13,6 +13,8 @@ const (
 	TestDefaultPerPage = 2
 	// JaLanguage is local language for Japan
 	JaLanguage = "ja"
+	// TestPrefixParam is prefix parameter for testing
+	TestPrefixParam = "Getdata"
 )
 
 // UpdateFixture removes fixtures when `update` is true.
