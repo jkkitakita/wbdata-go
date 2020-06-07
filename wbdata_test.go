@@ -21,7 +21,6 @@ func TestNewClient(t *testing.T) {
 		client:    &http.Client{},
 		BaseURL:   baseURL,
 		Language:  ``,
-		Format:    defaultFormat,
 		Logger:    nil,
 		UserAgent: userAgent,
 	}
@@ -29,7 +28,6 @@ func TestNewClient(t *testing.T) {
 		client:    &http.Client{},
 		BaseURL:   baseURL,
 		Language:  testutils.JaLanguage,
-		Format:    defaultFormat,
 		Logger:    nil,
 		UserAgent: userAgent,
 	}
@@ -93,7 +91,6 @@ func TestClient_NewRequest(t *testing.T) {
 		client:    &http.Client{},
 		BaseURL:   baseURL,
 		Language:  "",
-		Format:    defaultFormat,
 		Logger:    nil,
 		UserAgent: userAgent,
 	}
@@ -101,7 +98,6 @@ func TestClient_NewRequest(t *testing.T) {
 		client:    &http.Client{},
 		BaseURL:   baseURL,
 		Language:  testutils.JaLanguage,
-		Format:    defaultFormat,
 		Logger:    nil,
 		UserAgent: userAgent,
 	}

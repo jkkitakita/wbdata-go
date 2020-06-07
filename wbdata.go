@@ -118,7 +118,7 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 func (c *Client) buildRequestURL(urlStr string) (string, error) {
 	// Set format
 	v := url.Values{}
-	v.Set("format", c.Format)
+	v.Set("format", defaultFormat)
 	// Set local language
 	if c.Language != `` {
 		urlStr = fmt.Sprintf("%s/%s", c.Language, urlStr)
