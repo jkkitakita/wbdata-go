@@ -120,7 +120,7 @@ func (c *Client) buildRequestURL(urlStr string) (string, error) {
 	v := url.Values{}
 	v.Set("format", defaultFormat)
 	// Set local language
-	if c.Language != `` {
+	if c.Language != "" {
 		urlStr = fmt.Sprintf("%s/%s", c.Language, urlStr)
 	}
 	u, err := c.BaseURL.Parse(urlStr)
