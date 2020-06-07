@@ -27,6 +27,7 @@ func TestNewClient(t *testing.T) {
 		client:       &http.Client{},
 		BaseURL:      baseURL,
 		OutputFormat: OutputFormatJSONP,
+		PrefixParam:  testutils.TestPrefixParam,
 		UserAgent:    userAgent,
 	}
 	jaClient := &Client{
@@ -80,7 +81,7 @@ func TestNewClient(t *testing.T) {
 			args: args{
 				httpClient: &http.Client{},
 				options: []func(*Client){
-					SetOutputFormat(OutputFormatJSONP),
+					SetOutputFormat(OutputFormatJSONP, testutils.TestPrefixParam),
 				},
 			},
 			want: jsonPClient,
@@ -100,7 +101,14 @@ func TestClient_NewRequest(t *testing.T) {
 	baseURL, _ := url.Parse(fmt.Sprintf("%s%s/", defaultBaseURL, apiVersion))
 	urlStr := "countries"
 	defaultRequestURL, _ := url.Parse(fmt.Sprintf("%s%s?format=%s", baseURL, urlStr, OutputFormatJSON))
-	jsonPRequestURL, _ := url.Parse(fmt.Sprintf("%s%s?format=%s", baseURL, urlStr, OutputFormatJSONP))
+	jsonPRequestURL, _ := url.Parse(
+		fmt.Sprintf(
+			"%s%s?format=%s&prefix=%s",
+			baseURL,
+			urlStr,
+			OutputFormatJSONP,
+			testutils.TestPrefixParam,
+		))
 	jaRequestURL, _ := url.Parse(fmt.Sprintf("%s%s/%s?format=%s", baseURL, testutils.JaLanguage, urlStr, OutputFormatJSON))
 
 	defaultClient := &Client{
@@ -110,6 +118,13 @@ func TestClient_NewRequest(t *testing.T) {
 		UserAgent:    userAgent,
 	}
 	jsonPClient := &Client{
+		client:       &http.Client{},
+		BaseURL:      baseURL,
+		OutputFormat: OutputFormatJSONP,
+		PrefixParam:  testutils.TestPrefixParam,
+		UserAgent:    userAgent,
+	}
+	jsonPWithoutPrefixClient := &Client{
 		client:       &http.Client{},
 		BaseURL:      baseURL,
 		OutputFormat: OutputFormatJSONP,
@@ -206,6 +221,17 @@ func TestClient_NewRequest(t *testing.T) {
 			},
 			want:    jsonPHTTPRequest,
 			wantErr: false,
+		},
+		{
+			name:   "OutputFormat_jsonP_without_prefix",
+			client: jsonPWithoutPrefixClient,
+			args: args{
+				method: "GET",
+				urlStr: urlStr,
+				body:   nil,
+			},
+			want:    nil,
+			wantErr: true,
 		},
 	}
 	for _, tt := range tests {

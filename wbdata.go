@@ -37,6 +37,9 @@ type Client struct {
 	// OutputFormat is output format
 	OutputFormat OutputFormat
 
+	// PrefixParams is prefix parameter for OutputFormatJSONP
+	PrefixParam string
+
 	// Logger
 	Logger *log.Logger
 
@@ -66,8 +69,11 @@ func SetLanguage(lang *Language) func(*Client) {
 }
 
 // SetOutputFormat sets local language to request URL
-func SetOutputFormat(format OutputFormat) func(*Client) {
+func SetOutputFormat(format OutputFormat, prefix string) func(*Client) {
 	return func(s *Client) {
+		if format == OutputFormatJSONP {
+			s.PrefixParam = prefix
+		}
 		s.OutputFormat = format
 	}
 }
@@ -128,6 +134,12 @@ func (c *Client) buildRequestURL(urlStr string) (string, error) {
 	// Set format
 	v := url.Values{}
 	v.Set("format", c.OutputFormat.String())
+	if c.OutputFormat == OutputFormatJSONP {
+		if c.PrefixParam == "" {
+			return "", fmt.Errorf("prefix parameter must be specified for JSONP format. urlStr: %s", urlStr)
+		}
+		v.Set("prefix", c.PrefixParam)
+	}
 	// Set local language
 	if c.Language != "" {
 		urlStr = fmt.Sprintf("%s/%s", c.Language, urlStr)
