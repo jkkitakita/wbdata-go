@@ -29,16 +29,16 @@ const (
 type Client struct {
 	client *http.Client
 
-	// Base URL for API requests. Defaults to the World Bank Open Data API
+	// BaseURL is URL for API requests. Defaults to the World Bank Open Data API
 	BaseURL *url.URL
 
-	// Local Language
-	LocalLanguage string
+	// Language is Local Language for response
+	Language string
 
 	// Logger
 	Logger *log.Logger
 
-	// User agent used when communicating with the World Bank Open Data API
+	// UserAgent is user agent used when communicating with the World Bank Open Data API
 	UserAgent string
 
 	// Services to talk to different APIs
@@ -49,16 +49,17 @@ type Client struct {
 	Regions      *RegionsService
 	Sources      *SourcesService
 	Topics       *TopicsService
+	Languages    *LanguagesService
 }
 
 type service struct {
 	client *Client //nolint:structcheck
 }
 
-// LocalLanguage sets local language
-func LocalLanguage(lang string) func(*Client) {
+// SetLanguage sets local language to request URL
+func SetLanguage(lang *Language) func(*Client) {
 	return func(s *Client) {
-		s.LocalLanguage = lang
+		s.Language = lang.Code
 	}
 }
 
@@ -75,6 +76,7 @@ func NewClient(httpClient *http.Client, options ...func(*Client)) *Client {
 	c.Countries = &CountriesService{client: c}
 	c.Sources = &SourcesService{client: c}
 	c.Topics = &TopicsService{client: c}
+	c.Languages = &LanguagesService{client: c}
 	c.Indicators = &IndicatorsService{client: c}
 	c.IncomeLevels = &IncomeLevelsService{client: c}
 	c.LendingTypes = &LendingTypesService{client: c}
@@ -87,17 +89,11 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 	if !strings.HasSuffix(c.BaseURL.Path, "/") {
 		return nil, fmt.Errorf("BaseURL must have a trailing slash, but %q does not", c.BaseURL)
 	}
-	v := url.Values{}
-	v.Set("format", defaultFormat)
-	// Set Local language
-	if c.LocalLanguage != `` {
-		urlStr = fmt.Sprintf("%s/%s", c.LocalLanguage, urlStr)
-	}
-	u, err := c.BaseURL.Parse(urlStr)
+
+	url, err := c.buildRequestURL(urlStr)
 	if err != nil {
-		return nil, fmt.Errorf("failed to parse from %s: %v", urlStr, err)
+		return nil, err
 	}
-	url := fmt.Sprintf("%s?%s", u, v.Encode())
 
 	var buf io.ReadWriter
 	if body != nil {
@@ -114,14 +110,34 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 		return nil, err
 	}
 
+	setHeader(c, req, body)
+
+	return req, nil
+}
+
+func (c *Client) buildRequestURL(urlStr string) (string, error) {
+	// Set format
+	v := url.Values{}
+	v.Set("format", defaultFormat)
+	// Set local language
+	if c.Language != "" {
+		urlStr = fmt.Sprintf("%s/%s", c.Language, urlStr)
+	}
+	u, err := c.BaseURL.Parse(urlStr)
+	if err != nil {
+		return ``, fmt.Errorf("failed to parse from %s: %v", urlStr, err)
+	}
+
+	return fmt.Sprintf("%s?%s", u, v.Encode()), nil
+}
+
+func setHeader(c *Client, req *http.Request, body interface{}) {
 	if body != nil {
 		req.Header.Set("Content-Type", "application/json")
 	}
 	if c.UserAgent != "" {
 		req.Header.Set("User-Agent", c.UserAgent)
 	}
-
-	return req, nil
 }
 
 func (c *Client) do(req *http.Request, v *[]interface{}) error {

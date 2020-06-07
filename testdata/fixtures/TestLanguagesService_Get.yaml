@@ -1,0 +1,79 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/languages/ja?format=json
+    method: GET
+  response:
+    body: '[{"page":"1","pages":"1","per_page":"50","total":"1"},[{"code":"ja","name":"Japanese ","nativeForm":"日本語"}]]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "114"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sun, 07 Jun 2020 08:40:11 GMT
+      Set-Cookie:
+      - TS019266c8=017189f947166cd0c46c02d445c5a6a2998ba5b87c91d1b7fb7c8bb8258f98eb392739853eadd294cdcde1002bae10ea90fc1630c8; Path=/
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/languages/ABCDEFG?format=json
+    method: GET
+  response:
+    body: '[{"message":[{"id":"150","key":"Language is not yet supported in the API","value":"Response requested in an unsupported language."}]}]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "134"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sun, 07 Jun 2020 08:40:11 GMT
+      Set-Cookie:
+      - TS019266c8=017189f94778e514207cc5b8bbc753d9b12162d4c999d150ad5b5bc21f364f59bd9a29e780302e692864c49481f358c356763729cd; Path=/
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 200 OK
+    code: 200
+    duration: ""

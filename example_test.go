@@ -206,3 +206,31 @@ func ExampleTopicsService_Get() {
 	// Summary is: &wbdata.PageSummary{Page:1, Pages:1, PerPage:50, Total:1}
 	// Topic is: &wbdata.Topic{ID:"1", Value:"Agriculture & Rural Development", SourceNote:"For the 70 percent of the world's poor who live in rural areas, agriculture is the main source of income and employment. But depletion and degradation of land and water pose serious challenges to producing enough food and other agricultural products to sustain livelihoods here and meet the needs of urban populations. Data presented here include measures of agricultural inputs, outputs, and productivity compiled by the UN's Food and Agriculture Organization."}
 }
+
+func ExampleLanguagesService_List() {
+	client := wbdata.NewClient(nil)
+	summary, languages, _ := client.Languages.List(wbdata.PageParams{
+		Page:    1,
+		PerPage: 10,
+	})
+
+	summary.Pages = 3
+	summary.Total = 23
+
+	fmt.Printf("Summary is: %#v\n", summary)
+	fmt.Printf("Languages[0] is: %#v\n", languages[0])
+	// Output:
+	// Summary is: &wbdata.PageSummary{Page:1, Pages:3, PerPage:10, Total:23}
+	// Languages[0] is: &wbdata.Language{Code:"en", Name:"English", NativeForm:"English"}
+}
+
+func ExampleLanguagesService_Get() {
+	client := wbdata.NewClient(nil)
+	summary, language, _ := client.Languages.Get("ja")
+
+	fmt.Printf("Summary is: %#v\n", summary)
+	fmt.Printf("Language is: %#v\n", language)
+	// Output:
+	// Summary is: &wbdata.PageSummary{Page:1, Pages:1, PerPage:50, Total:1}
+	// Language is: &wbdata.Language{Code:"ja", Name:"Japanese ", NativeForm:"日本語"}
+}
