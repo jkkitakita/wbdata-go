@@ -14,19 +14,24 @@ import (
 
 func TestNewClient(t *testing.T) {
 	baseURL, _ := url.Parse(defaultBaseURL + apiVersion + "/")
+	jaLanguage := &Language{
+		Code: "ja",
+	}
 	defaultClient := &Client{
-		client:        &http.Client{},
-		BaseURL:       baseURL,
-		LocalLanguage: "",
-		Logger:        nil,
-		UserAgent:     userAgent,
+		client:    &http.Client{},
+		BaseURL:   baseURL,
+		Language:  ``,
+		Format:    defaultFormat,
+		Logger:    nil,
+		UserAgent: userAgent,
 	}
 	jaClient := &Client{
-		client:        &http.Client{},
-		BaseURL:       baseURL,
-		LocalLanguage: testutils.JaLocalLanguage,
-		Logger:        nil,
-		UserAgent:     userAgent,
+		client:    &http.Client{},
+		BaseURL:   baseURL,
+		Language:  testutils.JaLanguage,
+		Format:    defaultFormat,
+		Logger:    nil,
+		UserAgent: userAgent,
 	}
 	optIgnoreUnexported := cmpopts.IgnoreUnexported(Client{})
 	optIgnoreFields := cmpopts.IgnoreFields(Client{},
@@ -37,6 +42,7 @@ func TestNewClient(t *testing.T) {
 		"Regions",
 		"Sources",
 		"Topics",
+		"Languages",
 	)
 
 	type args struct {
@@ -61,7 +67,7 @@ func TestNewClient(t *testing.T) {
 			args: args{
 				httpClient: &http.Client{},
 				options: []func(*Client){
-					LocalLanguage(testutils.JaLocalLanguage),
+					SetLanguage(jaLanguage),
 				},
 			},
 			want: jaClient,
@@ -81,21 +87,23 @@ func TestClient_NewRequest(t *testing.T) {
 	baseURL, _ := url.Parse(fmt.Sprintf("%s%s/", defaultBaseURL, apiVersion))
 	urlStr := "countries"
 	defaultRequestURL, _ := url.Parse(fmt.Sprintf("%s%s?format=%s", baseURL, urlStr, defaultFormat))
-	jaRequestURL, _ := url.Parse(fmt.Sprintf("%s%s/%s?format=%s", baseURL, testutils.JaLocalLanguage, urlStr, defaultFormat))
+	jaRequestURL, _ := url.Parse(fmt.Sprintf("%s%s/%s?format=%s", baseURL, testutils.JaLanguage, urlStr, defaultFormat))
 
 	defaultClient := &Client{
-		client:        &http.Client{},
-		BaseURL:       baseURL,
-		LocalLanguage: "",
-		Logger:        nil,
-		UserAgent:     userAgent,
+		client:    &http.Client{},
+		BaseURL:   baseURL,
+		Language:  "",
+		Format:    defaultFormat,
+		Logger:    nil,
+		UserAgent: userAgent,
 	}
 	jaClient := &Client{
-		client:        &http.Client{},
-		BaseURL:       baseURL,
-		LocalLanguage: testutils.JaLocalLanguage,
-		Logger:        nil,
-		UserAgent:     userAgent,
+		client:    &http.Client{},
+		BaseURL:   baseURL,
+		Language:  testutils.JaLanguage,
+		Format:    defaultFormat,
+		Logger:    nil,
+		UserAgent: userAgent,
 	}
 	defaultHTTPRequest := &http.Request{
 		Method:     "GET",

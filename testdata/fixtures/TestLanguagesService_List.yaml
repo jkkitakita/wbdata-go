@@ -1,0 +1,41 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/languages?format=json&page=1&per_page=2
+    method: GET
+  response:
+    body: '[{"page":"1","pages":"12","per_page":"2","total":"23"},[{"code":"ar","name":"Arabic","nativeForm":"عربي"},{"code":"bg","name":"Bulgarian ","nativeForm":"Български"}]]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "179"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sun, 07 Jun 2020 08:42:28 GMT
+      Set-Cookie:
+      - TS01fa65e4=01359ee976c61b344e5a5814d7c9daa72c6079f67c294b4d62636c07b09ba5fee63b216fb056aa32da379d495cc30dfae791c99f44; Path=/
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 200 OK
+    code: 200
+    duration: ""

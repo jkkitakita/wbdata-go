@@ -11,8 +11,8 @@ const (
 	TestDefaultPage = 1
 	// TestDefaultPerPage is the default number of pages per page for testing
 	TestDefaultPerPage = 2
-	// JaLocalLanguage is local language for Japan
-	JaLocalLanguage = "ja"
+	// JaLanguage is local language for Japan
+	JaLanguage = "ja"
 )
 
 // UpdateFixture removes fixtures when `update` is true.
