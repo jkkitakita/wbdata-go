@@ -67,40 +67,6 @@ func TestNewClient(t *testing.T) {
 				UserAgent:    userAgent,
 			},
 		},
-		{
-			name: "OutputFormat_jsonP",
-			args: args{
-				httpClient: &http.Client{},
-				options: []func(*Client){
-					SetOutputFormat(OutputFormatJSONP, testutils.TestPrefixParam),
-				},
-			},
-			want: &Client{
-				client:       &http.Client{},
-				BaseURL:      baseURL,
-				OutputFormat: OutputFormatJSONP,
-				PrefixParam:  testutils.TestPrefixParam,
-				UserAgent:    userAgent,
-			},
-		},
-		{
-			name: "Language_ja_OutputFormat_jsonP",
-			args: args{
-				httpClient: &http.Client{},
-				options: []func(*Client){
-					SetLanguage(jaLanguage),
-					SetOutputFormat(OutputFormatJSONP, testutils.TestPrefixParam),
-				},
-			},
-			want: &Client{
-				client:       &http.Client{},
-				BaseURL:      baseURL,
-				Language:     testutils.JaLanguage,
-				OutputFormat: OutputFormatJSONP,
-				PrefixParam:  testutils.TestPrefixParam,
-				UserAgent:    userAgent,
-			},
-		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -117,23 +83,6 @@ func TestClient_NewRequest(t *testing.T) {
 	urlStr := "countries"
 	defaultRequestURL, _ := url.Parse(fmt.Sprintf("%s%s?format=%s", baseURL, urlStr, OutputFormatJSON))
 	jaRequestURL, _ := url.Parse(fmt.Sprintf("%s%s/%s?format=%s", baseURL, testutils.JaLanguage, urlStr, OutputFormatJSON))
-	jsonPRequestURL, _ := url.Parse(
-		fmt.Sprintf(
-			"%s%s?format=%s&prefix=%s",
-			baseURL,
-			urlStr,
-			OutputFormatJSONP,
-			testutils.TestPrefixParam,
-		))
-	jaJSONPRequestURL, _ := url.Parse(
-		fmt.Sprintf(
-			"%s%s/%s?format=%s&prefix=%s",
-			baseURL,
-			testutils.JaLanguage,
-			urlStr,
-			OutputFormatJSONP,
-			testutils.TestPrefixParam,
-		))
 
 	type args struct {
 		method string
@@ -203,98 +152,6 @@ func TestClient_NewRequest(t *testing.T) {
 				Host: defaultHost,
 			},
 			wantErr: false,
-		},
-		{
-			name: "OutputFormat_jsonP",
-			client: &Client{
-				client:       &http.Client{},
-				BaseURL:      baseURL,
-				OutputFormat: OutputFormatJSONP,
-				PrefixParam:  testutils.TestPrefixParam,
-				UserAgent:    userAgent,
-			},
-			args: args{
-				method: "GET",
-				urlStr: urlStr,
-				body:   nil,
-			},
-			want: &http.Request{
-				Method:     "GET",
-				URL:        jsonPRequestURL,
-				Proto:      "HTTP/1.1",
-				ProtoMajor: 1,
-				ProtoMinor: 1,
-				Header: map[string][]string{
-					"User-Agent": {
-						userAgent,
-					},
-				},
-				Host: defaultHost,
-			},
-			wantErr: false,
-		},
-		{
-			name: "Language_ja_OutputFormat_jsonP",
-			client: &Client{
-				client:       &http.Client{},
-				BaseURL:      baseURL,
-				Language:     testutils.JaLanguage,
-				OutputFormat: OutputFormatJSONP,
-				PrefixParam:  testutils.TestPrefixParam,
-				UserAgent:    userAgent,
-			},
-			args: args{
-				method: "GET",
-				urlStr: urlStr,
-				body:   nil,
-			},
-			want: &http.Request{
-				Method:     "GET",
-				URL:        jaJSONPRequestURL,
-				Proto:      "HTTP/1.1",
-				ProtoMajor: 1,
-				ProtoMinor: 1,
-				Header: map[string][]string{
-					"User-Agent": {
-						userAgent,
-					},
-				},
-				Host: defaultHost,
-			},
-			wantErr: false,
-		},
-		{
-			name: "OutputFormat_jsonP_without_prefix",
-			client: &Client{
-				client:       &http.Client{},
-				BaseURL:      baseURL,
-				OutputFormat: OutputFormatJSONP,
-				UserAgent:    userAgent,
-			},
-			args: args{
-				method: "GET",
-				urlStr: urlStr,
-				body:   nil,
-			},
-			want:    nil,
-			wantErr: true,
-		},
-		{
-			name: "OutputFormat_json_with_prefix",
-			client: &Client{
-				client:       &http.Client{},
-				BaseURL:      baseURL,
-				OutputFormat: OutputFormatJSON,
-				PrefixParam:  testutils.TestPrefixParam,
-				UserAgent:    userAgent,
-			},
-			args: args{
-				method: "GET",
-				urlStr: urlStr,
-				body:   nil,
-			},
-			want:    nil,
-			wantErr: true,
 		},
 	}
 	for _, tt := range tests {

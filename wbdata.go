@@ -3,7 +3,6 @@ package wbdata
 import (
 	"bytes"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -23,6 +22,7 @@ const (
 	defaultBaseURL  = defaultProtocol + "://" + defaultHost + "/"
 	apiVersion      = "v2"
 	userAgent       = "wbdata-go"
+	defaultFormat   = OutputFormatJSON
 )
 
 // A Client manages communication with the World Bank Open Data API
@@ -38,8 +38,9 @@ type Client struct {
 	// OutputFormat is output format
 	OutputFormat OutputFormat
 
-	// PrefixParams is prefix parameter for OutputFormatJSONP
-	PrefixParam string
+	// NOTE: default format is json
+	// PrefixParam is prefix parameter for OutputFormatJSONP
+	// PrefixParam string
 
 	// Logger
 	Logger *log.Logger
@@ -69,13 +70,14 @@ func SetLanguage(lang *Language) func(*Client) {
 	}
 }
 
+// NOTE: default format is json
 // SetOutputFormat sets local language to request URL
-func SetOutputFormat(format OutputFormat, prefix string) func(*Client) {
-	return func(s *Client) {
-		s.OutputFormat = format
-		s.PrefixParam = prefix
-	}
-}
+// func SetOutputFormat(format OutputFormat, prefix string) func(*Client) {
+// 	return func(s *Client) {
+// 		s.OutputFormat = format
+// 		s.PrefixParam = prefix
+// 	}
+// }
 
 // NewClient returns a new World Bank Open Data API client.
 func NewClient(httpClient *http.Client, options ...func(*Client)) *Client {
@@ -83,7 +85,7 @@ func NewClient(httpClient *http.Client, options ...func(*Client)) *Client {
 		httpClient = &http.Client{}
 	}
 	baseURL, _ := url.Parse(defaultBaseURL + apiVersion + "/")
-	c := &Client{client: httpClient, BaseURL: baseURL, OutputFormat: OutputFormatJSON, UserAgent: userAgent}
+	c := &Client{client: httpClient, BaseURL: baseURL, OutputFormat: defaultFormat, UserAgent: userAgent}
 	for _, option := range options {
 		option(c)
 	}
@@ -131,10 +133,7 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 
 func (c *Client) buildRequestURL(urlStr string) (string, error) {
 	// Set format
-	v, err := buildQueryParam(c)
-	if err != nil {
-		return "", err
-	}
+	values := buildQueryParam(c)
 	// Set local language
 	if c.Language != "" {
 		urlStr = fmt.Sprintf("%s/%s", c.Language, urlStr)
@@ -144,25 +143,14 @@ func (c *Client) buildRequestURL(urlStr string) (string, error) {
 		return "", fmt.Errorf("failed to parse from %s: %v", urlStr, err)
 	}
 
-	return fmt.Sprintf("%s?%s", u, v.Encode()), nil
+	return fmt.Sprintf("%s?%s", u, values.Encode()), nil
 }
 
-func buildQueryParam(c *Client) (url.Values, error) {
+func buildQueryParam(c *Client) url.Values {
 	v := url.Values{}
 	v.Set("format", c.OutputFormat.String())
 
-	if c.OutputFormat != OutputFormatJSONP && c.PrefixParam != "" {
-		return nil, errors.New(fmt.Sprint("prefix parameter must NOT be specified for NOT JSONP format"))
-	}
-
-	if c.OutputFormat == OutputFormatJSONP {
-		if c.PrefixParam == "" {
-			return nil, errors.New(fmt.Sprint("prefix parameter must be specified for JSONP format"))
-		}
-		v.Set("prefix", c.PrefixParam)
-	}
-
-	return v, nil
+	return v
 }
 
 func setHeader(c *Client, req *http.Request, body interface{}) {
