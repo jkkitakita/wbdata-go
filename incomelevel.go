@@ -21,7 +21,7 @@ func (il *IncomeLevelsService) List(pages PageParams) (*PageSummary, []*IncomeLe
 	summary := &PageSummary{}
 	incomeLevels := []*IncomeLevel{}
 
-	req, err := il.client.NewRequest("GET", "incomeLevels", nil)
+	req, err := il.client.NewRequest("GET", "incomeLevels", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -43,7 +43,7 @@ func (il *IncomeLevelsService) Get(incomeLevelID string) (*PageSummary, *IncomeL
 	incomeLevels := []*IncomeLevel{}
 
 	path := fmt.Sprintf("incomeLevels/%v", incomeLevelID)
-	req, err := il.client.NewRequest("GET", path, nil)
+	req, err := il.client.NewRequest("GET", path, nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}

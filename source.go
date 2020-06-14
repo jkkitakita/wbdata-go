@@ -27,7 +27,7 @@ func (s *SourcesService) List(pages PageParams) (*PageSummary, []*Source, error)
 	summary := &PageSummary{}
 	sources := []*Source{}
 
-	req, err := s.client.NewRequest("GET", "sources", nil)
+	req, err := s.client.NewRequest("GET", "sources", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -49,7 +49,7 @@ func (s *SourcesService) Get(sourceID string) (*PageSummary, *Source, error) {
 	source := []*Source{}
 
 	path := fmt.Sprintf("sources/%v", sourceID)
-	req, err := s.client.NewRequest("GET", path, nil)
+	req, err := s.client.NewRequest("GET", path, nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}

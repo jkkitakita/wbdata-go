@@ -29,7 +29,7 @@ func (i *IndicatorsService) List(pages PageParams) (*PageSummary, []*Indicator, 
 	summary := &PageSummary{}
 	indicators := []*Indicator{}
 
-	req, err := i.client.NewRequest("GET", "indicators", nil)
+	req, err := i.client.NewRequest("GET", "indicators", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -51,7 +51,7 @@ func (i *IndicatorsService) Get(indicatorID string) (*PageSummary, *Indicator, e
 	indicator := []*Indicator{}
 
 	path := fmt.Sprintf("indicators/%v", indicatorID)
-	req, err := i.client.NewRequest("GET", path, nil)
+	req, err := i.client.NewRequest("GET", path, nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -69,7 +69,7 @@ func (i *IndicatorsService) ListByTopicID(topicID string, pages PageParams) (*Pa
 	indicators := []*Indicator{}
 
 	path := fmt.Sprintf("topics/%v/indicators", topicID)
-	req, err := i.client.NewRequest("GET", path, nil)
+	req, err := i.client.NewRequest("GET", path, nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}

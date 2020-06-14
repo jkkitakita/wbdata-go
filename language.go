@@ -21,7 +21,7 @@ func (c *LanguagesService) List(pages PageParams) (*PageSummary, []*Language, er
 	summary := &PageSummary{}
 	languages := []*Language{}
 
-	req, err := c.client.NewRequest("GET", "languages", nil)
+	req, err := c.client.NewRequest("GET", "languages", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -43,7 +43,7 @@ func (c *LanguagesService) Get(languageCode string) (*PageSummary, *Language, er
 	language := []*Language{}
 
 	path := fmt.Sprintf("languages/%v", languageCode)
-	req, err := c.client.NewRequest("GET", path, nil)
+	req, err := c.client.NewRequest("GET", path, nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}

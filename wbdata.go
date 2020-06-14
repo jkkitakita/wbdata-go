@@ -101,12 +101,17 @@ func NewClient(httpClient *http.Client, options ...func(*Client)) *Client {
 }
 
 // NewRequest returns a new World Bank Open Data API http request.
-func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Request, error) {
+func (c *Client) NewRequest(
+	method,
+	urlStr string,
+	queryParams map[string]string,
+	body interface{},
+) (*http.Request, error) {
 	if !strings.HasSuffix(c.BaseURL.Path, "/") {
 		return nil, fmt.Errorf("BaseURL must have a trailing slash, but %q does not", c.BaseURL)
 	}
 
-	url, err := c.buildRequestURL(urlStr)
+	url, err := c.buildRequestURL(urlStr, queryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -131,9 +136,9 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 	return req, nil
 }
 
-func (c *Client) buildRequestURL(urlStr string) (string, error) {
+func (c *Client) buildRequestURL(urlStr string, queryParams map[string]string) (string, error) {
 	// Set format
-	values := buildQueryParam(c)
+	values := buildQueryParam(c, queryParams)
 	// Set local language
 	if c.Language != "" {
 		urlStr = fmt.Sprintf("%s/%s", c.Language, urlStr)
@@ -146,11 +151,14 @@ func (c *Client) buildRequestURL(urlStr string) (string, error) {
 	return fmt.Sprintf("%s?%s", u, values.Encode()), nil
 }
 
-func buildQueryParam(c *Client) url.Values {
-	v := url.Values{}
-	v.Set("format", c.OutputFormat.String())
+func buildQueryParam(c *Client, queryParams map[string]string) url.Values {
+	values := url.Values{}
+	values.Set("format", c.OutputFormat.String())
+	for k, v := range queryParams {
+		values.Set(k, v)
+	}
 
-	return v
+	return values
 }
 
 func setHeader(c *Client, req *http.Request, body interface{}) {

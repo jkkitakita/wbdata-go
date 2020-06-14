@@ -19,7 +19,7 @@ func (lt *LendingTypesService) List(pages PageParams) (*PageSummary, []*LendingT
 	summary := &PageSummary{}
 	lendingTypes := []*LendingType{}
 
-	req, err := lt.client.NewRequest("GET", "lendingTypes", nil)
+	req, err := lt.client.NewRequest("GET", "lendingTypes", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -41,7 +41,7 @@ func (lt *LendingTypesService) Get(lendingTypeID string) (*PageSummary, *Lending
 	lendingType := []*LendingType{}
 
 	path := fmt.Sprintf("lendingTypes/%v", lendingTypeID)
-	req, err := lt.client.NewRequest("GET", path, nil)
+	req, err := lt.client.NewRequest("GET", path, nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}

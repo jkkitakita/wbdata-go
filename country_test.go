@@ -203,3 +203,230 @@ func TestCountriesService_Get(t *testing.T) {
 		})
 	}
 }
+
+func TestCountriesService_ListWithParams(t *testing.T) {
+	client, save := NewTestClient(t, *update)
+	defer save()
+
+	type args struct {
+		params ListCountryParams
+		pages  PageParams
+	}
+	tests := []struct {
+		name               string
+		args               args
+		want               *PageSummary
+		wantCountriesCount int
+		wantErr            bool
+	}{
+		{
+			name: "success",
+			args: args{
+				params: ListCountryParams{},
+				pages: PageParams{
+					Page:    testutils.TestDefaultPage,
+					PerPage: testutils.TestDefaultPerPage,
+				},
+			},
+			want: &PageSummary{
+				Page:    intOrString(testutils.TestDefaultPage),
+				PerPage: intOrString(testutils.TestDefaultPerPage),
+			},
+			wantCountriesCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
+			wantErr:            false,
+		},
+		{
+			name: "success with region id",
+			args: args{
+				params: ListCountryParams{
+					RegionID: "EAS",
+				},
+				pages: PageParams{
+					Page:    testutils.TestDefaultPage,
+					PerPage: testutils.TestDefaultPerPage,
+				},
+			},
+			want: &PageSummary{
+				Page:    intOrString(testutils.TestDefaultPage),
+				PerPage: intOrString(testutils.TestDefaultPerPage),
+			},
+			wantCountriesCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
+			wantErr:            false,
+		},
+		{
+			name: "success with income level id",
+			args: args{
+				params: ListCountryParams{
+					IncomeLevelID: "HIC",
+				},
+				pages: PageParams{
+					Page:    testutils.TestDefaultPage,
+					PerPage: testutils.TestDefaultPerPage,
+				},
+			},
+			want: &PageSummary{
+				Page:    intOrString(testutils.TestDefaultPage),
+				PerPage: intOrString(testutils.TestDefaultPerPage),
+			},
+			wantCountriesCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
+			wantErr:            false,
+		},
+		{
+			name: "success with lending type id",
+			args: args{
+				params: ListCountryParams{
+					LendingTypeID: "LNX",
+				},
+				pages: PageParams{
+					Page:    testutils.TestDefaultPage,
+					PerPage: testutils.TestDefaultPerPage,
+				},
+			},
+			want: &PageSummary{
+				Page:    intOrString(testutils.TestDefaultPage),
+				PerPage: intOrString(testutils.TestDefaultPerPage),
+			},
+			wantCountriesCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
+			wantErr:            false,
+		},
+		{
+			name: "success with params",
+			args: args{
+				params: ListCountryParams{
+					RegionID:      "EAS",
+					IncomeLevelID: "HIC",
+					LendingTypeID: "LNX",
+				},
+				pages: PageParams{
+					Page:    testutils.TestDefaultPage,
+					PerPage: testutils.TestDefaultPerPage,
+				},
+			},
+			want: &PageSummary{
+				Page:    intOrString(testutils.TestDefaultPage),
+				PerPage: intOrString(testutils.TestDefaultPerPage),
+			},
+			wantCountriesCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
+			wantErr:            false,
+		},
+		{
+			name: "failure because invalid region id",
+			args: args{
+				params: ListCountryParams{
+					RegionID:      invalidID,
+					IncomeLevelID: "",
+					LendingTypeID: "",
+				},
+				pages: PageParams{
+					Page:    0,
+					PerPage: testutils.TestDefaultPerPage,
+				},
+			},
+			want:               nil,
+			wantCountriesCount: 0,
+			wantErr:            true,
+		},
+		{
+			name: "failure because invalid income level id",
+			args: args{
+				params: ListCountryParams{
+					RegionID:      "",
+					IncomeLevelID: invalidID,
+					LendingTypeID: "",
+				},
+				pages: PageParams{
+					Page:    0,
+					PerPage: testutils.TestDefaultPerPage,
+				},
+			},
+			want:               nil,
+			wantCountriesCount: 0,
+			wantErr:            true,
+		},
+		{
+			name: "failure because invalid lending type id",
+			args: args{
+				params: ListCountryParams{
+					RegionID:      "",
+					IncomeLevelID: "",
+					LendingTypeID: invalidID,
+				},
+				pages: PageParams{
+					Page:    0,
+					PerPage: testutils.TestDefaultPerPage,
+				},
+			},
+			want:               nil,
+			wantCountriesCount: 0,
+			wantErr:            true,
+		},
+		{
+			name: "failure because Page is less than 1",
+			args: args{
+				params: ListCountryParams{
+					RegionID:      "",
+					IncomeLevelID: "",
+					LendingTypeID: "",
+				},
+				pages: PageParams{
+					Page:    0,
+					PerPage: testutils.TestDefaultPerPage,
+				},
+			},
+			want:               nil,
+			wantCountriesCount: 0,
+			wantErr:            true,
+		},
+		{
+			name: "failure because PerPage is less than 1",
+			args: args{
+				params: ListCountryParams{
+					RegionID:      "",
+					IncomeLevelID: "",
+					LendingTypeID: "",
+				},
+				pages: PageParams{
+					Page:    testutils.TestDefaultPage,
+					PerPage: 0,
+				},
+			},
+			want:               nil,
+			wantCountriesCount: 0,
+			wantErr:            true,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c := &CountriesService{
+				client: client,
+			}
+
+			got, got1, err := c.ListWithParams(tt.args.params, tt.args.pages)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("CountriesService.ListWithParams() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if tt.want != nil {
+				if got.Page != tt.want.Page || got.PerPage != tt.want.PerPage {
+					t.Errorf("CountriesService.ListWithParams() got = %v, want %v", got, tt.want)
+				}
+			}
+			if len(got1) != tt.wantCountriesCount {
+				t.Errorf("CountriesService.ListWithParams() got1 = %v, want %v", got1, tt.wantCountriesCount)
+			}
+
+			for i := range got1 {
+				if tt.args.params.RegionID != "" && got1[i].Region.ID != tt.args.params.RegionID {
+					t.Errorf("invalid region id. got1[i].Region.ID = %v, want %v", got1[i].Region.ID, tt.args.params.RegionID)
+				}
+				if tt.args.params.IncomeLevelID != "" && got1[i].IncomeLevel.ID != tt.args.params.IncomeLevelID {
+					t.Errorf("invalid region id. got1[i].IncomeLevel.ID = %v, want %v", got1[i].IncomeLevel.ID, tt.args.params.IncomeLevelID)
+				}
+				if tt.args.params.LendingTypeID != "" && got1[i].LendingType.ID != tt.args.params.LendingTypeID {
+					t.Errorf("invalid region id. got1[i].LendingType.ID = %v, want %v", got1[i].LendingType.ID, tt.args.params.LendingTypeID)
+				}
+			}
+		})
+	}
+}
