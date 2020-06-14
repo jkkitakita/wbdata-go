@@ -85,9 +85,10 @@ func TestClient_NewRequest(t *testing.T) {
 	jaRequestURL, _ := url.Parse(fmt.Sprintf("%s%s/%s?format=%s", baseURL, testutils.JaLanguage, urlStr, OutputFormatJSON))
 
 	type args struct {
-		method string
-		urlStr string
-		body   interface{}
+		method      string
+		urlStr      string
+		queryParams map[string]string
+		body        interface{}
 	}
 	tests := []struct {
 		name    string
@@ -105,9 +106,10 @@ func TestClient_NewRequest(t *testing.T) {
 				UserAgent:    userAgent,
 			},
 			args: args{
-				method: "GET",
-				urlStr: urlStr,
-				body:   nil,
+				method:      "GET",
+				urlStr:      urlStr,
+				queryParams: nil,
+				body:        nil,
 			},
 			want: &http.Request{
 				Method:     "GET",
@@ -134,9 +136,10 @@ func TestClient_NewRequest(t *testing.T) {
 				UserAgent:    userAgent,
 			},
 			args: args{
-				method: "GET",
-				urlStr: urlStr,
-				body:   nil,
+				method:      "GET",
+				urlStr:      urlStr,
+				queryParams: nil,
+				body:        nil,
 			},
 			want: &http.Request{
 				Method:     "GET",
@@ -157,7 +160,7 @@ func TestClient_NewRequest(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			c := tt.client
-			got, err := c.NewRequest(tt.args.method, tt.args.urlStr, tt.args.body)
+			got, err := c.NewRequest(tt.args.method, tt.args.urlStr, tt.args.queryParams, tt.args.body)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Client.NewRequest() error = %v, wantErr %v", err, tt.wantErr)
 				return

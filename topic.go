@@ -19,7 +19,7 @@ func (t *TopicsService) List(pages PageParams) (*PageSummary, []*Topic, error) {
 	summary := &PageSummary{}
 	topics := []*Topic{}
 
-	req, err := t.client.NewRequest("GET", "topics", nil)
+	req, err := t.client.NewRequest("GET", "topics", nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -41,7 +41,7 @@ func (t *TopicsService) Get(topicID string) (*PageSummary, *Topic, error) {
 	topic := []*Topic{}
 
 	path := fmt.Sprintf("topics/%v", topicID)
-	req, err := t.client.NewRequest("GET", path, nil)
+	req, err := t.client.NewRequest("GET", path, nil, nil)
 	if err != nil {
 		return nil, nil, err
 	}
