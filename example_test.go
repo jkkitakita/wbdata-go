@@ -95,6 +95,32 @@ func ExampleIndicatorsService_Get() {
 	// Indicator without Source and Topics is: &wbdata.Indicator{ID:"1.0.HCount.1.90usd", Name:"Poverty Headcount ($1.90 a day)", Unit:"", Source:(*wbdata.IDAndValue)(nil), SourceNote:"The poverty headcount index measures the proportion of the population with daily per capita income (in 2011 PPP) below the poverty line.", SourceOrganization:"LAC Equity Lab tabulations of SEDLAC (CEDLAS and the World Bank).", Topics:[]*wbdata.IDAndValue(nil)}
 }
 
+func ExampleIndicatorsService_ListByTopicID() {
+	client := wbdata.NewClient(nil)
+	topicID := "1"
+	summary, indicators, _ := client.Indicators.ListByTopicID(
+		topicID,
+		wbdata.PageParams{
+			Page:    1,
+			PerPage: 10,
+		},
+	)
+
+	summary.Pages = 1735
+	summary.Total = 17349
+	topics := indicators[0].Topics
+	indicators[0].Source = nil
+	indicators[0].Topics = nil
+
+	fmt.Printf("Summary is: %#v\n", summary)
+	fmt.Printf("Indicators[0] without Source and Topics is: %#v\n", indicators[0])
+	fmt.Printf("Topics is: %+v\n", topics[0])
+	// Output:
+	// Summary is: &wbdata.PageSummary{Page:1, Pages:1735, PerPage:10, Total:17349}
+	// Indicators[0] without Source and Topics is: &wbdata.Indicator{ID:"AG.AGR.TRAC.NO", Name:"Agricultural machinery, tractors", Unit:"", Source:(*wbdata.IDAndValue)(nil), SourceNote:"Agricultural machinery refers to the number of wheel and crawler tractors (excluding garden tractors) in use in agriculture at the end of the calendar year specified or during the first quarter of the following year.", SourceOrganization:"Food and Agriculture Organization, electronic files and web site.", Topics:[]*wbdata.IDAndValue(nil)}
+	// Topics is: &{ID:1 Value:Agriculture & Rural Development  }
+}
+
 func ExampleLendingTypesService_List() {
 	client := wbdata.NewClient(nil)
 	summary, lendingTypes, _ := client.LendingTypes.List(wbdata.PageParams{
