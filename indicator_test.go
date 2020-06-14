@@ -176,6 +176,7 @@ func TestIndicatorsService_ListByTopicID(t *testing.T) {
 	defer save()
 
 	defaultTopicID := "1"
+	invalidTopicID := "1000"
 
 	type args struct {
 		topicID string
@@ -203,6 +204,19 @@ func TestIndicatorsService_ListByTopicID(t *testing.T) {
 			},
 			wantIndicatorsCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
 			wantErr:             false,
+		},
+		{
+			name: "failure because invalid topic id",
+			args: args{
+				topicID: invalidTopicID,
+				pages: PageParams{
+					Page:    testutils.TestDefaultPage,
+					PerPage: testutils.TestDefaultPerPage,
+				},
+			},
+			want:                nil,
+			wantIndicatorsCount: 0,
+			wantErr:             true,
 		},
 		{
 			name: "failure because Page is less than 1",
