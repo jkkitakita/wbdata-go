@@ -133,10 +133,7 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 
 func (c *Client) buildRequestURL(urlStr string) (string, error) {
 	// Set format
-	v, err := buildQueryParam(c)
-	if err != nil {
-		return "", err
-	}
+	values := buildQueryParam(c)
 	// Set local language
 	if c.Language != "" {
 		urlStr = fmt.Sprintf("%s/%s", c.Language, urlStr)
@@ -146,26 +143,14 @@ func (c *Client) buildRequestURL(urlStr string) (string, error) {
 		return "", fmt.Errorf("failed to parse from %s: %v", urlStr, err)
 	}
 
-	return fmt.Sprintf("%s?%s", u, v.Encode()), nil
+	return fmt.Sprintf("%s?%s", u, values.Encode()), nil
 }
 
-func buildQueryParam(c *Client) (url.Values, error) {
+func buildQueryParam(c *Client) url.Values {
 	v := url.Values{}
 	v.Set("format", c.OutputFormat.String())
 
-	// NOTE: default format is json
-	// if c.OutputFormat != OutputFormatJSONP && c.PrefixParam != "" {
-	// 	return nil, errors.New(fmt.Sprint("prefix parameter must NOT be specified for NOT JSONP format"))
-	// }
-
-	// if c.OutputFormat == OutputFormatJSONP {
-	// 	if c.PrefixParam == "" {
-	// 		return nil, errors.New(fmt.Sprint("prefix parameter must be specified for JSONP format"))
-	// 	}
-	// 	v.Set("prefix", c.PrefixParam)
-	// }
-
-	return v, nil
+	return v
 }
 
 func setHeader(c *Client, req *http.Request, body interface{}) {
