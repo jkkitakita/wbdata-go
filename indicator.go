@@ -17,6 +17,7 @@ type (
 		Topics             []*IDAndValue
 	}
 
+	// IDAndValue represents ID and Value
 	IDAndValue struct {
 		ID    string
 		Value string
@@ -60,4 +61,26 @@ func (i *IndicatorsService) Get(indicatorID string) (*PageSummary, *Indicator, e
 	}
 
 	return summary, indicator[0], nil
+}
+
+// ListByTopicID returns a Response's Summary and Indicators By topic id
+func (i *IndicatorsService) ListByTopicID(topicID string, pages PageParams) (*PageSummary, []*Indicator, error) {
+	summary := &PageSummary{}
+	indicators := []*Indicator{}
+
+	path := fmt.Sprintf("topics/%v/indicators", topicID)
+	req, err := i.client.NewRequest("GET", path, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	if err := pages.pageParams(req); err != nil {
+		return nil, nil, err
+	}
+
+	if err = i.client.do(req, &[]interface{}{summary, &indicators}); err != nil {
+		return nil, nil, err
+	}
+
+	return summary, indicators, nil
 }
