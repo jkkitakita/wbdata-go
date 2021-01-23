@@ -10,7 +10,23 @@ interactions:
     url: http://api.worldbank.org/v2/topics/1/indicators?format=json&page=1&per_page=2
     method: GET
   response:
-    body: '[{"page":1,"pages":25,"per_page":"2","total":49},[{"id":"AG.AGR.TRAC.NO","name":"Agricultural machinery, tractors","unit":"","source":{"id":"2","value":"World Development Indicators"},"sourceNote":"Agricultural machinery refers to the number of wheel and crawler tractors (excluding garden tractors) in use in agriculture at the end of the calendar year specified or during the first quarter of the following year.","sourceOrganization":"Food and Agriculture Organization, electronic files and web site.","topics":[{"id":"1","value":"Agriculture & Rural Development  "}]},{"id":"AG.CON.FERT.PT.ZS","name":"Fertilizer consumption (% of fertilizer production)","unit":"","source":{"id":"2","value":"World Development Indicators"},"sourceNote":"Fertilizer consumption measures the quantity of plant nutrients used per unit of arable land. Fertilizer products cover nitrogenous, potash, and phosphate fertilizers (including ground rock phosphate). Traditional nutrients--animal and plant manures--are not included. For the purpose of data dissemination, FAO has adopted the concept of a calendar year (January to December). Some countries compile fertilizer data on a calendar year basis, while others are on a split-year basis.","sourceOrganization":"Food and Agriculture Organization, electronic files and web site.","topics":[{"id":"1","value":"Agriculture & Rural Development  "}]}]]'
+    body: '[{"page":1,"pages":25,"per_page":"2","total":49},[{"id":"AG.AGR.TRAC.NO","name":"Agricultural
+      machinery, tractors","unit":"","source":{"id":"2","value":"World Development
+      Indicators"},"sourceNote":"Agricultural machinery refers to the number of wheel
+      and crawler tractors (excluding garden tractors) in use in agriculture at the
+      end of the calendar year specified or during the first quarter of the following
+      year.","sourceOrganization":"Food and Agriculture Organization, electronic files
+      and web site.","topics":[{"id":"1","value":"Agriculture & Rural Development  "}]},{"id":"AG.CON.FERT.PT.ZS","name":"Fertilizer
+      consumption (% of fertilizer production)","unit":"","source":{"id":"2","value":"World
+      Development Indicators"},"sourceNote":"Fertilizer consumption measures the quantity
+      of plant nutrients used per unit of arable land. Fertilizer products cover nitrogenous,
+      potash, and phosphate fertilizers (including ground rock phosphate). Traditional
+      nutrients--animal and plant manures--are not included. For the purpose of data
+      dissemination, FAO has adopted the concept of a calendar year (January to December).
+      Some countries compile fertilizer data on a calendar year basis, while others
+      are on a split-year basis.","sourceOrganization":"Food and Agriculture Organization,
+      electronic files and web site.","topics":[{"id":"1","value":"Agriculture & Rural
+      Development  "}]}]]'
     headers:
       Access-Control-Allow-Headers:
       - X-Requested-With
@@ -18,6 +34,8 @@ interactions:
       - GET
       Access-Control-Allow-Origin:
       - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2591783
       Connection:
       - keep-alive
       Content-Length:
@@ -25,17 +43,62 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 14 Jun 2020 07:35:34 GMT
+      - Sat, 23 Jan 2021 04:35:57 GMT
+      Expires:
+      - Mon, 22 Feb 2021 04:32:20 GMT
+      Last-Modified:
+      - Sat, 23 Jan 2021 04:32:20 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - TS019266c8=017189f9479cc045fc766e5cd78ecd725f5106ec9a2a3b5ff40a7ef9f18c69173fb0936289dc2b06248d07c96a6133060afbbf60ba; Path=/
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
+      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - TS01fa65e4=01359ee976fea1817b2377428fe293185a6f8c8c1fb4ece7db3fedc4d185a495bca0347caca0429984d2efba18f1cf96f7f700d2e5;
+        Path=/
+      - TS019865bf=012364632104e522a147ee2948c400ec292418270ef91b249a1717a0f48cb823ea5b2f3adf4ee800836be2d0f4e4425d54120c522635c16254d1583b775e6c807874293b0b;
+        Path=/
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/topics/1000/indicators?format=json&page=1&per_page=2
+    method: GET
+  response:
+    body: '[{"message":[{"id":"120","key":"Invalid value","value":"The provided parameter
+      value is not valid"}]}]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2591783
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "102"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sat, 23 Jan 2021 04:35:58 GMT
+      Expires:
+      - Mon, 22 Feb 2021 04:32:20 GMT
+      Last-Modified:
+      - Sat, 23 Jan 2021 04:32:20 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
+      Set-Cookie:
+      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - TS01fa65e4=01359ee97605307f19788f5a068191700c062ab50b1626ea8ab9117bc171ae2eedb2f61264c29e27d0002f0034bb6712976484eefb;
+        Path=/
+      - TS019865bf=016ca921731f4007b940dc211da2d4a157b785241a499def294331a143d6247e58bf9b53fcf8d891f4f53c693f741147d04dfb7bee141f92ad3a826d6ae996b35b6be3349d;
+        Path=/
     status: 200 OK
     code: 200
     duration: ""

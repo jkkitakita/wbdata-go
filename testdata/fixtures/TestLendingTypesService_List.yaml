@@ -18,6 +18,8 @@ interactions:
       - GET
       Access-Control-Allow-Origin:
       - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2591783
       Connection:
       - keep-alive
       Content-Length:
@@ -25,18 +27,19 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sat, 06 Jun 2020 08:39:56 GMT
+      - Sat, 23 Jan 2021 04:35:58 GMT
+      Expires:
+      - Mon, 22 Feb 2021 04:32:21 GMT
+      Last-Modified:
+      - Sat, 23 Jan 2021 04:32:21 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - TS019266c8=017189f94714aedb32f09e077de649ea31b122f4d2586ab4e9bc1cbb8207d71c2d6814e3df60e31fd9649bd1f8c5d3244689291ae9;
+      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - TS01fa65e4=01359ee9762096a594f0610503ce79cdaca97fc7ae75bfcd2bd060339d21bb93e0ca89ae7959d22328cdb9e332327a9c1375070124;
         Path=/
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
+      - TS019865bf=016ca92173195e5b0349bd617c7ae2126c25ac0acfe27435aea6f566c7b5bc59b4a4f8769b5045ce75f7121acb8478c8258924dad4a1439ad7ad66e170f32349df5b84653d;
+        Path=/
     status: 200 OK
     code: 200
     duration: ""

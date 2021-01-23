@@ -10,7 +10,8 @@ interactions:
     url: http://api.worldbank.org/v2/languages/ja?format=json
     method: GET
   response:
-    body: '[{"page":"1","pages":"1","per_page":"50","total":"1"},[{"code":"ja","name":"Japanese ","nativeForm":"日本語"}]]'
+    body: '[{"page":"1","pages":"1","per_page":"50","total":"1"},[{"code":"ja","name":"Japanese
+      ","nativeForm":"日本語"}]]'
     headers:
       Access-Control-Allow-Headers:
       - X-Requested-With
@@ -18,6 +19,8 @@ interactions:
       - GET
       Access-Control-Allow-Origin:
       - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2591783
       Connection:
       - keep-alive
       Content-Length:
@@ -25,17 +28,19 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 07 Jun 2020 08:40:11 GMT
+      - Sat, 23 Jan 2021 04:35:58 GMT
+      Expires:
+      - Mon, 22 Feb 2021 04:32:21 GMT
+      Last-Modified:
+      - Sat, 23 Jan 2021 04:32:21 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - TS019266c8=017189f947166cd0c46c02d445c5a6a2998ba5b87c91d1b7fb7c8bb8258f98eb392739853eadd294cdcde1002bae10ea90fc1630c8; Path=/
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
+      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - TS01fa65e4=01359ee976ccefa049b0c1cedca62b37e7d0ac61d263c1573504e7114cf6a8a579618ee4e0073f3bf5209e1ebd49d0dd5f001b7e85;
+        Path=/
+      - TS019865bf=01236463214bc4fb534ff857fddc3ef66155d17db77ba612c32171e8744bf2b90e05e76969fe46f0f680ded806f649f810b727527858f5a45971d10ebec89b7bd5468ecb9e;
+        Path=/
     status: 200 OK
     code: 200
     duration: ""
@@ -48,7 +53,8 @@ interactions:
     url: http://api.worldbank.org/v2/languages/ABCDEFG?format=json
     method: GET
   response:
-    body: '[{"message":[{"id":"150","key":"Language is not yet supported in the API","value":"Response requested in an unsupported language."}]}]'
+    body: '[{"message":[{"id":"150","key":"Language is not yet supported in the API","value":"Response
+      requested in an unsupported language."}]}]'
     headers:
       Access-Control-Allow-Headers:
       - X-Requested-With
@@ -56,6 +62,8 @@ interactions:
       - GET
       Access-Control-Allow-Origin:
       - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2591783
       Connection:
       - keep-alive
       Content-Length:
@@ -63,17 +71,19 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 07 Jun 2020 08:40:11 GMT
+      - Sat, 23 Jan 2021 04:35:58 GMT
+      Expires:
+      - Mon, 22 Feb 2021 04:32:21 GMT
+      Last-Modified:
+      - Sat, 23 Jan 2021 04:32:21 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - TS019266c8=017189f94778e514207cc5b8bbc753d9b12162d4c999d150ad5b5bc21f364f59bd9a29e780302e692864c49481f358c356763729cd; Path=/
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
+      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - TS01fa65e4=01359ee9761e11c71b5d1839beb469970455a53bbe863b6a27a1ecd75bcc3928616cc05225602e8097bb9042a1ad8cd5f3b883a422;
+        Path=/
+      - TS019865bf=01236463217cf3493e65f721e6edf4d0c8f05c5e84e69c0ddff3374065cf45d6c7bf742b043d0a0cb54cc916ccad77c7caae2bf133951e7e0c20493c79ac05472ba7e77077;
+        Path=/
     status: 200 OK
     code: 200
     duration: ""

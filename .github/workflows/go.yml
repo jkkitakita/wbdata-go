@@ -9,7 +9,7 @@ on:
     paths-ignore:
       - "**/README.md"
 env:
-  GOLANGCI_LINT_VERSION: v1.23.8
+  GOLANGCI_LINT_VERSION: v1.35.2
 
 jobs:
   build:
@@ -17,20 +17,18 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        go-version: [1.14.x]
+        go-version: [1.15]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Set up Go ${{ matrix.go-version }}
-        uses: actions/setup-go@v2-beta
-        with:
-          go-version: ${{ matrix.go-version }}
-        id: go
-
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
+      - name: Set up Go ${{ matrix.go-version }}
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go-version }}
 
       - name: cache
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ~/go/pkg/mod
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
@@ -45,7 +43,7 @@ jobs:
         run: golangci-lint run ./... -v
       - name: test
         run: go test -race -coverprofile coverage.txt -covermode atomic ./... -v -update true
-      - uses: codecov/codecov-action@v1.0.6
+      - uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           file: ./coverage.txt

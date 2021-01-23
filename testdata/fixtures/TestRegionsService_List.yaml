@@ -10,8 +10,8 @@ interactions:
     url: http://api.worldbank.org/v2/regions?format=json&page=1&per_page=2
     method: GET
   response:
-    body: '[{"page":"1","pages":"24","per_page":"2","total":"48"},[{"id":"","code":"AFR","iso2code":"A9","name":"Africa"},{"id":"","code":"ANR","iso2code":"L5","name":"Andean
-      Region"}]]'
+    body: '[{"page":"1","pages":"21","per_page":"2","total":"42"},[{"id":"","code":"AFR","iso2code":"A9","name":"Africa"},{"id":"","code":"ARB","iso2code":"1A","name":"Arab
+      World"}]]'
     headers:
       Access-Control-Allow-Headers:
       - X-Requested-With
@@ -19,25 +19,28 @@ interactions:
       - GET
       Access-Control-Allow-Origin:
       - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2591783
       Connection:
       - keep-alive
       Content-Length:
-      - "174"
+      - "171"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sat, 06 Jun 2020 08:39:57 GMT
+      - Sat, 23 Jan 2021 04:35:59 GMT
+      Expires:
+      - Mon, 22 Feb 2021 04:32:22 GMT
+      Last-Modified:
+      - Sat, 23 Jan 2021 04:32:22 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - TS01fa65e4=01359ee976cc41cf4c41d77eb8b4c63d4c15f6bb305ad56d88d351073159838a120abdc0588bee5ca00f47769221abef2e4d6f258b;
+      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - TS01fa65e4=01359ee9760d84bec0c1b8f5c782346b0d3ada72fee169ef0301fe9b1d57101dce6542ca4bc96cc0cb14aca9e01f2d60224d43f471;
         Path=/
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
+      - TS019865bf=0123646321f596a0cd5b8c28c3f575770656088c222d48ab8f85d1d9678f3527d0cbd9c69728a367b00746d98ff0f2ae847fbaeb9b51fe9f35a477e4f532b4ea71f6777ed1;
+        Path=/
     status: 200 OK
     code: 200
     duration: ""
