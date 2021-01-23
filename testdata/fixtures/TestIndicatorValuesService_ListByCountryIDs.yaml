@@ -1,0 +1,133 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/countries/JPN;USA/indicators/NY.GDP.MKTP.CD?date=2018%3A2019&format=json&page=1&per_page=2
+    method: GET
+  response:
+    body: '[{"page":1,"pages":2,"per_page":2,"total":4,"sourceid":"2","lastupdated":"2020-12-16"},[{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2019","value":5081769542379.77,"unit":"","obs_status":"","decimal":0},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2018","value":4954806619995.19,"unit":"","obs_status":"","decimal":0}]]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2589813
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "499"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sat, 23 Jan 2021 08:57:26 GMT
+      Expires:
+      - Mon, 22 Feb 2021 08:20:59 GMT
+      Last-Modified:
+      - Sat, 23 Jan 2021 08:20:59 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
+      Set-Cookie:
+      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - TS019266c8=017189f947bc7ef53e4f84b78de7b2af1014953fbca4341f340dcab5851ae130a7261cab1f3084b89c19df1764cf17e094bd6d0c98;
+        Path=/
+      - TS019865bf=0123646321b093b9d5e6a8d30ccd026a4ca8e6cb4deebcd6d1e213af42b6d458caed3ad573ee4bcfe58730075c0501414e9b8f1db174d3905127cd72eb64e146f2ce7a65ad;
+        Path=/
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/countries/ABCDEFG;HIJKLM/indicators/NY.GDP.MKTP.CD?date=2018%3A2019&format=json
+    method: GET
+  response:
+    body: '[{"message":[{"id":"120","key":"Invalid value","value":"The provided parameter
+      value is not valid"}]}]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2591680
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "102"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sat, 23 Jan 2021 08:57:26 GMT
+      Expires:
+      - Mon, 22 Feb 2021 08:52:06 GMT
+      Last-Modified:
+      - Sat, 23 Jan 2021 08:52:06 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
+      Set-Cookie:
+      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - TS019266c8=017189f947dfd8468cd8b06e10c91870806fc0b27793aa329eaace85cb56537875d9cca638a5bd8824e77ce5a8d5847a296c5952bb;
+        Path=/
+      - TS019865bf=01236463213d844bad3c50dc5918e49246277e601d44b66595a46178115b2d84018387e33f02f3ea7cc07a89b072887e85b38ba84a69fde7e3bb126b65bf7adb96f7ee3999;
+        Path=/
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/countries/JPN;USA/indicators/INVALID.INDICATOR.ID?date=2018%3A2019&format=json
+    method: GET
+  response:
+    body: '[{"message":[{"id":"120","key":"Invalid value","value":"The provided parameter
+      value is not valid"}]}]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2592000
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "102"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sat, 23 Jan 2021 08:57:27 GMT
+      Expires:
+      - Mon, 22 Feb 2021 08:57:27 GMT
+      Last-Modified:
+      - Sat, 23 Jan 2021 08:57:27 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
+      Set-Cookie:
+      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - TS019266c8=017189f94735d864766c72d60377f7704d485722755cb9ee3948ddf055fbb23126fa4d5d188d545da4a26cf7490577ea4805e35a1b;
+        Path=/
+      - TS019865bf=016ca9217311aba1334bdb9edfd4d81f289075ff485473ab067de0573b630a380f95f9b47521be7792194a6d6ec11704c2c2163fb6761fc5d31abe2e9904a0630f06b21c05;
+        Path=/
+    status: 200 OK
+    code: 200
+    duration: ""
