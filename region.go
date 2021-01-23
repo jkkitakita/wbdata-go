@@ -23,7 +23,7 @@ type (
 )
 
 // List returns a Response's Summary and Regions
-func (r *RegionsService) List(pages PageParams) (*PageSummary, []*Region, error) {
+func (r *RegionsService) List(pages *PageParams) (*PageSummary, []*Region, error) {
 	summary := &PageSummary{}
 	regions := []*Region{}
 

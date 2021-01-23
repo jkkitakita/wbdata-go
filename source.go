@@ -23,7 +23,7 @@ type (
 )
 
 // List returns a Response's Summary and Sources
-func (s *SourcesService) List(pages PageParams) (*PageSummary, []*Source, error) {
+func (s *SourcesService) List(pages *PageParams) (*PageSummary, []*Source, error) {
 	summary := &PageSummary{}
 	sources := []*Source{}
 

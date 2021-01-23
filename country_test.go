@@ -29,7 +29,7 @@ func TestCountriesService_List(t *testing.T) {
 
 	type args struct {
 		params ListCountryParams
-		pages  PageParams
+		pages  *PageParams
 	}
 	tests := []struct {
 		name               string
@@ -42,7 +42,7 @@ func TestCountriesService_List(t *testing.T) {
 			name: "success",
 			args: args{
 				params: ListCountryParams{},
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    testutils.TestDefaultPage,
 					PerPage: testutils.TestDefaultPerPage,
 				},
@@ -60,7 +60,7 @@ func TestCountriesService_List(t *testing.T) {
 				params: ListCountryParams{
 					RegionID: "EAS",
 				},
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    testutils.TestDefaultPage,
 					PerPage: testutils.TestDefaultPerPage,
 				},
@@ -78,7 +78,7 @@ func TestCountriesService_List(t *testing.T) {
 				params: ListCountryParams{
 					IncomeLevelID: "HIC",
 				},
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    testutils.TestDefaultPage,
 					PerPage: testutils.TestDefaultPerPage,
 				},
@@ -96,7 +96,7 @@ func TestCountriesService_List(t *testing.T) {
 				params: ListCountryParams{
 					LendingTypeID: "LNX",
 				},
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    testutils.TestDefaultPage,
 					PerPage: testutils.TestDefaultPerPage,
 				},
@@ -116,7 +116,7 @@ func TestCountriesService_List(t *testing.T) {
 					IncomeLevelID: "HIC",
 					LendingTypeID: "LNX",
 				},
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    testutils.TestDefaultPage,
 					PerPage: testutils.TestDefaultPerPage,
 				},
@@ -136,7 +136,7 @@ func TestCountriesService_List(t *testing.T) {
 					IncomeLevelID: "",
 					LendingTypeID: "",
 				},
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    0,
 					PerPage: testutils.TestDefaultPerPage,
 				},
@@ -153,7 +153,7 @@ func TestCountriesService_List(t *testing.T) {
 					IncomeLevelID: invalidID,
 					LendingTypeID: "",
 				},
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    0,
 					PerPage: testutils.TestDefaultPerPage,
 				},
@@ -170,7 +170,7 @@ func TestCountriesService_List(t *testing.T) {
 					IncomeLevelID: "",
 					LendingTypeID: invalidID,
 				},
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    0,
 					PerPage: testutils.TestDefaultPerPage,
 				},
@@ -187,7 +187,7 @@ func TestCountriesService_List(t *testing.T) {
 					IncomeLevelID: "",
 					LendingTypeID: "",
 				},
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    0,
 					PerPage: testutils.TestDefaultPerPage,
 				},
@@ -204,7 +204,7 @@ func TestCountriesService_List(t *testing.T) {
 					IncomeLevelID: "",
 					LendingTypeID: "",
 				},
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    testutils.TestDefaultPage,
 					PerPage: 0,
 				},

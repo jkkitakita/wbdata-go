@@ -9,6 +9,8 @@ import (
 const (
 	// TestDefaultPage is the default number of pages for testing
 	TestDefaultPage = 1
+	// TestInvalidPage is the invalid number of pages for testing
+	TestInvalidPage = -1
 	// TestDefaultPerPage is the default number of pages per page for testing
 	TestDefaultPerPage = 2
 	// JaLanguage is local language for Japan

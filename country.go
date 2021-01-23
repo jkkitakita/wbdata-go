@@ -31,7 +31,10 @@ type (
 )
 
 // List returns summary and countries with params
-func (c *CountriesService) List(params ListCountryParams, pages PageParams) (*PageSummary, []*Country, error) {
+func (c *CountriesService) List(
+	params ListCountryParams,
+	pages *PageParams,
+) (*PageSummary, []*Country, error) {
 	summary := &PageSummary{}
 	countries := []*Country{}
 	queryParams := map[string]string{

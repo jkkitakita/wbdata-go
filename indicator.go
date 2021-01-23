@@ -27,7 +27,7 @@ type (
 )
 
 // List returns a Response's Summary and Indicators
-func (i *IndicatorsService) List(pages PageParams) (*PageSummary, []*Indicator, error) {
+func (i *IndicatorsService) List(pages *PageParams) (*PageSummary, []*Indicator, error) {
 	summary := &PageSummary{}
 	indicators := []*Indicator{}
 
@@ -66,7 +66,7 @@ func (i *IndicatorsService) Get(indicatorID string) (*PageSummary, *Indicator, e
 }
 
 // ListByTopicID returns a Response's Summary and Indicators By topic id
-func (i *IndicatorsService) ListByTopicID(topicID string, pages PageParams) (*PageSummary, []*Indicator, error) {
+func (i *IndicatorsService) ListByTopicID(topicID string, pages *PageParams) (*PageSummary, []*Indicator, error) {
 	summary := &PageSummary{}
 	indicators := []*Indicator{}
 

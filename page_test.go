@@ -20,20 +20,25 @@ func TestPageParams_addPageParams(t *testing.T) {
 	}
 	tests := []struct {
 		name    string
-		fields  fields
+		fields  *fields
 		wantErr bool
 	}{
 		{
 			name: "success",
-			fields: fields{
+			fields: &fields{
 				Page:    validNumber,
 				PerPage: validNumber,
 			},
 			wantErr: false,
 		},
 		{
+			name:    "success with nil field",
+			fields:  nil,
+			wantErr: false,
+		},
+		{
 			name: "failure because Page is less than 1",
-			fields: fields{
+			fields: &fields{
 				Page:    invalidNumber,
 				PerPage: validNumber,
 			},
@@ -41,7 +46,7 @@ func TestPageParams_addPageParams(t *testing.T) {
 		},
 		{
 			name: "failure because PerPage is less than 1",
-			fields: fields{
+			fields: &fields{
 				Page:    validNumber,
 				PerPage: invalidNumber,
 			},
@@ -49,7 +54,7 @@ func TestPageParams_addPageParams(t *testing.T) {
 		},
 		{
 			name: "failure because both Page and PerPage is less than 1",
-			fields: fields{
+			fields: &fields{
 				Page:    invalidNumber,
 				PerPage: invalidNumber,
 			},
@@ -58,9 +63,14 @@ func TestPageParams_addPageParams(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			pages := &PageParams{
-				Page:    tt.fields.Page,
-				PerPage: tt.fields.PerPage,
+			var pages *PageParams
+			if tt.fields != nil {
+				pages = &PageParams{
+					Page:    tt.fields.Page,
+					PerPage: tt.fields.PerPage,
+				}
+			} else {
+				pages = nil
 			}
 			if err := pages.addPageParams(mockReq); (err != nil) != tt.wantErr {
 				t.Errorf("PageParams.addPageParams() error = %v, wantErr %v", err, tt.wantErr)

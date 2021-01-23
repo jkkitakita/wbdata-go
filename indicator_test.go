@@ -12,7 +12,7 @@ func TestIndicatorsService_List(t *testing.T) {
 	defer save()
 
 	type args struct {
-		pages PageParams
+		pages *PageParams
 	}
 	tests := []struct {
 		name                string
@@ -24,7 +24,7 @@ func TestIndicatorsService_List(t *testing.T) {
 		{
 			name: "success",
 			args: args{
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    testutils.TestDefaultPage,
 					PerPage: testutils.TestDefaultPerPage,
 				},
@@ -39,7 +39,7 @@ func TestIndicatorsService_List(t *testing.T) {
 		{
 			name: "failure because Page is less than 1",
 			args: args{
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    0,
 					PerPage: testutils.TestDefaultPerPage,
 				},
@@ -51,7 +51,7 @@ func TestIndicatorsService_List(t *testing.T) {
 		{
 			name: "failure because PerPage is less than 1",
 			args: args{
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    testutils.TestDefaultPage,
 					PerPage: 0,
 				},
@@ -180,7 +180,7 @@ func TestIndicatorsService_ListByTopicID(t *testing.T) {
 
 	type args struct {
 		topicID string
-		pages   PageParams
+		pages   *PageParams
 	}
 	tests := []struct {
 		name                string
@@ -193,7 +193,7 @@ func TestIndicatorsService_ListByTopicID(t *testing.T) {
 			name: "success",
 			args: args{
 				topicID: defaultTopicID,
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    testutils.TestDefaultPage,
 					PerPage: testutils.TestDefaultPerPage,
 				},
@@ -209,7 +209,7 @@ func TestIndicatorsService_ListByTopicID(t *testing.T) {
 			name: "failure because invalid topic id",
 			args: args{
 				topicID: invalidTopicID,
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    testutils.TestDefaultPage,
 					PerPage: testutils.TestDefaultPerPage,
 				},
@@ -222,7 +222,7 @@ func TestIndicatorsService_ListByTopicID(t *testing.T) {
 			name: "failure because Page is less than 1",
 			args: args{
 				topicID: defaultTopicID,
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    0,
 					PerPage: testutils.TestDefaultPerPage,
 				},
@@ -235,7 +235,7 @@ func TestIndicatorsService_ListByTopicID(t *testing.T) {
 			name: "failure because PerPage is less than 1",
 			args: args{
 				topicID: defaultTopicID,
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    testutils.TestDefaultPage,
 					PerPage: 0,
 				},

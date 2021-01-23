@@ -12,7 +12,7 @@ func TestLanguagesService_List(t *testing.T) {
 	defer save()
 
 	type args struct {
-		pages PageParams
+		pages *PageParams
 	}
 	tests := []struct {
 		name               string
@@ -24,7 +24,7 @@ func TestLanguagesService_List(t *testing.T) {
 		{
 			name: "success",
 			args: args{
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    testutils.TestDefaultPage,
 					PerPage: testutils.TestDefaultPerPage,
 				},
@@ -39,7 +39,7 @@ func TestLanguagesService_List(t *testing.T) {
 		{
 			name: "failure because Page is less than 1",
 			args: args{
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    0,
 					PerPage: testutils.TestDefaultPerPage,
 				},
@@ -51,7 +51,7 @@ func TestLanguagesService_List(t *testing.T) {
 		{
 			name: "failure because PerPage is less than 1",
 			args: args{
-				pages: PageParams{
+				pages: &PageParams{
 					Page:    testutils.TestDefaultPage,
 					PerPage: 0,
 				},

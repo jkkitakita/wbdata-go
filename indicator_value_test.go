@@ -18,8 +18,13 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 	invalidIndicatorID := "INVALID.INDICATOR.ID"
 	defaultDateStart := "2018"
 	defaultDateEnd := "2019"
+	invalidDate := "hoge"
 	defaultDateParams := &DateParams{
 		Start: defaultDateStart,
+		End:   defaultDateEnd,
+	}
+	invalidDateParams := &DateParams{
+		Start: invalidDate,
 		End:   defaultDateEnd,
 	}
 
@@ -108,6 +113,38 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 				},
 			},
 		},
+		{
+			name: "failure because invalid date params",
+			args: args{
+				countryIDs:  defaultCountryIDs,
+				indicatorID: defaultIndicatorID,
+				datePatams:  invalidDateParams,
+				pages: &PageParams{
+					Page:    testutils.TestDefaultPage,
+					PerPage: testutils.TestDefaultPerPage,
+				},
+			},
+			want:                     nil,
+			wantIndicatorValuesCount: 0,
+			wantErr:                  true,
+			wantErrRes:               nil,
+		},
+		{
+			name: "failure because invalid page params",
+			args: args{
+				countryIDs:  defaultCountryIDs,
+				indicatorID: defaultIndicatorID,
+				datePatams:  defaultDateParams,
+				pages: &PageParams{
+					Page:    testutils.TestInvalidPage,
+					PerPage: testutils.TestDefaultPerPage,
+				},
+			},
+			want:                     nil,
+			wantIndicatorValuesCount: 0,
+			wantErr:                  true,
+			wantErrRes:               nil,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -119,7 +156,7 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 				t.Errorf("IndicatorValuesService.ListByCountryIDs() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if err != nil {
+			if err != nil && tt.wantErrRes != nil {
 				if !reflect.DeepEqual(err, tt.wantErrRes) {
 					t.Errorf("IndicatorValuesService.ListByCountryIDs() err = %v, wantErrRes %v", err, tt.wantErrRes)
 				}
