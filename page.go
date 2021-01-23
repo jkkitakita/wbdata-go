@@ -25,9 +25,19 @@ type (
 		PerPage intOrString `json:"per_page"`
 		Total   intOrString `json:"total"`
 	}
+
+	// PageSummaryWithSource is a struct for a Summary about pages
+	PageSummaryWithSource struct {
+		Page        intOrString `json:"page"`
+		Pages       intOrString `json:"pages"`
+		PerPage     intOrString `json:"per_page"`
+		Total       intOrString `json:"total"`
+		SourceID    string      `json:"sourceid"`
+		LastUpdated string      `json:"lastupdated"`
+	}
 )
 
-func (pages *PageParams) pageParams(req *http.Request) error {
+func (pages *PageParams) addPageParams(req *http.Request) error {
 	params := req.URL.Query()
 
 	if pages.Page > 0 {

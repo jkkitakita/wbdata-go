@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestPageParams_pageParams(t *testing.T) {
+func TestPageParams_addPageParams(t *testing.T) {
 	invalidNumber := 0
 	validNumber := 1
 
@@ -62,8 +62,8 @@ func TestPageParams_pageParams(t *testing.T) {
 				Page:    tt.fields.Page,
 				PerPage: tt.fields.PerPage,
 			}
-			if err := pages.pageParams(mockReq); (err != nil) != tt.wantErr {
-				t.Errorf("PageParams.pageParams() error = %v, wantErr %v", err, tt.wantErr)
+			if err := pages.addPageParams(mockReq); (err != nil) != tt.wantErr {
+				t.Errorf("PageParams.addPageParams() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
 	}

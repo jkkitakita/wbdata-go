@@ -45,7 +45,7 @@ func (c *CountriesService) List(params ListCountryParams, pages PageParams) (*Pa
 		return nil, nil, err
 	}
 
-	if err := pages.pageParams(req); err != nil {
+	if err := pages.addPageParams(req); err != nil {
 		return nil, nil, err
 	}
 

@@ -24,7 +24,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2586905
+      - public, must-revalidate, max-age=2576095
       Connection:
       - keep-alive
       Content-Length:
@@ -32,7 +32,7 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sat, 23 Jan 2021 05:57:15 GMT
+      - Sat, 23 Jan 2021 08:57:25 GMT
       Expires:
       - Mon, 22 Feb 2021 04:32:20 GMT
       Last-Modified:
@@ -40,10 +40,11 @@ interactions:
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
       - TS01fa65e4=01359ee97607adbab749b32d7e7a971311117afd7000e821a306dee87a983c080906257b0f3cdb7561c5374f8c4b4c8ba4c78467ae;
         Path=/
-      - TS019865bf=016ca92173abe6888f8890792b75ab5ab683edd00c4abc855d159c99300ba3800714bc61baf4c8ba154b74f68dd7ce6f3b3f934434d89b02888d71053ac85864bebdb79387;
+      - api_http.cookie=277260298.20480.0000; path=/; Httponly
+      - TS019865bf=0123646321e208eea379e597e59562c67d5ffc9c9a3b04057704493421b39cd4d88f84091961f1be85996130572c9e8994c92e6fe1009a54f9678c969dc9e2a481e7f7ffb6b9556d6f5991cbc6e51aaccb5654f44f;
         Path=/
     status: 200 OK
     code: 200
@@ -67,7 +68,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2586905
+      - public, must-revalidate, max-age=2576095
       Connection:
       - keep-alive
       Content-Length:
@@ -75,7 +76,7 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sat, 23 Jan 2021 05:57:15 GMT
+      - Sat, 23 Jan 2021 08:57:25 GMT
       Expires:
       - Mon, 22 Feb 2021 04:32:20 GMT
       Last-Modified:
@@ -86,7 +87,7 @@ interactions:
       - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
       - TS01fa65e4=01359ee976181c7f37d511ca08afc45f58f4ff4ff501e08286fe223480c22671eea4ffcfc1bfe98c9d2738d03019f60ab1b8299a90;
         Path=/
-      - TS019865bf=016ca921738dc40f4024d214a77ad153c1d98c74dc49ee7720ed67a4a452e3fcbbb32e13a3d5e8764b748af8e1b8fb28cb2c8811c589e0d94a0e2d69d7195191012ab34295;
+      - TS019865bf=016ca92173c7a1b5055c665d8d896bac0d52598085777831e3aa7bfe40b6440b52c8482b4af4066fc72942f00493d7fc9581ffac20473694d97f0d97fc3b224d0e57e4778b;
         Path=/
     status: 200 OK
     code: 200
