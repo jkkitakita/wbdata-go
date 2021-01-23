@@ -12,7 +12,7 @@ func ExampleCountriesService_List() {
 		wbdata.ListCountryParams{
 			RegionID: "EAS",
 		},
-		wbdata.PageParams{
+		&wbdata.PageParams{
 			Page:    1,
 			PerPage: 10,
 		})
@@ -40,10 +40,12 @@ func ExampleCountriesService_Get() {
 
 func ExampleIncomeLevelsService_List() {
 	client := wbdata.NewClient(nil)
-	summary, incomeLevels, _ := client.IncomeLevels.List(wbdata.PageParams{
-		Page:    1,
-		PerPage: 10,
-	})
+	summary, incomeLevels, _ := client.IncomeLevels.List(
+		&wbdata.PageParams{
+			Page:    1,
+			PerPage: 10,
+		},
+	)
 
 	summary.Pages = 1
 	summary.Total = 7
@@ -68,10 +70,12 @@ func ExampleIncomeLevelsService_Get() {
 
 func ExampleIndicatorsService_List() {
 	client := wbdata.NewClient(nil)
-	summary, indicators, _ := client.Indicators.List(wbdata.PageParams{
-		Page:    1,
-		PerPage: 10,
-	})
+	summary, indicators, _ := client.Indicators.List(
+		&wbdata.PageParams{
+			Page:    1,
+			PerPage: 10,
+		},
+	)
 
 	summary.Pages = 1735
 	summary.Total = 17349
@@ -104,7 +108,7 @@ func ExampleIndicatorsService_ListByTopicID() {
 	topicID := "1"
 	summary, indicators, _ := client.Indicators.ListByTopicID(
 		topicID,
-		wbdata.PageParams{
+		&wbdata.PageParams{
 			Page:    1,
 			PerPage: 10,
 		},
@@ -151,10 +155,12 @@ func ExampleIndicatorValuesService_ListByCountryIDs() {
 
 func ExampleLendingTypesService_List() {
 	client := wbdata.NewClient(nil)
-	summary, lendingTypes, _ := client.LendingTypes.List(wbdata.PageParams{
-		Page:    1,
-		PerPage: 10,
-	})
+	summary, lendingTypes, _ := client.LendingTypes.List(
+		&wbdata.PageParams{
+			Page:    1,
+			PerPage: 10,
+		},
+	)
 
 	summary.Pages = 1
 	summary.Total = 4
@@ -179,10 +185,12 @@ func ExampleLendingTypesService_Get() {
 
 func ExampleRegionsService_List() {
 	client := wbdata.NewClient(nil)
-	summary, regions, _ := client.Regions.List(wbdata.PageParams{
-		Page:    1,
-		PerPage: 10,
-	})
+	summary, regions, _ := client.Regions.List(
+		&wbdata.PageParams{
+			Page:    1,
+			PerPage: 10,
+		},
+	)
 
 	summary.Pages = 5
 	summary.Total = 48
@@ -207,10 +215,12 @@ func ExampleRegionsService_Get() {
 
 func ExampleSourcesService_List() {
 	client := wbdata.NewClient(nil)
-	summary, sources, _ := client.Sources.List(wbdata.PageParams{
-		Page:    1,
-		PerPage: 10,
-	})
+	summary, sources, _ := client.Sources.List(
+		&wbdata.PageParams{
+			Page:    1,
+			PerPage: 10,
+		},
+	)
 
 	summary.Pages = 6
 	summary.Total = 59
@@ -235,10 +245,12 @@ func ExampleSourcesService_Get() {
 
 func ExampleTopicsService_List() {
 	client := wbdata.NewClient(nil)
-	summary, topics, _ := client.Topics.List(wbdata.PageParams{
-		Page:    1,
-		PerPage: 10,
-	})
+	summary, topics, _ := client.Topics.List(
+		&wbdata.PageParams{
+			Page:    1,
+			PerPage: 10,
+		},
+	)
 
 	summary.Pages = 3
 	summary.Total = 21
@@ -263,10 +275,12 @@ func ExampleTopicsService_Get() {
 
 func ExampleLanguagesService_List() {
 	client := wbdata.NewClient(nil)
-	summary, languages, _ := client.Languages.List(wbdata.PageParams{
-		Page:    1,
-		PerPage: 10,
-	})
+	summary, languages, _ := client.Languages.List(
+		&wbdata.PageParams{
+			Page:    1,
+			PerPage: 10,
+		},
+	)
 
 	summary.Pages = 3
 	summary.Total = 23

@@ -15,7 +15,7 @@ type (
 )
 
 // List returns a Response's Summary and Topics
-func (t *TopicsService) List(pages PageParams) (*PageSummary, []*Topic, error) {
+func (t *TopicsService) List(pages *PageParams) (*PageSummary, []*Topic, error) {
 	summary := &PageSummary{}
 	topics := []*Topic{}
 

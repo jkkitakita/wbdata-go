@@ -17,7 +17,7 @@ type (
 )
 
 // List returns a Response's Summary and IncomeLevels
-func (il *IncomeLevelsService) List(pages PageParams) (*PageSummary, []*IncomeLevel, error) {
+func (il *IncomeLevelsService) List(pages *PageParams) (*PageSummary, []*IncomeLevel, error) {
 	summary := &PageSummary{}
 	incomeLevels := []*IncomeLevel{}
 

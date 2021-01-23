@@ -17,7 +17,7 @@ type (
 )
 
 // List returns summary and languages
-func (c *LanguagesService) List(pages PageParams) (*PageSummary, []*Language, error) {
+func (c *LanguagesService) List(pages *PageParams) (*PageSummary, []*Language, error) {
 	summary := &PageSummary{}
 	languages := []*Language{}
 

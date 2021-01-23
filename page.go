@@ -40,6 +40,10 @@ type (
 func (pages *PageParams) addPageParams(req *http.Request) error {
 	params := req.URL.Query()
 
+	if pages == nil {
+		return nil
+	}
+
 	if pages.Page > 0 {
 		params.Add(`page`, strconv.Itoa(pages.Page))
 	} else {

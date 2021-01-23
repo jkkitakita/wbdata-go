@@ -43,16 +43,12 @@ func (i *IndicatorValuesService) ListByCountryIDs(
 		return nil, nil, err
 	}
 
-	if pages != nil {
-		if err := pages.addPageParams(req); err != nil {
-			return nil, nil, err
-		}
+	if err := pages.addPageParams(req); err != nil {
+		return nil, nil, err
 	}
 
-	if datePatams != nil {
-		if err := datePatams.addDateParams(req); err != nil {
-			return nil, nil, err
-		}
+	if err := datePatams.addDateParams(req); err != nil {
+		return nil, nil, err
 	}
 
 	if err = i.client.do(req, &[]interface{}{summary, &indicatorValues}); err != nil {

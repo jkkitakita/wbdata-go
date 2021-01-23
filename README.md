@@ -22,10 +22,12 @@ import (
 
 func main() {
 	client := wbdata.NewClient(nil)
-	summary, countries, _ := client.Countries.List(wbdata.PageParams{
-		Page:    1,
-		PerPage: 1,
-	})
+	summary, countries, _ := client.Countries.List(
+		&wbdata.PageParams{
+			Page:    1,
+			PerPage: 1,
+		},
+	)
 
 	fmt.Printf("Summary is: %#v\n", summary)
 	fmt.Printf("Countries[0] is: %#v\n", countries[0])

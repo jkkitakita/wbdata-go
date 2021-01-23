@@ -15,7 +15,7 @@ type (
 )
 
 // List returns a Response's Summary and LendingTypes
-func (lt *LendingTypesService) List(pages PageParams) (*PageSummary, []*LendingType, error) {
+func (lt *LendingTypesService) List(pages *PageParams) (*PageSummary, []*LendingType, error) {
 	summary := &PageSummary{}
 	lendingTypes := []*LendingType{}
 

@@ -45,6 +45,10 @@ func (dp *DateParams) join() string {
 }
 
 func (dp *DateParams) addDateParams(req *http.Request) error {
+	if dp == nil {
+		return nil
+	}
+
 	if err := dp.validate(); err != nil {
 		return err
 	}
