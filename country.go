@@ -22,7 +22,7 @@ type (
 		AdminRegion CountryRegion
 	}
 
-	// ListCountryParams contains parameters for ListWithParams
+	// ListCountryParams contains parameters for List
 	ListCountryParams struct {
 		RegionID      string
 		IncomeLevelID string
@@ -30,12 +30,17 @@ type (
 	}
 )
 
-// List returns summary and countries
-func (c *CountriesService) List(pages PageParams) (*PageSummary, []*Country, error) {
+// List returns summary and countries with params
+func (c *CountriesService) List(params ListCountryParams, pages PageParams) (*PageSummary, []*Country, error) {
 	summary := &PageSummary{}
 	countries := []*Country{}
+	queryParams := map[string]string{
+		"region":      params.RegionID,
+		"incomelevel": params.IncomeLevelID,
+		"lendingtype": params.LendingTypeID,
+	}
 
-	req, err := c.client.NewRequest("GET", "countries", nil, nil)
+	req, err := c.client.NewRequest("GET", "countries", queryParams, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -67,30 +72,4 @@ func (c *CountriesService) Get(countryID string) (*PageSummary, *Country, error)
 	}
 
 	return summary, country[0], nil
-}
-
-// ListWithParams returns summary and countries with params
-func (c *CountriesService) ListWithParams(params ListCountryParams, pages PageParams) (*PageSummary, []*Country, error) {
-	summary := &PageSummary{}
-	countries := []*Country{}
-	queryParams := map[string]string{
-		"region":      params.RegionID,
-		"incomelevel": params.IncomeLevelID,
-		"lendingtype": params.LendingTypeID,
-	}
-
-	req, err := c.client.NewRequest("GET", "countries", queryParams, nil)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	if err := pages.pageParams(req); err != nil {
-		return nil, nil, err
-	}
-
-	if err = c.client.do(req, &[]interface{}{summary, &countries}); err != nil {
-		return nil, nil, err
-	}
-
-	return summary, countries, nil
 }

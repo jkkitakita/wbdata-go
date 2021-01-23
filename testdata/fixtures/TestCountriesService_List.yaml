@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries?format=json&page=1&per_page=2
+    url: http://api.worldbank.org/v2/countries?format=json&incomelevel=&lendingtype=&page=1&per_page=2&region=
     method: GET
   response:
     body: '[{"page":1,"pages":149,"per_page":"2","total":297},[{"id":"ABW","iso2Code":"AW","name":"Aruba","region":{"id":"LCN","iso2code":"ZJ","value":"Latin
@@ -23,7 +23,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2591778
+      - public, must-revalidate, max-age=2586902
       Connection:
       - keep-alive
       Content-Length:
@@ -31,18 +31,207 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sat, 23 Jan 2021 04:35:54 GMT
+      - Sat, 23 Jan 2021 05:57:12 GMT
       Expires:
-      - Mon, 22 Feb 2021 04:32:12 GMT
+      - Mon, 22 Feb 2021 04:32:14 GMT
       Last-Modified:
-      - Sat, 23 Jan 2021 04:32:12 GMT
+      - Sat, 23 Jan 2021 04:32:14 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
       - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
-      - TS01fa65e4=01359ee97628b25ea838a5cd43cd2aba71c88af4655f96a851f96b3b8e3bd28235aa1638a373a136206fdaf30ce277f393e850a912;
+      - TS01fa65e4=01359ee976a11abf4974989f5c17efea11f37dd27c68bcca7be100dc8e8e22374b3fd33c23513a21084153f2c2e7530cd7e1b978f1;
         Path=/
-      - TS019865bf=016ca9217362e91ac2fd8a98d5264568c3375ce44ac716cb8ff6386428fc28773bc403cd03779ba598584acf9ff339a49e399150af011faf5449dbff46ec77556133159175;
+      - TS019865bf=016ca9217313199534fb8d434ac056cb3cc0ba4189e5622186cb8df831c3e4e0f125c676f9003be4c048e7d9350312c6b76c3a6127d742f53e0c16d977b88e692706eabd0c;
+        Path=/
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/countries?format=json&incomelevel=&lendingtype=&page=1&per_page=2&region=EAS
+    method: GET
+  response:
+    body: '[{"page":1,"pages":19,"per_page":"2","total":38},[{"id":"ASM","iso2Code":"AS","name":"American
+      Samoa","region":{"id":"EAS","iso2code":"Z4","value":"East Asia & Pacific"},"adminregion":{"id":"EAP","iso2code":"4E","value":"East
+      Asia & Pacific (excluding high income)"},"incomeLevel":{"id":"UMC","iso2code":"XT","value":"Upper
+      middle income"},"lendingType":{"id":"LNX","iso2code":"XX","value":"Not classified"},"capitalCity":"Pago
+      Pago","longitude":"-170.691","latitude":"-14.2846"},{"id":"AUS","iso2Code":"AU","name":"Australia","region":{"id":"EAS","iso2code":"Z4","value":"East
+      Asia & Pacific"},"adminregion":{"id":"","iso2code":"","value":""},"incomeLevel":{"id":"HIC","iso2code":"XD","value":"High
+      income"},"lendingType":{"id":"LNX","iso2code":"XX","value":"Not classified"},"capitalCity":"Canberra","longitude":"149.129","latitude":"-35.282"}]]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2586902
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "847"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sat, 23 Jan 2021 05:57:13 GMT
+      Expires:
+      - Mon, 22 Feb 2021 04:32:15 GMT
+      Last-Modified:
+      - Sat, 23 Jan 2021 04:32:15 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
+      Set-Cookie:
+      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - TS01fa65e4=01359ee976c5c495d9331dd92924386a0d595fcba23ce63be9400f19a9ccc3b861ee991055166886fe5aaad5739adb9d61ae6b59f5;
+        Path=/
+      - TS019865bf=016ca92173bc6b1ffe7ef8e6b3b76dd4b740e0e49ab7c6c044b7c5bfa6515f2c9c52c6d67f5947b020ce8d100223873ab386f4045fe7b6848fbd28bcc54890f89567db808d;
+        Path=/
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/countries?format=json&incomelevel=HIC&lendingtype=&page=1&per_page=2&region=
+    method: GET
+  response:
+    body: '[{"page":1,"pages":42,"per_page":"2","total":83},[{"id":"ABW","iso2Code":"AW","name":"Aruba","region":{"id":"LCN","iso2code":"ZJ","value":"Latin
+      America & Caribbean "},"adminregion":{"id":"","iso2code":"","value":""},"incomeLevel":{"id":"HIC","iso2code":"XD","value":"High
+      income"},"lendingType":{"id":"LNX","iso2code":"XX","value":"Not classified"},"capitalCity":"Oranjestad","longitude":"-70.0167","latitude":"12.5167"},{"id":"AND","iso2Code":"AD","name":"Andorra","region":{"id":"ECS","iso2code":"Z7","value":"Europe
+      & Central Asia"},"adminregion":{"id":"","iso2code":"","value":""},"incomeLevel":{"id":"HIC","iso2code":"XD","value":"High
+      income"},"lendingType":{"id":"LNX","iso2code":"XX","value":"Not classified"},"capitalCity":"Andorra
+      la Vella","longitude":"1.5218","latitude":"42.5075"}]]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2586903
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "796"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sat, 23 Jan 2021 05:57:13 GMT
+      Expires:
+      - Mon, 22 Feb 2021 04:32:16 GMT
+      Last-Modified:
+      - Sat, 23 Jan 2021 04:32:16 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
+      Set-Cookie:
+      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - TS01fa65e4=01359ee9760ef2fd5508ab68d807e8c562a1dc0f96e28cc17e32664846c7f056f72c2db50360eb11e4f3fef8c404d9f68cfabb0c1c;
+        Path=/
+      - TS019865bf=0123646321e657b518b96c10fcdc7ba19be36055c368cc90f0ef5926003121b46ef38388e9f4d7c12987b8bc4598888e117d93bd78e31978cde6ecdefb4614f02273e812ac;
+        Path=/
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/countries?format=json&incomelevel=&lendingtype=LNX&page=1&per_page=2&region=
+    method: GET
+  response:
+    body: '[{"page":1,"pages":37,"per_page":"2","total":74},[{"id":"ABW","iso2Code":"AW","name":"Aruba","region":{"id":"LCN","iso2code":"ZJ","value":"Latin
+      America & Caribbean "},"adminregion":{"id":"","iso2code":"","value":""},"incomeLevel":{"id":"HIC","iso2code":"XD","value":"High
+      income"},"lendingType":{"id":"LNX","iso2code":"XX","value":"Not classified"},"capitalCity":"Oranjestad","longitude":"-70.0167","latitude":"12.5167"},{"id":"AND","iso2Code":"AD","name":"Andorra","region":{"id":"ECS","iso2code":"Z7","value":"Europe
+      & Central Asia"},"adminregion":{"id":"","iso2code":"","value":""},"incomeLevel":{"id":"HIC","iso2code":"XD","value":"High
+      income"},"lendingType":{"id":"LNX","iso2code":"XX","value":"Not classified"},"capitalCity":"Andorra
+      la Vella","longitude":"1.5218","latitude":"42.5075"}]]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2586903
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "796"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sat, 23 Jan 2021 05:57:13 GMT
+      Expires:
+      - Mon, 22 Feb 2021 04:32:16 GMT
+      Last-Modified:
+      - Sat, 23 Jan 2021 04:32:16 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
+      Set-Cookie:
+      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - TS01fa65e4=01359ee9765117fe9f2ec2ac3ed21217a6f93cb257a575c61fa1def2fb579a5dfcd4a7c58deb9ba8defa81bb4c4148b49bd58610c5;
+        Path=/
+      - TS019865bf=0123646321a1b807b3b3ef152104f400c38fea7b628fec4159106fa277b3e40ad0e96207673cb11c99964c33918ceebcdf49314b488f646edc91bd2c54b3f1008cd08fe1ca;
+        Path=/
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/countries?format=json&incomelevel=HIC&lendingtype=LNX&page=1&per_page=2&region=EAS
+    method: GET
+  response:
+    body: '[{"page":1,"pages":7,"per_page":"2","total":13},[{"id":"AUS","iso2Code":"AU","name":"Australia","region":{"id":"EAS","iso2code":"Z4","value":"East
+      Asia & Pacific"},"adminregion":{"id":"","iso2code":"","value":""},"incomeLevel":{"id":"HIC","iso2code":"XD","value":"High
+      income"},"lendingType":{"id":"LNX","iso2code":"XX","value":"Not classified"},"capitalCity":"Canberra","longitude":"149.129","latitude":"-35.282"},{"id":"BRN","iso2Code":"BN","name":"Brunei
+      Darussalam","region":{"id":"EAS","iso2code":"Z4","value":"East Asia & Pacific"},"adminregion":{"id":"","iso2code":"","value":""},"incomeLevel":{"id":"HIC","iso2code":"XD","value":"High
+      income"},"lendingType":{"id":"LNX","iso2code":"XX","value":"Not classified"},"capitalCity":"Bandar
+      Seri Begawan","longitude":"114.946","latitude":"4.94199"}]]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2586905
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "801"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sat, 23 Jan 2021 05:57:13 GMT
+      Expires:
+      - Mon, 22 Feb 2021 04:32:18 GMT
+      Last-Modified:
+      - Sat, 23 Jan 2021 04:32:18 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
+      Set-Cookie:
+      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - TS01fa65e4=01359ee976efc9e92aa5109ca2ac5288348f9e1cf03a1098e5d4f87697722e2d010b399784b2989dc1c32e79af11eed6e7159fae08;
+        Path=/
+      - TS019865bf=016ca92173e78efe91aff85f23a058c6c5de92d19023ccf8a01e5a8f4afad99d1457fca858c5793073ca13ae6a3ad92b5c1911ebcf6efddd51cd42010ff9d6975ceaa55e53;
         Path=/
     status: 200 OK
     code: 200
