@@ -125,6 +125,30 @@ func ExampleIndicatorsService_ListByTopicID() {
 	// Topics is: &{ID:1 Value:Agriculture & Rural Development  }
 }
 
+func ExampleIndicatorValuesService_ListByCountryIDs() {
+	client := wbdata.NewClient(nil)
+	countryIDs := []string{"JPN", "USA"}
+	indicatorID := "NY.GDP.MKTP.CD"
+	summary, indicatorValues, _ := client.IndicatorValues.ListByCountryIDs(
+		countryIDs,
+		indicatorID,
+		&wbdata.DateParams{
+			Start: "2018",
+			End:   "2019",
+		},
+		&wbdata.PageParams{
+			Page:    1,
+			PerPage: 10,
+		},
+	)
+
+	fmt.Printf("Summary is: %#v\n", summary)
+	fmt.Printf("IndicatorValues[0]: %#v\n", indicatorValues[0])
+	// Output:
+	// Summary is: &wbdata.PageSummaryWithSource{Page:1, Pages:1, PerPage:10, Total:4, SourceID:"2", LastUpdated:"2020-12-16"}
+	// IndicatorValues[0]: &wbdata.IndicatorValue{Indicator:wbdata.IDAndValue{ID:"NY.GDP.MKTP.CD", Value:"GDP (current US$)"}, Country:wbdata.IDAndValue{ID:"JP", Value:"Japan"}, Countryiso3code:"JPN", Date:"2019", Value:5.08176954237977e+12, Unit:"", ObsStatus:"", Decimal:0}
+}
+
 func ExampleLendingTypesService_List() {
 	client := wbdata.NewClient(nil)
 	summary, lendingTypes, _ := client.LendingTypes.List(wbdata.PageParams{

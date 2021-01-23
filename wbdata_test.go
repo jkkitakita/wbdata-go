@@ -21,6 +21,7 @@ func TestNewClient(t *testing.T) {
 	optIgnoreFields := cmpopts.IgnoreFields(Client{},
 		"Countries",
 		"Indicators",
+		"IndicatorValues",
 		"IncomeLevels",
 		"LendingTypes",
 		"Regions",

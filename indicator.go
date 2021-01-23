@@ -1,6 +1,8 @@
 package wbdata
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type (
 	// IndicatorsService ...
@@ -34,7 +36,7 @@ func (i *IndicatorsService) List(pages PageParams) (*PageSummary, []*Indicator, 
 		return nil, nil, err
 	}
 
-	if err := pages.pageParams(req); err != nil {
+	if err := pages.addPageParams(req); err != nil {
 		return nil, nil, err
 	}
 
@@ -74,7 +76,7 @@ func (i *IndicatorsService) ListByTopicID(topicID string, pages PageParams) (*Pa
 		return nil, nil, err
 	}
 
-	if err := pages.pageParams(req); err != nil {
+	if err := pages.addPageParams(req); err != nil {
 		return nil, nil, err
 	}
 

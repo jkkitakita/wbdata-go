@@ -26,7 +26,7 @@ func (c *LanguagesService) List(pages PageParams) (*PageSummary, []*Language, er
 		return nil, nil, err
 	}
 
-	if err := pages.pageParams(req); err != nil {
+	if err := pages.addPageParams(req); err != nil {
 		return nil, nil, err
 	}
 

@@ -32,7 +32,7 @@ func (r *RegionsService) List(pages PageParams) (*PageSummary, []*Region, error)
 		return nil, nil, err
 	}
 
-	if err := pages.pageParams(req); err != nil {
+	if err := pages.addPageParams(req); err != nil {
 		return nil, nil, err
 	}
 

@@ -49,14 +49,15 @@ type Client struct {
 	UserAgent string
 
 	// Services to talk to different APIs
-	Countries    *CountriesService
-	Indicators   *IndicatorsService
-	IncomeLevels *IncomeLevelsService
-	LendingTypes *LendingTypesService
-	Regions      *RegionsService
-	Sources      *SourcesService
-	Topics       *TopicsService
-	Languages    *LanguagesService
+	Countries       *CountriesService
+	Indicators      *IndicatorsService
+	IndicatorValues *IndicatorValuesService
+	IncomeLevels    *IncomeLevelsService
+	LendingTypes    *LendingTypesService
+	Regions         *RegionsService
+	Sources         *SourcesService
+	Topics          *TopicsService
+	Languages       *LanguagesService
 }
 
 type service struct {
@@ -94,6 +95,7 @@ func NewClient(httpClient *http.Client, options ...func(*Client)) *Client {
 	c.Topics = &TopicsService{client: c}
 	c.Languages = &LanguagesService{client: c}
 	c.Indicators = &IndicatorsService{client: c}
+	c.IndicatorValues = &IndicatorValuesService{client: c}
 	c.IncomeLevels = &IncomeLevelsService{client: c}
 	c.LendingTypes = &LendingTypesService{client: c}
 	c.Regions = &RegionsService{client: c}
