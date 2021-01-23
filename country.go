@@ -32,16 +32,12 @@ type (
 
 // List returns summary and countries with params
 func (c *CountriesService) List(
-	params ListCountryParams,
+	params *ListCountryParams,
 	pages *PageParams,
 ) (*PageSummary, []*Country, error) {
 	summary := &PageSummary{}
 	countries := []*Country{}
-	queryParams := map[string]string{
-		"region":      params.RegionID,
-		"incomelevel": params.IncomeLevelID,
-		"lendingtype": params.LendingTypeID,
-	}
+	queryParams := params.toQueryParams()
 
 	req, err := c.client.NewRequest("GET", "countries", queryParams, nil)
 	if err != nil {
@@ -75,4 +71,16 @@ func (c *CountriesService) Get(countryID string) (*PageSummary, *Country, error)
 	}
 
 	return summary, country[0], nil
+}
+
+func (params *ListCountryParams) toQueryParams() map[string]string {
+	if params == nil {
+		return nil
+	}
+
+	return map[string]string{
+		"region":      params.RegionID,
+		"incomelevel": params.IncomeLevelID,
+		"lendingtype": params.LendingTypeID,
+	}
 }

@@ -28,7 +28,7 @@ func TestCountriesService_List(t *testing.T) {
 	defer save()
 
 	type args struct {
-		params ListCountryParams
+		params *ListCountryParams
 		pages  *PageParams
 	}
 	tests := []struct {
@@ -41,7 +41,7 @@ func TestCountriesService_List(t *testing.T) {
 		{
 			name: "success",
 			args: args{
-				params: ListCountryParams{},
+				params: nil,
 				pages: &PageParams{
 					Page:    testutils.TestDefaultPage,
 					PerPage: testutils.TestDefaultPerPage,
@@ -57,7 +57,7 @@ func TestCountriesService_List(t *testing.T) {
 		{
 			name: "success with region id",
 			args: args{
-				params: ListCountryParams{
+				params: &ListCountryParams{
 					RegionID: "EAS",
 				},
 				pages: &PageParams{
@@ -75,7 +75,7 @@ func TestCountriesService_List(t *testing.T) {
 		{
 			name: "success with income level id",
 			args: args{
-				params: ListCountryParams{
+				params: &ListCountryParams{
 					IncomeLevelID: "HIC",
 				},
 				pages: &PageParams{
@@ -93,7 +93,7 @@ func TestCountriesService_List(t *testing.T) {
 		{
 			name: "success with lending type id",
 			args: args{
-				params: ListCountryParams{
+				params: &ListCountryParams{
 					LendingTypeID: "LNX",
 				},
 				pages: &PageParams{
@@ -111,7 +111,7 @@ func TestCountriesService_List(t *testing.T) {
 		{
 			name: "success with params",
 			args: args{
-				params: ListCountryParams{
+				params: &ListCountryParams{
 					RegionID:      "EAS",
 					IncomeLevelID: "HIC",
 					LendingTypeID: "LNX",
@@ -131,7 +131,7 @@ func TestCountriesService_List(t *testing.T) {
 		{
 			name: "failure because invalid region id",
 			args: args{
-				params: ListCountryParams{
+				params: &ListCountryParams{
 					RegionID:      invalidID,
 					IncomeLevelID: "",
 					LendingTypeID: "",
@@ -148,7 +148,7 @@ func TestCountriesService_List(t *testing.T) {
 		{
 			name: "failure because invalid income level id",
 			args: args{
-				params: ListCountryParams{
+				params: &ListCountryParams{
 					RegionID:      "",
 					IncomeLevelID: invalidID,
 					LendingTypeID: "",
@@ -165,7 +165,7 @@ func TestCountriesService_List(t *testing.T) {
 		{
 			name: "failure because invalid lending type id",
 			args: args{
-				params: ListCountryParams{
+				params: &ListCountryParams{
 					RegionID:      "",
 					IncomeLevelID: "",
 					LendingTypeID: invalidID,
@@ -182,7 +182,7 @@ func TestCountriesService_List(t *testing.T) {
 		{
 			name: "failure because Page is less than 1",
 			args: args{
-				params: ListCountryParams{
+				params: &ListCountryParams{
 					RegionID:      "",
 					IncomeLevelID: "",
 					LendingTypeID: "",
@@ -199,7 +199,7 @@ func TestCountriesService_List(t *testing.T) {
 		{
 			name: "failure because PerPage is less than 1",
 			args: args{
-				params: ListCountryParams{
+				params: &ListCountryParams{
 					RegionID:      "",
 					IncomeLevelID: "",
 					LendingTypeID: "",
@@ -236,14 +236,16 @@ func TestCountriesService_List(t *testing.T) {
 			}
 
 			for i := range got1 {
-				if tt.args.params.RegionID != "" && got1[i].Region.ID != tt.args.params.RegionID {
-					t.Errorf("invalid region id. got1[i].Region.ID = %v, want %v", got1[i].Region.ID, tt.args.params.RegionID)
-				}
-				if tt.args.params.IncomeLevelID != "" && got1[i].IncomeLevel.ID != tt.args.params.IncomeLevelID {
-					t.Errorf("invalid region id. got1[i].IncomeLevel.ID = %v, want %v", got1[i].IncomeLevel.ID, tt.args.params.IncomeLevelID)
-				}
-				if tt.args.params.LendingTypeID != "" && got1[i].LendingType.ID != tt.args.params.LendingTypeID {
-					t.Errorf("invalid region id. got1[i].LendingType.ID = %v, want %v", got1[i].LendingType.ID, tt.args.params.LendingTypeID)
+				if tt.args.params != nil {
+					if tt.args.params.RegionID != "" && got1[i].Region.ID != tt.args.params.RegionID {
+						t.Errorf("invalid region id. got1[i].Region.ID = %v, want %v", got1[i].Region.ID, tt.args.params.RegionID)
+					}
+					if tt.args.params.IncomeLevelID != "" && got1[i].IncomeLevel.ID != tt.args.params.IncomeLevelID {
+						t.Errorf("invalid region id. got1[i].IncomeLevel.ID = %v, want %v", got1[i].IncomeLevel.ID, tt.args.params.IncomeLevelID)
+					}
+					if tt.args.params.LendingTypeID != "" && got1[i].LendingType.ID != tt.args.params.LendingTypeID {
+						t.Errorf("invalid region id. got1[i].LendingType.ID = %v, want %v", got1[i].LendingType.ID, tt.args.params.LendingTypeID)
+					}
 				}
 			}
 		})
@@ -348,6 +350,55 @@ func TestCountriesService_Get(t *testing.T) {
 			}
 			if !reflect.DeepEqual(got1, tt.want1) {
 				t.Errorf("CountriesService.Get() got1 = %v, want %v", got1, tt.want1)
+			}
+		})
+	}
+}
+
+func TestListCountryParams_toQueryParams(t *testing.T) {
+	type fields struct {
+		RegionID      string
+		IncomeLevelID string
+		LendingTypeID string
+	}
+	tests := []struct {
+		name   string
+		fields *fields
+		want   map[string]string
+	}{
+		{
+			name: "success",
+			fields: &fields{
+				RegionID:      "EAS",
+				IncomeLevelID: "HIC",
+				LendingTypeID: "LNX",
+			},
+			want: map[string]string{
+				"region":      "EAS",
+				"incomelevel": "HIC",
+				"lendingtype": "LNX",
+			},
+		},
+		{
+			name:   "success with nil",
+			fields: nil,
+			want:   nil,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var params *ListCountryParams
+			if tt.fields != nil {
+				params = &ListCountryParams{
+					RegionID:      tt.fields.RegionID,
+					IncomeLevelID: tt.fields.IncomeLevelID,
+					LendingTypeID: tt.fields.LendingTypeID,
+				}
+			} else {
+				params = nil
+			}
+			if got := params.toQueryParams(); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("ListCountryParams.toQueryParams() = %v, want %v", got, tt.want)
 			}
 		})
 	}
