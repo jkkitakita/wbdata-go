@@ -20,7 +20,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2576095
+      - public, must-revalidate, max-age=2559465
       Connection:
       - keep-alive
       Content-Length:
@@ -28,7 +28,7 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sat, 23 Jan 2021 08:57:24 GMT
+      - Sat, 23 Jan 2021 13:34:34 GMT
       Expires:
       - Mon, 22 Feb 2021 04:32:19 GMT
       Last-Modified:
@@ -36,10 +36,11 @@ interactions:
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
       - TS01fa65e4=01359ee976b5e2441f0d7f827ae3d005ca9b3e170cd134d2d3cb1292efa8a66bbc6a88c739d6e5074d1216aca006608755c7fd8cc5;
         Path=/
-      - TS019865bf=016ca92173bff4729589869a4345768f020b057161410741fb91032b660fbff28edba821d89f393a1e1467bea9c69af04dedacfab15e634bc8ef1fafaf57f322afa0227357;
+      - api_http.cookie=277260298.20480.0000; path=/; Httponly
+      - TS019865bf=01236463210fdd77f5c4d86594c90d07f113fbd7130259cb7dffc1fd9db6f2519671a56dbc47dddc4203c98b97885c5709b7bafac46c51fc71335d5cc8b0f0338a68c6b6ccff203bbd79d7188d65c16da9c284a85e;
         Path=/
     status: 200 OK
     code: 200
@@ -63,7 +64,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2576095
+      - public, must-revalidate, max-age=2559465
       Connection:
       - keep-alive
       Content-Length:
@@ -71,7 +72,7 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sat, 23 Jan 2021 08:57:24 GMT
+      - Sat, 23 Jan 2021 13:34:34 GMT
       Expires:
       - Mon, 22 Feb 2021 04:32:19 GMT
       Last-Modified:
@@ -79,10 +80,10 @@ interactions:
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
       - TS01fa65e4=01359ee97639dcea69dc7440acc5a61dba4dfaae857da85384e15cea1306ac28f108c381b69a00c4d3be6fccdb8e86a9c3d425ffa4;
         Path=/
-      - TS019865bf=016ca92173d89a4bc4af0937d31fdff748e7ece5bde13ca01ab12418ba84aa2d85ad4fda63bd336c93f95b25c62f0e429f6a1c17bd18e8be3e87d92833e7e8ea17f1dc904a;
+      - TS019865bf=012364632105fe200738dc969eb69d4be673e59379456548ca4f2afa6cbe372016ebef1908da8ce4b475b6b038bf5b8aa124d4198cb041929d48946174fa44c7f32508bf14;
         Path=/
     status: 200 OK
     code: 200

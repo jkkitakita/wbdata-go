@@ -9,7 +9,7 @@ import (
 func ExampleCountriesService_List() {
 	client := wbdata.NewClient(nil)
 	summary, countries, _ := client.Countries.List(
-		wbdata.ListCountryParams{
+		&wbdata.ListCountryParams{
 			RegionID: "EAS",
 		},
 		&wbdata.PageParams{
