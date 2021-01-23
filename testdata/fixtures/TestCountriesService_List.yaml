@@ -10,7 +10,7 @@ interactions:
     url: http://api.worldbank.org/v2/countries?format=json&page=1&per_page=2
     method: GET
   response:
-    body: '[{"page":1,"pages":152,"per_page":"2","total":304},[{"id":"ABW","iso2Code":"AW","name":"Aruba","region":{"id":"LCN","iso2code":"ZJ","value":"Latin
+    body: '[{"page":1,"pages":149,"per_page":"2","total":297},[{"id":"ABW","iso2Code":"AW","name":"Aruba","region":{"id":"LCN","iso2code":"ZJ","value":"Latin
       America & Caribbean "},"adminregion":{"id":"","iso2code":"","value":""},"incomeLevel":{"id":"HIC","iso2code":"XD","value":"High
       income"},"lendingType":{"id":"LNX","iso2code":"XX","value":"Not classified"},"capitalCity":"Oranjestad","longitude":"-70.0167","latitude":"12.5167"},{"id":"AFG","iso2Code":"AF","name":"Afghanistan","region":{"id":"SAS","iso2code":"8S","value":"South
       Asia"},"adminregion":{"id":"SAS","iso2code":"8S","value":"South Asia"},"incomeLevel":{"id":"LIC","iso2code":"XM","value":"Low
@@ -22,6 +22,8 @@ interactions:
       - GET
       Access-Control-Allow-Origin:
       - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2591778
       Connection:
       - keep-alive
       Content-Length:
@@ -29,18 +31,19 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sat, 06 Jun 2020 08:39:54 GMT
+      - Sat, 23 Jan 2021 04:35:54 GMT
+      Expires:
+      - Mon, 22 Feb 2021 04:32:12 GMT
+      Last-Modified:
+      - Sat, 23 Jan 2021 04:32:12 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - TS01fa65e4=01359ee976a9f029ebc07b994348ee518fca16288c8c353d9f3068c05a1225a9dafeda26222d8c5ac9ec0ea9b4b49f5e25bf54a007;
+      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - TS01fa65e4=01359ee97628b25ea838a5cd43cd2aba71c88af4655f96a851f96b3b8e3bd28235aa1638a373a136206fdaf30ce277f393e850a912;
         Path=/
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
+      - TS019865bf=016ca9217362e91ac2fd8a98d5264568c3375ce44ac716cb8ff6386428fc28773bc403cd03779ba598584acf9ff339a49e399150af011faf5449dbff46ec77556133159175;
+        Path=/
     status: 200 OK
     code: 200
     duration: ""

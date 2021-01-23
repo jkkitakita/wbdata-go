@@ -20,6 +20,8 @@ interactions:
       - GET
       Access-Control-Allow-Origin:
       - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2591779
       Connection:
       - keep-alive
       Content-Length:
@@ -27,18 +29,19 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sat, 06 Jun 2020 08:39:54 GMT
+      - Sat, 23 Jan 2021 04:35:54 GMT
+      Expires:
+      - Mon, 22 Feb 2021 04:32:13 GMT
+      Last-Modified:
+      - Sat, 23 Jan 2021 04:32:13 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - TS01fa65e4=01359ee976249f985377ca4be4087f0d5c16791807b2bbce717c13139a5be7d008156bb1017abc0032289fac986da61bbd5ce40d5d;
+      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - TS01fa65e4=01359ee976404c61b121f402cbfe0e8551424db12a979f23afaafba40ff8899eb6bc5e286fb43ddd759b8ca5f23a824fa716549779;
         Path=/
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
+      - TS019865bf=016ca921738f5c3a72e1d3055fd2b8444fa16ef6d84612232a45d28a394d7afe420d560c8e0128f45e6b874859f7bab9cf16fe66a8bfb45a61eac9bf37a0c57b5bfaa136f4;
+        Path=/
     status: 200 OK
     code: 200
     duration: ""
@@ -60,6 +63,8 @@ interactions:
       - GET
       Access-Control-Allow-Origin:
       - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2591778
       Connection:
       - keep-alive
       Content-Length:
@@ -67,18 +72,19 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sat, 06 Jun 2020 08:39:54 GMT
+      - Sat, 23 Jan 2021 04:35:55 GMT
+      Expires:
+      - Mon, 22 Feb 2021 04:32:13 GMT
+      Last-Modified:
+      - Sat, 23 Jan 2021 04:32:13 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - TS01fa65e4=01359ee97692140d383b5dd041a4f1c70de18d38101b4d28acda5dbd9998192d58b2eb208801e79968096a4ea7b727787fbce19ab9;
+      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - TS01fa65e4=01359ee97652212db85587d66e10bf6057863fd2ba83199f6c5c515f4ea3e42515ba849d5bf93aecca5eaae73eff762c3fb0e3d654;
         Path=/
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
+      - TS019865bf=016ca92173591147b0a6da9ac29090841601d65a8d031294650c0482bc49955626f31bb832de7651efee27ecc66cb3819809687daf3941c43ad92ff55f56708754a078d89e;
+        Path=/
     status: 200 OK
     code: 200
     duration: ""
