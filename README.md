@@ -2,7 +2,7 @@
 
 [![GoDoc](https://godoc.org/github.com/jkkitakita/wbdata-go?status.svg)](https://godoc.org/github.com/jkkitakita/wbdata-go)
 ![Build Status](https://github.com/jkkitakita/wbdata-go/workflows/Go/badge.svg)
-[![codecov](https://codecov.io/gh/jkkitakita/wbdata-go/branch/master/graph/badge.svg)](https://codecov.io/gh/jkkitakita/wbdata-go)
+[![codecov](https://codecov.io/gh/jkkitakita/wbdata-go/branch/main/graph/badge.svg)](https://codecov.io/gh/jkkitakita/wbdata-go)
 [![Go Report Card](https://goreportcard.com/badge/github.com/jkkitakita/wbdata-go)](https://goreportcard.com/report/github.com/jkkitakita/wbdata-go)
 
 ## Installing
