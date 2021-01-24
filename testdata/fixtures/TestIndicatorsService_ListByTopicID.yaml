@@ -35,7 +35,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2482986
+      - public, must-revalidate, max-age=2469432
       Connection:
       - keep-alive
       Content-Length:
@@ -43,7 +43,7 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 24 Jan 2021 10:49:14 GMT
+      - Sun, 24 Jan 2021 14:35:08 GMT
       Expires:
       - Mon, 22 Feb 2021 04:32:20 GMT
       Last-Modified:
@@ -54,7 +54,7 @@ interactions:
       - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
       - TS01fa65e4=01359ee976fea1817b2377428fe293185a6f8c8c1fb4ece7db3fedc4d185a495bca0347caca0429984d2efba18f1cf96f7f700d2e5;
         Path=/
-      - TS019865bf=016ca921736ceea087929b3c940a67f1519da2f834280f6918aa862b09f9d9efb16421d72db8b697e389ec1bdd2cecc4f474ab3d08ec77e21bd3752f92a290fc724155ad19;
+      - TS019865bf=016ca92173494b63a9fbafe64837d163667e6914e69d3cee4853305afec0959d8c26da63e10f15194d1181bb4a38d220439d26b5e88ab3cba5b3bc4c1d5942ab4b6ce72f35;
         Path=/
     status: 200 OK
     code: 200
@@ -65,7 +65,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/topics/1000/indicators?format=json&page=1&per_page=2
+    url: http://api.worldbank.org/v2/topics/invalid_topic_id/indicators?format=json&page=1&per_page=2
     method: GET
   response:
     body: '[{"message":[{"id":"120","key":"Invalid value","value":"The provided parameter
@@ -78,7 +78,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2569557
+      - public, must-revalidate, max-age=2591659
       Connection:
       - keep-alive
       Content-Length:
@@ -86,18 +86,18 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 24 Jan 2021 10:49:15 GMT
+      - Sun, 24 Jan 2021 14:35:08 GMT
       Expires:
-      - Tue, 23 Feb 2021 04:35:12 GMT
+      - Tue, 23 Feb 2021 14:29:27 GMT
       Last-Modified:
-      - Sun, 24 Jan 2021 04:35:12 GMT
+      - Sun, 24 Jan 2021 14:29:27 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
-      - TS019266c8=017189f947743f565e88f8f3c1df0c57a4491e58ebee2dd4a2a8d85b3689a9f80af15faa2b5666b29bab3ced875f8793d8075a7487;
+      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - TS01fa65e4=01359ee97660b69fb47d6d2b3ab7f8da9bdbae261948a21f064e5f08374ee53757432e9416c7c34e9a51cac5469b3dd3bd743a3526;
         Path=/
-      - TS019865bf=016ca921735ae42a7e22d526a77e641751b03a43dc8730e58ad3493a2c113b2696e55c535c69fec1474ad921235a9db094b7ff93b77cf2dae6cee78f3ce0893a25a8537bf4;
+      - TS019865bf=0123646321fce1cd90149907b4b2cc04d3c948846181ae56223a102c221c117d72f0f43d4521e9de996c63decb495a8da8089c7d64feb2eb0202b31d99a2edef736400f092;
         Path=/
     status: 200 OK
     code: 200

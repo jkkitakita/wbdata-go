@@ -63,7 +63,7 @@ func TestNewClient(t *testing.T) {
 			want: &Client{
 				client:       &http.Client{},
 				BaseURL:      baseURL,
-				Language:     testutils.JaLanguage,
+				Language:     testutils.TestDefaultLanguageCode,
 				OutputFormat: OutputFormatJSON,
 				UserAgent:    userAgent,
 			},
@@ -83,7 +83,7 @@ func TestClient_NewRequest(t *testing.T) {
 	baseURL, _ := url.Parse(fmt.Sprintf("%s%s/", defaultBaseURL, apiVersion))
 	urlStr := "countries"
 	defaultRequestURL, _ := url.Parse(fmt.Sprintf("%s%s?format=%s", baseURL, urlStr, OutputFormatJSON))
-	jaRequestURL, _ := url.Parse(fmt.Sprintf("%s%s/%s?format=%s", baseURL, testutils.JaLanguage, urlStr, OutputFormatJSON))
+	jaRequestURL, _ := url.Parse(fmt.Sprintf("%s%s/%s?format=%s", baseURL, testutils.TestDefaultLanguageCode, urlStr, OutputFormatJSON))
 
 	type args struct {
 		method      string
@@ -132,7 +132,7 @@ func TestClient_NewRequest(t *testing.T) {
 			client: &Client{
 				client:       &http.Client{},
 				BaseURL:      baseURL,
-				Language:     testutils.JaLanguage,
+				Language:     testutils.TestDefaultLanguageCode,
 				OutputFormat: OutputFormatJSON,
 				UserAgent:    userAgent,
 			},

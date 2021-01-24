@@ -1,6 +1,7 @@
 package wbdata
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 
@@ -10,6 +11,19 @@ import (
 func TestIncomeLevelsService_List(t *testing.T) {
 	client, save := NewTestClient(t, *update)
 	defer save()
+
+	defaultPageParams := &PageParams{
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestDefaultPerPage,
+	}
+	invalidPageParams := &PageParams{
+		Page:    testutils.TestInvalidPage,
+		PerPage: testutils.TestDefaultPerPage,
+	}
+	invalidPerPageParams := &PageParams{
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestInvalidPerPage,
+	}
 
 	type args struct {
 		pages *PageParams
@@ -24,10 +38,7 @@ func TestIncomeLevelsService_List(t *testing.T) {
 		{
 			name: "success",
 			args: args{
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages: defaultPageParams,
 			},
 			want: &PageSummary{
 				Page:    intOrString(testutils.TestDefaultPage),
@@ -39,10 +50,7 @@ func TestIncomeLevelsService_List(t *testing.T) {
 		{
 			name: "failure because Page is less than 1",
 			args: args{
-				pages: &PageParams{
-					Page:    0,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages: invalidPageParams,
 			},
 			want:                  nil,
 			wantIncomeLevelsCount: 0,
@@ -51,10 +59,7 @@ func TestIncomeLevelsService_List(t *testing.T) {
 		{
 			name: "failure because PerPage is less than 1",
 			args: args{
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: 0,
-				},
+				pages: invalidPerPageParams,
 			},
 			want:                  nil,
 			wantIncomeLevelsCount: 0,
@@ -101,7 +106,7 @@ func TestIncomeLevelsService_Get(t *testing.T) {
 		{
 			name: "success",
 			args: args{
-				incomeLevelID: "hic",
+				incomeLevelID: testutils.TestDefaultIncomeLevelID,
 			},
 			want: &PageSummary{
 				Page:    1,
@@ -120,13 +125,18 @@ func TestIncomeLevelsService_Get(t *testing.T) {
 		{
 			name: "failure because incomeLevelID is invalid",
 			args: args{
-				incomeLevelID: invalidID,
+				incomeLevelID: testutils.TestInvalidIncomeLevelID,
 			},
 			want:    nil,
 			want1:   nil,
 			wantErr: true,
 			wantErrRes: &ErrorResponse{
-				URL:  defaultBaseURL + apiVersion + "/incomeLevels/" + invalidID + "?format=json",
+				URL: fmt.Sprintf(
+					"%s%s/incomeLevels/%s?format=json",
+					defaultBaseURL,
+					apiVersion,
+					testutils.TestInvalidIncomeLevelID,
+				),
 				Code: 200,
 				Message: []ErrorMessage{
 					{

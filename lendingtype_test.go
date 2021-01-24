@@ -1,6 +1,7 @@
 package wbdata
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 
@@ -10,6 +11,19 @@ import (
 func TestLendingTypesService_List(t *testing.T) {
 	client, save := NewTestClient(t, *update)
 	defer save()
+
+	defaultPageParams := &PageParams{
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestDefaultPerPage,
+	}
+	invalidPageParams := &PageParams{
+		Page:    testutils.TestInvalidPage,
+		PerPage: testutils.TestDefaultPerPage,
+	}
+	invalidPerPageParams := &PageParams{
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestInvalidPerPage,
+	}
 
 	type args struct {
 		pages *PageParams
@@ -24,10 +38,7 @@ func TestLendingTypesService_List(t *testing.T) {
 		{
 			name: "success",
 			args: args{
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages: defaultPageParams,
 			},
 			want: &PageSummary{
 				Page:    intOrString(testutils.TestDefaultPage),
@@ -39,10 +50,7 @@ func TestLendingTypesService_List(t *testing.T) {
 		{
 			name: "failure because Page is less than 1",
 			args: args{
-				pages: &PageParams{
-					Page:    0,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages: invalidPageParams,
 			},
 			want:                  nil,
 			wantLendingTypesCount: 0,
@@ -51,10 +59,7 @@ func TestLendingTypesService_List(t *testing.T) {
 		{
 			name: "failure because PerPage is less than 1",
 			args: args{
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: 0,
-				},
+				pages: invalidPerPageParams,
 			},
 			want:                  nil,
 			wantLendingTypesCount: 0,
@@ -101,7 +106,7 @@ func TestLendingTypesService_Get(t *testing.T) {
 		{
 			name: "success",
 			args: args{
-				lendingTypeID: "ibd",
+				lendingTypeID: testutils.TestDefaultLendingTypeID,
 			},
 			want: &PageSummary{
 				Page:    1,
@@ -120,13 +125,18 @@ func TestLendingTypesService_Get(t *testing.T) {
 		{
 			name: "failure because lendingTypeID is invalid",
 			args: args{
-				lendingTypeID: invalidID,
+				lendingTypeID: testutils.TestInvalidLendingTypeID,
 			},
 			want:    nil,
 			want1:   nil,
 			wantErr: true,
 			wantErrRes: &ErrorResponse{
-				URL:  defaultBaseURL + apiVersion + "/lendingTypes/" + invalidID + "?format=json",
+				URL: fmt.Sprintf(
+					"%s%s/lendingTypes/%s?format=json",
+					defaultBaseURL,
+					apiVersion,
+					testutils.TestInvalidLendingTypeID,
+				),
 				Code: 200,
 				Message: []ErrorMessage{
 					{

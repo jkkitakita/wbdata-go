@@ -1,6 +1,7 @@
 package wbdata
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 
@@ -10,6 +11,19 @@ import (
 func TestSourcesService_List(t *testing.T) {
 	client, save := NewTestClient(t, *update)
 	defer save()
+
+	defaultPageParams := &PageParams{
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestDefaultPerPage,
+	}
+	invalidPageParams := &PageParams{
+		Page:    testutils.TestInvalidPage,
+		PerPage: testutils.TestDefaultPerPage,
+	}
+	invalidPerPageParams := &PageParams{
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestInvalidPerPage,
+	}
 
 	type args struct {
 		pages *PageParams
@@ -24,10 +38,7 @@ func TestSourcesService_List(t *testing.T) {
 		{
 			name: "success",
 			args: args{
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages: defaultPageParams,
 			},
 			want: &PageSummary{
 				Page:    intOrString(testutils.TestDefaultPage),
@@ -39,10 +50,7 @@ func TestSourcesService_List(t *testing.T) {
 		{
 			name: "failure because Page is less than 1",
 			args: args{
-				pages: &PageParams{
-					Page:    0,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages: invalidPageParams,
 			},
 			want:             nil,
 			wantSourcesCount: 0,
@@ -51,10 +59,7 @@ func TestSourcesService_List(t *testing.T) {
 		{
 			name: "failure because PerPage is less than 1",
 			args: args{
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: 0,
-				},
+				pages: invalidPerPageParams,
 			},
 			want:             nil,
 			wantSourcesCount: 0,
@@ -101,7 +106,7 @@ func TestSourcesService_Get(t *testing.T) {
 		{
 			name: "success",
 			args: args{
-				sourceID: "11",
+				sourceID: testutils.TestDefaultSourceID,
 			},
 			want: &PageSummary{
 				Page:    1,
@@ -110,10 +115,10 @@ func TestSourcesService_Get(t *testing.T) {
 				Total:   1,
 			},
 			want1: &Source{
-				ID:                   "11",
-				LastUpdated:          "2013-02-22",
-				Name:                 "Africa Development Indicators",
-				Code:                 "ADI",
+				ID:                   "2",
+				LastUpdated:          "2020-12-16",
+				Name:                 "World Development Indicators",
+				Code:                 "WDI",
 				Description:          "", // NOTE: always empty?
 				URL:                  "", // NOTE: always empty?
 				DataAvailability:     "Y",
@@ -126,13 +131,18 @@ func TestSourcesService_Get(t *testing.T) {
 		{
 			name: "failure because sourceID is invalid",
 			args: args{
-				sourceID: invalidID,
+				sourceID: testutils.TestInvalidSourceID,
 			},
 			want:    nil,
 			want1:   nil,
 			wantErr: true,
 			wantErrRes: &ErrorResponse{
-				URL:  defaultBaseURL + apiVersion + "/sources/" + invalidID + "?format=json",
+				URL: fmt.Sprintf(
+					"%s%s/sources/%s?format=json",
+					defaultBaseURL,
+					apiVersion,
+					testutils.TestInvalidSourceID,
+				),
 				Code: 200,
 				Message: []ErrorMessage{
 					{

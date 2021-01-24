@@ -20,7 +20,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2563353
+      - public, must-revalidate, max-age=2549799
       Connection:
       - keep-alive
       Content-Length:
@@ -28,7 +28,7 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 24 Jan 2021 10:49:20 GMT
+      - Sun, 24 Jan 2021 14:35:14 GMT
       Expires:
       - Tue, 23 Feb 2021 02:51:53 GMT
       Last-Modified:
@@ -39,7 +39,7 @@ interactions:
       - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
       - TS01fa65e4=01359ee97664e91c2ef5392a1794726a8f5602fde349ace19fe5c9475e91a41326e9331fe6ec089848c516c6b533b57b05ee6286a7;
         Path=/
-      - TS019865bf=016ca9217383d70b4be6160a41a7b6fce63491858d4b221b6cf490263af202b38867ae78993cf95831776db4fc6eab662708281ecc8d6dc91722114516eb098e92dfb7ac82;
+      - TS019865bf=016ca92173e05907e8e5ef264ee69ad836d3c399b348b23afaa3459a7a3e2c885789be248c86f8dc0df0a4995484b97f20fea0ea936f13f1bbd58fcf67e841046e5607addc;
         Path=/
     status: 200 OK
     code: 200
@@ -50,7 +50,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/languages/ABCDEFG?format=json
+    url: http://api.worldbank.org/v2/languages/invalid_language_code?format=json
     method: GET
   response:
     body: '[{"message":[{"id":"150","key":"Language is not yet supported in the API","value":"Response
@@ -63,7 +63,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2569553
+      - public, must-revalidate, max-age=2591657
       Connection:
       - keep-alive
       Content-Length:
@@ -71,18 +71,18 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 24 Jan 2021 10:49:20 GMT
+      - Sun, 24 Jan 2021 14:35:14 GMT
       Expires:
-      - Tue, 23 Feb 2021 04:35:13 GMT
+      - Tue, 23 Feb 2021 14:29:31 GMT
       Last-Modified:
-      - Sun, 24 Jan 2021 04:35:13 GMT
+      - Sun, 24 Jan 2021 14:29:31 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
       - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
-      - TS019266c8=017189f94785a9de22b7dfa5213c4edac7ccb86d676ae7b73560d1c774f9b186e307ed64411ac5ccabf118765e7505e4b795ce671c;
+      - TS01fa65e4=01359ee976d26c00e07b8ae60ec3d7f6d5cbee3fba007a2123809816521005b6f906c1781970210f6095c2f4f21bc5b4078c906087;
         Path=/
-      - TS019865bf=0123646321ed37659c8dbb7dc34fe0e38e53c01f79975c8a522469e5d8ec074b955b00841e1f06a3e83d6ea6f373a18929e9c91ca01b8661b48a83df94b07075e66fd21d93;
+      - TS019865bf=012364632141d4812840087e355572e8f1c94cd62b562ca682ebe6f0a2ee3d77b2189ff608bb5a9c13111c5320ff555572afd4fa26550b152372674958bf4b994a9752a8ec;
         Path=/
     status: 200 OK
     code: 200
