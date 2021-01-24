@@ -48,7 +48,7 @@ func (r *RegionsService) Get(code string) (*PageSummary, *Region, error) {
 	summary := &PageSummary{}
 	region := []*Region{}
 
-	path := fmt.Sprintf("regions/%v", code)
+	path := fmt.Sprintf("regions/%s", code)
 	req, err := r.client.NewRequest("GET", path, nil, nil)
 	if err != nil {
 		return nil, nil, err

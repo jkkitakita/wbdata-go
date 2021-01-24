@@ -60,7 +60,7 @@ func (c *CountriesService) Get(countryID string) (*PageSummary, *Country, error)
 	summary := &PageSummary{}
 	country := []*Country{}
 
-	path := fmt.Sprintf("countries/%v", countryID)
+	path := fmt.Sprintf("countries/%s", countryID)
 	req, err := c.client.NewRequest("GET", path, nil, nil)
 	if err != nil {
 		return nil, nil, err

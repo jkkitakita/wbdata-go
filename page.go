@@ -26,8 +26,17 @@ type (
 		Total   intOrString `json:"total"`
 	}
 
-	// PageSummaryWithSource is a struct for a Summary about pages
-	PageSummaryWithSource struct {
+	// PageSummaryWithLastUpdated is a struct for a Summary about pages
+	PageSummaryWithLastUpdated struct {
+		Page        intOrString `json:"page"`
+		Pages       intOrString `json:"pages"`
+		PerPage     intOrString `json:"per_page"`
+		Total       intOrString `json:"total"`
+		LastUpdated string      `json:"lastupdated"`
+	}
+
+	// PageSummaryWithSourceID is a struct for a Summary about pages
+	PageSummaryWithSourceID struct {
 		Page        intOrString `json:"page"`
 		Pages       intOrString `json:"pages"`
 		PerPage     intOrString `json:"per_page"`
@@ -38,11 +47,11 @@ type (
 )
 
 func (pages *PageParams) addPageParams(req *http.Request) error {
-	params := req.URL.Query()
-
 	if pages == nil {
 		return nil
 	}
+
+	params := req.URL.Query()
 
 	if pages.Page > 0 {
 		params.Add(`page`, strconv.Itoa(pages.Page))

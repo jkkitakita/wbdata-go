@@ -129,6 +129,34 @@ func ExampleIndicatorsService_ListByTopicID() {
 	// Topics is: &{ID:1 Value:Agriculture & Rural Development  }
 }
 
+func ExampleIndicatorValuesService_List() {
+	client := wbdata.NewClient(nil)
+	indicatorID := "NY.GDP.MKTP.CD"
+	summary, indicatorValues, _ := client.IndicatorValues.List(
+		indicatorID,
+		&wbdata.DateParams{
+			DateParamsType: wbdata.DateParamsRange,
+			DateRange: &wbdata.DateRange{
+				Start: "2018",
+				End:   "2019",
+			},
+		},
+		&wbdata.PageParams{
+			Page:    1,
+			PerPage: 10,
+		},
+	)
+
+	summary.Pages = 53
+	summary.Total = 528
+
+	fmt.Printf("Summary is: %#v\n", summary)
+	fmt.Printf("IndicatorValues[0]: %#v\n", indicatorValues[0])
+	// Output:
+	// Summary is: &wbdata.PageSummaryWithSourceID{Page:1, Pages:53, PerPage:10, Total:528, SourceID:"2", LastUpdated:"2020-12-16"}
+	// IndicatorValues[0]: &wbdata.IndicatorValue{Indicator:wbdata.IDAndValue{ID:"NY.GDP.MKTP.CD", Value:"GDP (current US$)"}, Country:wbdata.IDAndValue{ID:"1A", Value:"Arab World"}, Countryiso3code:"ARB", Date:"2019", Value:2.81741458466511e+12, Unit:"", ObsStatus:"", Decimal:0}
+}
+
 func ExampleIndicatorValuesService_ListByCountryIDs() {
 	client := wbdata.NewClient(nil)
 	countryIDs := []string{"JPN", "USA"}
@@ -152,7 +180,69 @@ func ExampleIndicatorValuesService_ListByCountryIDs() {
 	fmt.Printf("Summary is: %#v\n", summary)
 	fmt.Printf("IndicatorValues[0]: %#v\n", indicatorValues[0])
 	// Output:
-	// Summary is: &wbdata.PageSummaryWithSource{Page:1, Pages:1, PerPage:10, Total:4, SourceID:"2", LastUpdated:"2020-12-16"}
+	// Summary is: &wbdata.PageSummaryWithSourceID{Page:1, Pages:1, PerPage:10, Total:4, SourceID:"2", LastUpdated:"2020-12-16"}
+	// IndicatorValues[0]: &wbdata.IndicatorValue{Indicator:wbdata.IDAndValue{ID:"NY.GDP.MKTP.CD", Value:"GDP (current US$)"}, Country:wbdata.IDAndValue{ID:"JP", Value:"Japan"}, Countryiso3code:"JPN", Date:"2019", Value:5.08176954237977e+12, Unit:"", ObsStatus:"", Decimal:0}
+}
+
+func ExampleIndicatorValuesService_ListBySourceID() {
+	client := wbdata.NewClient(nil)
+	indicatorIDs := []string{"NY.GDP.MKTP.CD", "SP.POP.TOTL"}
+	sourceID := "2"
+	summary, indicatorValues, _ := client.IndicatorValues.ListBySourceID(
+		indicatorIDs,
+		sourceID,
+		&wbdata.DateParams{
+			DateParamsType: wbdata.DateParamsRange,
+			DateRange: &wbdata.DateRange{
+				Start: "2018",
+				End:   "2019",
+			},
+		},
+		&wbdata.PageParams{
+			Page:    1,
+			PerPage: 10,
+		},
+	)
+
+	summary.Pages = 106
+	summary.Total = 1056
+
+	fmt.Printf("Summary is: %#v\n", summary)
+	fmt.Printf("IndicatorValues[0]: %#v\n", indicatorValues[0])
+	// Output:
+	// Summary is: &wbdata.PageSummaryWithLastUpdated{Page:1, Pages:106, PerPage:10, Total:1056, LastUpdated:"2020-12-16"}
+	// IndicatorValues[0]: &wbdata.IndicatorValue{Indicator:wbdata.IDAndValue{ID:"NY.GDP.MKTP.CD", Value:"GDP (current US$)"}, Country:wbdata.IDAndValue{ID:"1A", Value:"Arab World"}, Countryiso3code:"ARB", Date:"2019", Value:2.81741458466511e+12, Unit:"", ObsStatus:"", Decimal:0}
+}
+
+func ExampleIndicatorValuesService_ListByCountryIDsAndSourceID() {
+	client := wbdata.NewClient(nil)
+	countryIDs := []string{"JPN", "USA"}
+	indicatorIDs := []string{"NY.GDP.MKTP.CD", "SP.POP.TOTL"}
+	sourceID := "2"
+	summary, indicatorValues, _ := client.IndicatorValues.ListByCountryIDsAndSourceID(
+		countryIDs,
+		indicatorIDs,
+		sourceID,
+		&wbdata.DateParams{
+			DateParamsType: wbdata.DateParamsRange,
+			DateRange: &wbdata.DateRange{
+				Start: "2018",
+				End:   "2019",
+			},
+		},
+		&wbdata.PageParams{
+			Page:    1,
+			PerPage: 10,
+		},
+	)
+
+	summary.Pages = 106
+	summary.Total = 1056
+
+	fmt.Printf("Summary is: %#v\n", summary)
+	fmt.Printf("IndicatorValues[0]: %#v\n", indicatorValues[0])
+	// Output:
+	// Summary is: &wbdata.PageSummaryWithLastUpdated{Page:1, Pages:106, PerPage:10, Total:1056, LastUpdated:"2020-12-16"}
 	// IndicatorValues[0]: &wbdata.IndicatorValue{Indicator:wbdata.IDAndValue{ID:"NY.GDP.MKTP.CD", Value:"GDP (current US$)"}, Country:wbdata.IDAndValue{ID:"JP", Value:"Japan"}, Countryiso3code:"JPN", Date:"2019", Value:5.08176954237977e+12, Unit:"", ObsStatus:"", Decimal:0}
 }
 

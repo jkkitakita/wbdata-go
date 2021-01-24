@@ -48,7 +48,7 @@ func (s *SourcesService) Get(sourceID string) (*PageSummary, *Source, error) {
 	summary := &PageSummary{}
 	source := []*Source{}
 
-	path := fmt.Sprintf("sources/%v", sourceID)
+	path := fmt.Sprintf("sources/%s", sourceID)
 	req, err := s.client.NewRequest("GET", path, nil, nil)
 	if err != nil {
 		return nil, nil, err

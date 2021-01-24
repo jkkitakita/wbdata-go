@@ -42,7 +42,7 @@ func (il *IncomeLevelsService) Get(incomeLevelID string) (*PageSummary, *IncomeL
 	summary := &PageSummary{}
 	incomeLevels := []*IncomeLevel{}
 
-	path := fmt.Sprintf("incomeLevels/%v", incomeLevelID)
+	path := fmt.Sprintf("incomeLevels/%s", incomeLevelID)
 	req, err := il.client.NewRequest("GET", path, nil, nil)
 	if err != nil {
 		return nil, nil, err

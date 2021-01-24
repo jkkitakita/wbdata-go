@@ -113,7 +113,7 @@ func (c *Client) NewRequest(
 		return nil, fmt.Errorf("BaseURL must have a trailing slash, but %q does not", c.BaseURL)
 	}
 
-	url, err := c.buildRequestURL(urlStr, queryParams)
+	buildedURLStr, err := c.buildRequestURL(urlStr)
 	if err != nil {
 		return nil, err
 	}
@@ -124,23 +124,28 @@ func (c *Client) NewRequest(
 		enc := json.NewEncoder(buf)
 		enc.SetEscapeHTML(false)
 		if err := enc.Encode(body); err != nil {
-			return nil, fmt.Errorf("failed to encode from %s: %v", url, err)
+			return nil, fmt.Errorf("failed to encode from %s: %v", buildedURLStr, err)
 		}
 	}
 
-	req, err := http.NewRequest(method, url, buf)
+	req, err := http.NewRequest(method, buildedURLStr, buf)
 	if err != nil {
 		return nil, err
 	}
+
+	params := req.URL.Query()
+	params.Add(`format`, c.OutputFormat.String())
+	for k, v := range queryParams {
+		params.Add(k, v)
+	}
+	req.URL.RawQuery = params.Encode()
 
 	setHeader(c, req, body)
 
 	return req, nil
 }
 
-func (c *Client) buildRequestURL(urlStr string, queryParams map[string]string) (string, error) {
-	// Set format
-	values := buildQueryParam(c, queryParams)
+func (c *Client) buildRequestURL(urlStr string) (string, error) {
 	// Set local language
 	if c.Language != "" {
 		urlStr = fmt.Sprintf("%s/%s", c.Language, urlStr)
@@ -150,17 +155,7 @@ func (c *Client) buildRequestURL(urlStr string, queryParams map[string]string) (
 		return "", fmt.Errorf("failed to parse from %s: %v", urlStr, err)
 	}
 
-	return fmt.Sprintf("%s?%s", u, values.Encode()), nil
-}
-
-func buildQueryParam(c *Client, queryParams map[string]string) url.Values {
-	values := url.Values{}
-	values.Set("format", c.OutputFormat.String())
-	for k, v := range queryParams {
-		values.Set(k, v)
-	}
-
-	return values
+	return u.String(), nil
 }
 
 func setHeader(c *Client, req *http.Request, body interface{}) {

@@ -40,7 +40,7 @@ func (t *TopicsService) Get(topicID string) (*PageSummary, *Topic, error) {
 	summary := &PageSummary{}
 	topic := []*Topic{}
 
-	path := fmt.Sprintf("topics/%v", topicID)
+	path := fmt.Sprintf("topics/%s", topicID)
 	req, err := t.client.NewRequest("GET", path, nil, nil)
 	if err != nil {
 		return nil, nil, err
