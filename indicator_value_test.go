@@ -9,16 +9,6 @@ import (
 	"github.com/jkkitakita/wbdata-go/testutils"
 )
 
-const (
-	defaultIndicatorID = "NY.GDP.MKTP.CD"
-	invalidIndicatorID = "INVALID.INDICATOR.ID"
-	defaultSourceID    = "2"
-	invalidSourceID    = "hoge"
-	defaultDateStart   = "2018"
-	defaultDateEnd     = "2019"
-	invalidDate        = "hoge"
-)
-
 func TestIndicatorValuesService_List(t *testing.T) {
 	client, save := NewTestClient(t, *update)
 	defer save()
@@ -26,16 +16,24 @@ func TestIndicatorValuesService_List(t *testing.T) {
 	defaultDateParams := &DateParams{
 		DateParamsType: DateParamsRange,
 		DateRange: &DateRange{
-			Start: defaultDateStart,
-			End:   defaultDateEnd,
+			Start: testutils.TestDefaultDateStart,
+			End:   testutils.TestDefaultDateEnd,
 		},
 	}
 	invalidDateParams := &DateParams{
 		DateParamsType: DateParamsRange,
 		DateRange: &DateRange{
-			Start: invalidDate,
-			End:   defaultDateEnd,
+			Start: testutils.TestInvalidDate,
+			End:   testutils.TestDefaultDateEnd,
 		},
+	}
+	defaultPageParams := &PageParams{
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestDefaultPerPage,
+	}
+	invalidPageParams := &PageParams{
+		Page:    testutils.TestInvalidPage,
+		PerPage: testutils.TestDefaultPerPage,
 	}
 
 	type args struct {
@@ -54,7 +52,7 @@ func TestIndicatorValuesService_List(t *testing.T) {
 		{
 			name: "success",
 			args: args{
-				indicatorID: defaultIndicatorID,
+				indicatorID: testutils.TestDefaultIndicatorID,
 			},
 			want:                     nil,
 			wantIndicatorValuesCount: 0,
@@ -64,12 +62,9 @@ func TestIndicatorValuesService_List(t *testing.T) {
 		{
 			name: "success with params",
 			args: args{
-				indicatorID: defaultIndicatorID,
+				indicatorID: testutils.TestDefaultIndicatorID,
 				datePatams:  defaultDateParams,
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages:       defaultPageParams,
 			},
 			want: &PageSummaryWithSourceID{
 				Page:    intOrString(testutils.TestDefaultPage),
@@ -82,7 +77,7 @@ func TestIndicatorValuesService_List(t *testing.T) {
 		{
 			name: "failure because invalid indicator id",
 			args: args{
-				indicatorID: invalidIndicatorID,
+				indicatorID: testutils.TestInvalidIndicatorID,
 			},
 			want:                     nil,
 			wantIndicatorValuesCount: 0,
@@ -92,7 +87,7 @@ func TestIndicatorValuesService_List(t *testing.T) {
 					"%s%s/countries/all/indicators/%s?format=json",
 					defaultBaseURL,
 					apiVersion,
-					invalidIndicatorID,
+					testutils.TestInvalidIndicatorID,
 				),
 				Code: 200,
 				Message: []ErrorMessage{
@@ -107,7 +102,7 @@ func TestIndicatorValuesService_List(t *testing.T) {
 		{
 			name: "failure because invalid date params",
 			args: args{
-				indicatorID: defaultIndicatorID,
+				indicatorID: testutils.TestDefaultIndicatorID,
 				datePatams:  invalidDateParams,
 			},
 			want:                     nil,
@@ -118,11 +113,8 @@ func TestIndicatorValuesService_List(t *testing.T) {
 		{
 			name: "failure because invalid page params",
 			args: args{
-				indicatorID: defaultIndicatorID,
-				pages: &PageParams{
-					Page:    testutils.TestInvalidPage,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				indicatorID: testutils.TestDefaultIndicatorID,
+				pages:       invalidPageParams,
 			},
 			want:                     nil,
 			wantIndicatorValuesCount: 0,
@@ -161,19 +153,19 @@ func TestIndicatorValuesService_List(t *testing.T) {
 				}
 				if !tt.wantErr {
 					for i := range got1 {
-						if got1[i].Date != defaultDateStart && got1[i].Date != defaultDateEnd {
+						if got1[i].Date != tt.args.datePatams.DateRange.Start && got1[i].Date != tt.args.datePatams.DateRange.End {
 							t.Errorf(
 								"invalid date of IndicatorValuesService.List() got1 = %v, want %v or %v",
 								got1[i].Date,
-								defaultDateStart,
-								defaultDateEnd,
+								tt.args.datePatams.DateRange.Start,
+								tt.args.datePatams.DateRange.End,
 							)
 						}
-						if got1[i].Indicator.ID != defaultIndicatorID {
+						if got1[i].Indicator.ID != tt.args.indicatorID {
 							t.Errorf(
 								"invalid indicator ID of IndicatorValuesService.List() got1[i].Indicator.ID = %v, want %v",
 								got1[i].Indicator.ID,
-								defaultIndicatorID,
+								tt.args.indicatorID,
 							)
 						}
 					}
@@ -187,21 +179,27 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 	client, save := NewTestClient(t, *update)
 	defer save()
 
-	defaultCountryIDs := []string{"JPN", "USA"}
-	invalidCountryIDs := []string{"ABCDEFG", "HIJKLM"}
 	defaultDateParams := &DateParams{
 		DateParamsType: DateParamsRange,
 		DateRange: &DateRange{
-			Start: defaultDateStart,
-			End:   defaultDateEnd,
+			Start: testutils.TestDefaultDateStart,
+			End:   testutils.TestDefaultDateEnd,
 		},
 	}
 	invalidDateParams := &DateParams{
 		DateParamsType: DateParamsRange,
 		DateRange: &DateRange{
-			Start: invalidDate,
-			End:   defaultDateEnd,
+			Start: testutils.TestInvalidDate,
+			End:   testutils.TestDefaultDateEnd,
 		},
+	}
+	defaultPageParams := &PageParams{
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestDefaultPerPage,
+	}
+	invalidPageParams := &PageParams{
+		Page:    testutils.TestInvalidPage,
+		PerPage: testutils.TestDefaultPerPage,
 	}
 
 	type args struct {
@@ -221,8 +219,8 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 		{
 			name: "success",
 			args: args{
-				countryIDs:  defaultCountryIDs,
-				indicatorID: defaultIndicatorID,
+				countryIDs:  testutils.TestDefaultCountryIDs,
+				indicatorID: testutils.TestDefaultIndicatorID,
 			},
 			want:                     nil,
 			wantIndicatorValuesCount: 0,
@@ -232,13 +230,10 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 		{
 			name: "success with params",
 			args: args{
-				countryIDs:  defaultCountryIDs,
-				indicatorID: defaultIndicatorID,
+				countryIDs:  testutils.TestDefaultCountryIDs,
+				indicatorID: testutils.TestDefaultIndicatorID,
 				datePatams:  defaultDateParams,
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages:       defaultPageParams,
 			},
 			want: &PageSummaryWithSourceID{
 				Page:    intOrString(testutils.TestDefaultPage),
@@ -251,8 +246,8 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 		{
 			name: "failure because invalid CountryIDs",
 			args: args{
-				countryIDs:  invalidCountryIDs,
-				indicatorID: defaultIndicatorID,
+				countryIDs:  testutils.TestInvalidCountryIDs,
+				indicatorID: testutils.TestDefaultIndicatorID,
 			},
 			want:                     nil,
 			wantIndicatorValuesCount: 0,
@@ -262,8 +257,8 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 					"%s%s/countries/%s/indicators/%s?format=json",
 					defaultBaseURL,
 					apiVersion,
-					strings.Join(invalidCountryIDs, ";"),
-					defaultIndicatorID,
+					strings.Join(testutils.TestInvalidCountryIDs, ";"),
+					testutils.TestDefaultIndicatorID,
 				),
 				Code: 200,
 				Message: []ErrorMessage{
@@ -278,8 +273,8 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 		{
 			name: "failure because invalid indicatorID",
 			args: args{
-				countryIDs:  defaultCountryIDs,
-				indicatorID: invalidIndicatorID,
+				countryIDs:  testutils.TestDefaultCountryIDs,
+				indicatorID: testutils.TestInvalidIndicatorID,
 			},
 			want:                     nil,
 			wantIndicatorValuesCount: 0,
@@ -289,8 +284,8 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 					"%s%s/countries/%s/indicators/%s?format=json",
 					defaultBaseURL,
 					apiVersion,
-					strings.Join(defaultCountryIDs, ";"),
-					invalidIndicatorID,
+					strings.Join(testutils.TestDefaultCountryIDs, ";"),
+					testutils.TestInvalidIndicatorID,
 				),
 				Code: 200,
 				Message: []ErrorMessage{
@@ -305,8 +300,8 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 		{
 			name: "failure because invalid date params",
 			args: args{
-				countryIDs:  defaultCountryIDs,
-				indicatorID: defaultIndicatorID,
+				countryIDs:  testutils.TestDefaultCountryIDs,
+				indicatorID: testutils.TestDefaultIndicatorID,
 				datePatams:  invalidDateParams,
 			},
 			want:                     nil,
@@ -317,12 +312,9 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 		{
 			name: "failure because invalid page params",
 			args: args{
-				countryIDs:  defaultCountryIDs,
-				indicatorID: defaultIndicatorID,
-				pages: &PageParams{
-					Page:    testutils.TestInvalidPage,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				countryIDs:  testutils.TestDefaultCountryIDs,
+				indicatorID: testutils.TestDefaultIndicatorID,
+				pages:       invalidPageParams,
 			},
 			want:                     nil,
 			wantIndicatorValuesCount: 0,
@@ -361,19 +353,19 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 				}
 				if !tt.wantErr {
 					for i := range got1 {
-						if got1[i].Date != defaultDateStart && got1[i].Date != defaultDateEnd {
+						if got1[i].Date != tt.args.datePatams.DateRange.Start && got1[i].Date != tt.args.datePatams.DateRange.End {
 							t.Errorf(
 								"invalid date of IndicatorValuesService.ListByCountryIDs() got1 = %v, want %v or %v",
 								got1[i].Date,
-								defaultDateStart,
-								defaultDateEnd,
+								tt.args.datePatams.DateRange.Start,
+								tt.args.datePatams.DateRange.End,
 							)
 						}
-						if got1[i].Indicator.ID != defaultIndicatorID {
+						if got1[i].Indicator.ID != tt.args.indicatorID {
 							t.Errorf(
 								"invalid indicator ID of IndicatorValuesService.ListByCountryIDs() got1[i].Indicator.ID = %v, want %v",
 								got1[i].Indicator.ID,
-								defaultIndicatorID,
+								tt.args.indicatorID,
 							)
 						}
 					}
@@ -387,21 +379,27 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 	client, save := NewTestClient(t, *update)
 	defer save()
 
-	defaultIndicatorIDs := []string{"NY.GDP.MKTP.CD", "SP.POP.TOTL"}
-	invalidIndicatorIDs := []string{"INVALID.INDICATOR.ID", "SP.POP.TOTL"}
 	defaultDateParams := &DateParams{
 		DateParamsType: DateParamsRange,
 		DateRange: &DateRange{
-			Start: defaultDateStart,
-			End:   defaultDateEnd,
+			Start: testutils.TestDefaultDateStart,
+			End:   testutils.TestDefaultDateEnd,
 		},
 	}
 	invalidDateParams := &DateParams{
 		DateParamsType: DateParamsRange,
 		DateRange: &DateRange{
-			Start: invalidDate,
-			End:   defaultDateEnd,
+			Start: testutils.TestInvalidDate,
+			End:   testutils.TestDefaultDateEnd,
 		},
+	}
+	defaultPageParams := &PageParams{
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestDefaultPerPage,
+	}
+	invalidPageParams := &PageParams{
+		Page:    testutils.TestInvalidPage,
+		PerPage: testutils.TestDefaultPerPage,
 	}
 
 	type args struct {
@@ -421,8 +419,8 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 		{
 			name: "success",
 			args: args{
-				indicatorIDs: defaultIndicatorIDs,
-				sourceID:     defaultSourceID,
+				indicatorIDs: testutils.TestDefaultIndicatorIDs,
+				sourceID:     testutils.TestDefaultSourceID,
 			},
 			want:                     nil,
 			wantIndicatorValuesCount: 0,
@@ -432,13 +430,10 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 		{
 			name: "success with params",
 			args: args{
-				indicatorIDs: defaultIndicatorIDs,
-				sourceID:     defaultSourceID,
+				indicatorIDs: testutils.TestDefaultIndicatorIDs,
+				sourceID:     testutils.TestDefaultSourceID,
 				datePatams:   defaultDateParams,
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages:        defaultPageParams,
 			},
 			want: &PageSummaryWithLastUpdated{
 				Page:    intOrString(testutils.TestDefaultPage),
@@ -451,8 +446,8 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 		{
 			name: "failure because invalid indicator id",
 			args: args{
-				indicatorIDs: invalidIndicatorIDs,
-				sourceID:     defaultSourceID,
+				indicatorIDs: testutils.TestInvalidIndicatorIDs,
+				sourceID:     testutils.TestDefaultSourceID,
 			},
 			want:                     nil,
 			wantIndicatorValuesCount: 0,
@@ -462,8 +457,8 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 					"%s%s/countries/all/indicators/%s?format=json&source=%s",
 					defaultBaseURL,
 					apiVersion,
-					strings.Join(invalidIndicatorIDs, ";"),
-					defaultSourceID,
+					strings.Join(testutils.TestInvalidIndicatorIDs, ";"),
+					testutils.TestDefaultSourceID,
 				),
 				Code: 200,
 				// http://api.worldbank.org/v2/countries/all/indicators/INVALID.INDICATOR.ID;SP.POP.TOTL?format=json&source=2
@@ -489,8 +484,8 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 		{
 			name: "failure because invalid source id",
 			args: args{
-				indicatorIDs: defaultIndicatorIDs,
-				sourceID:     invalidSourceID,
+				indicatorIDs: testutils.TestInvalidIndicatorIDs,
+				sourceID:     testutils.TestInvalidSourceID,
 			},
 			want:                     nil,
 			wantIndicatorValuesCount: 0,
@@ -500,8 +495,8 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 		{
 			name: "failure because invalid date params",
 			args: args{
-				indicatorIDs: invalidIndicatorIDs,
-				sourceID:     defaultSourceID,
+				indicatorIDs: testutils.TestDefaultIndicatorIDs,
+				sourceID:     testutils.TestDefaultSourceID,
 				datePatams:   invalidDateParams,
 			},
 			want:                     nil,
@@ -512,12 +507,9 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 		{
 			name: "failure because invalid page params",
 			args: args{
-				indicatorIDs: defaultIndicatorIDs,
-				sourceID:     defaultSourceID,
-				pages: &PageParams{
-					Page:    testutils.TestInvalidPage,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				indicatorIDs: testutils.TestDefaultIndicatorIDs,
+				sourceID:     testutils.TestDefaultSourceID,
+				pages:        invalidPageParams,
 			},
 			want:                     nil,
 			wantIndicatorValuesCount: 0,
@@ -556,12 +548,12 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 				}
 				if !tt.wantErr {
 					for i := range got1 {
-						if got1[i].Date != defaultDateStart && got1[i].Date != defaultDateEnd {
+						if got1[i].Date != tt.args.datePatams.DateRange.Start && got1[i].Date != tt.args.datePatams.DateRange.End {
 							t.Errorf(
 								"invalid date of IndicatorValuesService.ListBySourceID() got1 = %v, want %v or %v",
 								got1[i].Date,
-								defaultDateStart,
-								defaultDateEnd,
+								tt.args.datePatams.DateRange.Start,
+								tt.args.datePatams.DateRange.End,
 							)
 						}
 					}
@@ -575,23 +567,27 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 	client, save := NewTestClient(t, *update)
 	defer save()
 
-	defaultCountryIDs := []string{"JPN", "USA"}
-	invalidCountryIDs := []string{"ABCDEFG", "HIJKLM"}
-	defaultIndicatorIDs := []string{"NY.GDP.MKTP.CD", "SP.POP.TOTL"}
-	invalidIndicatorIDs := []string{"INVALID.INDICATOR.ID", "SP.POP.TOTL"}
 	defaultDateParams := &DateParams{
 		DateParamsType: DateParamsRange,
 		DateRange: &DateRange{
-			Start: defaultDateStart,
-			End:   defaultDateEnd,
+			Start: testutils.TestDefaultDateStart,
+			End:   testutils.TestDefaultDateEnd,
 		},
 	}
 	invalidDateParams := &DateParams{
 		DateParamsType: DateParamsRange,
 		DateRange: &DateRange{
-			Start: invalidDate,
-			End:   defaultDateEnd,
+			Start: testutils.TestInvalidDate,
+			End:   testutils.TestDefaultDateEnd,
 		},
+	}
+	defaultPageParams := &PageParams{
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestDefaultPerPage,
+	}
+	invalidPageParams := &PageParams{
+		Page:    testutils.TestInvalidPage,
+		PerPage: testutils.TestDefaultPerPage,
 	}
 
 	type args struct {
@@ -612,9 +608,9 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 		{
 			name: "success",
 			args: args{
-				countryIDs:   defaultCountryIDs,
-				indicatorIDs: defaultIndicatorIDs,
-				sourceID:     defaultSourceID,
+				countryIDs:   testutils.TestDefaultCountryIDs,
+				indicatorIDs: testutils.TestDefaultIndicatorIDs,
+				sourceID:     testutils.TestDefaultSourceID,
 			},
 			want:                     nil,
 			wantIndicatorValuesCount: 0,
@@ -624,14 +620,11 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 		{
 			name: "success with params",
 			args: args{
-				countryIDs:   defaultCountryIDs,
-				indicatorIDs: defaultIndicatorIDs,
-				sourceID:     defaultSourceID,
+				countryIDs:   testutils.TestDefaultCountryIDs,
+				indicatorIDs: testutils.TestDefaultIndicatorIDs,
+				sourceID:     testutils.TestDefaultSourceID,
 				datePatams:   defaultDateParams,
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages:        defaultPageParams,
 			},
 			want: &PageSummaryWithLastUpdated{
 				Page:    intOrString(testutils.TestDefaultPage),
@@ -644,9 +637,9 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 		{
 			name: "failure because invalid country ids",
 			args: args{
-				countryIDs:   invalidCountryIDs,
-				indicatorIDs: defaultIndicatorIDs,
-				sourceID:     defaultSourceID,
+				countryIDs:   testutils.TestInvalidCountryIDs,
+				indicatorIDs: testutils.TestDefaultIndicatorIDs,
+				sourceID:     testutils.TestDefaultSourceID,
 			},
 			want:                     nil,
 			wantIndicatorValuesCount: 0,
@@ -656,9 +649,9 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 					"%s%s/countries/%s/indicators/%s?format=json&source=%s",
 					defaultBaseURL,
 					apiVersion,
-					strings.Join(invalidCountryIDs, ";"),
-					strings.Join(defaultIndicatorIDs, ";"),
-					defaultSourceID,
+					strings.Join(testutils.TestInvalidCountryIDs, ";"),
+					strings.Join(testutils.TestDefaultIndicatorIDs, ";"),
+					testutils.TestDefaultSourceID,
 				),
 				Code: 200,
 				// http://api.worldbank.org/v2/countries/all/indicators/INVALID.INDICATOR.ID;SP.POP.TOTL?format=json&source=2
@@ -674,9 +667,9 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 		{
 			name: "failure because invalid indicator id",
 			args: args{
-				countryIDs:   defaultCountryIDs,
-				indicatorIDs: invalidIndicatorIDs,
-				sourceID:     defaultSourceID,
+				countryIDs:   testutils.TestDefaultCountryIDs,
+				indicatorIDs: testutils.TestInvalidIndicatorIDs,
+				sourceID:     testutils.TestDefaultSourceID,
 			},
 			want:                     nil,
 			wantIndicatorValuesCount: 0,
@@ -686,9 +679,9 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 					"%s%s/countries/%s/indicators/%s?format=json&source=%s",
 					defaultBaseURL,
 					apiVersion,
-					strings.Join(defaultCountryIDs, ";"),
-					strings.Join(invalidIndicatorIDs, ";"),
-					defaultSourceID,
+					strings.Join(testutils.TestDefaultCountryIDs, ";"),
+					strings.Join(testutils.TestInvalidIndicatorIDs, ";"),
+					testutils.TestDefaultSourceID,
 				),
 				Code: 200,
 				// http://api.worldbank.org/v2/countries/all/indicators/INVALID.INDICATOR.ID;SP.POP.TOTL?format=json&source=2
@@ -714,9 +707,9 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 		{
 			name: "failure because invalid source id",
 			args: args{
-				countryIDs:   defaultCountryIDs,
-				indicatorIDs: defaultIndicatorIDs,
-				sourceID:     invalidSourceID,
+				countryIDs:   testutils.TestDefaultCountryIDs,
+				indicatorIDs: testutils.TestDefaultIndicatorIDs,
+				sourceID:     testutils.TestInvalidSourceID,
 			},
 			want:                     nil,
 			wantIndicatorValuesCount: 0,
@@ -726,9 +719,9 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 		{
 			name: "failure because invalid date params",
 			args: args{
-				countryIDs:   defaultCountryIDs,
-				indicatorIDs: defaultIndicatorIDs,
-				sourceID:     defaultSourceID,
+				countryIDs:   testutils.TestDefaultCountryIDs,
+				indicatorIDs: testutils.TestDefaultIndicatorIDs,
+				sourceID:     testutils.TestDefaultSourceID,
 				datePatams:   invalidDateParams,
 			},
 			want:                     nil,
@@ -739,13 +732,10 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 		{
 			name: "failure because invalid page params",
 			args: args{
-				countryIDs:   defaultCountryIDs,
-				indicatorIDs: defaultIndicatorIDs,
-				sourceID:     defaultSourceID,
-				pages: &PageParams{
-					Page:    testutils.TestInvalidPage,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				countryIDs:   testutils.TestDefaultCountryIDs,
+				indicatorIDs: testutils.TestDefaultIndicatorIDs,
+				sourceID:     testutils.TestDefaultSourceID,
+				pages:        invalidPageParams,
 			},
 			want:                     nil,
 			wantIndicatorValuesCount: 0,
@@ -794,12 +784,12 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 				}
 				if !tt.wantErr {
 					for i := range got1 {
-						if got1[i].Date != defaultDateStart && got1[i].Date != defaultDateEnd {
+						if got1[i].Date != tt.args.datePatams.DateRange.Start && got1[i].Date != tt.args.datePatams.DateRange.End {
 							t.Errorf(
 								"invalid date of IndicatorValuesService.ListByCountryIDsAndSourceID() got1 = %v, want %v or %v",
 								got1[i].Date,
-								defaultDateStart,
-								defaultDateEnd,
+								tt.args.datePatams.DateRange.Start,
+								tt.args.datePatams.DateRange.End,
 							)
 						}
 					}

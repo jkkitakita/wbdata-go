@@ -1,6 +1,7 @@
 package wbdata
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 
@@ -10,6 +11,19 @@ import (
 func TestLanguagesService_List(t *testing.T) {
 	client, save := NewTestClient(t, *update)
 	defer save()
+
+	defaultPageParams := &PageParams{
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestDefaultPerPage,
+	}
+	invalidPageParams := &PageParams{
+		Page:    testutils.TestInvalidPage,
+		PerPage: testutils.TestDefaultPerPage,
+	}
+	invalidPerPageParams := &PageParams{
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestInvalidPerPage,
+	}
 
 	type args struct {
 		pages *PageParams
@@ -24,10 +38,7 @@ func TestLanguagesService_List(t *testing.T) {
 		{
 			name: "success",
 			args: args{
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages: defaultPageParams,
 			},
 			want: &PageSummary{
 				Page:    intOrString(testutils.TestDefaultPage),
@@ -39,10 +50,7 @@ func TestLanguagesService_List(t *testing.T) {
 		{
 			name: "failure because Page is less than 1",
 			args: args{
-				pages: &PageParams{
-					Page:    0,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages: invalidPageParams,
 			},
 			want:               nil,
 			wantLanguagesCount: 0,
@@ -51,10 +59,7 @@ func TestLanguagesService_List(t *testing.T) {
 		{
 			name: "failure because PerPage is less than 1",
 			args: args{
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: 0,
-				},
+				pages: invalidPerPageParams,
 			},
 			want:               nil,
 			wantLanguagesCount: 0,
@@ -103,7 +108,7 @@ func TestLanguagesService_Get(t *testing.T) {
 		{
 			name: "success",
 			args: args{
-				languageCode: "ja",
+				languageCode: testutils.TestDefaultLanguageCode,
 			},
 			want: &PageSummary{
 				Page:    1,
@@ -112,7 +117,7 @@ func TestLanguagesService_Get(t *testing.T) {
 				Total:   1,
 			},
 			want1: &Language{
-				Code:       "ja",
+				Code:       testutils.TestDefaultLanguageCode,
 				Name:       "Japanese ",
 				NativeForm: "日本語",
 			},
@@ -122,13 +127,18 @@ func TestLanguagesService_Get(t *testing.T) {
 		{
 			name: "failure because languageCode is invalid",
 			args: args{
-				languageCode: invalidID,
+				languageCode: testutils.TestInvalidLanguageCode,
 			},
 			want:    nil,
 			want1:   nil,
 			wantErr: true,
 			wantErrRes: &ErrorResponse{
-				URL:  defaultBaseURL + apiVersion + "/languages/" + invalidID + "?format=json",
+				URL: fmt.Sprintf(
+					"%s%s/languages/%s?format=json",
+					defaultBaseURL,
+					apiVersion,
+					testutils.TestInvalidLanguageCode,
+				),
 				Code: 200,
 				Message: []ErrorMessage{
 					{

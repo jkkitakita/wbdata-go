@@ -2,15 +2,12 @@ package wbdata
 
 import (
 	"flag"
+	"fmt"
 	"os"
 	"reflect"
 	"testing"
 
 	"github.com/jkkitakita/wbdata-go/testutils"
-)
-
-const (
-	invalidID = "ABCDEFG"
 )
 
 var (
@@ -27,6 +24,19 @@ func TestCountriesService_List(t *testing.T) {
 	client, save := NewTestClient(t, *update)
 	defer save()
 
+	defaultPageParams := &PageParams{
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestDefaultPerPage,
+	}
+	invalidPageParams := &PageParams{
+		Page:    testutils.TestInvalidPage,
+		PerPage: testutils.TestDefaultPerPage,
+	}
+	invalidPerPageParams := &PageParams{
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestInvalidPerPage,
+	}
+
 	type args struct {
 		params *ListCountryParams
 		pages  *PageParams
@@ -42,10 +52,7 @@ func TestCountriesService_List(t *testing.T) {
 			name: "success",
 			args: args{
 				params: nil,
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages:  defaultPageParams,
 			},
 			want: &PageSummary{
 				Page:    intOrString(testutils.TestDefaultPage),
@@ -60,10 +67,7 @@ func TestCountriesService_List(t *testing.T) {
 				params: &ListCountryParams{
 					RegionID: "EAS",
 				},
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages: defaultPageParams,
 			},
 			want: &PageSummary{
 				Page:    intOrString(testutils.TestDefaultPage),
@@ -78,10 +82,7 @@ func TestCountriesService_List(t *testing.T) {
 				params: &ListCountryParams{
 					IncomeLevelID: "HIC",
 				},
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages: defaultPageParams,
 			},
 			want: &PageSummary{
 				Page:    intOrString(testutils.TestDefaultPage),
@@ -96,10 +97,7 @@ func TestCountriesService_List(t *testing.T) {
 				params: &ListCountryParams{
 					LendingTypeID: "LNX",
 				},
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages: defaultPageParams,
 			},
 			want: &PageSummary{
 				Page:    intOrString(testutils.TestDefaultPage),
@@ -116,10 +114,7 @@ func TestCountriesService_List(t *testing.T) {
 					IncomeLevelID: "HIC",
 					LendingTypeID: "LNX",
 				},
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages: defaultPageParams,
 			},
 			want: &PageSummary{
 				Page:    intOrString(testutils.TestDefaultPage),
@@ -132,13 +127,7 @@ func TestCountriesService_List(t *testing.T) {
 			name: "failure because invalid region id",
 			args: args{
 				params: &ListCountryParams{
-					RegionID:      invalidID,
-					IncomeLevelID: "",
-					LendingTypeID: "",
-				},
-				pages: &PageParams{
-					Page:    0,
-					PerPage: testutils.TestDefaultPerPage,
+					RegionID: testutils.TestInvalidRegionCode,
 				},
 			},
 			want:               nil,
@@ -149,13 +138,7 @@ func TestCountriesService_List(t *testing.T) {
 			name: "failure because invalid income level id",
 			args: args{
 				params: &ListCountryParams{
-					RegionID:      "",
-					IncomeLevelID: invalidID,
-					LendingTypeID: "",
-				},
-				pages: &PageParams{
-					Page:    0,
-					PerPage: testutils.TestDefaultPerPage,
+					IncomeLevelID: testutils.TestInvalidIncomeLevelID,
 				},
 			},
 			want:               nil,
@@ -166,13 +149,7 @@ func TestCountriesService_List(t *testing.T) {
 			name: "failure because invalid lending type id",
 			args: args{
 				params: &ListCountryParams{
-					RegionID:      "",
-					IncomeLevelID: "",
-					LendingTypeID: invalidID,
-				},
-				pages: &PageParams{
-					Page:    0,
-					PerPage: testutils.TestDefaultPerPage,
+					LendingTypeID: testutils.TestInvalidLendingTypeID,
 				},
 			},
 			want:               nil,
@@ -182,15 +159,7 @@ func TestCountriesService_List(t *testing.T) {
 		{
 			name: "failure because Page is less than 1",
 			args: args{
-				params: &ListCountryParams{
-					RegionID:      "",
-					IncomeLevelID: "",
-					LendingTypeID: "",
-				},
-				pages: &PageParams{
-					Page:    0,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages: invalidPageParams,
 			},
 			want:               nil,
 			wantCountriesCount: 0,
@@ -199,15 +168,7 @@ func TestCountriesService_List(t *testing.T) {
 		{
 			name: "failure because PerPage is less than 1",
 			args: args{
-				params: &ListCountryParams{
-					RegionID:      "",
-					IncomeLevelID: "",
-					LendingTypeID: "",
-				},
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: 0,
-				},
+				pages: invalidPerPageParams,
 			},
 			want:               nil,
 			wantCountriesCount: 0,
@@ -312,13 +273,18 @@ func TestCountriesService_Get(t *testing.T) {
 		{
 			name: "failure because countryID is invalid",
 			args: args{
-				countryID: invalidID,
+				countryID: testutils.TestInvalidCountryID,
 			},
 			want:    nil,
 			want1:   nil,
 			wantErr: true,
 			wantErrRes: &ErrorResponse{
-				URL:  defaultBaseURL + apiVersion + "/countries/" + invalidID + "?format=json",
+				URL: fmt.Sprintf(
+					"%s%s/countries/%s?format=json",
+					defaultBaseURL,
+					apiVersion,
+					testutils.TestInvalidCountryID,
+				),
 				Code: 200,
 				Message: []ErrorMessage{
 					{

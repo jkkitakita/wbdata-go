@@ -1,6 +1,7 @@
 package wbdata
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 
@@ -10,6 +11,19 @@ import (
 func TestTopicsService_List(t *testing.T) {
 	client, save := NewTestClient(t, *update)
 	defer save()
+
+	defaultPageParams := &PageParams{
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestDefaultPerPage,
+	}
+	invalidPageParams := &PageParams{
+		Page:    testutils.TestInvalidPage,
+		PerPage: testutils.TestDefaultPerPage,
+	}
+	invalidPerPageParams := &PageParams{
+		Page:    testutils.TestDefaultPage,
+		PerPage: testutils.TestInvalidPerPage,
+	}
 
 	type args struct {
 		pages *PageParams
@@ -24,10 +38,7 @@ func TestTopicsService_List(t *testing.T) {
 		{
 			name: "success",
 			args: args{
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages: defaultPageParams,
 			},
 			want: &PageSummary{
 				Page:    intOrString(testutils.TestDefaultPage),
@@ -39,10 +50,7 @@ func TestTopicsService_List(t *testing.T) {
 		{
 			name: "failure because Page is less than 1",
 			args: args{
-				pages: &PageParams{
-					Page:    0,
-					PerPage: testutils.TestDefaultPerPage,
-				},
+				pages: invalidPageParams,
 			},
 			want:            nil,
 			wantTopicsCount: 0,
@@ -51,10 +59,7 @@ func TestTopicsService_List(t *testing.T) {
 		{
 			name: "failure because PerPage is less than 1",
 			args: args{
-				pages: &PageParams{
-					Page:    testutils.TestDefaultPage,
-					PerPage: 0,
-				},
+				pages: invalidPerPageParams,
 			},
 			want:            nil,
 			wantTopicsCount: 0,
@@ -101,7 +106,7 @@ func TestTopicsService_Get(t *testing.T) {
 		{
 			name: "success",
 			args: args{
-				topicID: "1",
+				topicID: testutils.TestDefaultTopicID,
 			},
 			want: &PageSummary{
 				Page:    1,
@@ -125,13 +130,18 @@ func TestTopicsService_Get(t *testing.T) {
 		{
 			name: "failure because topicID is invalid",
 			args: args{
-				topicID: invalidID,
+				topicID: testutils.TestInvalidTopicID,
 			},
 			want:    nil,
 			want1:   nil,
 			wantErr: true,
 			wantErrRes: &ErrorResponse{
-				URL:  defaultBaseURL + apiVersion + "/topics/" + invalidID + "?format=json",
+				URL: fmt.Sprintf(
+					"%s%s/topics/%s?format=json",
+					defaultBaseURL,
+					apiVersion,
+					testutils.TestInvalidTopicID,
+				),
 				Code: 200,
 				Message: []ErrorMessage{
 					{
