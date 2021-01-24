@@ -20,12 +20,18 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 	defaultDateEnd := "2019"
 	invalidDate := "hoge"
 	defaultDateParams := &DateParams{
-		Start: defaultDateStart,
-		End:   defaultDateEnd,
+		DateParamsType: DateParamsRange,
+		DateRange: &DateRange{
+			Start: defaultDateStart,
+			End:   defaultDateEnd,
+		},
 	}
 	invalidDateParams := &DateParams{
-		Start: invalidDate,
-		End:   defaultDateEnd,
+		DateParamsType: DateParamsRange,
+		DateRange: &DateRange{
+			Start: invalidDate,
+			End:   defaultDateEnd,
+		},
 	}
 
 	type args struct {
