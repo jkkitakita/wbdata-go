@@ -7,22 +7,27 @@
 
 ## Installing
 
-### _go get_
-
-    $ go get -u github.com/jkkitakita/wbdata-go
+```shell
+go get -u github.com/jkkitakita/wbdata-go
+```
 
 ## Example
 
 ```go
+package main
+
 import (
 	"fmt"
 
 	"github.com/jkkitakita/wbdata-go"
 )
 
-func main() {
+func main () {
 	client := wbdata.NewClient(nil)
 	summary, countries, _ := client.Countries.List(
+		&wbdata.ListCountryParams{
+			RegionID: "EAS",
+		},
 		&wbdata.PageParams{
 			Page:    1,
 			PerPage: 1,
@@ -32,8 +37,8 @@ func main() {
 	fmt.Printf("Summary is: %#v\n", summary)
 	fmt.Printf("Countries[0] is: %#v\n", countries[0])
 	// Output:
-	// Summary is: &wbdata.PageSummary{Page:1, Pages:304, PerPage:1, Total:304}
-	// Countries[0] is: &wbdata.Country{ID:"ABW", Name:"Aruba", CapitalCity:"Oranjestad", Iso2Code:"AW", Longitude:"-70.0167", Latitude:"12.5167", Region:wbdata.Region{ID:"LCN", Code:"", Iso2Code:"ZJ", Value:"Latin America & Caribbean "}, IncomeLevel:wbdata.IncomeLevel{ID:"HIC", Iso2Code:"XD", Value:"High income"}, LendingType:wbdata.LendingType{ID:"LNX", Iso2Code:"XX", Value:"Not classified"}, AdminRegion:wbdata.Region{ID:"", Code:"", Iso2Code:"", Value:""}}
+	// Summary is: &wbdata.PageSummary{Page:1, Pages:38, PerPage:1, Total:38}
+	// Countries[0] is: &wbdata.Country{ID:"ASM", Name:"American Samoa", CapitalCity:"Pago Pago", Iso2Code:"AS", Longitude:"-170.691", Latitude:"-14.2846", Region:wbdata.CountryRegion{ID:"EAS", Iso2Code:"Z4", Value:"East Asia & Pacific"}, IncomeLevel:wbdata.IncomeLevel{ID:"UMC", Iso2Code:"XT", Value:"Upper middle income"}, LendingType:wbdata.LendingType{ID:"LNX", Iso2Code:"XX", Value:"Not classified"}, AdminRegion:wbdata.CountryRegion{ID:"EAP", Iso2Code:"4E", Value:"East Asia & Pacific (excluding high income)"}}
 }
 ```
 
