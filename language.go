@@ -42,7 +42,7 @@ func (c *LanguagesService) Get(languageCode string) (*PageSummary, *Language, er
 	summary := &PageSummary{}
 	language := []*Language{}
 
-	path := fmt.Sprintf("languages/%v", languageCode)
+	path := fmt.Sprintf("languages/%s", languageCode)
 	req, err := c.client.NewRequest("GET", path, nil, nil)
 	if err != nil {
 		return nil, nil, err
