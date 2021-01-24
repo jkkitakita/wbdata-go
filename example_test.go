@@ -137,8 +137,11 @@ func ExampleIndicatorValuesService_ListByCountryIDs() {
 		countryIDs,
 		indicatorID,
 		&wbdata.DateParams{
-			Start: "2018",
-			End:   "2019",
+			DateParamsType: wbdata.DateParamsRange,
+			DateRange: &wbdata.DateRange{
+				Start: "2018",
+				End:   "2019",
+			},
 		},
 		&wbdata.PageParams{
 			Page:    1,
