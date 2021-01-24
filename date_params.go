@@ -129,23 +129,23 @@ func (dp *DateRange) validate() error {
 }
 
 func (dp *DateRange) validateMonthlyAndQuarterly() error {
-	if dp.isYearlyRange() || dp.isMonthlyRange() || dp.isQuarterlyRange() {
+	if dp.isYearly() || dp.isMonthly() || dp.isQuarterly() {
 		return nil
 	}
 
 	return fmt.Errorf("yearly and quarterly and monthly cannot be used together, start: %v end: %v", dp.Start, dp.End)
 }
 
-func (dp *DateRange) isYearlyRange() bool {
+func (dp *DateRange) isYearly() bool {
 	return !strings.Contains(dp.Start, "M") && !strings.Contains(dp.End, "M") &&
 		!strings.Contains(dp.End, "Q") && !strings.Contains(dp.End, "Q")
 }
 
-func (dp *DateRange) isMonthlyRange() bool {
+func (dp *DateRange) isMonthly() bool {
 	return strings.Contains(dp.Start, "M") && strings.Contains(dp.End, "M")
 }
 
-func (dp *DateRange) isQuarterlyRange() bool {
+func (dp *DateRange) isQuarterly() bool {
 	return strings.Contains(dp.Start, "Q") && strings.Contains(dp.End, "Q")
 }
 
