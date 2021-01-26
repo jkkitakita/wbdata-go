@@ -31,7 +31,7 @@ type (
 // List returns a Response's Summary and Indicator in all countries
 func (i *IndicatorValuesService) List(
 	indicatorID string,
-	datePatams *DateParams,
+	filterParams *FilterParams,
 	pages *PageParams,
 ) (*PageSummaryWithSourceID, []*IndicatorValue, error) {
 	summary := &PageSummaryWithSourceID{}
@@ -51,7 +51,7 @@ func (i *IndicatorValuesService) List(
 		return nil, nil, err
 	}
 
-	if err := datePatams.addDateParams(req); err != nil {
+	if err := filterParams.addFilterParams(req); err != nil {
 		return nil, nil, err
 	}
 
@@ -65,7 +65,7 @@ func (i *IndicatorValuesService) List(
 // ListWithFootnote returns a Response's Summary and Indicator with footnote in all countries
 func (i *IndicatorValuesService) ListWithFootnote(
 	indicatorID string,
-	datePatams *DateParams,
+	filterParams *FilterParams,
 	pages *PageParams,
 ) (*PageSummaryWithSourceID, []*IndicatorValueWithFootnote, error) {
 	summary := &PageSummaryWithSourceID{}
@@ -85,7 +85,7 @@ func (i *IndicatorValuesService) ListWithFootnote(
 		return nil, nil, err
 	}
 
-	if err := datePatams.addDateParams(req); err != nil {
+	if err := filterParams.addFilterParams(req); err != nil {
 		return nil, nil, err
 	}
 
@@ -102,7 +102,7 @@ func (i *IndicatorValuesService) ListWithFootnote(
 func (i *IndicatorValuesService) ListByCountryIDs(
 	countryIDs []string,
 	indicatorID string,
-	datePatams *DateParams,
+	filterParams *FilterParams,
 	pages *PageParams,
 ) (*PageSummaryWithSourceID, []*IndicatorValue, error) {
 	summary := &PageSummaryWithSourceID{}
@@ -123,7 +123,7 @@ func (i *IndicatorValuesService) ListByCountryIDs(
 		return nil, nil, err
 	}
 
-	if err := datePatams.addDateParams(req); err != nil {
+	if err := filterParams.addFilterParams(req); err != nil {
 		return nil, nil, err
 	}
 
@@ -138,7 +138,7 @@ func (i *IndicatorValuesService) ListByCountryIDs(
 func (i *IndicatorValuesService) ListByCountryIDsWithFootnote(
 	countryIDs []string,
 	indicatorID string,
-	datePatams *DateParams,
+	filterParams *FilterParams,
 	pages *PageParams,
 ) (*PageSummaryWithSourceID, []*IndicatorValueWithFootnote, error) {
 	summary := &PageSummaryWithSourceID{}
@@ -159,7 +159,7 @@ func (i *IndicatorValuesService) ListByCountryIDsWithFootnote(
 		return nil, nil, err
 	}
 
-	if err := datePatams.addDateParams(req); err != nil {
+	if err := filterParams.addFilterParams(req); err != nil {
 		return nil, nil, err
 	}
 
@@ -176,7 +176,7 @@ func (i *IndicatorValuesService) ListByCountryIDsWithFootnote(
 func (i *IndicatorValuesService) ListBySourceID(
 	indicatorIDs []string,
 	sourceID string,
-	datePatams *DateParams,
+	filterParams *FilterParams,
 	pages *PageParams,
 ) (*PageSummaryWithLastUpdated, []*IndicatorValue, error) {
 	summary := &PageSummaryWithLastUpdated{}
@@ -197,7 +197,7 @@ func (i *IndicatorValuesService) ListBySourceID(
 		return nil, nil, err
 	}
 
-	if err := datePatams.addDateParams(req); err != nil {
+	if err := filterParams.addFilterParams(req); err != nil {
 		return nil, nil, err
 	}
 
@@ -212,7 +212,7 @@ func (i *IndicatorValuesService) ListBySourceID(
 func (i *IndicatorValuesService) ListBySourceIDWithFootnote(
 	indicatorIDs []string,
 	sourceID string,
-	datePatams *DateParams,
+	filterParams *FilterParams,
 	pages *PageParams,
 ) (*PageSummaryWithLastUpdated, []*IndicatorValueWithFootnote, error) {
 	summary := &PageSummaryWithLastUpdated{}
@@ -233,7 +233,7 @@ func (i *IndicatorValuesService) ListBySourceIDWithFootnote(
 		return nil, nil, err
 	}
 
-	if err := datePatams.addDateParams(req); err != nil {
+	if err := filterParams.addFilterParams(req); err != nil {
 		return nil, nil, err
 	}
 
@@ -251,7 +251,7 @@ func (i *IndicatorValuesService) ListByCountryIDsAndSourceID(
 	countryIDs []string,
 	indicatorIDs []string,
 	sourceID string,
-	datePatams *DateParams,
+	filterParams *FilterParams,
 	pages *PageParams,
 ) (*PageSummaryWithLastUpdated, []*IndicatorValue, error) {
 	summary := &PageSummaryWithLastUpdated{}
@@ -273,7 +273,7 @@ func (i *IndicatorValuesService) ListByCountryIDsAndSourceID(
 		return nil, nil, err
 	}
 
-	if err := datePatams.addDateParams(req); err != nil {
+	if err := filterParams.addFilterParams(req); err != nil {
 		return nil, nil, err
 	}
 
@@ -289,7 +289,7 @@ func (i *IndicatorValuesService) ListByCountryIDsAndSourceIDWithFootnote(
 	countryIDs []string,
 	indicatorIDs []string,
 	sourceID string,
-	datePatams *DateParams,
+	filterParams *FilterParams,
 	pages *PageParams,
 ) (*PageSummaryWithLastUpdated, []*IndicatorValueWithFootnote, error) {
 	summary := &PageSummaryWithLastUpdated{}
@@ -311,7 +311,7 @@ func (i *IndicatorValuesService) ListByCountryIDsAndSourceIDWithFootnote(
 		return nil, nil, err
 	}
 
-	if err := datePatams.addDateParams(req); err != nil {
+	if err := filterParams.addFilterParams(req); err != nil {
 		return nil, nil, err
 	}
 

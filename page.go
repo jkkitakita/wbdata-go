@@ -54,13 +54,13 @@ func (pages *PageParams) addPageParams(req *http.Request) error {
 	params := req.URL.Query()
 
 	if pages.Page > 0 {
-		params.Add(`page`, strconv.Itoa(pages.Page))
+		params.Set(`page`, strconv.Itoa(pages.Page))
 	} else {
 		return errors.New("page of params should be larger than 0")
 	}
 
 	if pages.PerPage > 0 {
-		params.Add(`per_page`, strconv.Itoa(pages.PerPage))
+		params.Set(`per_page`, strconv.Itoa(pages.PerPage))
 	} else {
 		return errors.New("per_page of params should be larger than 0")
 	}

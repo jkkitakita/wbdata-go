@@ -134,10 +134,10 @@ func (c *Client) NewRequest(
 	}
 
 	params := req.URL.Query()
-	params.Add(`format`, c.OutputFormat.String())
+	params.Set(`format`, c.OutputFormat.String())
 	for k, v := range queryParams {
 		if v != "" {
-			params.Add(k, v)
+			params.Set(k, v)
 		}
 	}
 	req.URL.RawQuery = params.Encode()
