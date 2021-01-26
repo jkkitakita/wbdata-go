@@ -6,6 +6,6 @@ import (
 
 func addFootNoteParams(req *http.Request) {
 	params := req.URL.Query()
-	params.Add(`footnote`, `y`)
+	params.Set(`footnote`, `y`)
 	req.URL.RawQuery = params.Encode()
 }

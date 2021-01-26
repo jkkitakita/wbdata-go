@@ -129,16 +129,18 @@ func ExampleIndicatorsService_ListByTopicID() {
 	// Topics is: &{ID:1 Value:Agriculture & Rural Development  }
 }
 
-func ExampleIndicatorValuesService_List() {
+func ExampleIndicatorValuesService_List_DateParam() {
 	client := wbdata.NewClient(nil)
 	indicatorID := "NY.GDP.MKTP.CD"
 	summary, indicatorValues, _ := client.IndicatorValues.List(
 		indicatorID,
-		&wbdata.DateParams{
-			DateParamsType: wbdata.DateParamsRange,
-			DateRange: &wbdata.DateRange{
-				Start: "2018",
-				End:   "2019",
+		&wbdata.FilterParams{
+			FilterParamsType: wbdata.FilterParamsDateRange,
+			DateParam: &wbdata.DateParam{
+				DateRange: &wbdata.DateRange{
+					Start: "2018",
+					End:   "2019",
+				},
 			},
 		},
 		&wbdata.PageParams{
@@ -149,6 +151,38 @@ func ExampleIndicatorValuesService_List() {
 
 	summary.Pages = 53
 	summary.Total = 528
+	summary.LastUpdated = "2020-12-16"
+
+	fmt.Printf("Summary is: %#v\n", summary)
+	fmt.Printf("IndicatorValues[0]: %#v\n", indicatorValues[0])
+	// Output:
+	// Summary is: &wbdata.PageSummaryWithSourceID{Page:1, Pages:53, PerPage:10, Total:528, SourceID:"2", LastUpdated:"2020-12-16"}
+	// IndicatorValues[0]: &wbdata.IndicatorValue{Indicator:wbdata.IDAndValue{ID:"NY.GDP.MKTP.CD", Value:"GDP (current US$)"}, Country:wbdata.IDAndValue{ID:"1A", Value:"Arab World"}, Countryiso3code:"ARB", Date:"2019", Value:2.81741458466511e+12, Unit:"", ObsStatus:"", Decimal:0}
+}
+
+func ExampleIndicatorValuesService_List_RecentParam() {
+	client := wbdata.NewClient(nil)
+	indicatorID := "NY.GDP.MKTP.CD"
+	summary, indicatorValues, _ := client.IndicatorValues.List(
+		indicatorID,
+		&wbdata.FilterParams{
+			FilterParamsType: wbdata.FilterParamsMRV,
+			RecentParam: &wbdata.RecentParam{
+				FrequencyType:    wbdata.FrequencyYearly,
+				MostRecentValues: 1,
+				IsNotEmpty:       false,
+				IsGapFill:        false,
+			},
+		},
+		&wbdata.PageParams{
+			Page:    1,
+			PerPage: 10,
+		},
+	)
+
+	summary.Pages = 53
+	summary.Total = 528
+	summary.LastUpdated = "2020-12-16"
 
 	fmt.Printf("Summary is: %#v\n", summary)
 	fmt.Printf("IndicatorValues[0]: %#v\n", indicatorValues[0])
@@ -164,11 +198,13 @@ func ExampleIndicatorValuesService_ListByCountryIDs() {
 	summary, indicatorValues, _ := client.IndicatorValues.ListByCountryIDs(
 		countryIDs,
 		indicatorID,
-		&wbdata.DateParams{
-			DateParamsType: wbdata.DateParamsRange,
-			DateRange: &wbdata.DateRange{
-				Start: "2018",
-				End:   "2019",
+		&wbdata.FilterParams{
+			FilterParamsType: wbdata.FilterParamsDateRange,
+			DateParam: &wbdata.DateParam{
+				DateRange: &wbdata.DateRange{
+					Start: "2018",
+					End:   "2019",
+				},
 			},
 		},
 		&wbdata.PageParams{
@@ -176,6 +212,8 @@ func ExampleIndicatorValuesService_ListByCountryIDs() {
 			PerPage: 10,
 		},
 	)
+
+	summary.LastUpdated = "2020-12-16"
 
 	fmt.Printf("Summary is: %#v\n", summary)
 	fmt.Printf("IndicatorValues[0]: %#v\n", indicatorValues[0])
@@ -191,11 +229,13 @@ func ExampleIndicatorValuesService_ListBySourceID() {
 	summary, indicatorValues, _ := client.IndicatorValues.ListBySourceID(
 		indicatorIDs,
 		sourceID,
-		&wbdata.DateParams{
-			DateParamsType: wbdata.DateParamsRange,
-			DateRange: &wbdata.DateRange{
-				Start: "2018",
-				End:   "2019",
+		&wbdata.FilterParams{
+			FilterParamsType: wbdata.FilterParamsDateRange,
+			DateParam: &wbdata.DateParam{
+				DateRange: &wbdata.DateRange{
+					Start: "2018",
+					End:   "2019",
+				},
 			},
 		},
 		&wbdata.PageParams{
@@ -206,6 +246,7 @@ func ExampleIndicatorValuesService_ListBySourceID() {
 
 	summary.Pages = 106
 	summary.Total = 1056
+	summary.LastUpdated = "2020-12-16"
 
 	fmt.Printf("Summary is: %#v\n", summary)
 	fmt.Printf("IndicatorValues[0]: %#v\n", indicatorValues[0])
@@ -223,11 +264,13 @@ func ExampleIndicatorValuesService_ListByCountryIDsAndSourceID() {
 		countryIDs,
 		indicatorIDs,
 		sourceID,
-		&wbdata.DateParams{
-			DateParamsType: wbdata.DateParamsRange,
-			DateRange: &wbdata.DateRange{
-				Start: "2018",
-				End:   "2019",
+		&wbdata.FilterParams{
+			FilterParamsType: wbdata.FilterParamsDateRange,
+			DateParam: &wbdata.DateParam{
+				DateRange: &wbdata.DateRange{
+					Start: "2018",
+					End:   "2019",
+				},
 			},
 		},
 		&wbdata.PageParams{
@@ -238,6 +281,7 @@ func ExampleIndicatorValuesService_ListByCountryIDsAndSourceID() {
 
 	summary.Pages = 106
 	summary.Total = 1056
+	summary.LastUpdated = "2020-12-16"
 
 	fmt.Printf("Summary is: %#v\n", summary)
 	fmt.Printf("IndicatorValues[0]: %#v\n", indicatorValues[0])

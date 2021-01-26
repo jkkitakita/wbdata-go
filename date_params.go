@@ -8,25 +8,52 @@ import (
 )
 
 const (
-	// DateParamsUnknown is type of date params for unknown
-	DateParamsUnknown DateParamsType = iota
-	// DateParamsDate is type of date params for date
-	DateParamsDate
-	// DateParamsRange is type of date params for date range
-	DateParamsRange
-	// DateParamsYearToDate is type of date params for year-to-date
-	DateParamsYearToDate
+	// FilterParamsUnknown is type of filter params for unknown
+	FilterParamsUnknown FilterParamsType = iota
+	// FilterParamsDate is type of filter params for date
+	FilterParamsDate
+	// FilterParamsDateRange is type of filter params for date range
+	FilterParamsDateRange
+	// FilterParamsYearToDate is type of filter params for year-to-date
+	FilterParamsYearToDate
+	// FilterParamsMRV is type of filter params for most recent values
+	FilterParamsMRV
+
+	// FrequencyUnknown is frequency type of unknown
+	FrequencyUnknown FrequencyType = iota
+	// FrequencyMonthly is frequency type of monthly (M)
+	FrequencyMonthly
+	// FrequencyQuarterly is frequency type of quarterly (Q)
+	FrequencyQuarterly
+	// FrequencyYearly is frequency type of yearly (Y)
+	FrequencyYearly
 )
 
 type (
-	// DateParamsType is type of date params
-	DateParamsType uint
+	// FilterParamsType is type of filter params
+	FilterParamsType uint
+	// FrequencyType is type of frequency
+	FrequencyType uint
 
-	// DateParams is struct for date params
-	DateParams struct {
-		DateParamsType DateParamsType
-		Date           string
-		DateRange      *DateRange
+	// FilterParams is struct for filter params
+	FilterParams struct {
+		FilterParamsType FilterParamsType
+		DateParam        *DateParam
+		RecentParam      *RecentParam
+	}
+
+	// DateParam is struct for date params
+	DateParam struct {
+		Date      string
+		DateRange *DateRange
+	}
+
+	// RecentParam is struct for recent params
+	RecentParam struct {
+		FrequencyType    FrequencyType
+		MostRecentValues uint
+		IsNotEmpty       bool
+		IsGapFill        bool
 	}
 
 	// DateRange is a struct for API's query params about date
@@ -36,7 +63,7 @@ type (
 	}
 )
 
-func (dp *DateParams) addDateParams(req *http.Request) error {
+func (dp *FilterParams) addFilterParams(req *http.Request) error {
 	if dp == nil {
 		return nil
 	}
@@ -45,64 +72,159 @@ func (dp *DateParams) addDateParams(req *http.Request) error {
 		return err
 	}
 
-	params := req.URL.Query()
-	params.Add(`date`, dp.buildDateParams())
-	req.URL.RawQuery = params.Encode()
-
-	return nil
-}
-
-func (dp *DateParams) validate() error {
-	switch dp.DateParamsType {
-	case DateParamsDate:
-		if dp.DateRange != nil {
-			return fmt.Errorf("date range should not be specified with DateParamsDate. date params: %v", dp)
-		}
-		if dp.Date == "" {
-			return fmt.Errorf("date is required. date param: %v", dp)
-		}
-		_, err := parseDate(dp.Date)
-		if err != nil {
-			return err
-		}
-	case DateParamsRange:
-		if dp.Date != "" {
-			return fmt.Errorf("date should not be specified with DateParamsRange. date params: %v", dp)
-		}
-		if dp.DateRange == nil {
-			return fmt.Errorf("dateRange is required. date params: %v", dp)
-		}
-		if err := dp.DateRange.validate(); err != nil {
-			return err
-		}
-	case DateParamsYearToDate:
-		if dp.DateRange != nil {
-			return fmt.Errorf("date range should not be specified with DateParamsYearToDate. date params: %v", dp)
-		}
-		if dp.Date == "" {
-			return fmt.Errorf("date is required. date params: %v", dp)
-		}
-		_, err := time.Parse("2006", dp.Date)
-		if err != nil {
-			return err
-		}
-	default:
-		return fmt.Errorf("date params type is unknown. date params: %v", dp)
+	switch dp.FilterParamsType {
+	case FilterParamsDate, FilterParamsDateRange, FilterParamsYearToDate:
+		dp.addDateParams(req)
+	case FilterParamsMRV:
+		dp.addRecentParam(req)
 	}
 
 	return nil
 }
 
-func (dp *DateParams) buildDateParams() string {
-	switch dp.DateParamsType {
-	case DateParamsDate:
-		return dp.Date
-	case DateParamsRange:
-		return dp.DateRange.join()
-	case DateParamsYearToDate:
-		return "YTD:" + dp.Date
+func (dp *FilterParams) addDateParams(req *http.Request) {
+	params := req.URL.Query()
+	params.Set(`date`, dp.buildDateParams())
+	req.URL.RawQuery = params.Encode()
+}
+
+func (dp *FilterParams) addRecentParam(req *http.Request) {
+	params := req.URL.Query()
+
+	if dp.RecentParam.IsNotEmpty {
+		params.Set(`mrnev`, fmt.Sprint(dp.RecentParam.MostRecentValues))
+	} else {
+		params.Set(`mrv`, fmt.Sprint(dp.RecentParam.MostRecentValues))
+	}
+
+	if dp.RecentParam.IsGapFill {
+		params.Set(`gapfill`, `Y`)
+	}
+
+	switch dp.RecentParam.FrequencyType {
+	case FrequencyMonthly:
+		params.Set(`frequency`, `M`)
+	case FrequencyQuarterly:
+		params.Set(`frequency`, `Q`)
+	case FrequencyYearly:
+		params.Set(`frequency`, `Y`)
+	}
+
+	req.URL.RawQuery = params.Encode()
+}
+
+func (dp *FilterParams) validate() error {
+	switch dp.FilterParamsType {
+	case FilterParamsDate:
+		if err := dp.validateFilterParamsDate(); err != nil {
+			return err
+		}
+	case FilterParamsDateRange:
+		if err := dp.validateFilterParamsDateRange(); err != nil {
+			return err
+		}
+	case FilterParamsYearToDate:
+		if err := dp.validateFilterParamsYearToDate(); err != nil {
+			return err
+		}
+	case FilterParamsMRV:
+		if err := dp.validateFilterParamsMRV(); err != nil {
+			return err
+		}
 	default:
-		fmt.Printf("date params type is invalid. date params: %v", dp)
+		return fmt.Errorf("filter params type is unknown. filter params: %v", dp)
+	}
+
+	return nil
+}
+
+func (dp *FilterParams) validateFilterParamsDate() error {
+	if dp.RecentParam != nil {
+		return fmt.Errorf("recent param should not be specified with FilterParamsDate. filter params: %v", dp)
+	}
+	if dp.DateParam.DateRange != nil {
+		return fmt.Errorf("date range should not be specified with FilterParamsDate. filter params: %v", dp)
+	}
+	if dp.DateParam.Date == "" {
+		return fmt.Errorf("date is required. filter params: %v", dp)
+	}
+	_, err := parseDate(dp.DateParam.Date)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (dp *FilterParams) validateFilterParamsDateRange() error {
+	if dp.RecentParam != nil {
+		return fmt.Errorf("recent param should not be specified with FilterParamsDateRange. filter params: %v", dp)
+	}
+	if dp.DateParam.Date != "" {
+		return fmt.Errorf("date should not be specified with FilterParamsDateRange. filter params: %v", dp)
+	}
+	if dp.DateParam.DateRange == nil {
+		return fmt.Errorf("dateRange is required. filter params: %v", dp)
+	}
+	if err := dp.DateParam.DateRange.validate(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (dp *FilterParams) validateFilterParamsYearToDate() error {
+	if dp.RecentParam != nil {
+		return fmt.Errorf("recent param should not be specified with FilterParamsYearToDate. filter params: %v", dp)
+	}
+	if dp.DateParam.DateRange != nil {
+		return fmt.Errorf("date range should not be specified with FilterParamsYearToDate. filter params: %v", dp)
+	}
+	if dp.DateParam.Date == "" {
+		return fmt.Errorf("date is required. filter params: %v", dp)
+	}
+	_, err := time.Parse("2006", dp.DateParam.Date)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (dp *FilterParams) validateFilterParamsMRV() error {
+	if dp.DateParam != nil {
+		return fmt.Errorf("date param should not be specified with FilterParamsMRV. filter params: %v", dp)
+	}
+	if dp.RecentParam == nil {
+		return fmt.Errorf("recent param is required. filter params: %v", dp)
+	}
+
+	switch dp.RecentParam.FrequencyType {
+	case FrequencyMonthly, FrequencyQuarterly, FrequencyYearly:
+	default:
+		return fmt.Errorf("frequency type should be quarterly (Q), monthly (M) or yearly (Y). filter params: %v", dp)
+	}
+
+	if dp.RecentParam.MostRecentValues == 0 {
+		return fmt.Errorf("most recent values should be larger then 0. filter params: %v", dp)
+	}
+	if dp.RecentParam.IsGapFill && dp.RecentParam.IsNotEmpty {
+		return fmt.Errorf("IsGapFill cannot be true when IsNotEmpty is true. filter params: %v", dp)
+	}
+
+	return nil
+}
+
+func (dp *FilterParams) buildDateParams() string {
+	switch dp.FilterParamsType {
+	case FilterParamsDate:
+		return dp.DateParam.Date
+	case FilterParamsDateRange:
+		return dp.DateParam.DateRange.join()
+	case FilterParamsYearToDate:
+		return "YTD:" + dp.DateParam.Date
+	default:
+		fmt.Printf("filter params type is invalid. filter params: %v", dp)
 		return ""
 	}
 }

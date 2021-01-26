@@ -459,10 +459,8 @@ func TestCountriesService_List(t *testing.T) {
 				t.Errorf("CountriesService.List() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if tt.want != nil {
-				if got.Page != tt.want.Page || got.PerPage != tt.want.PerPage {
-					t.Errorf("CountriesService.List() got = %v, want %v", got, tt.want)
-				}
+			if tt.want != nil && (got.Page != tt.want.Page || got.PerPage != tt.want.PerPage) {
+				t.Errorf("CountriesService.List() got = %v, want %v", got, tt.want)
 			}
 
 			for i := range got1 {

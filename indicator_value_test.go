@@ -23,18 +23,31 @@ func TestIndicatorValuesService_List(t *testing.T) {
 		"LastUpdated",
 	)
 
-	defaultDateParams := &DateParams{
-		DateParamsType: DateParamsRange,
-		DateRange: &DateRange{
-			Start: testutils.TestDefaultDateStart,
-			End:   testutils.TestDefaultDateEnd,
+	defaultFilterDateParams := &FilterParams{
+		FilterParamsType: FilterParamsDateRange,
+		DateParam: &DateParam{
+			DateRange: &DateRange{
+				Start: testutils.TestDefaultDateStart,
+				End:   testutils.TestDefaultDateEnd,
+			},
 		},
 	}
-	invalidDateParams := &DateParams{
-		DateParamsType: DateParamsRange,
-		DateRange: &DateRange{
-			Start: testutils.TestInvalidDate,
-			End:   testutils.TestDefaultDateEnd,
+	defaultFilterRecentParams := &FilterParams{
+		FilterParamsType: FilterParamsMRV,
+		RecentParam: &RecentParam{
+			FrequencyType:    FrequencyYearly,
+			MostRecentValues: 1,
+			IsNotEmpty:       false,
+			IsGapFill:        false,
+		},
+	}
+	invalidFilterDateParams := &FilterParams{
+		FilterParamsType: FilterParamsDateRange,
+		DateParam: &DateParam{
+			DateRange: &DateRange{
+				Start: testutils.TestInvalidDate,
+				End:   testutils.TestDefaultDateEnd,
+			},
 		},
 	}
 	defaultPageParams := &PageParams{
@@ -47,9 +60,9 @@ func TestIndicatorValuesService_List(t *testing.T) {
 	}
 
 	type args struct {
-		indicatorID string
-		datePatams  *DateParams
-		pages       *PageParams
+		indicatorID  string
+		filterParams *FilterParams
+		pages        *PageParams
 	}
 	tests := []struct {
 		name       string
@@ -74,11 +87,11 @@ func TestIndicatorValuesService_List(t *testing.T) {
 			wantErrRes: nil,
 		},
 		{
-			name: "success with date params",
+			name: "success with filter date params",
 			args: args{
-				indicatorID: testutils.TestDefaultIndicatorID,
-				datePatams:  defaultDateParams,
-				pages:       defaultPageParams,
+				indicatorID:  testutils.TestDefaultIndicatorID,
+				filterParams: defaultFilterDateParams,
+				pages:        defaultPageParams,
 			},
 			want: &PageSummaryWithSourceID{
 				Page:     1,
@@ -123,6 +136,55 @@ func TestIndicatorValuesService_List(t *testing.T) {
 			wantErrRes: nil,
 		},
 		{
+			name: "success with filter recent params",
+			args: args{
+				indicatorID:  testutils.TestDefaultIndicatorID,
+				filterParams: defaultFilterRecentParams,
+				pages:        defaultPageParams,
+			},
+			want: &PageSummaryWithSourceID{
+				Page:     1,
+				PerPage:  2,
+				SourceID: "2",
+			},
+			want1: []*IndicatorValue{
+				{
+					Indicator: IDAndValue{
+						ID:    "NY.GDP.MKTP.CD",
+						Value: "GDP (current US$)",
+					},
+					Country: IDAndValue{
+						ID:    "1A",
+						Value: "Arab World",
+					},
+					Countryiso3code: "ARB",
+					Date:            "2019",
+					Value:           2.81741458466511e+12,
+					Unit:            "",
+					ObsStatus:       "",
+					Decimal:         0,
+				},
+				{
+					Indicator: IDAndValue{
+						ID:    "NY.GDP.MKTP.CD",
+						Value: "GDP (current US$)",
+					},
+					Country: IDAndValue{
+						ID:    "S3",
+						Value: "Caribbean small states",
+					},
+					Countryiso3code: "CSS",
+					Date:            "2019",
+					Value:           7.77217149178506e+10,
+					Unit:            "",
+					ObsStatus:       "",
+					Decimal:         0,
+				},
+			},
+			wantErr:    false,
+			wantErrRes: nil,
+		},
+		{
 			name: "failure because invalid indicator id",
 			args: args{
 				indicatorID: testutils.TestInvalidIndicatorID,
@@ -148,10 +210,10 @@ func TestIndicatorValuesService_List(t *testing.T) {
 			},
 		},
 		{
-			name: "failure because invalid date params",
+			name: "failure because invalid filter params",
 			args: args{
-				indicatorID: testutils.TestDefaultIndicatorID,
-				datePatams:  invalidDateParams,
+				indicatorID:  testutils.TestDefaultIndicatorID,
+				filterParams: invalidFilterDateParams,
 			},
 			want:       nil,
 			want1:      nil,
@@ -175,7 +237,7 @@ func TestIndicatorValuesService_List(t *testing.T) {
 			i := &IndicatorValuesService{
 				client: client,
 			}
-			got, got1, err := i.List(tt.args.indicatorID, tt.args.datePatams, tt.args.pages)
+			got, got1, err := i.List(tt.args.indicatorID, tt.args.filterParams, tt.args.pages)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("IndicatorValuesService.List() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -185,10 +247,8 @@ func TestIndicatorValuesService_List(t *testing.T) {
 					t.Errorf("IndicatorValuesService.List() err = %v, wantErrRes %v", err, tt.wantErrRes)
 				}
 			}
-			if tt.want != nil {
-				if !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
-					t.Errorf("NewClient() = %+v, want %+v", got, tt.want)
-				}
+			if tt.want != nil && !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
+				t.Errorf("NewClient() = %+v, want %+v", got, tt.want)
 			}
 			if tt.want1 != nil {
 				for i := range got1 {
@@ -212,18 +272,22 @@ func TestIndicatorValuesService_ListWithFootnote(t *testing.T) {
 		"LastUpdated",
 	)
 
-	defaultDateParams := &DateParams{
-		DateParamsType: DateParamsRange,
-		DateRange: &DateRange{
-			Start: testutils.TestDefaultDateStart,
-			End:   testutils.TestDefaultDateEnd,
+	defaultFilterDateParams := &FilterParams{
+		FilterParamsType: FilterParamsDateRange,
+		DateParam: &DateParam{
+			DateRange: &DateRange{
+				Start: testutils.TestDefaultDateStart,
+				End:   testutils.TestDefaultDateEnd,
+			},
 		},
 	}
-	invalidDateParams := &DateParams{
-		DateParamsType: DateParamsRange,
-		DateRange: &DateRange{
-			Start: testutils.TestInvalidDate,
-			End:   testutils.TestDefaultDateEnd,
+	invalidFilterDateParams := &FilterParams{
+		FilterParamsType: FilterParamsDateRange,
+		DateParam: &DateParam{
+			DateRange: &DateRange{
+				Start: testutils.TestInvalidDate,
+				End:   testutils.TestDefaultDateEnd,
+			},
 		},
 	}
 	defaultPageParams := &PageParams{
@@ -236,9 +300,9 @@ func TestIndicatorValuesService_ListWithFootnote(t *testing.T) {
 	}
 
 	type args struct {
-		indicatorID string
-		datePatams  *DateParams
-		pages       *PageParams
+		indicatorID  string
+		filterParams *FilterParams
+		pages        *PageParams
 	}
 	tests := []struct {
 		name       string
@@ -263,11 +327,11 @@ func TestIndicatorValuesService_ListWithFootnote(t *testing.T) {
 			wantErrRes: nil,
 		},
 		{
-			name: "success with date params",
+			name: "success with filter params",
 			args: args{
-				indicatorID: testutils.TestDefaultIndicatorID,
-				datePatams:  defaultDateParams,
-				pages:       defaultPageParams,
+				indicatorID:  testutils.TestDefaultIndicatorID,
+				filterParams: defaultFilterDateParams,
+				pages:        defaultPageParams,
 			},
 			want: &PageSummaryWithSourceID{
 				Page:     1,
@@ -343,10 +407,10 @@ func TestIndicatorValuesService_ListWithFootnote(t *testing.T) {
 			},
 		},
 		{
-			name: "failure because invalid date params",
+			name: "failure because invalid filter params",
 			args: args{
-				indicatorID: testutils.TestDefaultIndicatorID,
-				datePatams:  invalidDateParams,
+				indicatorID:  testutils.TestDefaultIndicatorID,
+				filterParams: invalidFilterDateParams,
 			},
 			want:       nil,
 			want1:      nil,
@@ -370,7 +434,7 @@ func TestIndicatorValuesService_ListWithFootnote(t *testing.T) {
 			i := &IndicatorValuesService{
 				client: client,
 			}
-			got, got1, err := i.ListWithFootnote(tt.args.indicatorID, tt.args.datePatams, tt.args.pages)
+			got, got1, err := i.ListWithFootnote(tt.args.indicatorID, tt.args.filterParams, tt.args.pages)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("IndicatorValuesService.ListWithFootnote() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -380,10 +444,8 @@ func TestIndicatorValuesService_ListWithFootnote(t *testing.T) {
 					t.Errorf("IndicatorValuesService.ListWithFootnote() err = %v, wantErrRes %v", err, tt.wantErrRes)
 				}
 			}
-			if tt.want != nil {
-				if !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
-					t.Errorf("NewClient() = %+v, want %+v", got, tt.want)
-				}
+			if tt.want != nil && !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
+				t.Errorf("NewClient() = %+v, want %+v", got, tt.want)
 			}
 			if tt.want1 != nil {
 				for i := range got1 {
@@ -407,18 +469,22 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 		"LastUpdated",
 	)
 
-	defaultDateParams := &DateParams{
-		DateParamsType: DateParamsRange,
-		DateRange: &DateRange{
-			Start: testutils.TestDefaultDateStart,
-			End:   testutils.TestDefaultDateEnd,
+	defaultFilterDateParams := &FilterParams{
+		FilterParamsType: FilterParamsDateRange,
+		DateParam: &DateParam{
+			DateRange: &DateRange{
+				Start: testutils.TestDefaultDateStart,
+				End:   testutils.TestDefaultDateEnd,
+			},
 		},
 	}
-	invalidDateParams := &DateParams{
-		DateParamsType: DateParamsRange,
-		DateRange: &DateRange{
-			Start: testutils.TestInvalidDate,
-			End:   testutils.TestDefaultDateEnd,
+	invalidFilterDateParams := &FilterParams{
+		FilterParamsType: FilterParamsDateRange,
+		DateParam: &DateParam{
+			DateRange: &DateRange{
+				Start: testutils.TestInvalidDate,
+				End:   testutils.TestDefaultDateEnd,
+			},
 		},
 	}
 	defaultPageParams := &PageParams{
@@ -431,10 +497,10 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 	}
 
 	type args struct {
-		countryIDs  []string
-		indicatorID string
-		datePatams  *DateParams
-		pages       *PageParams
+		countryIDs   []string
+		indicatorID  string
+		filterParams *FilterParams
+		pages        *PageParams
 	}
 	tests := []struct {
 		name       string
@@ -462,10 +528,10 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 		{
 			name: "success with params",
 			args: args{
-				countryIDs:  testutils.TestDefaultCountryIDs,
-				indicatorID: testutils.TestDefaultIndicatorID,
-				datePatams:  defaultDateParams,
-				pages:       defaultPageParams,
+				countryIDs:   testutils.TestDefaultCountryIDs,
+				indicatorID:  testutils.TestDefaultIndicatorID,
+				filterParams: defaultFilterDateParams,
+				pages:        defaultPageParams,
 			},
 			want: &PageSummaryWithSourceID{
 				Page:     1,
@@ -564,11 +630,11 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 			},
 		},
 		{
-			name: "failure because invalid date params",
+			name: "failure because invalid filter params",
 			args: args{
-				countryIDs:  testutils.TestDefaultCountryIDs,
-				indicatorID: testutils.TestDefaultIndicatorID,
-				datePatams:  invalidDateParams,
+				countryIDs:   testutils.TestDefaultCountryIDs,
+				indicatorID:  testutils.TestDefaultIndicatorID,
+				filterParams: invalidFilterDateParams,
 			},
 			want:       nil,
 			want1:      nil,
@@ -593,7 +659,7 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 			i := &IndicatorValuesService{
 				client: client,
 			}
-			got, got1, err := i.ListByCountryIDs(tt.args.countryIDs, tt.args.indicatorID, tt.args.datePatams, tt.args.pages)
+			got, got1, err := i.ListByCountryIDs(tt.args.countryIDs, tt.args.indicatorID, tt.args.filterParams, tt.args.pages)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("IndicatorValuesService.ListByCountryIDs() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -603,10 +669,8 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 					t.Errorf("IndicatorValuesService.ListByCountryIDs() err = %v, wantErrRes %v", err, tt.wantErrRes)
 				}
 			}
-			if tt.want != nil {
-				if !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
-					t.Errorf("IndicatorValuesService.ListByCountryIDs() got = %+v, want %+v", got, tt.want)
-				}
+			if tt.want != nil && !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
+				t.Errorf("IndicatorValuesService.ListByCountryIDs() got = %+v, want %+v", got, tt.want)
 			}
 			if tt.want1 != nil {
 				for i := range got1 {
@@ -630,18 +694,22 @@ func TestIndicatorValuesService_ListByCountryIDsWithFootnote(t *testing.T) {
 		"LastUpdated",
 	)
 
-	defaultDateParams := &DateParams{
-		DateParamsType: DateParamsRange,
-		DateRange: &DateRange{
-			Start: testutils.TestDefaultDateStart,
-			End:   testutils.TestDefaultDateEnd,
+	defaultFilterDateParams := &FilterParams{
+		FilterParamsType: FilterParamsDateRange,
+		DateParam: &DateParam{
+			DateRange: &DateRange{
+				Start: testutils.TestDefaultDateStart,
+				End:   testutils.TestDefaultDateEnd,
+			},
 		},
 	}
-	invalidDateParams := &DateParams{
-		DateParamsType: DateParamsRange,
-		DateRange: &DateRange{
-			Start: testutils.TestInvalidDate,
-			End:   testutils.TestDefaultDateEnd,
+	invalidFilterDateParams := &FilterParams{
+		FilterParamsType: FilterParamsDateRange,
+		DateParam: &DateParam{
+			DateRange: &DateRange{
+				Start: testutils.TestInvalidDate,
+				End:   testutils.TestDefaultDateEnd,
+			},
 		},
 	}
 	defaultPageParams := &PageParams{
@@ -654,10 +722,10 @@ func TestIndicatorValuesService_ListByCountryIDsWithFootnote(t *testing.T) {
 	}
 
 	type args struct {
-		countryIDs  []string
-		indicatorID string
-		datePatams  *DateParams
-		pages       *PageParams
+		countryIDs   []string
+		indicatorID  string
+		filterParams *FilterParams
+		pages        *PageParams
 	}
 	tests := []struct {
 		name       string
@@ -685,10 +753,10 @@ func TestIndicatorValuesService_ListByCountryIDsWithFootnote(t *testing.T) {
 		{
 			name: "success with params",
 			args: args{
-				countryIDs:  testutils.TestDefaultCountryIDs,
-				indicatorID: testutils.TestDefaultIndicatorID,
-				datePatams:  defaultDateParams,
-				pages:       defaultPageParams,
+				countryIDs:   testutils.TestDefaultCountryIDs,
+				indicatorID:  testutils.TestDefaultIndicatorID,
+				filterParams: defaultFilterDateParams,
+				pages:        defaultPageParams,
 			},
 			want: &PageSummaryWithSourceID{
 				Page:     1,
@@ -793,11 +861,11 @@ func TestIndicatorValuesService_ListByCountryIDsWithFootnote(t *testing.T) {
 			},
 		},
 		{
-			name: "failure because invalid date params",
+			name: "failure because invalid filter params",
 			args: args{
-				countryIDs:  testutils.TestDefaultCountryIDs,
-				indicatorID: testutils.TestDefaultIndicatorID,
-				datePatams:  invalidDateParams,
+				countryIDs:   testutils.TestDefaultCountryIDs,
+				indicatorID:  testutils.TestDefaultIndicatorID,
+				filterParams: invalidFilterDateParams,
 			},
 			want:       nil,
 			want1:      nil,
@@ -822,7 +890,7 @@ func TestIndicatorValuesService_ListByCountryIDsWithFootnote(t *testing.T) {
 			i := &IndicatorValuesService{
 				client: client,
 			}
-			got, got1, err := i.ListByCountryIDsWithFootnote(tt.args.countryIDs, tt.args.indicatorID, tt.args.datePatams, tt.args.pages)
+			got, got1, err := i.ListByCountryIDsWithFootnote(tt.args.countryIDs, tt.args.indicatorID, tt.args.filterParams, tt.args.pages)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("IndicatorValuesService.ListByCountryIDsWithFootnote() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -832,10 +900,8 @@ func TestIndicatorValuesService_ListByCountryIDsWithFootnote(t *testing.T) {
 					t.Errorf("IndicatorValuesService.ListByCountryIDsWithFootnote() err = %v, wantErrRes %v", err, tt.wantErrRes)
 				}
 			}
-			if tt.want != nil {
-				if !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
-					t.Errorf("IndicatorValuesService.ListByCountryIDsWithFootnote() got = %+v, want %+v", got, tt.want)
-				}
+			if tt.want != nil && !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
+				t.Errorf("IndicatorValuesService.ListByCountryIDsWithFootnote() got = %+v, want %+v", got, tt.want)
 			}
 			if tt.want1 != nil {
 				for i := range got1 {
@@ -859,18 +925,22 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 		"LastUpdated",
 	)
 
-	defaultDateParams := &DateParams{
-		DateParamsType: DateParamsRange,
-		DateRange: &DateRange{
-			Start: testutils.TestDefaultDateStart,
-			End:   testutils.TestDefaultDateEnd,
+	defaultFilterDateParams := &FilterParams{
+		FilterParamsType: FilterParamsDateRange,
+		DateParam: &DateParam{
+			DateRange: &DateRange{
+				Start: testutils.TestDefaultDateStart,
+				End:   testutils.TestDefaultDateEnd,
+			},
 		},
 	}
-	invalidDateParams := &DateParams{
-		DateParamsType: DateParamsRange,
-		DateRange: &DateRange{
-			Start: testutils.TestInvalidDate,
-			End:   testutils.TestDefaultDateEnd,
+	invalidFilterDateParams := &FilterParams{
+		FilterParamsType: FilterParamsDateRange,
+		DateParam: &DateParam{
+			DateRange: &DateRange{
+				Start: testutils.TestInvalidDate,
+				End:   testutils.TestDefaultDateEnd,
+			},
 		},
 	}
 	defaultPageParams := &PageParams{
@@ -885,7 +955,7 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 	type args struct {
 		indicatorIDs []string
 		sourceID     string
-		datePatams   *DateParams
+		filterParams *FilterParams
 		pages        *PageParams
 	}
 	tests := []struct {
@@ -915,7 +985,7 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 			args: args{
 				indicatorIDs: testutils.TestDefaultIndicatorIDs,
 				sourceID:     testutils.TestDefaultSourceID,
-				datePatams:   defaultDateParams,
+				filterParams: defaultFilterDateParams,
 				pages:        defaultPageParams,
 			},
 			want: &PageSummaryWithLastUpdated{
@@ -1009,11 +1079,11 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 			wantErrRes: nil,
 		},
 		{
-			name: "failure because invalid date params",
+			name: "failure because invalid filter params",
 			args: args{
 				indicatorIDs: testutils.TestDefaultIndicatorIDs,
 				sourceID:     testutils.TestDefaultSourceID,
-				datePatams:   invalidDateParams,
+				filterParams: invalidFilterDateParams,
 			},
 			want:       nil,
 			want1:      nil,
@@ -1038,7 +1108,7 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 			i := &IndicatorValuesService{
 				client: client,
 			}
-			got, got1, err := i.ListBySourceID(tt.args.indicatorIDs, tt.args.sourceID, tt.args.datePatams, tt.args.pages)
+			got, got1, err := i.ListBySourceID(tt.args.indicatorIDs, tt.args.sourceID, tt.args.filterParams, tt.args.pages)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("IndicatorValuesService.ListBySourceID() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -1048,10 +1118,8 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 					t.Errorf("IndicatorValuesService.ListBySourceID() err = %v, wantErrRes %v", err, tt.wantErrRes)
 				}
 			}
-			if tt.want != nil {
-				if !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
-					t.Errorf("IndicatorValuesService.ListBySourceID() got = %+v, want %+v", got, tt.want)
-				}
+			if tt.want != nil && !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
+				t.Errorf("IndicatorValuesService.ListBySourceID() got = %+v, want %+v", got, tt.want)
 			}
 			if tt.want1 != nil {
 				for i := range got1 {
@@ -1075,18 +1143,22 @@ func TestIndicatorValuesService_ListBySourceIDWithFootnote(t *testing.T) {
 		"LastUpdated",
 	)
 
-	defaultDateParams := &DateParams{
-		DateParamsType: DateParamsRange,
-		DateRange: &DateRange{
-			Start: testutils.TestDefaultDateStart,
-			End:   testutils.TestDefaultDateEnd,
+	defaultFilterDateParams := &FilterParams{
+		FilterParamsType: FilterParamsDateRange,
+		DateParam: &DateParam{
+			DateRange: &DateRange{
+				Start: testutils.TestDefaultDateStart,
+				End:   testutils.TestDefaultDateEnd,
+			},
 		},
 	}
-	invalidDateParams := &DateParams{
-		DateParamsType: DateParamsRange,
-		DateRange: &DateRange{
-			Start: testutils.TestInvalidDate,
-			End:   testutils.TestDefaultDateEnd,
+	invalidFilterDateParams := &FilterParams{
+		FilterParamsType: FilterParamsDateRange,
+		DateParam: &DateParam{
+			DateRange: &DateRange{
+				Start: testutils.TestInvalidDate,
+				End:   testutils.TestDefaultDateEnd,
+			},
 		},
 	}
 	defaultPageParams := &PageParams{
@@ -1101,7 +1173,7 @@ func TestIndicatorValuesService_ListBySourceIDWithFootnote(t *testing.T) {
 	type args struct {
 		indicatorIDs []string
 		sourceID     string
-		datePatams   *DateParams
+		filterParams *FilterParams
 		pages        *PageParams
 	}
 	tests := []struct {
@@ -1131,7 +1203,7 @@ func TestIndicatorValuesService_ListBySourceIDWithFootnote(t *testing.T) {
 			args: args{
 				indicatorIDs: testutils.TestDefaultIndicatorIDs,
 				sourceID:     testutils.TestDefaultSourceID,
-				datePatams:   defaultDateParams,
+				filterParams: defaultFilterDateParams,
 				pages:        defaultPageParams,
 			},
 			want: &PageSummaryWithLastUpdated{
@@ -1231,11 +1303,11 @@ func TestIndicatorValuesService_ListBySourceIDWithFootnote(t *testing.T) {
 			wantErrRes: nil,
 		},
 		{
-			name: "failure because invalid date params",
+			name: "failure because invalid filter params",
 			args: args{
 				indicatorIDs: testutils.TestDefaultIndicatorIDs,
 				sourceID:     testutils.TestDefaultSourceID,
-				datePatams:   invalidDateParams,
+				filterParams: invalidFilterDateParams,
 			},
 			want:       nil,
 			want1:      nil,
@@ -1263,7 +1335,7 @@ func TestIndicatorValuesService_ListBySourceIDWithFootnote(t *testing.T) {
 			got, got1, err := i.ListBySourceIDWithFootnote(
 				tt.args.indicatorIDs,
 				tt.args.sourceID,
-				tt.args.datePatams,
+				tt.args.filterParams,
 				tt.args.pages,
 			)
 			if (err != nil) != tt.wantErr {
@@ -1275,10 +1347,8 @@ func TestIndicatorValuesService_ListBySourceIDWithFootnote(t *testing.T) {
 					t.Errorf("IndicatorValuesService.ListBySourceIDWithFootnote() err = %v, wantErrRes %v", err, tt.wantErrRes)
 				}
 			}
-			if tt.want != nil {
-				if !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
-					t.Errorf("IndicatorValuesService.ListBySourceIDWithFootnote() got = %+v, want %+v", got, tt.want)
-				}
+			if tt.want != nil && !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
+				t.Errorf("IndicatorValuesService.ListBySourceIDWithFootnote() got = %+v, want %+v", got, tt.want)
 			}
 			if tt.want1 != nil {
 				for i := range got1 {
@@ -1302,18 +1372,22 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 		"LastUpdated",
 	)
 
-	defaultDateParams := &DateParams{
-		DateParamsType: DateParamsRange,
-		DateRange: &DateRange{
-			Start: testutils.TestDefaultDateStart,
-			End:   testutils.TestDefaultDateEnd,
+	defaultFilterDateParams := &FilterParams{
+		FilterParamsType: FilterParamsDateRange,
+		DateParam: &DateParam{
+			DateRange: &DateRange{
+				Start: testutils.TestDefaultDateStart,
+				End:   testutils.TestDefaultDateEnd,
+			},
 		},
 	}
-	invalidDateParams := &DateParams{
-		DateParamsType: DateParamsRange,
-		DateRange: &DateRange{
-			Start: testutils.TestInvalidDate,
-			End:   testutils.TestDefaultDateEnd,
+	invalidFilterDateParams := &FilterParams{
+		FilterParamsType: FilterParamsDateRange,
+		DateParam: &DateParam{
+			DateRange: &DateRange{
+				Start: testutils.TestInvalidDate,
+				End:   testutils.TestDefaultDateEnd,
+			},
 		},
 	}
 	defaultPageParams := &PageParams{
@@ -1329,7 +1403,7 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 		countryIDs   []string
 		indicatorIDs []string
 		sourceID     string
-		datePatams   *DateParams
+		filterParams *FilterParams
 		pages        *PageParams
 	}
 	tests := []struct {
@@ -1358,7 +1432,7 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 				countryIDs:   testutils.TestDefaultCountryIDs,
 				indicatorIDs: testutils.TestDefaultIndicatorIDs,
 				sourceID:     testutils.TestDefaultSourceID,
-				datePatams:   defaultDateParams,
+				filterParams: defaultFilterDateParams,
 				pages:        defaultPageParams,
 			},
 			want: &PageSummaryWithLastUpdated{
@@ -1485,12 +1559,12 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 			wantErrRes: nil,
 		},
 		{
-			name: "failure because invalid date params",
+			name: "failure because invalid filter params",
 			args: args{
 				countryIDs:   testutils.TestDefaultCountryIDs,
 				indicatorIDs: testutils.TestDefaultIndicatorIDs,
 				sourceID:     testutils.TestDefaultSourceID,
-				datePatams:   invalidDateParams,
+				filterParams: invalidFilterDateParams,
 			},
 			want:       nil,
 			want1:      nil,
@@ -1520,7 +1594,7 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 				tt.args.countryIDs,
 				tt.args.indicatorIDs,
 				tt.args.sourceID,
-				tt.args.datePatams,
+				tt.args.filterParams,
 				tt.args.pages,
 			)
 			if (err != nil) != tt.wantErr {
@@ -1532,10 +1606,8 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 					t.Errorf("IndicatorValuesService.ListBySourceID() err = %v, wantErrRes %v", err, tt.wantErrRes)
 				}
 			}
-			if tt.want != nil {
-				if !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
-					t.Errorf("IndicatorValuesService.ListBySourceID() got = %+v, want %+v", got, tt.want)
-				}
+			if tt.want != nil && !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
+				t.Errorf("IndicatorValuesService.ListBySourceID() got = %+v, want %+v", got, tt.want)
 			}
 			if tt.want1 != nil {
 				for i := range got1 {
@@ -1559,18 +1631,22 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceIDWithFootnote(t *testi
 		"LastUpdated",
 	)
 
-	defaultDateParams := &DateParams{
-		DateParamsType: DateParamsRange,
-		DateRange: &DateRange{
-			Start: testutils.TestDefaultDateStart,
-			End:   testutils.TestDefaultDateEnd,
+	defaultFilterDateParams := &FilterParams{
+		FilterParamsType: FilterParamsDateRange,
+		DateParam: &DateParam{
+			DateRange: &DateRange{
+				Start: testutils.TestDefaultDateStart,
+				End:   testutils.TestDefaultDateEnd,
+			},
 		},
 	}
-	invalidDateParams := &DateParams{
-		DateParamsType: DateParamsRange,
-		DateRange: &DateRange{
-			Start: testutils.TestInvalidDate,
-			End:   testutils.TestDefaultDateEnd,
+	invalidFilterDateParams := &FilterParams{
+		FilterParamsType: FilterParamsDateRange,
+		DateParam: &DateParam{
+			DateRange: &DateRange{
+				Start: testutils.TestInvalidDate,
+				End:   testutils.TestDefaultDateEnd,
+			},
 		},
 	}
 	defaultPageParams := &PageParams{
@@ -1586,7 +1662,7 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceIDWithFootnote(t *testi
 		countryIDs   []string
 		indicatorIDs []string
 		sourceID     string
-		datePatams   *DateParams
+		filterParams *FilterParams
 		pages        *PageParams
 	}
 	tests := []struct {
@@ -1615,7 +1691,7 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceIDWithFootnote(t *testi
 				countryIDs:   testutils.TestDefaultCountryIDs,
 				indicatorIDs: testutils.TestDefaultIndicatorIDs,
 				sourceID:     testutils.TestDefaultSourceID,
-				datePatams:   defaultDateParams,
+				filterParams: defaultFilterDateParams,
 				pages:        defaultPageParams,
 			},
 			want: &PageSummaryWithLastUpdated{
@@ -1748,12 +1824,12 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceIDWithFootnote(t *testi
 			wantErrRes: nil,
 		},
 		{
-			name: "failure because invalid date params",
+			name: "failure because invalid filter params",
 			args: args{
 				countryIDs:   testutils.TestDefaultCountryIDs,
 				indicatorIDs: testutils.TestDefaultIndicatorIDs,
 				sourceID:     testutils.TestDefaultSourceID,
-				datePatams:   invalidDateParams,
+				filterParams: invalidFilterDateParams,
 			},
 			want:       nil,
 			want1:      nil,
@@ -1783,7 +1859,7 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceIDWithFootnote(t *testi
 				tt.args.countryIDs,
 				tt.args.indicatorIDs,
 				tt.args.sourceID,
-				tt.args.datePatams,
+				tt.args.filterParams,
 				tt.args.pages,
 			)
 			if (err != nil) != tt.wantErr {
@@ -1803,14 +1879,12 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceIDWithFootnote(t *testi
 					)
 				}
 			}
-			if tt.want != nil {
-				if !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
-					t.Errorf(
-						"IndicatorValuesService.ListByCountryIDsAndSourceIDWithFootnote() got = %+v, want %+v",
-						got,
-						tt.want,
-					)
-				}
+			if tt.want != nil && !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
+				t.Errorf(
+					"IndicatorValuesService.ListByCountryIDsAndSourceIDWithFootnote() got = %+v, want %+v",
+					got,
+					tt.want,
+				)
 			}
 			if tt.want1 != nil {
 				for i := range got1 {

@@ -100,10 +100,8 @@ func TestIndicatorsService_List(t *testing.T) {
 				t.Errorf("IndicatorsService.List() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if tt.want != nil {
-				if got.Page != tt.want.Page || got.PerPage != tt.want.PerPage {
-					t.Errorf("IndicatorsService.List() got = %v, want %v", got, tt.want)
-				}
+			if tt.want != nil && (got.Page != tt.want.Page || got.PerPage != tt.want.PerPage) {
+				t.Errorf("IndicatorsService.List() got = %v, want %v", got, tt.want)
 			}
 			for i := range got1 {
 				if !reflect.DeepEqual(got1[i], tt.want1[i]) {
@@ -318,10 +316,8 @@ func TestIndicatorsService_ListByTopicID(t *testing.T) {
 				t.Errorf("IndicatorsService.ListByTopicID() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if tt.want != nil {
-				if got.Page != tt.want.Page || got.PerPage != tt.want.PerPage {
-					t.Errorf("IndicatorsService.ListByTopicID() got = %v, want %v", got, tt.want)
-				}
+			if tt.want != nil && (got.Page != tt.want.Page || got.PerPage != tt.want.PerPage) {
+				t.Errorf("IndicatorsService.ListByTopicID() got = %v, want %v", got, tt.want)
 			}
 			for i := range got1 {
 				if !reflect.DeepEqual(got1[i], tt.want1[i]) {
