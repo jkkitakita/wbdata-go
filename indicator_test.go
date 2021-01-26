@@ -20,10 +20,6 @@ func TestIndicatorsService_List(t *testing.T) {
 		Page:    testutils.TestInvalidPage,
 		PerPage: testutils.TestDefaultPerPage,
 	}
-	invalidPerPageParams := &PageParams{
-		Page:    testutils.TestDefaultPage,
-		PerPage: testutils.TestInvalidPerPage,
-	}
 
 	type args struct {
 		pages *PageParams
@@ -51,15 +47,6 @@ func TestIndicatorsService_List(t *testing.T) {
 			name: "failure because Page is less than 1",
 			args: args{
 				pages: invalidPageParams,
-			},
-			want:                nil,
-			wantIndicatorsCount: 0,
-			wantErr:             true,
-		},
-		{
-			name: "failure because PerPage is less than 1",
-			args: args{
-				pages: invalidPerPageParams,
 			},
 			want:                nil,
 			wantIndicatorsCount: 0,
@@ -193,10 +180,6 @@ func TestIndicatorsService_ListByTopicID(t *testing.T) {
 		Page:    testutils.TestInvalidPage,
 		PerPage: testutils.TestDefaultPerPage,
 	}
-	invalidPerPageParams := &PageParams{
-		Page:    testutils.TestDefaultPage,
-		PerPage: testutils.TestInvalidPerPage,
-	}
 
 	type args struct {
 		topicID string
@@ -237,16 +220,6 @@ func TestIndicatorsService_ListByTopicID(t *testing.T) {
 			args: args{
 				topicID: testutils.TestDefaultTopicID,
 				pages:   invalidPageParams,
-			},
-			want:                nil,
-			wantIndicatorsCount: 0,
-			wantErr:             true,
-		},
-		{
-			name: "failure because PerPage is less than 1",
-			args: args{
-				topicID: testutils.TestDefaultTopicID,
-				pages:   invalidPerPageParams,
 			},
 			want:                nil,
 			wantIndicatorsCount: 0,

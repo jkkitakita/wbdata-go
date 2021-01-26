@@ -20,10 +20,6 @@ func TestIncomeLevelsService_List(t *testing.T) {
 		Page:    testutils.TestInvalidPage,
 		PerPage: testutils.TestDefaultPerPage,
 	}
-	invalidPerPageParams := &PageParams{
-		Page:    testutils.TestDefaultPage,
-		PerPage: testutils.TestInvalidPerPage,
-	}
 
 	type args struct {
 		pages *PageParams
@@ -51,15 +47,6 @@ func TestIncomeLevelsService_List(t *testing.T) {
 			name: "failure because Page is less than 1",
 			args: args{
 				pages: invalidPageParams,
-			},
-			want:                  nil,
-			wantIncomeLevelsCount: 0,
-			wantErr:               true,
-		},
-		{
-			name: "failure because PerPage is less than 1",
-			args: args{
-				pages: invalidPerPageParams,
 			},
 			want:                  nil,
 			wantIncomeLevelsCount: 0,
