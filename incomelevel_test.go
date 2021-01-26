@@ -25,11 +25,11 @@ func TestIncomeLevelsService_List(t *testing.T) {
 		pages *PageParams
 	}
 	tests := []struct {
-		name                  string
-		args                  args
-		want                  *PageSummary
-		wantIncomeLevelsCount int
-		wantErr               bool
+		name    string
+		args    args
+		want    *PageSummary
+		want1   []*IncomeLevel
+		wantErr bool
 	}{
 		{
 			name: "success",
@@ -37,20 +37,33 @@ func TestIncomeLevelsService_List(t *testing.T) {
 				pages: defaultPageParams,
 			},
 			want: &PageSummary{
-				Page:    intOrString(testutils.TestDefaultPage),
-				PerPage: intOrString(testutils.TestDefaultPerPage),
+				Page:    1,
+				Pages:   4,
+				PerPage: 2,
+				Total:   7,
 			},
-			wantIncomeLevelsCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
-			wantErr:               false,
+			want1: []*IncomeLevel{
+				{
+					ID:       "HIC",
+					Iso2Code: "XD",
+					Value:    "High income",
+				},
+				{
+					ID:       "INX",
+					Iso2Code: "XY",
+					Value:    "Not classified",
+				},
+			},
+			wantErr: false,
 		},
 		{
 			name: "failure because Page is less than 1",
 			args: args{
 				pages: invalidPageParams,
 			},
-			want:                  nil,
-			wantIncomeLevelsCount: 0,
-			wantErr:               true,
+			want:    nil,
+			want1:   nil,
+			wantErr: true,
 		},
 	}
 	for _, tt := range tests {
@@ -63,13 +76,13 @@ func TestIncomeLevelsService_List(t *testing.T) {
 				t.Errorf("IncomeLevelsService.List() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if tt.want != nil {
-				if got.Page != tt.want.Page || got.PerPage != tt.want.PerPage {
-					t.Errorf("IncomeLevelsService.List() got = %v, want %v", got, tt.want)
-				}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("IncomeLevelsService.List() got = %v, want %v", got, tt.want)
 			}
-			if len(got1) != tt.wantIncomeLevelsCount {
-				t.Errorf("IncomeLevelsService.List() got1 = %v, want %v", got1, tt.wantIncomeLevelsCount)
+			for i := range got1 {
+				if !reflect.DeepEqual(got1[i], tt.want1[i]) {
+					t.Errorf("IncomeLevelsService.List() got1 = %v, want %v", got1[i], tt.want1[i])
+				}
 			}
 		})
 	}

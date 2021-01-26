@@ -25,32 +25,78 @@ func TestLendingTypesService_List(t *testing.T) {
 		pages *PageParams
 	}
 	tests := []struct {
-		name                  string
-		args                  args
-		want                  *PageSummary
-		wantLendingTypesCount int
-		wantErr               bool
+		name    string
+		args    args
+		want    *PageSummary
+		want1   []*LendingType
+		wantErr bool
 	}{
 		{
 			name: "success",
+			args: args{},
+			want: &PageSummary{
+				Page:    1,
+				Pages:   1,
+				PerPage: 50,
+				Total:   4,
+			},
+			want1: []*LendingType{
+				{
+					ID:       "IBD",
+					Iso2Code: "XF",
+					Value:    "IBRD",
+				},
+				{
+					ID:       "IDB",
+					Iso2Code: "XH",
+					Value:    "Blend",
+				},
+				{
+					ID:       "IDX",
+					Iso2Code: "XI",
+					Value:    "IDA",
+				},
+				{
+					ID:       "LNX",
+					Iso2Code: "XX",
+					Value:    "Not classified",
+				},
+			},
+			wantErr: false,
+		},
+		{
+			name: "success with page params",
 			args: args{
 				pages: defaultPageParams,
 			},
 			want: &PageSummary{
-				Page:    intOrString(testutils.TestDefaultPage),
-				PerPage: intOrString(testutils.TestDefaultPerPage),
+				Page:    1,
+				Pages:   2,
+				PerPage: 2,
+				Total:   4,
 			},
-			wantLendingTypesCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
-			wantErr:               false,
+			want1: []*LendingType{
+				{
+					ID:       "IBD",
+					Iso2Code: "XF",
+					Value:    "IBRD",
+				},
+				{
+					ID:       "IDB",
+					Iso2Code: "XH",
+					Value:    "Blend",
+				},
+			},
+			wantErr: false,
 		},
 		{
 			name: "failure because Page is less than 1",
 			args: args{
 				pages: invalidPageParams,
 			},
-			want:                  nil,
-			wantLendingTypesCount: 0,
-			wantErr:               true,
+			want:    nil,
+			want1:   nil,
+			wantErr: true,
 		},
 	}
 	for _, tt := range tests {
@@ -60,16 +106,16 @@ func TestLendingTypesService_List(t *testing.T) {
 			}
 			got, got1, err := lt.List(tt.args.pages)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("c.List() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("LendingTypesService.List() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if tt.want != nil {
-				if got.Page != tt.want.Page || got.PerPage != tt.want.PerPage {
-					t.Errorf("LendingTypesService.List() got = %v, want %v", got, tt.want)
-				}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("LendingTypesService.List() got = %v, want %v", got, tt.want)
 			}
-			if len(got1) != tt.wantLendingTypesCount {
-				t.Errorf("LendingTypesService.List() got1 = %v, want %v", got1, tt.wantLendingTypesCount)
+			for i := range got1 {
+				if !reflect.DeepEqual(got1[i], tt.want1[i]) {
+					t.Errorf("LendingTypesService.List() got1[i] = %v, want[i] %v", got1[i], tt.want1[i])
+				}
 			}
 		})
 	}

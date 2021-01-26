@@ -3,12 +3,11 @@ package wbdata
 import (
 	"net/http"
 	"testing"
+
+	"github.com/jkkitakita/wbdata-go/testutils"
 )
 
 func TestPageParams_addPageParams(t *testing.T) {
-	invalidNumber := 0
-	validNumber := 1
-
 	mockReq, err := http.NewRequest("GET", "/hoge", nil)
 	if err != nil {
 		t.Error("failed to generate Mock http.NewRequest")
@@ -24,39 +23,39 @@ func TestPageParams_addPageParams(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "success",
-			fields: &fields{
-				Page:    validNumber,
-				PerPage: validNumber,
-			},
+			name:    "success",
+			fields:  nil,
 			wantErr: false,
 		},
 		{
-			name:    "success with nil field",
-			fields:  nil,
+			name: "success with pages",
+			fields: &fields{
+				Page:    testutils.TestDefaultPage,
+				PerPage: testutils.TestDefaultPerPage,
+			},
 			wantErr: false,
 		},
 		{
 			name: "failure because Page is less than 1",
 			fields: &fields{
-				Page:    invalidNumber,
-				PerPage: validNumber,
+				Page:    testutils.TestInvalidPage,
+				PerPage: testutils.TestDefaultPerPage,
 			},
 			wantErr: true,
 		},
 		{
 			name: "failure because PerPage is less than 1",
 			fields: &fields{
-				Page:    validNumber,
-				PerPage: invalidNumber,
+				Page:    testutils.TestDefaultPage,
+				PerPage: testutils.TestInvalidPerPage,
 			},
 			wantErr: true,
 		},
 		{
 			name: "failure because both Page and PerPage is less than 1",
 			fields: &fields{
-				Page:    invalidNumber,
-				PerPage: invalidNumber,
+				Page:    testutils.TestInvalidPage,
+				PerPage: testutils.TestInvalidPerPage,
 			},
 			wantErr: true,
 		},

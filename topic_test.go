@@ -25,32 +25,66 @@ func TestTopicsService_List(t *testing.T) {
 		pages *PageParams
 	}
 	tests := []struct {
-		name            string
-		args            args
-		want            *PageSummary
-		wantTopicsCount int
-		wantErr         bool
+		name    string
+		args    args
+		want    *PageSummary
+		want1   []*Topic
+		wantErr bool
 	}{
 		{
 			name: "success",
+			args: args{},
+			want: &PageSummary{
+				Page:    1,
+				Pages:   1,
+				PerPage: 50,
+				Total:   21,
+			},
+			want1:   nil,
+			wantErr: false,
+		},
+		{
+			name: "success with page params",
 			args: args{
 				pages: defaultPageParams,
 			},
 			want: &PageSummary{
-				Page:    intOrString(testutils.TestDefaultPage),
-				PerPage: intOrString(testutils.TestDefaultPerPage),
+				Page:    1,
+				Pages:   11,
+				PerPage: 2,
+				Total:   21,
 			},
-			wantTopicsCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
-			wantErr:         false,
+			want1: []*Topic{
+				{
+					ID:    "1",
+					Value: "Agriculture & Rural Development",
+					SourceNote: "For the 70 percent of the world's poor who " +
+						"live in rural areas, agriculture is the main source of income and employment. " +
+						"But depletion and degradation of land and water pose serious challenges to producing " +
+						"enough food and other agricultural products to sustain livelihoods here " +
+						"and meet the needs of urban populations. Data presented here include measures of " +
+						"agricultural inputs, outputs, and productivity compiled by the UN's Food and Agriculture Organization.",
+				},
+				{
+					ID:    "2",
+					Value: "Aid Effectiveness",
+					SourceNote: "Aid effectiveness is the impact that aid has " +
+						"in reducing poverty and inequality, increasing growth, building capacity, and " +
+						"accelerating achievement of the Millennium Development Goals set by the international community. " +
+						"Indicators here cover aid received as well as progress in reducing poverty and " +
+						"improving education, health, and other measures of human welfare.",
+				},
+			},
+			wantErr: false,
 		},
 		{
 			name: "failure because Page is less than 1",
 			args: args{
 				pages: invalidPageParams,
 			},
-			want:            nil,
-			wantTopicsCount: 0,
-			wantErr:         true,
+			want:    nil,
+			want1:   nil,
+			wantErr: true,
 		},
 	}
 	for _, tt := range tests {
@@ -63,13 +97,15 @@ func TestTopicsService_List(t *testing.T) {
 				t.Errorf("TopicsService.List() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if tt.want != nil {
-				if got.Page != tt.want.Page || got.PerPage != tt.want.PerPage {
-					t.Errorf("TopicsService.List() got = %v, want %v", got, tt.want)
-				}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("TopicsService.List() got = %v, want %v", got, tt.want)
 			}
-			if len(got1) != tt.wantTopicsCount {
-				t.Errorf("TopicsService.List() got1 = %v, want %v", got1, tt.wantTopicsCount)
+			if tt.want1 != nil {
+				for i := range got1 {
+					if !reflect.DeepEqual(got1[i], tt.want1[i]) {
+						t.Errorf("TopicsService.List() got1[i] = %v, want[i] %v", got1[i], tt.want1[i])
+					}
+				}
 			}
 		})
 	}

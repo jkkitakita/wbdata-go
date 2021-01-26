@@ -38,11 +38,11 @@ func TestCountriesService_List(t *testing.T) {
 		pages  *PageParams
 	}
 	tests := []struct {
-		name               string
-		args               args
-		want               *PageSummary
-		wantCountriesCount int
-		wantErr            bool
+		name    string
+		args    args
+		want    *PageSummary
+		want1   []*Country
+		wantErr bool
 	}{
 		{
 			name: "success",
@@ -54,8 +54,65 @@ func TestCountriesService_List(t *testing.T) {
 				Page:    intOrString(testutils.TestDefaultPage),
 				PerPage: intOrString(testutils.TestDefaultPerPage),
 			},
-			wantCountriesCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
-			wantErr:            false,
+			want1: []*Country{
+				{
+					ID:          "ABW",
+					Name:        "Aruba",
+					CapitalCity: "Oranjestad",
+					Iso2Code:    "AW",
+					Longitude:   "-70.0167",
+					Latitude:    "12.5167",
+					Region: CountryRegion{
+						ID:       "LCN",
+						Iso2Code: "ZJ",
+						Value:    "Latin America & Caribbean ",
+					},
+					IncomeLevel: IncomeLevel{
+						ID:       "HIC",
+						Iso2Code: "XD",
+						Value:    "High income",
+					},
+					LendingType: LendingType{
+						ID:       "LNX",
+						Iso2Code: "XX",
+						Value:    "Not classified",
+					},
+					AdminRegion: CountryRegion{
+						ID:       "",
+						Iso2Code: "",
+						Value:    "",
+					},
+				},
+				{
+					ID:          "AFG",
+					Name:        "Afghanistan",
+					CapitalCity: "Kabul",
+					Iso2Code:    "AF",
+					Longitude:   "69.1761",
+					Latitude:    "34.5228",
+					Region: CountryRegion{
+						ID:       "SAS",
+						Iso2Code: "8S",
+						Value:    "South Asia",
+					},
+					IncomeLevel: IncomeLevel{
+						ID:       "LIC",
+						Iso2Code: "XM",
+						Value:    "Low income",
+					},
+					LendingType: LendingType{
+						ID:       "IDX",
+						Iso2Code: "XI",
+						Value:    "IDA",
+					},
+					AdminRegion: CountryRegion{
+						ID:       "SAS",
+						Iso2Code: "8S",
+						Value:    "South Asia",
+					},
+				},
+			},
+			wantErr: false,
 		},
 		{
 			name: "success with region id",
@@ -69,8 +126,65 @@ func TestCountriesService_List(t *testing.T) {
 				Page:    intOrString(testutils.TestDefaultPage),
 				PerPage: intOrString(testutils.TestDefaultPerPage),
 			},
-			wantCountriesCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
-			wantErr:            false,
+			want1: []*Country{
+				{
+					ID:          "ASM",
+					Name:        "American Samoa",
+					CapitalCity: "Pago Pago",
+					Iso2Code:    "AS",
+					Longitude:   "-170.691",
+					Latitude:    "-14.2846",
+					Region: CountryRegion{
+						ID:       "EAS",
+						Iso2Code: "Z4",
+						Value:    "East Asia & Pacific",
+					},
+					IncomeLevel: IncomeLevel{
+						ID:       "UMC",
+						Iso2Code: "XT",
+						Value:    "Upper middle income",
+					},
+					LendingType: LendingType{
+						ID:       "LNX",
+						Iso2Code: "XX",
+						Value:    "Not classified",
+					},
+					AdminRegion: CountryRegion{
+						ID:       "EAP",
+						Iso2Code: "4E",
+						Value:    "East Asia & Pacific (excluding high income)",
+					},
+				},
+				{
+					ID:          "AUS",
+					Name:        "Australia",
+					CapitalCity: "Canberra",
+					Iso2Code:    "AU",
+					Longitude:   "149.129",
+					Latitude:    "-35.282",
+					Region: CountryRegion{
+						ID:       "EAS",
+						Iso2Code: "Z4",
+						Value:    "East Asia & Pacific",
+					},
+					IncomeLevel: IncomeLevel{
+						ID:       "HIC",
+						Iso2Code: "XD",
+						Value:    "High income",
+					},
+					LendingType: LendingType{
+						ID:       "LNX",
+						Iso2Code: "XX",
+						Value:    "Not classified",
+					},
+					AdminRegion: CountryRegion{
+						ID:       "",
+						Iso2Code: "",
+						Value:    "",
+					},
+				},
+			},
+			wantErr: false,
 		},
 		{
 			name: "success with income level id",
@@ -84,8 +198,65 @@ func TestCountriesService_List(t *testing.T) {
 				Page:    intOrString(testutils.TestDefaultPage),
 				PerPage: intOrString(testutils.TestDefaultPerPage),
 			},
-			wantCountriesCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
-			wantErr:            false,
+			want1: []*Country{
+				{
+					ID:          "ABW",
+					Name:        "Aruba",
+					CapitalCity: "Oranjestad",
+					Iso2Code:    "AW",
+					Longitude:   "-70.0167",
+					Latitude:    "12.5167",
+					Region: CountryRegion{
+						ID:       "LCN",
+						Iso2Code: "ZJ",
+						Value:    "Latin America & Caribbean ",
+					},
+					IncomeLevel: IncomeLevel{
+						ID:       "HIC",
+						Iso2Code: "XD",
+						Value:    "High income",
+					},
+					LendingType: LendingType{
+						ID:       "LNX",
+						Iso2Code: "XX",
+						Value:    "Not classified",
+					},
+					AdminRegion: CountryRegion{
+						ID:       "",
+						Iso2Code: "",
+						Value:    "",
+					},
+				},
+				{
+					ID:          "AND",
+					Name:        "Andorra",
+					CapitalCity: "Andorra la Vella",
+					Iso2Code:    "AD",
+					Longitude:   "1.5218",
+					Latitude:    "42.5075",
+					Region: CountryRegion{
+						ID:       "ECS",
+						Iso2Code: "Z7",
+						Value:    "Europe & Central Asia",
+					},
+					IncomeLevel: IncomeLevel{
+						ID:       "HIC",
+						Iso2Code: "XD",
+						Value:    "High income",
+					},
+					LendingType: LendingType{
+						ID:       "LNX",
+						Iso2Code: "XX",
+						Value:    "Not classified",
+					},
+					AdminRegion: CountryRegion{
+						ID:       "",
+						Iso2Code: "",
+						Value:    "",
+					},
+				},
+			},
+			wantErr: false,
 		},
 		{
 			name: "success with lending type id",
@@ -99,8 +270,65 @@ func TestCountriesService_List(t *testing.T) {
 				Page:    intOrString(testutils.TestDefaultPage),
 				PerPage: intOrString(testutils.TestDefaultPerPage),
 			},
-			wantCountriesCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
-			wantErr:            false,
+			want1: []*Country{
+				{
+					ID:          "ABW",
+					Name:        "Aruba",
+					CapitalCity: "Oranjestad",
+					Iso2Code:    "AW",
+					Longitude:   "-70.0167",
+					Latitude:    "12.5167",
+					Region: CountryRegion{
+						ID:       "LCN",
+						Iso2Code: "ZJ",
+						Value:    "Latin America & Caribbean ",
+					},
+					IncomeLevel: IncomeLevel{
+						ID:       "HIC",
+						Iso2Code: "XD",
+						Value:    "High income",
+					},
+					LendingType: LendingType{
+						ID:       "LNX",
+						Iso2Code: "XX",
+						Value:    "Not classified",
+					},
+					AdminRegion: CountryRegion{
+						ID:       "",
+						Iso2Code: "",
+						Value:    "",
+					},
+				},
+				{
+					ID:          "AND",
+					Name:        "Andorra",
+					CapitalCity: "Andorra la Vella",
+					Iso2Code:    "AD",
+					Longitude:   "1.5218",
+					Latitude:    "42.5075",
+					Region: CountryRegion{
+						ID:       "ECS",
+						Iso2Code: "Z7",
+						Value:    "Europe & Central Asia",
+					},
+					IncomeLevel: IncomeLevel{
+						ID:       "HIC",
+						Iso2Code: "XD",
+						Value:    "High income",
+					},
+					LendingType: LendingType{
+						ID:       "LNX",
+						Iso2Code: "XX",
+						Value:    "Not classified",
+					},
+					AdminRegion: CountryRegion{
+						ID:       "",
+						Iso2Code: "",
+						Value:    "",
+					},
+				},
+			},
+			wantErr: false,
 		},
 		{
 			name: "success with params",
@@ -116,8 +344,65 @@ func TestCountriesService_List(t *testing.T) {
 				Page:    intOrString(testutils.TestDefaultPage),
 				PerPage: intOrString(testutils.TestDefaultPerPage),
 			},
-			wantCountriesCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
-			wantErr:            false,
+			want1: []*Country{
+				{
+					ID:          "AUS",
+					Name:        "Australia",
+					CapitalCity: "Canberra",
+					Iso2Code:    "AU",
+					Longitude:   "149.129",
+					Latitude:    "-35.282",
+					Region: CountryRegion{
+						ID:       "EAS",
+						Iso2Code: "Z4",
+						Value:    "East Asia & Pacific",
+					},
+					IncomeLevel: IncomeLevel{
+						ID:       "HIC",
+						Iso2Code: "XD",
+						Value:    "High income",
+					},
+					LendingType: LendingType{
+						ID:       "LNX",
+						Iso2Code: "XX",
+						Value:    "Not classified",
+					},
+					AdminRegion: CountryRegion{
+						ID:       "",
+						Iso2Code: "",
+						Value:    "",
+					},
+				},
+				{
+					ID:          "BRN",
+					Name:        "Brunei Darussalam",
+					CapitalCity: "Bandar Seri Begawan",
+					Iso2Code:    "BN",
+					Longitude:   "114.946",
+					Latitude:    "4.94199",
+					Region: CountryRegion{
+						ID:       "EAS",
+						Iso2Code: "Z4",
+						Value:    "East Asia & Pacific",
+					},
+					IncomeLevel: IncomeLevel{
+						ID:       "HIC",
+						Iso2Code: "XD",
+						Value:    "High income",
+					},
+					LendingType: LendingType{
+						ID:       "LNX",
+						Iso2Code: "XX",
+						Value:    "Not classified",
+					},
+					AdminRegion: CountryRegion{
+						ID:       "",
+						Iso2Code: "",
+						Value:    "",
+					},
+				},
+			},
+			wantErr: false,
 		},
 		{
 			name: "failure because invalid region id",
@@ -126,9 +411,9 @@ func TestCountriesService_List(t *testing.T) {
 					RegionID: testutils.TestInvalidRegionCode,
 				},
 			},
-			want:               nil,
-			wantCountriesCount: 0,
-			wantErr:            true,
+			want:    nil,
+			want1:   nil,
+			wantErr: true,
 		},
 		{
 			name: "failure because invalid income level id",
@@ -137,9 +422,9 @@ func TestCountriesService_List(t *testing.T) {
 					IncomeLevelID: testutils.TestInvalidIncomeLevelID,
 				},
 			},
-			want:               nil,
-			wantCountriesCount: 0,
-			wantErr:            true,
+			want:    nil,
+			want1:   nil,
+			wantErr: true,
 		},
 		{
 			name: "failure because invalid lending type id",
@@ -148,18 +433,18 @@ func TestCountriesService_List(t *testing.T) {
 					LendingTypeID: testutils.TestInvalidLendingTypeID,
 				},
 			},
-			want:               nil,
-			wantCountriesCount: 0,
-			wantErr:            true,
+			want:    nil,
+			want1:   nil,
+			wantErr: true,
 		},
 		{
 			name: "failure because Page is less than 1",
 			args: args{
 				pages: invalidPageParams,
 			},
-			want:               nil,
-			wantCountriesCount: 0,
-			wantErr:            true,
+			want:    nil,
+			want1:   nil,
+			wantErr: true,
 		},
 	}
 
@@ -179,21 +464,10 @@ func TestCountriesService_List(t *testing.T) {
 					t.Errorf("CountriesService.List() got = %v, want %v", got, tt.want)
 				}
 			}
-			if len(got1) != tt.wantCountriesCount {
-				t.Errorf("CountriesService.List() got1 = %v, want %v", got1, tt.wantCountriesCount)
-			}
 
 			for i := range got1 {
-				if tt.args.params != nil {
-					if tt.args.params.RegionID != "" && got1[i].Region.ID != tt.args.params.RegionID {
-						t.Errorf("invalid region id. got1[i].Region.ID = %v, want %v", got1[i].Region.ID, tt.args.params.RegionID)
-					}
-					if tt.args.params.IncomeLevelID != "" && got1[i].IncomeLevel.ID != tt.args.params.IncomeLevelID {
-						t.Errorf("invalid region id. got1[i].IncomeLevel.ID = %v, want %v", got1[i].IncomeLevel.ID, tt.args.params.IncomeLevelID)
-					}
-					if tt.args.params.LendingTypeID != "" && got1[i].LendingType.ID != tt.args.params.LendingTypeID {
-						t.Errorf("invalid region id. got1[i].LendingType.ID = %v, want %v", got1[i].LendingType.ID, tt.args.params.LendingTypeID)
-					}
+				if !reflect.DeepEqual(got1[i], tt.want1[i]) {
+					t.Errorf("CountriesService.List() got1 = %v, want %v", got1[i], tt.want1[i])
 				}
 			}
 		})
@@ -218,7 +492,7 @@ func TestCountriesService_Get(t *testing.T) {
 		{
 			name: "success",
 			args: args{
-				countryID: "jpn",
+				countryID: testutils.TestDefaultCountryID,
 			},
 			want: &PageSummary{
 				Page:    1,

@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/lendingTypes/ibd?format=json
+    url: http://api.worldbank.org/v2/lendingTypes/IBD?format=json
     method: GET
   response:
     body: '[{"page":"1","pages":"1","per_page":"50","total":"1"},[{"id":"IBD","iso2code":"XF","value":"IBRD"}]]'
@@ -19,7 +19,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2549797
+      - public, must-revalidate, max-age=2584702
       Connection:
       - keep-alive
       Content-Length:
@@ -27,18 +27,18 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 24 Jan 2021 14:35:14 GMT
+      - Tue, 26 Jan 2021 03:47:29 GMT
       Expires:
-      - Tue, 23 Feb 2021 02:51:51 GMT
+      - Thu, 25 Feb 2021 01:45:51 GMT
       Last-Modified:
-      - Sun, 24 Jan 2021 02:51:51 GMT
+      - Tue, 26 Jan 2021 01:45:51 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
       - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
-      - TS01fa65e4=01359ee97613536590e03cc8f6d180482fb9d533e4f23ecbc93d4e2fc2ae1a31b9a288dbc52d9905e91ddb30daa0c3c13c00a8e2d4;
+      - TS01fa65e4=01359ee97616f7c11cf563bd5880c7fcc1e59e8418380cd5fb03698c3cb991fc455c4192cc50da13e765b4f8c4580d8d42379dab64;
         Path=/
-      - TS019865bf=016ca92173b3c5fbd63cbf5d45ec12d37f25a2d7b9ba369028e2c69fc61eea7fdc033d86d7a024099dcb88e64f789da8a57416be6ace8677efb9f1f6c2215532e8eff4e22e;
+      - TS019865bf=016ca9217314ec23d9ae4acb9c7cecf25a0187cadf958ea77f42a2fc30a5795fa04ffeb2aca0579378ad12574b8ac955af7b95ce3f3cb2fb95b6e6936d7e8d557489af77d9;
         Path=/
     status: 200 OK
     code: 200
@@ -62,7 +62,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2591658
+      - public, must-revalidate, max-age=2584702
       Connection:
       - keep-alive
       Content-Length:
@@ -70,18 +70,18 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 24 Jan 2021 14:35:14 GMT
+      - Tue, 26 Jan 2021 03:47:29 GMT
       Expires:
-      - Tue, 23 Feb 2021 14:29:32 GMT
+      - Thu, 25 Feb 2021 01:45:51 GMT
       Last-Modified:
-      - Sun, 24 Jan 2021 14:29:32 GMT
+      - Tue, 26 Jan 2021 01:45:51 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
-      - TS01fa65e4=01359ee976479869b16b0713b6574f08082f4207f1e05e704d4c2f9f1a6a0e7fc7803d911d38824301acdbb2e3e67b5ce06d1d593f;
+      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - TS01fa65e4=01359ee9760a7f7e014a84a3d837fe16aa6a9fa69f6921ec9160ef5963725b1bfbc2410b6c8a1e2759e1c6c1b704926d938ece2183;
         Path=/
-      - TS019865bf=016ca92173f0070d87b675877663412a7613a0279ba14769e6cfe51473108983720622b240fd0b4b5ec3005d0b34e6f22915b96d302f4718dce0f82277bd198f4478cb88a2;
+      - TS019865bf=0123646321ac6c5bf712fadecf5613ffe5f93326230a27231e73dad87c3eef79233e1f0c48d6f86184986baf6c9a199240e9184a22e0303cbfa57dbb3f4b5be36fa5275079;
         Path=/
     status: 200 OK
     code: 200
