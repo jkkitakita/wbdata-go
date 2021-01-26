@@ -129,7 +129,7 @@ func ExampleIndicatorsService_ListByTopicID() {
 	// Topics is: &{ID:1 Value:Agriculture & Rural Development  }
 }
 
-func ExampleIndicatorValuesService_List_DateParam() {
+func ExampleIndicatorValuesService_List() {
 	client := wbdata.NewClient(nil)
 	indicatorID := "NY.GDP.MKTP.CD"
 	summary, indicatorValues, _ := client.IndicatorValues.List(
@@ -160,7 +160,7 @@ func ExampleIndicatorValuesService_List_DateParam() {
 	// IndicatorValues[0]: &wbdata.IndicatorValue{Indicator:wbdata.IDAndValue{ID:"NY.GDP.MKTP.CD", Value:"GDP (current US$)"}, Country:wbdata.IDAndValue{ID:"1A", Value:"Arab World"}, Countryiso3code:"ARB", Date:"2019", Value:2.81741458466511e+12, Unit:"", ObsStatus:"", Decimal:0}
 }
 
-func ExampleIndicatorValuesService_List_RecentParam() {
+func ExampleIndicatorValuesService_List_second() {
 	client := wbdata.NewClient(nil)
 	indicatorID := "NY.GDP.MKTP.CD"
 	summary, indicatorValues, _ := client.IndicatorValues.List(
