@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/regions?format=json
+    url: https://api.worldbank.org/v2/regions?format=json
     method: GET
   response:
     body: '[{"page":"1","pages":"1","per_page":"50","total":"42"},[{"id":"","code":"AFR","iso2code":"A9","name":"Africa"},{"id":"","code":"ARB","iso2code":"1A","name":"Arab
@@ -52,15 +52,13 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2583045
-      Connection:
-      - keep-alive
+      - public, must-revalidate, max-age=2581583
       Content-Length:
       - "3356"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 26 Jan 2021 06:03:50 GMT
+      - Tue, 26 Jan 2021 06:28:12 GMT
       Expires:
       - Thu, 25 Feb 2021 03:34:35 GMT
       Last-Modified:
@@ -68,10 +66,12 @@ interactions:
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - api_https.cookieCORS=53177bb75221daa2374b8eb09e8f707d; Path=/; SameSite=None;
+        Secure
+      - api_https.cookie=53177bb75221daa2374b8eb09e8f707d; Path=/
       - TS019266c8=017189f94760e6fbf7433145d7f315bea5c8205ffe9f4c532d49b901ca168e09bbc4fad6a74948a7a9f817593fad3ef58d2b7a69bb;
         Path=/
-      - TS019865bf=016ca92173a532448e673007ad3b9b4eb55582fdfff7bb1a8ef2f934fffe0c336bef100838ffdd44328318ec4ccafc801b9ed6980f818289cdc94bd97a4c315a0b65081736;
+      - TS019865bf=012364632127799ce15c0993cba9867374d1b214652abfb7923008aff376f310f13f7daaed197802e01c884979ce684cd293e86ff78a91eb516b55ddf9b5fae6c180d0b46b;
         Path=/
     status: 200 OK
     code: 200
@@ -82,7 +82,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/regions?format=json&page=1&per_page=2
+    url: https://api.worldbank.org/v2/regions?format=json&page=1&per_page=2
     method: GET
   response:
     body: '[{"page":"1","pages":"21","per_page":"2","total":"42"},[{"id":"","code":"AFR","iso2code":"A9","name":"Africa"},{"id":"","code":"ARB","iso2code":"1A","name":"Arab
@@ -95,15 +95,13 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2576523
-      Connection:
-      - keep-alive
+      - public, must-revalidate, max-age=2575061
       Content-Length:
       - "171"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 26 Jan 2021 06:03:50 GMT
+      - Tue, 26 Jan 2021 06:28:12 GMT
       Expires:
       - Thu, 25 Feb 2021 01:45:53 GMT
       Last-Modified:
@@ -111,10 +109,12 @@ interactions:
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - api_https.cookieCORS=96906c52f5aa89ac2fd6ca82f58d4294; Path=/; SameSite=None;
+        Secure
+      - api_https.cookie=96906c52f5aa89ac2fd6ca82f58d4294; Path=/
       - TS01fa65e4=01359ee97690476ad2c5cdfc8069492adfb764849a18c994644fb162cae1f49ace204aa5a65eb07e08c11ce46ca588ad9ff6309610;
         Path=/
-      - TS019865bf=01236463215d454f5216ad15f8a74ad4cb0d578152963107deb7f43aeef284e3010303f48b2a4ed89a70854ec08754ada6a916a67cb27ed444c3a7d948885af9e9a3e56f4d;
+      - TS019865bf=016ca921737c6b18c452d1ee79fb9f5de4afcdaeb0ed5a884ff091eafaf50affb71e9abe508f1e72421fb9e0ebe7d26345c0cbdc978f33541c14246b801cea831f468950be;
         Path=/
     status: 200 OK
     code: 200
