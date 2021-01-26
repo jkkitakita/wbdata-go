@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries/JPN?format=json
+    url: https://api.worldbank.org/v2/countries/JPN?format=json
     method: GET
   response:
     body: '[{"page":1,"pages":1,"per_page":"50","total":1},[{"id":"JPN","iso2Code":"JP","name":"Japan","region":{"id":"EAS","iso2code":"Z4","value":"East
@@ -21,15 +21,13 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2576804
-      Connection:
-      - keep-alive
+      - public, must-revalidate, max-age=2575346
       Content-Length:
       - "406"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 26 Jan 2021 06:03:39 GMT
+      - Tue, 26 Jan 2021 06:27:57 GMT
       Expires:
       - Thu, 25 Feb 2021 01:50:23 GMT
       Last-Modified:
@@ -37,10 +35,12 @@ interactions:
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - api_https.cookieCORS=96906c52f5aa89ac2fd6ca82f58d4294; Path=/; SameSite=None;
+        Secure
+      - api_https.cookie=96906c52f5aa89ac2fd6ca82f58d4294; Path=/
       - TS019266c8=017189f94781841cbc1e0e1c71b3bc92b91282242149df1c523c134da5e310d0f489421debc803f2b27f4854f7abbb96a190073131;
         Path=/
-      - TS019865bf=0123646321d9b187708b8092a247dcdb3927cce09e10c885ade26ff6586b372e081968ad383643dbabee6ab65607fc08489ca4ea3e74de96471d0acac0540b4430a5186b92;
+      - TS019865bf=016ca921737feb93ae44f9550f3a427053bc7b3432ffbaba8f9a16e0dea7193bcc37bd77961043c222ad8b5f5f7add28b7d0a89ceef58a68078db3169d9240a2984471723e;
         Path=/
     status: 200 OK
     code: 200
@@ -51,7 +51,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries/invalid_country_id?format=json
+    url: https://api.worldbank.org/v2/countries/invalid_country_id?format=json
     method: GET
   response:
     body: '[{"message":[{"id":"120","key":"Invalid value","value":"The provided parameter
@@ -64,15 +64,13 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2576521
-      Connection:
-      - keep-alive
+      - public, must-revalidate, max-age=2575063
       Content-Length:
       - "102"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 26 Jan 2021 06:03:39 GMT
+      - Tue, 26 Jan 2021 06:27:57 GMT
       Expires:
       - Thu, 25 Feb 2021 01:45:40 GMT
       Last-Modified:
@@ -80,10 +78,12 @@ interactions:
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - api_https.cookieCORS=53177bb75221daa2374b8eb09e8f707d; Path=/; SameSite=None;
+        Secure
+      - api_https.cookie=53177bb75221daa2374b8eb09e8f707d; Path=/
       - TS01fa65e4=01359ee97627563ad6bb677568fd9a4e545883837bfb3a30a534b60a5539c170efa57e839a4e9f4b1754ed8c9e614c0a4e82cca710;
         Path=/
-      - TS019865bf=0123646321f861f411a82c546a321698bf177617150cdbc9a4ca9e235e19a2dd9c7461c6ce420dbac7f8a9c46e8fa95ae916a76f3f92267d82c1678106075898304db2f1b1;
+      - TS019865bf=0123646321b59d725787b648339b02a5df9abc275d0e9fca330ccd209acb1c10562737752bf60a6926a5ffa4a7a5454896c390fe748eb937a44444f8d21f437ce171b3488f;
         Path=/
     status: 200 OK
     code: 200

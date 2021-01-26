@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/topics/1?format=json
+    url: https://api.worldbank.org/v2/topics/1?format=json
     method: GET
   response:
     body: '[{"page":1,"pages":1,"per_page":"50","total":1},[{"id":"1","value":"Agriculture
@@ -26,15 +26,13 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2576348
-      Connection:
-      - keep-alive
+      - public, must-revalidate, max-age=2574885
       Content-Length:
       - "580"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 26 Jan 2021 06:03:52 GMT
+      - Tue, 26 Jan 2021 06:28:15 GMT
       Expires:
       - Thu, 25 Feb 2021 01:43:00 GMT
       Last-Modified:
@@ -42,10 +40,12 @@ interactions:
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - api_https.cookieCORS=53177bb75221daa2374b8eb09e8f707d; Path=/; SameSite=None;
+        Secure
+      - api_https.cookie=53177bb75221daa2374b8eb09e8f707d; Path=/
       - TS01fa65e4=01359ee976b903247f60fe4f9c021a62a5171960199007c12d0f812b3cabc0df2436cc400240c834d8504762dfaa6ae02319cbb96e;
         Path=/
-      - TS019865bf=016ca92173c441ae7e30fabfdd2379db72aaea571582cddc956a98f9fb64e1b2e035b7913c988dfac9f7a955f2d91963255759efb2889d7c435700a26e84508a7b95536e55;
+      - TS019865bf=0123646321d6bd0e7a1cd5d6905f49d0e28fda566d5fd96ac666acc871f76c4b60ea81b84d230dd0cf838f642ee025690196472eed34de2a8170bc97dad7ccfc5470206197;
         Path=/
     status: 200 OK
     code: 200
@@ -56,7 +56,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/topics/invalid_topic_id?format=json
+    url: https://api.worldbank.org/v2/topics/invalid_topic_id?format=json
     method: GET
   response:
     body: '[{"message":[{"id":"120","key":"Invalid value","value":"The provided parameter
@@ -69,15 +69,13 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2576523
-      Connection:
-      - keep-alive
+      - public, must-revalidate, max-age=2575060
       Content-Length:
       - "102"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 26 Jan 2021 06:03:52 GMT
+      - Tue, 26 Jan 2021 06:28:15 GMT
       Expires:
       - Thu, 25 Feb 2021 01:45:55 GMT
       Last-Modified:
@@ -85,10 +83,12 @@ interactions:
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - api_https.cookieCORS=96906c52f5aa89ac2fd6ca82f58d4294; Path=/; SameSite=None;
+        Secure
+      - api_https.cookie=96906c52f5aa89ac2fd6ca82f58d4294; Path=/
       - TS019266c8=017189f947c867d15d1d7c2a7fa1a99480480cb3de28a6a2b3dcac32cf7196943499ba021c69aafdec18d571945b48d812ecf472ce;
         Path=/
-      - TS019865bf=016ca92173d2eb5ca61e818883aeefc73fe14190ee3c897507004081ca70542c04c63a98327f5eba898afe6bd17bda0e5a79288fded10fc7fa6c3bc9a7eb29edb8b5d8fc70;
+      - TS019865bf=016ca92173a49b4bb187e2f40ca60d1dbc4420af3896e4eb9ba18a593b93f11d3f5b1bdd9fc4f43437cdd92a27c22be03b7ca277d68eda2307cb28e5f03bc323836ca844b9;
         Path=/
     status: 200 OK
     code: 200

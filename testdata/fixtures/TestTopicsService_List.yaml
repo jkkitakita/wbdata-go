@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/topics?format=json
+    url: https://api.worldbank.org/v2/topics?format=json
     method: GET
   response:
     body: '[{"page":1,"pages":1,"per_page":"50","total":21},[{"id":"1","value":"Agriculture
@@ -181,15 +181,13 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2583820
-      Connection:
-      - keep-alive
+      - public, must-revalidate, max-age=2582357
       Content-Length:
       - "13357"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 26 Jan 2021 06:03:51 GMT
+      - Tue, 26 Jan 2021 06:28:14 GMT
       Expires:
       - Thu, 25 Feb 2021 03:47:31 GMT
       Last-Modified:
@@ -197,10 +195,12 @@ interactions:
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - api_https.cookieCORS=53177bb75221daa2374b8eb09e8f707d; Path=/; SameSite=None;
+        Secure
+      - api_https.cookie=53177bb75221daa2374b8eb09e8f707d; Path=/
       - TS01fa65e4=01359ee976098d62d07c2a46321acc34e3b53e0a07a99f2b350c20380c82917d1f1a3e6b704cdd2b3cab388a2aa25dd2c7fb4b48f5;
         Path=/
-      - TS019865bf=016ca92173d84bf1245290618b8662cc850026fdaa2d787fc41ad10d4e29c589dbf9be5f578dd4adb7bce83e3b9d85c4c9a1e5c2b543be437ebf5e1cac8b1db663cd4019d2;
+      - TS019865bf=012364632133aacd41dfa0ea8ea31d594f21301aae92ab9a94dc9d9981b1a6051a8dfcf7b960962f5770c1ddff83d097fe2dee2b24942c21ed9ee6a6b87a39c6109e1dc59a;
         Path=/
     status: 200 OK
     code: 200
@@ -211,7 +211,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/topics?format=json&page=1&per_page=2
+    url: https://api.worldbank.org/v2/topics?format=json&page=1&per_page=2
     method: GET
   response:
     body: '[{"page":1,"pages":11,"per_page":"2","total":21},[{"id":"1","value":"Agriculture
@@ -235,15 +235,13 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2576523
-      Connection:
-      - keep-alive
+      - public, must-revalidate, max-age=2575060
       Content-Length:
       - "1000"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 26 Jan 2021 06:03:51 GMT
+      - Tue, 26 Jan 2021 06:28:14 GMT
       Expires:
       - Thu, 25 Feb 2021 01:45:54 GMT
       Last-Modified:
@@ -251,10 +249,12 @@ interactions:
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - api_https.cookieCORS=96906c52f5aa89ac2fd6ca82f58d4294; Path=/; SameSite=None;
+        Secure
+      - api_https.cookie=96906c52f5aa89ac2fd6ca82f58d4294; Path=/
       - TS01fa65e4=01359ee9765b1016d5ccd20c30ac527f4d2996eba4834f9931023a118961aa80695401b5f8872000b5723aa0c2c74cc629eec3c67d;
         Path=/
-      - TS019865bf=016ca92173382c6eeb5a2fba54a7fdd0aa5c0c1a96757891b3cca6fb1ed0b2d880b5868ff26f91e7f6f56e01e0a0a68bd5fc835d59c9bdb7a278f735a2a49007133a8a9be4;
+      - TS019865bf=016ca921731623e604d6a1a0b7c23466d19d3a30f2c96877e3bc4d51fc442b7a4b3f0a1af2bffc53e6bdb218de8cf975ac4fbb60842877fc970444dd3e7ec304a9d27a9529;
         Path=/
     status: 200 OK
     code: 200

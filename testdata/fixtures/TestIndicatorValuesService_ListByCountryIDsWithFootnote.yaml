@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries/JPN;USA/indicators/NY.GDP.MKTP.CD?footnote=y&format=json
+    url: https://api.worldbank.org/v2/countries/JPN;USA/indicators/NY.GDP.MKTP.CD?footnote=y&format=json
     method: GET
   response:
     body: '[{"page":1,"pages":3,"per_page":50,"total":122,"sourceid":"2","lastupdated":"2020-12-16"},[{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
@@ -69,15 +69,13 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2591813
-      Connection:
-      - keep-alive
+      - public, must-revalidate, max-age=2590354
       Content-Length:
       - "11026"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 26 Jan 2021 06:03:43 GMT
+      - Tue, 26 Jan 2021 06:28:02 GMT
       Expires:
       - Thu, 25 Feb 2021 06:00:36 GMT
       Last-Modified:
@@ -85,10 +83,12 @@ interactions:
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - api_https.cookieCORS=96906c52f5aa89ac2fd6ca82f58d4294; Path=/; SameSite=None;
+        Secure
+      - api_https.cookie=96906c52f5aa89ac2fd6ca82f58d4294; Path=/
       - TS019266c8=017189f947c3ecdee860a81532faa4ca0f160643b0eaa20cd64ea6ab101b168e0677d19d78705b0862a28243105679ab2b19626ec4;
         Path=/
-      - TS019865bf=016ca92173f4d2fb5470c7b570ef44b9bd7ac8e9e21593c83e72575c8f48e1a8f15a892d6c2bd8f47c88aef19f3125e33e731422c2057aa76da39f4785ea6bcbd983a24af8;
+      - TS019865bf=016ca921736e7cbfb42a04c9c8e6a2857e7efca6272e185b509819e050fab153af2681f695231cb784ef07e9e9bfd3fe9023e02a84d57e8ec0e14bf45fc27a616d178112dc;
         Path=/
     status: 200 OK
     code: 200
@@ -99,7 +99,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries/JPN;USA/indicators/NY.GDP.MKTP.CD?date=2018%3A2019&footnote=y&format=json&page=1&per_page=2
+    url: https://api.worldbank.org/v2/countries/JPN;USA/indicators/NY.GDP.MKTP.CD?date=2018%3A2019&footnote=y&format=json&page=1&per_page=2
     method: GET
   response:
     body: '[{"page":1,"pages":2,"per_page":2,"total":4,"sourceid":"2","lastupdated":"2020-12-16"},[{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
@@ -113,15 +113,13 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2591814
-      Connection:
-      - keep-alive
+      - public, must-revalidate, max-age=2590354
       Content-Length:
       - "527"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 26 Jan 2021 06:03:43 GMT
+      - Tue, 26 Jan 2021 06:28:03 GMT
       Expires:
       - Thu, 25 Feb 2021 06:00:37 GMT
       Last-Modified:
@@ -129,10 +127,12 @@ interactions:
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - api_https.cookieCORS=96906c52f5aa89ac2fd6ca82f58d4294; Path=/; SameSite=None;
+        Secure
+      - api_https.cookie=96906c52f5aa89ac2fd6ca82f58d4294; Path=/
       - TS019266c8=017189f9471299af530d00270ca054094b888623d20c6183e995a1858a3195505e411aeabef9499fb36413db579fa55bca6b673145;
         Path=/
-      - TS019865bf=016ca92173ce978cb55708a690650091c34d38e96570321697a908422ae8d3759dde175adeba03cd2c25b3e2598ecbb136ebaf40058a8196ac82052af05f2ac8c6fadc376c;
+      - TS019865bf=016ca921730f57a2e748cae6f39b10523fbb70fff8d89e9ebc9e9a561c364331e4be7d709253d9f5d121f4aac3040861f51ceb7bd3ccc8065a89d2f2c3f40daffd7f6453db;
         Path=/
     status: 200 OK
     code: 200
@@ -143,7 +143,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries/ABCDEFG;HIJKLM/indicators/NY.GDP.MKTP.CD?footnote=y&format=json
+    url: https://api.worldbank.org/v2/countries/ABCDEFG;HIJKLM/indicators/NY.GDP.MKTP.CD?footnote=y&format=json
     method: GET
   response:
     body: '[{"message":[{"id":"120","key":"Invalid value","value":"The provided parameter
@@ -156,15 +156,13 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2591814
-      Connection:
-      - keep-alive
+      - public, must-revalidate, max-age=2590354
       Content-Length:
       - "102"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 26 Jan 2021 06:03:43 GMT
+      - Tue, 26 Jan 2021 06:28:03 GMT
       Expires:
       - Thu, 25 Feb 2021 06:00:37 GMT
       Last-Modified:
@@ -172,10 +170,12 @@ interactions:
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - api_https.cookieCORS=53177bb75221daa2374b8eb09e8f707d; Path=/; SameSite=None;
+        Secure
+      - api_https.cookie=53177bb75221daa2374b8eb09e8f707d; Path=/
       - TS01fa65e4=01359ee97680435f8133a0c784437a03fe97abbd1f7ae07c1aab76b594f5a46600f0b813b1fce23c821a6f3db3b07ffffa758f4709;
         Path=/
-      - TS019865bf=01236463218ddf2e96aef65036397c992ac9435af6433376a28f74c3e870c00a7607b971a1d8254b685d6f9da1b49e4b40eea73e1c2a94329dfdda22bda2af47eac70bd467;
+      - TS019865bf=0123646321f6ab3bdb5c68cb3b37f98874a315c747166598b84596d452b8e1b599887b80b1f26ba1cfeb8fb5ba9d4ef74a03dddffec9b97aa01f639c96e463e49944ca2d40;
         Path=/
     status: 200 OK
     code: 200
@@ -186,7 +186,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries/JPN;USA/indicators/INVALID.INDICATOR.ID?footnote=y&format=json
+    url: https://api.worldbank.org/v2/countries/JPN;USA/indicators/INVALID.INDICATOR.ID?footnote=y&format=json
     method: GET
   response:
     body: '[{"message":[{"id":"120","key":"Invalid value","value":"The provided parameter
@@ -199,15 +199,13 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2591815
-      Connection:
-      - keep-alive
+      - public, must-revalidate, max-age=2590355
       Content-Length:
       - "102"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 26 Jan 2021 06:03:44 GMT
+      - Tue, 26 Jan 2021 06:28:03 GMT
       Expires:
       - Thu, 25 Feb 2021 06:00:38 GMT
       Last-Modified:
@@ -215,10 +213,12 @@ interactions:
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - api_https.cookieCORS=96906c52f5aa89ac2fd6ca82f58d4294; Path=/; SameSite=None;
+        Secure
+      - api_https.cookie=96906c52f5aa89ac2fd6ca82f58d4294; Path=/
       - TS019266c8=017189f947d1e82288ab20d8f5932f0b932e166d4bda6df225e851050f4a196bb44a6e5be55a15e46a28286875cf9cd2aa2eab1d07;
         Path=/
-      - TS019865bf=0123646321bfc157803b2284b7de268a445ffc05037a24c1aa21c12cf8a8a257dfa8ec211717665c8f39907021711b3ece726c4ebe0d70915781796a028be027ecf5813f62;
+      - TS019865bf=016ca921732826908513bb28470eaa0cc5fb50848bd49be5dc06078a00ecde5f19c00b3cabc8b9db19731b600b5b92841a7321bbd7fb22e380c078e35a403ac5f0c515f38a;
         Path=/
     status: 200 OK
     code: 200

@@ -17,7 +17,7 @@ import (
 )
 
 const (
-	defaultProtocol = "http"
+	defaultProtocol = "https"
 	defaultHost     = "api.worldbank.org"
 	defaultBaseURL  = defaultProtocol + "://" + defaultHost + "/"
 	apiVersion      = "v2"

@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/lendingTypes?format=json
+    url: https://api.worldbank.org/v2/lendingTypes?format=json
     method: GET
   response:
     body: '[{"page":"1","pages":"1","per_page":"50","total":"4"},[{"id":"IBD","iso2code":"XF","value":"IBRD"},{"id":"IDB","iso2code":"XH","value":"Blend"},{"id":"IDX","iso2code":"XI","value":"IDA"},{"id":"LNX","iso2code":"XX","value":"Not
@@ -20,15 +20,13 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2582733
-      Connection:
-      - keep-alive
+      - public, must-revalidate, max-age=2581272
       Content-Length:
       - "242"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 26 Jan 2021 06:03:49 GMT
+      - Tue, 26 Jan 2021 06:28:10 GMT
       Expires:
       - Thu, 25 Feb 2021 03:29:22 GMT
       Last-Modified:
@@ -36,10 +34,12 @@ interactions:
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - api_https.cookieCORS=53177bb75221daa2374b8eb09e8f707d; Path=/; SameSite=None;
+        Secure
+      - api_https.cookie=53177bb75221daa2374b8eb09e8f707d; Path=/
       - TS019266c8=017189f947476b3661abc41485c82c17415a627174fcd6a71b4cd5b48f1c613e6031eaddc89cb86bef8ab68ca98b97c9c9b5f0727f;
         Path=/
-      - TS019865bf=0123646321244dd57351fe462a13d3747e516ef2967722908f7e298305a9aeeae004f77cf35800bbe14796970198266841a5af19dd6ffd87b7bd4ab1bfeddda1ed3670be6e;
+      - TS019865bf=01236463215d48cf6e2d380d83d96d3d085cee0587106cdc3e5524b90f9ecf7fd795332db9edbee1016ce55451ea4889c18ddb06699b586c5947edf4d8cffc9fbcf1179526;
         Path=/
     status: 200 OK
     code: 200
@@ -50,7 +50,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/lendingTypes?format=json&page=1&per_page=2
+    url: https://api.worldbank.org/v2/lendingTypes?format=json&page=1&per_page=2
     method: GET
   response:
     body: '[{"page":"1","pages":"2","per_page":"2","total":"4"},[{"id":"IBD","iso2code":"XF","value":"IBRD"},{"id":"IDB","iso2code":"XH","value":"Blend"}]]'
@@ -62,15 +62,13 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2576522
-      Connection:
-      - keep-alive
+      - public, must-revalidate, max-age=2575061
       Content-Length:
       - "144"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 26 Jan 2021 06:03:49 GMT
+      - Tue, 26 Jan 2021 06:28:10 GMT
       Expires:
       - Thu, 25 Feb 2021 01:45:51 GMT
       Last-Modified:
@@ -78,10 +76,12 @@ interactions:
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - api_https.cookieCORS=96906c52f5aa89ac2fd6ca82f58d4294; Path=/; SameSite=None;
+        Secure
+      - api_https.cookie=96906c52f5aa89ac2fd6ca82f58d4294; Path=/
       - TS01fa65e4=01359ee97655614d3eb58a98748b0e75edbf1cd6ed12ef33b852faa5466f4c8a11ea6b54f3d6264ce750f304920059bb7f9820abaf;
         Path=/
-      - TS019865bf=016ca92173b7be0b05725baefd80372747b617ec0a80a0e77ea4afcecf9cc0460094fb9a5376231a6db0e12b5ff7dc358b0f25441db0b338ffdac292ec4a035f7c8855d6ac;
+      - TS019865bf=016ca92173bf9ed3657a958e16342e8608596f64310de1c7b057e85c63d67fa0121826c1047a70276233515eb0fc3b7e8209f78c70fe774a5541bcba51d37947c8726d7eee;
         Path=/
     status: 200 OK
     code: 200
