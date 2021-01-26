@@ -23,7 +23,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2501927
+      - public, must-revalidate, max-age=2584691
       Connection:
       - keep-alive
       Content-Length:
@@ -31,18 +31,18 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 24 Jan 2021 14:35:04 GMT
+      - Tue, 26 Jan 2021 03:47:22 GMT
       Expires:
-      - Mon, 22 Feb 2021 13:33:51 GMT
+      - Thu, 25 Feb 2021 01:45:33 GMT
       Last-Modified:
-      - Sat, 23 Jan 2021 13:33:51 GMT
+      - Tue, 26 Jan 2021 01:45:33 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
-      - TS01fa65e4=01359ee9760f62f1ae0dbc3b5cf9cf9d6e8863c97b748a2d9185d767180939812ca3b4072a67af84ac77dffe74eeefac81f8dc0597;
+      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - TS01fa65e4=01359ee9763ecd8591221cca700112769f0a33f327614959e7aa369e017611636c2804565cb938f160354ce7d961e7a6ee4a30d1f8;
         Path=/
-      - TS019865bf=016ca92173eb2c00d0ca9e011c47c7b42060933c806121e059edd8cc3c3807ca242ad5c62b6898db2fbf1c6a044e2239b0147f3e1dd95278034c7951708e96b341f8e513fc;
+      - TS019865bf=012364632101dcbaf31b771d7272017698beb93853ee5dd415ab4ef057faa3f46b2c5a858bf6333608217a677ca40d7a5cfba346eeed5d175146972c7bef23543864ba3361;
         Path=/
     status: 200 OK
     code: 200
@@ -53,7 +53,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries?format=json&incomelevel=&lendingtype=&page=1&per_page=2&region=EAS
+    url: http://api.worldbank.org/v2/countries?format=json&page=1&per_page=2&region=EAS
     method: GET
   response:
     body: '[{"page":1,"pages":19,"per_page":"2","total":38},[{"id":"ASM","iso2Code":"AS","name":"American
@@ -71,7 +71,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2556006
+      - public, must-revalidate, max-age=2584978
       Connection:
       - keep-alive
       Content-Length:
@@ -79,18 +79,18 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 24 Jan 2021 14:35:04 GMT
+      - Tue, 26 Jan 2021 03:47:22 GMT
       Expires:
-      - Tue, 23 Feb 2021 04:35:10 GMT
+      - Thu, 25 Feb 2021 01:50:20 GMT
       Last-Modified:
-      - Sun, 24 Jan 2021 04:35:10 GMT
+      - Tue, 26 Jan 2021 01:50:20 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
-      - TS019266c8=017189f947bad784b8348218e005cd413ed3ba08bdd5807bf76906a3ede83c7cc524172a48be9d89d44fd09ed303b1743a4bdc0f88;
+      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - TS019266c8=017189f9474f6ef7577a85fa3766ae86385da0b0c2c1844f243e9fa3b42ecbbd6200a1aacdf16792ea33227272f94164a4e5b13f99;
         Path=/
-      - TS019865bf=0123646321e5489526ffee15b5d7b8b3d205f0b1d460c954e23d7dd6ce099a96d48704d94514ab87612717974c8d6701c798d14b952f7a22defb987b1a77d453c4244bb229;
+      - TS019865bf=016ca921735d23ec78dfbf5145f5f6fa6f94feb9965d60eb812ce3e6f3406c43559813399654e80b22ee8725650af8cf505b8a1a2b6c65ac6d5853710b95d320e1e747d17f;
         Path=/
     status: 200 OK
     code: 200
@@ -101,7 +101,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries?format=json&incomelevel=HIC&lendingtype=&page=1&per_page=2&region=
+    url: http://api.worldbank.org/v2/countries?format=json&incomelevel=HIC&page=1&per_page=2
     method: GET
   response:
     body: '[{"page":1,"pages":42,"per_page":"2","total":83},[{"id":"ABW","iso2Code":"AW","name":"Aruba","region":{"id":"LCN","iso2code":"ZJ","value":"Latin
@@ -118,7 +118,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2469432
+      - public, must-revalidate, max-age=2584979
       Connection:
       - keep-alive
       Content-Length:
@@ -126,18 +126,18 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 24 Jan 2021 14:35:04 GMT
+      - Tue, 26 Jan 2021 03:47:22 GMT
       Expires:
-      - Mon, 22 Feb 2021 04:32:16 GMT
+      - Thu, 25 Feb 2021 01:50:21 GMT
       Last-Modified:
-      - Sat, 23 Jan 2021 04:32:16 GMT
+      - Tue, 26 Jan 2021 01:50:21 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
       - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
-      - TS01fa65e4=01359ee9760ef2fd5508ab68d807e8c562a1dc0f96e28cc17e32664846c7f056f72c2db50360eb11e4f3fef8c404d9f68cfabb0c1c;
+      - TS019266c8=017189f94721f1f4161813928352735c73c552747f4fb681750a5e848b7867bf5b60b18e58d9719fc98ed40e448c7f6b28dc0c9506;
         Path=/
-      - TS019865bf=0123646321164e80d2c29ee28f6afe4deb5053a28fa8c73e169698c0f00a38c193858d4be6c70aaf2e69b938a3d508519979163922a8b0153a18fd4837ac86183dc6605ee8;
+      - TS019865bf=012364632171ab5ffbb2aca15edeb6a8a998533810e884120b9d5b72fb6c8f4c6a77dfdac9b05732f6e2b1d32ba135229444a4094461c25d0624c9281cc178ba0e069d386e;
         Path=/
     status: 200 OK
     code: 200
@@ -148,7 +148,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries?format=json&incomelevel=&lendingtype=LNX&page=1&per_page=2&region=
+    url: http://api.worldbank.org/v2/countries?format=json&lendingtype=LNX&page=1&per_page=2
     method: GET
   response:
     body: '[{"page":1,"pages":37,"per_page":"2","total":74},[{"id":"ABW","iso2Code":"AW","name":"Aruba","region":{"id":"LCN","iso2code":"ZJ","value":"Latin
@@ -165,7 +165,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2556005
+      - public, must-revalidate, max-age=2584980
       Connection:
       - keep-alive
       Content-Length:
@@ -173,18 +173,18 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 24 Jan 2021 14:35:05 GMT
+      - Tue, 26 Jan 2021 03:47:22 GMT
       Expires:
-      - Tue, 23 Feb 2021 04:35:10 GMT
+      - Thu, 25 Feb 2021 01:50:22 GMT
       Last-Modified:
-      - Sun, 24 Jan 2021 04:35:10 GMT
+      - Tue, 26 Jan 2021 01:50:22 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
       - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
-      - TS019266c8=017189f9479538d668ed9e8a035f7ce2c7594f723bac94a4306ba83e2191491c7c165ab8defbb1fc33a7d2ac97b6a83a70d7329bb1;
+      - TS019266c8=017189f947e8306a6d5b2bb6fd5b3f4ef9d2d77ae18d33ac844a9563c06527c90faf23bbc597c6e9077e722fd21e240460526de66a;
         Path=/
-      - TS019865bf=016ca921734c7297fed824ad0b584aa3070f9a75348d3ca9154dc64a7afa60fbc66c1498e786889186189210bb6ac292f6cfba0b8985a3a14b009b1619467408f74bfca6e2;
+      - TS019865bf=016ca92173d5646821222d5cbaabdffe5dd44c7d08e8d0350bd1f605382047c09950e1dfcec66e92b78d4e6f1e1eeb3ea946a53b6c75858d31eca4c897b3a630991eda2eb3;
         Path=/
     status: 200 OK
     code: 200
@@ -212,7 +212,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2556007
+      - public, must-revalidate, max-age=2584696
       Connection:
       - keep-alive
       Content-Length:
@@ -220,18 +220,18 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 24 Jan 2021 14:35:05 GMT
+      - Tue, 26 Jan 2021 03:47:22 GMT
       Expires:
-      - Tue, 23 Feb 2021 04:35:12 GMT
+      - Thu, 25 Feb 2021 01:45:38 GMT
       Last-Modified:
-      - Sun, 24 Jan 2021 04:35:12 GMT
+      - Tue, 26 Jan 2021 01:45:38 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
       - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
-      - TS019266c8=017189f947dbcec64b69d0df7cce0d33479b99026ac16454cf6acfbb19b0ee846c893528d16ab58d41b71313376c353d38e18fd889;
+      - TS01fa65e4=01359ee9764465c0f60c9b2c1a59ea2857637b1cde82efd78b36050345e09f56d5d29d595459cb7cc4a436af5165dc189c984c6fa9;
         Path=/
-      - TS019865bf=0123646321a390ff06281af5e2c409d59bd26904dcf23efc85dc517e3820eda6f2f394f8f5a9b7f7b16b903378983cefe7a8c3484be69a3e59b91fc532e80f20e9c8350256;
+      - TS019865bf=012364632131af9d49594175340d44f370106d3d6ccd82b13a1dfa9b76c7c08425b2cd970387da061f4d7c4bef0307905cc144a2a4666d87eeb8e60587febf4946526116b4;
         Path=/
     status: 200 OK
     code: 200
@@ -242,7 +242,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries?format=json&incomelevel=&lendingtype=&region=invalid_region_id
+    url: http://api.worldbank.org/v2/countries?format=json&region=invalid_region_id
     method: GET
   response:
     body: '[{"message":[{"id":"120","key":"Invalid value","value":"The provided parameter
@@ -255,7 +255,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2591660
+      - public, must-revalidate, max-age=2584980
       Connection:
       - keep-alive
       Content-Length:
@@ -263,18 +263,18 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 24 Jan 2021 14:35:05 GMT
+      - Tue, 26 Jan 2021 03:47:22 GMT
       Expires:
-      - Tue, 23 Feb 2021 14:29:25 GMT
+      - Thu, 25 Feb 2021 01:50:22 GMT
       Last-Modified:
-      - Sun, 24 Jan 2021 14:29:25 GMT
+      - Tue, 26 Jan 2021 01:50:22 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
       - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
-      - TS01fa65e4=01359ee9763ae33fe7b87cb23bfc68e129179de0da692bd3596b008c0767915bad683b367479c752d15c25c07d0d6469c7c25f5df5;
+      - TS019266c8=017189f94735b6aff6b9b2f9c7032b6b2c96cd6259f58f97b3b02f9bb1736710b39d88f8dfdfd3c68771f99009bc988636ac7f1a85;
         Path=/
-      - TS019865bf=016ca92173006c34a9d405620206580418270420b8f686e5c720eeec6b7853f7d6c86297c23ddc304db91707372c8bab8a1165e30e3907c459b7c109c55bac3784e0cb68a4;
+      - TS019865bf=016ca92173b775cd0833903bc4c1b77762978bcbb9116225ff0216f52c3d4f52e40e79683c96029351475f2138de20e37c875897f6cde1a36a97c8982bbd4f04cdbe7037ff;
         Path=/
     status: 200 OK
     code: 200
@@ -285,7 +285,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries?format=json&incomelevel=invalid_income_level_id&lendingtype=&region=
+    url: http://api.worldbank.org/v2/countries?format=json&incomelevel=invalid_income_level_id
     method: GET
   response:
     body: '[{"message":[{"id":"120","key":"Invalid value","value":"The provided parameter
@@ -298,7 +298,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2591660
+      - public, must-revalidate, max-age=2584979
       Connection:
       - keep-alive
       Content-Length:
@@ -306,18 +306,18 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 24 Jan 2021 14:35:05 GMT
+      - Tue, 26 Jan 2021 03:47:23 GMT
       Expires:
-      - Tue, 23 Feb 2021 14:29:25 GMT
+      - Thu, 25 Feb 2021 01:50:22 GMT
       Last-Modified:
-      - Sun, 24 Jan 2021 14:29:25 GMT
+      - Tue, 26 Jan 2021 01:50:22 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
-      - TS01fa65e4=01359ee97634b882315ed610df3ca238a32119f46a49b0265a2d145e5de596a099fb9b24d0bde8a0446685ab9406f008aa6eb983dd;
+      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - TS019266c8=017189f9479819fec6b3bff7c724960d141e1ec9d9cfe2d8c8ac07ba9401347756dde56edb0325b508016ed695f9d4e551b567f4d4;
         Path=/
-      - TS019865bf=01236463212f6615a51883f13ec26e3c93bf87f4006e321ec61cf13f6a2ca90ef2e2a423c5ac7ae98e2c0db4d040695cfca289dfc4e28cdc711980d0b04d6cdef0df8f43d8;
+      - TS019865bf=016ca92173ef1362b37324abc95952f50fc4c1632dfad612381850b656f98f3889593eecfc8fd33330befe1cda2c7194374091f3ed8efab1c0f0e85247aab7654ac5507d26;
         Path=/
     status: 200 OK
     code: 200
@@ -328,7 +328,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/countries?format=json&incomelevel=&lendingtype=invalid_lending_type_id&region=
+    url: http://api.worldbank.org/v2/countries?format=json&lendingtype=invalid_lending_type_id
     method: GET
   response:
     body: '[{"message":[{"id":"120","key":"Invalid value","value":"The provided parameter
@@ -341,7 +341,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2591660
+      - public, must-revalidate, max-age=2584979
       Connection:
       - keep-alive
       Content-Length:
@@ -349,18 +349,18 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 24 Jan 2021 14:35:05 GMT
+      - Tue, 26 Jan 2021 03:47:23 GMT
       Expires:
-      - Tue, 23 Feb 2021 14:29:25 GMT
+      - Thu, 25 Feb 2021 01:50:22 GMT
       Last-Modified:
-      - Sun, 24 Jan 2021 14:29:25 GMT
+      - Tue, 26 Jan 2021 01:50:22 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
-      - TS01fa65e4=01359ee9765e10c29f90450e28bb8ba35e6e623c991385d6aa81c7161d70cebb4fd043d2b94903fb7449aee0df7d248de21cd9badf;
+      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - TS019266c8=017189f947109d9fa4b88668a39426b3a6ccf5eb934612ce3dbd62a686ca6552feb8ab2faf89582055ed705d5729d81cce65a2eafa;
         Path=/
-      - TS019865bf=0123646321b2288001b54b906e61fcc05650d7c259631e61de655a40a22c57f579c05bd3f4a4c490dab2ae04fe48b89f1918a0531c51361f22096a313d7c81df38ebbd6256;
+      - TS019865bf=016ca92173e6858e7398f78ee89b8b549a33a90e562ba817b21d8957e2f94d1dd2de5cdd46789e48076162bf4b056d59868c0ddbf1e3dc384bf9c0fe8d80c425b4005894d9;
         Path=/
     status: 200 OK
     code: 200

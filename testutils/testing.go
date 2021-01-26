@@ -36,15 +36,15 @@ const (
 	// TestInvalidSourceID is invalid source ID for testing
 	TestInvalidSourceID = "invalid_source_id"
 	// TestDefaultRegionCode is default region ID for testing
-	TestDefaultRegionCode = "afr"
+	TestDefaultRegionCode = "AFR"
 	// TestInvalidRegionCode is invalid region ID for testing
 	TestInvalidRegionCode = "invalid_region_id"
 	// TestDefaultIncomeLevelID is default income level ID for testing
-	TestDefaultIncomeLevelID = "hic"
+	TestDefaultIncomeLevelID = "HIC"
 	// TestInvalidIncomeLevelID is invalid income level ID for testing
 	TestInvalidIncomeLevelID = "invalid_income_level_id"
 	// TestDefaultLendingTypeID is default lending type ID for testing
-	TestDefaultLendingTypeID = "ibd"
+	TestDefaultLendingTypeID = "IBD"
 	// TestInvalidLendingTypeID is invalid lending type ID for testing
 	TestInvalidLendingTypeID = "invalid_lending_type_id"
 	// TestDefaultDateStart is default date start for testing

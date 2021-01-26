@@ -7,6 +7,49 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
+    url: http://api.worldbank.org/v2/lendingTypes?format=json
+    method: GET
+  response:
+    body: '[{"page":"1","pages":"1","per_page":"50","total":"4"},[{"id":"IBD","iso2code":"XF","value":"IBRD"},{"id":"IDB","iso2code":"XH","value":"Blend"},{"id":"IDX","iso2code":"XI","value":"IDA"},{"id":"LNX","iso2code":"XX","value":"Not
+      classified"}]]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2590913
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "242"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 26 Jan 2021 03:47:29 GMT
+      Expires:
+      - Thu, 25 Feb 2021 03:29:22 GMT
+      Last-Modified:
+      - Tue, 26 Jan 2021 03:29:22 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
+      Set-Cookie:
+      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - TS019266c8=017189f947476b3661abc41485c82c17415a627174fcd6a71b4cd5b48f1c613e6031eaddc89cb86bef8ab68ca98b97c9c9b5f0727f;
+        Path=/
+      - TS019865bf=016ca92173b8b7b8d8ae913b7e2b2db0a7445be58581d77eddb4a8f47fb6ef088aefb9a78dbcd541033551d9c6525375c2e85926784d3d1a5e8080e8ca798f5f341fa82117;
+        Path=/
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
     url: http://api.worldbank.org/v2/lendingTypes?format=json&page=1&per_page=2
     method: GET
   response:
@@ -19,7 +62,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2469427
+      - public, must-revalidate, max-age=2584702
       Connection:
       - keep-alive
       Content-Length:
@@ -27,18 +70,18 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 24 Jan 2021 14:35:14 GMT
+      - Tue, 26 Jan 2021 03:47:29 GMT
       Expires:
-      - Mon, 22 Feb 2021 04:32:21 GMT
+      - Thu, 25 Feb 2021 01:45:51 GMT
       Last-Modified:
-      - Sat, 23 Jan 2021 04:32:21 GMT
+      - Tue, 26 Jan 2021 01:45:51 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
       - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
-      - TS01fa65e4=01359ee9762096a594f0610503ce79cdaca97fc7ae75bfcd2bd060339d21bb93e0ca89ae7959d22328cdb9e332327a9c1375070124;
+      - TS01fa65e4=01359ee97655614d3eb58a98748b0e75edbf1cd6ed12ef33b852faa5466f4c8a11ea6b54f3d6264ce750f304920059bb7f9820abaf;
         Path=/
-      - TS019865bf=012364632137397a430549d78eb1a6d3feb14fd43bb332be7bceced33996965c72d06f587cab6c24a4948f0b99ffa7d1042b8667c5d44b67513f21f6cb84f6c431f9cc478f;
+      - TS019865bf=0123646321a5f961190d0d450b566d3463da35adf74c62922beaf2a3d66be2314902aab82ea916982ccabac3aad356eecf409ad9f5dea223be5fa8523792b14f3076f76b50;
         Path=/
     status: 200 OK
     code: 200

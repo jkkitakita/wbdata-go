@@ -5,12 +5,20 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
+
 	"github.com/jkkitakita/wbdata-go/testutils"
 )
 
 func TestSourcesService_List(t *testing.T) {
 	client, save := NewTestClient(t, *update)
 	defer save()
+
+	optIgnoreFields := cmpopts.IgnoreFields(
+		Source{},
+		"LastUpdated",
+	)
 
 	defaultPageParams := &PageParams{
 		Page:    testutils.TestDefaultPage,
@@ -20,50 +28,72 @@ func TestSourcesService_List(t *testing.T) {
 		Page:    testutils.TestInvalidPage,
 		PerPage: testutils.TestDefaultPerPage,
 	}
-	invalidPerPageParams := &PageParams{
-		Page:    testutils.TestDefaultPage,
-		PerPage: testutils.TestInvalidPerPage,
-	}
 
 	type args struct {
 		pages *PageParams
 	}
 	tests := []struct {
-		name             string
-		args             args
-		want             *PageSummary
-		wantSourcesCount int
-		wantErr          bool
+		name    string
+		args    args
+		want    *PageSummary
+		want1   []*Source
+		wantErr bool
 	}{
 		{
 			name: "success",
+			args: args{},
+			want: &PageSummary{
+				Page:    1,
+				Pages:   2,
+				PerPage: 50,
+				Total:   63,
+			},
+			want1:   nil,
+			wantErr: false,
+		},
+		{
+			name: "success with page params",
 			args: args{
 				pages: defaultPageParams,
 			},
 			want: &PageSummary{
-				Page:    intOrString(testutils.TestDefaultPage),
-				PerPage: intOrString(testutils.TestDefaultPerPage),
+				Page:    1,
+				Pages:   32,
+				PerPage: 2,
+				Total:   63,
 			},
-			wantSourcesCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
-			wantErr:          false,
+			want1: []*Source{
+				{
+					ID:                   "11",
+					Name:                 "Africa Development Indicators",
+					Code:                 "ADI",
+					Description:          "", // NOTE: always empty?
+					URL:                  "", // NOTE: always empty?
+					DataAvailability:     "Y",
+					MetadataAvailability: "Y",
+					Concepts:             "3",
+				},
+				{
+					ID:                   "36",
+					Name:                 "Statistical Capacity Indicators",
+					Code:                 "BBS",
+					Description:          "", // NOTE: always empty?
+					URL:                  "", // NOTE: always empty?
+					DataAvailability:     "Y",
+					MetadataAvailability: "",
+					Concepts:             "3",
+				},
+			},
+			wantErr: false,
 		},
 		{
 			name: "failure because Page is less than 1",
 			args: args{
 				pages: invalidPageParams,
 			},
-			want:             nil,
-			wantSourcesCount: 0,
-			wantErr:          true,
-		},
-		{
-			name: "failure because PerPage is less than 1",
-			args: args{
-				pages: invalidPerPageParams,
-			},
-			want:             nil,
-			wantSourcesCount: 0,
-			wantErr:          true,
+			want:    nil,
+			want1:   nil,
+			wantErr: true,
 		},
 	}
 	for _, tt := range tests {
@@ -76,13 +106,15 @@ func TestSourcesService_List(t *testing.T) {
 				t.Errorf("SourcesService.List() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if tt.want != nil {
-				if got.Page != tt.want.Page || got.PerPage != tt.want.PerPage {
-					t.Errorf("SourcesService.List() got = %v, want %v", got, tt.want)
-				}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("SourcesService.List() got = %v, want %v", got, tt.want)
 			}
-			if len(got1) != tt.wantSourcesCount {
-				t.Errorf("SourcesService.List() got1 = %v, want %v", got1, tt.wantSourcesCount)
+			if tt.want1 != nil {
+				for i := range got1 {
+					if !cmp.Equal(got1[i], tt.want1[i], nil, optIgnoreFields) {
+						t.Errorf("SourcesService.List() got1[i] = %v, want[i] %v", got1[i], tt.want1[i])
+					}
+				}
 			}
 		})
 	}

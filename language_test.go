@@ -20,20 +20,16 @@ func TestLanguagesService_List(t *testing.T) {
 		Page:    testutils.TestInvalidPage,
 		PerPage: testutils.TestDefaultPerPage,
 	}
-	invalidPerPageParams := &PageParams{
-		Page:    testutils.TestDefaultPage,
-		PerPage: testutils.TestInvalidPerPage,
-	}
 
 	type args struct {
 		pages *PageParams
 	}
 	tests := []struct {
-		name               string
-		args               args
-		want               *PageSummary
-		wantLanguagesCount int
-		wantErr            bool
+		name    string
+		args    args
+		want    *PageSummary
+		want1   []*Language
+		wantErr bool
 	}{
 		{
 			name: "success",
@@ -41,29 +37,33 @@ func TestLanguagesService_List(t *testing.T) {
 				pages: defaultPageParams,
 			},
 			want: &PageSummary{
-				Page:    intOrString(testutils.TestDefaultPage),
-				PerPage: intOrString(testutils.TestDefaultPerPage),
+				Page:    1,
+				Pages:   12,
+				PerPage: 2,
+				Total:   23,
 			},
-			wantLanguagesCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
-			wantErr:            false,
+			want1: []*Language{
+				{
+					Code:       "ar",
+					Name:       "Arabic",
+					NativeForm: "عربي",
+				},
+				{
+					Code:       "bg",
+					Name:       "Bulgarian ",
+					NativeForm: "Български",
+				},
+			},
+			wantErr: false,
 		},
 		{
 			name: "failure because Page is less than 1",
 			args: args{
 				pages: invalidPageParams,
 			},
-			want:               nil,
-			wantLanguagesCount: 0,
-			wantErr:            true,
-		},
-		{
-			name: "failure because PerPage is less than 1",
-			args: args{
-				pages: invalidPerPageParams,
-			},
-			want:               nil,
-			wantLanguagesCount: 0,
-			wantErr:            true,
+			want:    nil,
+			want1:   nil,
+			wantErr: true,
 		},
 	}
 
@@ -78,13 +78,13 @@ func TestLanguagesService_List(t *testing.T) {
 				t.Errorf("LanguagesService.List() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if tt.want != nil {
-				if got.Page != tt.want.Page || got.PerPage != tt.want.PerPage {
-					t.Errorf("LanguagesService.List() got = %v, want %v", got, tt.want)
-				}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("LanguagesService.List() got = %v, want %v", got, tt.want)
 			}
-			if len(got1) != tt.wantLanguagesCount {
-				t.Errorf("LanguagesService.List() got1 = %v, want %v", got1, tt.wantLanguagesCount)
+			for i := range got1 {
+				if !reflect.DeepEqual(got1[i], tt.want1[i]) {
+					t.Errorf("LanguagesService.List() got1[i] = %v, want[i] %v", got1[i], tt.want1[i])
+				}
 			}
 		})
 	}

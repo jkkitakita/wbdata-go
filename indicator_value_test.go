@@ -6,12 +6,22 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
+
 	"github.com/jkkitakita/wbdata-go/testutils"
 )
 
 func TestIndicatorValuesService_List(t *testing.T) {
 	client, save := NewTestClient(t, *update)
 	defer save()
+
+	optIgnoreFields := cmpopts.IgnoreFields(
+		PageSummaryWithSourceID{},
+		"Pages",
+		"Total",
+		"LastUpdated",
+	)
 
 	defaultDateParams := &DateParams{
 		DateParamsType: DateParamsRange,
@@ -42,46 +52,84 @@ func TestIndicatorValuesService_List(t *testing.T) {
 		pages       *PageParams
 	}
 	tests := []struct {
-		name                     string
-		args                     args
-		want                     *PageSummaryWithSourceID
-		wantIndicatorValuesCount int
-		wantErr                  bool
-		wantErrRes               *ErrorResponse
+		name       string
+		args       args
+		want       *PageSummaryWithSourceID
+		want1      []*IndicatorValue
+		wantErr    bool
+		wantErrRes *ErrorResponse
 	}{
 		{
 			name: "success",
 			args: args{
 				indicatorID: testutils.TestDefaultIndicatorID,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  false,
-			wantErrRes:               nil,
+			want: &PageSummaryWithSourceID{
+				Page:     1,
+				PerPage:  50,
+				SourceID: "2",
+			},
+			want1:      nil,
+			wantErr:    false,
+			wantErrRes: nil,
 		},
 		{
-			name: "success with params",
+			name: "success with date params",
 			args: args{
 				indicatorID: testutils.TestDefaultIndicatorID,
 				datePatams:  defaultDateParams,
 				pages:       defaultPageParams,
 			},
 			want: &PageSummaryWithSourceID{
-				Page:    intOrString(testutils.TestDefaultPage),
-				PerPage: intOrString(testutils.TestDefaultPerPage),
+				Page:     1,
+				PerPage:  2,
+				SourceID: "2",
 			},
-			wantIndicatorValuesCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
-			wantErr:                  false,
-			wantErrRes:               nil,
+			want1: []*IndicatorValue{
+				{
+					Indicator: IDAndValue{
+						ID:    "NY.GDP.MKTP.CD",
+						Value: "GDP (current US$)",
+					},
+					Country: IDAndValue{
+						ID:    "1A",
+						Value: "Arab World",
+					},
+					Countryiso3code: "ARB",
+					Date:            "2019",
+					Value:           2.81741458466511e+12,
+					Unit:            "",
+					ObsStatus:       "",
+					Decimal:         0,
+				},
+				{
+					Indicator: IDAndValue{
+						ID:    "NY.GDP.MKTP.CD",
+						Value: "GDP (current US$)",
+					},
+					Country: IDAndValue{
+						ID:    "1A",
+						Value: "Arab World",
+					},
+					Countryiso3code: "ARB",
+					Date:            "2018",
+					Value:           2.77138409790453e+12,
+					Unit:            "",
+					ObsStatus:       "",
+					Decimal:         0,
+				},
+			},
+			wantErr:    false,
+			wantErrRes: nil,
 		},
 		{
 			name: "failure because invalid indicator id",
 			args: args{
 				indicatorID: testutils.TestInvalidIndicatorID,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  true,
+			want:    nil,
+			want1:   nil,
+			wantErr: true,
 			wantErrRes: &ErrorResponse{
 				URL: fmt.Sprintf(
 					"%s%s/countries/all/indicators/%s?format=json",
@@ -105,10 +153,10 @@ func TestIndicatorValuesService_List(t *testing.T) {
 				indicatorID: testutils.TestDefaultIndicatorID,
 				datePatams:  invalidDateParams,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  true,
-			wantErrRes:               nil,
+			want:       nil,
+			want1:      nil,
+			wantErr:    true,
+			wantErrRes: nil,
 		},
 		{
 			name: "failure because invalid page params",
@@ -116,10 +164,10 @@ func TestIndicatorValuesService_List(t *testing.T) {
 				indicatorID: testutils.TestDefaultIndicatorID,
 				pages:       invalidPageParams,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  true,
-			wantErrRes:               nil,
+			want:       nil,
+			want1:      nil,
+			wantErr:    true,
+			wantErrRes: nil,
 		},
 	}
 	for _, tt := range tests {
@@ -132,42 +180,20 @@ func TestIndicatorValuesService_List(t *testing.T) {
 				t.Errorf("IndicatorValuesService.List() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if err != nil && tt.wantErrRes != nil {
+			if tt.wantErrRes != nil {
 				if !reflect.DeepEqual(err, tt.wantErrRes) {
 					t.Errorf("IndicatorValuesService.List() err = %v, wantErrRes %v", err, tt.wantErrRes)
 				}
 			}
 			if tt.want != nil {
-				if got.Page != tt.want.Page || got.PerPage != tt.want.PerPage {
-					t.Errorf("IndicatorValuesService.List() got = %v, want %v", got, tt.want)
+				if !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
+					t.Errorf("NewClient() = %+v, want %+v", got, tt.want)
 				}
-				if reflect.TypeOf(got) != reflect.TypeOf(tt.want) {
-					t.Errorf(
-						"IndicatorValuesService.List() reflect.TypeOf(got) = %v, reflect.TypeOf(tt.want) %v",
-						reflect.TypeOf(got),
-						reflect.TypeOf(tt.want),
-					)
-				}
-				if len(got1) != tt.wantIndicatorValuesCount {
-					t.Errorf("invalid length of IndicatorValuesService.List() got1 = %v, want %v", got1, tt.wantIndicatorValuesCount)
-				}
-				if !tt.wantErr {
-					for i := range got1 {
-						if got1[i].Date != tt.args.datePatams.DateRange.Start && got1[i].Date != tt.args.datePatams.DateRange.End {
-							t.Errorf(
-								"invalid date of IndicatorValuesService.List() got1 = %v, want %v or %v",
-								got1[i].Date,
-								tt.args.datePatams.DateRange.Start,
-								tt.args.datePatams.DateRange.End,
-							)
-						}
-						if got1[i].Indicator.ID != tt.args.indicatorID {
-							t.Errorf(
-								"invalid indicator ID of IndicatorValuesService.List() got1[i].Indicator.ID = %v, want %v",
-								got1[i].Indicator.ID,
-								tt.args.indicatorID,
-							)
-						}
+			}
+			if tt.want1 != nil {
+				for i := range got1 {
+					if !reflect.DeepEqual(got1[i], tt.want1[i]) {
+						t.Errorf("IndicatorValuesService.List() got1[i] = %v, want[i] %v", got1[i], tt.want1[i])
 					}
 				}
 			}
@@ -178,6 +204,13 @@ func TestIndicatorValuesService_List(t *testing.T) {
 func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 	client, save := NewTestClient(t, *update)
 	defer save()
+
+	optIgnoreFields := cmpopts.IgnoreFields(
+		PageSummaryWithSourceID{},
+		"Pages",
+		"Total",
+		"LastUpdated",
+	)
 
 	defaultDateParams := &DateParams{
 		DateParamsType: DateParamsRange,
@@ -209,12 +242,12 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 		pages       *PageParams
 	}
 	tests := []struct {
-		name                     string
-		args                     args
-		want                     *PageSummaryWithSourceID
-		wantIndicatorValuesCount int
-		wantErr                  bool
-		wantErrRes               *ErrorResponse
+		name       string
+		args       args
+		want       *PageSummaryWithSourceID
+		want1      []*IndicatorValue
+		wantErr    bool
+		wantErrRes *ErrorResponse
 	}{
 		{
 			name: "success",
@@ -222,10 +255,14 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 				countryIDs:  testutils.TestDefaultCountryIDs,
 				indicatorID: testutils.TestDefaultIndicatorID,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  false,
-			wantErrRes:               nil,
+			want: &PageSummaryWithSourceID{
+				Page:     1,
+				PerPage:  50,
+				SourceID: "2",
+			},
+			want1:      nil,
+			wantErr:    false,
+			wantErrRes: nil,
 		},
 		{
 			name: "success with params",
@@ -236,12 +273,46 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 				pages:       defaultPageParams,
 			},
 			want: &PageSummaryWithSourceID{
-				Page:    intOrString(testutils.TestDefaultPage),
-				PerPage: intOrString(testutils.TestDefaultPerPage),
+				Page:     1,
+				PerPage:  2,
+				SourceID: "2",
 			},
-			wantIndicatorValuesCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
-			wantErr:                  false,
-			wantErrRes:               nil,
+			want1: []*IndicatorValue{
+				{
+					Indicator: IDAndValue{
+						ID:    "NY.GDP.MKTP.CD",
+						Value: "GDP (current US$)",
+					},
+					Country: IDAndValue{
+						ID:    "JP",
+						Value: "Japan",
+					},
+					Countryiso3code: "JPN",
+					Date:            "2019",
+					Value:           5.08176954237977e+12,
+					Unit:            "",
+					ObsStatus:       "",
+					Decimal:         0,
+				},
+				{
+					Indicator: IDAndValue{
+						ID:    "NY.GDP.MKTP.CD",
+						Value: "GDP (current US$)",
+					},
+					Country: IDAndValue{
+						ID:    "JP",
+						Value: "Japan",
+					},
+					Countryiso3code: "JPN",
+					Date:            "2018",
+					Value:           4.95480661999519e+12,
+					Unit:            "",
+					ObsStatus:       "",
+					Decimal:         0,
+				},
+			},
+			wantErr:    false,
+			wantErrRes: nil,
 		},
 		{
 			name: "failure because invalid CountryIDs",
@@ -249,9 +320,9 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 				countryIDs:  testutils.TestInvalidCountryIDs,
 				indicatorID: testutils.TestDefaultIndicatorID,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  true,
+			want:    nil,
+			want1:   nil,
+			wantErr: true,
 			wantErrRes: &ErrorResponse{
 				URL: fmt.Sprintf(
 					"%s%s/countries/%s/indicators/%s?format=json",
@@ -276,9 +347,9 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 				countryIDs:  testutils.TestDefaultCountryIDs,
 				indicatorID: testutils.TestInvalidIndicatorID,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  true,
+			want:    nil,
+			want1:   nil,
+			wantErr: true,
 			wantErrRes: &ErrorResponse{
 				URL: fmt.Sprintf(
 					"%s%s/countries/%s/indicators/%s?format=json",
@@ -304,10 +375,10 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 				indicatorID: testutils.TestDefaultIndicatorID,
 				datePatams:  invalidDateParams,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  true,
-			wantErrRes:               nil,
+			want:       nil,
+			want1:      nil,
+			wantErr:    true,
+			wantErrRes: nil,
 		},
 		{
 			name: "failure because invalid page params",
@@ -316,10 +387,10 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 				indicatorID: testutils.TestDefaultIndicatorID,
 				pages:       invalidPageParams,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  true,
-			wantErrRes:               nil,
+			want:       nil,
+			want1:      nil,
+			wantErr:    true,
+			wantErrRes: nil,
 		},
 	}
 	for _, tt := range tests {
@@ -332,42 +403,20 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 				t.Errorf("IndicatorValuesService.ListByCountryIDs() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if err != nil && tt.wantErrRes != nil {
+			if tt.wantErrRes != nil {
 				if !reflect.DeepEqual(err, tt.wantErrRes) {
 					t.Errorf("IndicatorValuesService.ListByCountryIDs() err = %v, wantErrRes %v", err, tt.wantErrRes)
 				}
 			}
 			if tt.want != nil {
-				if got.Page != tt.want.Page || got.PerPage != tt.want.PerPage {
-					t.Errorf("IndicatorValuesService.ListByCountryIDs() got = %v, want %v", got, tt.want)
+				if !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
+					t.Errorf("IndicatorValuesService.ListByCountryIDs() got = %+v, want %+v", got, tt.want)
 				}
-				if reflect.TypeOf(got) != reflect.TypeOf(tt.want) {
-					t.Errorf(
-						"IndicatorValuesService.ListByCountryIDs() reflect.TypeOf(got) = %v, reflect.TypeOf(tt.want) %v",
-						reflect.TypeOf(got),
-						reflect.TypeOf(tt.want),
-					)
-				}
-				if len(got1) != tt.wantIndicatorValuesCount {
-					t.Errorf("invalid length of IndicatorValuesService.ListByCountryIDs() got1 = %v, want %v", got1, tt.wantIndicatorValuesCount)
-				}
-				if !tt.wantErr {
-					for i := range got1 {
-						if got1[i].Date != tt.args.datePatams.DateRange.Start && got1[i].Date != tt.args.datePatams.DateRange.End {
-							t.Errorf(
-								"invalid date of IndicatorValuesService.ListByCountryIDs() got1 = %v, want %v or %v",
-								got1[i].Date,
-								tt.args.datePatams.DateRange.Start,
-								tt.args.datePatams.DateRange.End,
-							)
-						}
-						if got1[i].Indicator.ID != tt.args.indicatorID {
-							t.Errorf(
-								"invalid indicator ID of IndicatorValuesService.ListByCountryIDs() got1[i].Indicator.ID = %v, want %v",
-								got1[i].Indicator.ID,
-								tt.args.indicatorID,
-							)
-						}
+			}
+			if tt.want1 != nil {
+				for i := range got1 {
+					if !reflect.DeepEqual(got1[i], tt.want1[i]) {
+						t.Errorf("IndicatorValuesService.ListByCountryIDs() got1[i] = %v, want[i] %v", got1[i], tt.want1[i])
 					}
 				}
 			}
@@ -378,6 +427,13 @@ func TestIndicatorValuesService_ListByCountryIDs(t *testing.T) {
 func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 	client, save := NewTestClient(t, *update)
 	defer save()
+
+	optIgnoreFields := cmpopts.IgnoreFields(
+		PageSummaryWithLastUpdated{},
+		"Pages",
+		"Total",
+		"LastUpdated",
+	)
 
 	defaultDateParams := &DateParams{
 		DateParamsType: DateParamsRange,
@@ -409,12 +465,12 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 		pages        *PageParams
 	}
 	tests := []struct {
-		name                     string
-		args                     args
-		want                     *PageSummaryWithLastUpdated
-		wantIndicatorValuesCount int
-		wantErr                  bool
-		wantErrRes               *ErrorResponse
+		name       string
+		args       args
+		want       *PageSummaryWithLastUpdated
+		want1      []*IndicatorValue
+		wantErr    bool
+		wantErrRes *ErrorResponse
 	}{
 		{
 			name: "success",
@@ -422,10 +478,13 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 				indicatorIDs: testutils.TestDefaultIndicatorIDs,
 				sourceID:     testutils.TestDefaultSourceID,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  false,
-			wantErrRes:               nil,
+			want: &PageSummaryWithLastUpdated{
+				Page:    1,
+				PerPage: 50,
+			},
+			want1:      nil,
+			wantErr:    false,
+			wantErrRes: nil,
 		},
 		{
 			name: "success with params",
@@ -436,12 +495,45 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 				pages:        defaultPageParams,
 			},
 			want: &PageSummaryWithLastUpdated{
-				Page:    intOrString(testutils.TestDefaultPage),
-				PerPage: intOrString(testutils.TestDefaultPerPage),
+				Page:    1,
+				PerPage: 2,
 			},
-			wantIndicatorValuesCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
-			wantErr:                  false,
-			wantErrRes:               nil,
+			want1: []*IndicatorValue{
+				{
+					Indicator: IDAndValue{
+						ID:    "NY.GDP.MKTP.CD",
+						Value: "GDP (current US$)",
+					},
+					Country: IDAndValue{
+						ID:    "1A",
+						Value: "Arab World",
+					},
+					Countryiso3code: "ARB",
+					Date:            "2019",
+					Value:           2.81741458466511e+12,
+					Unit:            "",
+					ObsStatus:       "",
+					Decimal:         0,
+				},
+				{
+					Indicator: IDAndValue{
+						ID:    "NY.GDP.MKTP.CD",
+						Value: "GDP (current US$)",
+					},
+					Country: IDAndValue{
+						ID:    "1A",
+						Value: "Arab World",
+					},
+					Countryiso3code: "ARB",
+					Date:            "2018",
+					Value:           2.77138409790453e+12,
+					Unit:            "",
+					ObsStatus:       "",
+					Decimal:         0,
+				},
+			},
+			wantErr:    false,
+			wantErrRes: nil,
 		},
 		{
 			name: "failure because invalid indicator id",
@@ -449,9 +541,9 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 				indicatorIDs: testutils.TestInvalidIndicatorIDs,
 				sourceID:     testutils.TestDefaultSourceID,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  true,
+			want:    nil,
+			want1:   nil,
+			wantErr: true,
 			wantErrRes: &ErrorResponse{
 				URL: fmt.Sprintf(
 					"%s%s/countries/all/indicators/%s?format=json&source=%s",
@@ -487,10 +579,10 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 				indicatorIDs: testutils.TestInvalidIndicatorIDs,
 				sourceID:     testutils.TestInvalidSourceID,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  true,
-			wantErrRes:               nil,
+			want:       nil,
+			want1:      nil,
+			wantErr:    true,
+			wantErrRes: nil,
 		},
 		{
 			name: "failure because invalid date params",
@@ -499,10 +591,10 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 				sourceID:     testutils.TestDefaultSourceID,
 				datePatams:   invalidDateParams,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  true,
-			wantErrRes:               nil,
+			want:       nil,
+			want1:      nil,
+			wantErr:    true,
+			wantErrRes: nil,
 		},
 		{
 			name: "failure because invalid page params",
@@ -511,10 +603,10 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 				sourceID:     testutils.TestDefaultSourceID,
 				pages:        invalidPageParams,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  true,
-			wantErrRes:               nil,
+			want:       nil,
+			want1:      nil,
+			wantErr:    true,
+			wantErrRes: nil,
 		},
 	}
 	for _, tt := range tests {
@@ -527,35 +619,20 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 				t.Errorf("IndicatorValuesService.ListBySourceID() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if err != nil && tt.wantErrRes != nil {
+			if tt.wantErrRes != nil {
 				if !reflect.DeepEqual(err, tt.wantErrRes) {
 					t.Errorf("IndicatorValuesService.ListBySourceID() err = %v, wantErrRes %v", err, tt.wantErrRes)
 				}
 			}
 			if tt.want != nil {
-				if got.Page != tt.want.Page || got.PerPage != tt.want.PerPage {
-					t.Errorf("IndicatorValuesService.ListBySourceID() got = %v, want %v", got, tt.want)
+				if !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
+					t.Errorf("IndicatorValuesService.ListBySourceID() got = %+v, want %+v", got, tt.want)
 				}
-				if reflect.TypeOf(got) != reflect.TypeOf(tt.want) {
-					t.Errorf(
-						"IndicatorValuesService.ListBySourceID() reflect.TypeOf(got) = %v, reflect.TypeOf(tt.want) %v",
-						reflect.TypeOf(got),
-						reflect.TypeOf(tt.want),
-					)
-				}
-				if len(got1) != tt.wantIndicatorValuesCount {
-					t.Errorf("invalid length of IndicatorValuesService.ListBySourceID() got1 = %v, want %v", got1, tt.wantIndicatorValuesCount)
-				}
-				if !tt.wantErr {
-					for i := range got1 {
-						if got1[i].Date != tt.args.datePatams.DateRange.Start && got1[i].Date != tt.args.datePatams.DateRange.End {
-							t.Errorf(
-								"invalid date of IndicatorValuesService.ListBySourceID() got1 = %v, want %v or %v",
-								got1[i].Date,
-								tt.args.datePatams.DateRange.Start,
-								tt.args.datePatams.DateRange.End,
-							)
-						}
+			}
+			if tt.want1 != nil {
+				for i := range got1 {
+					if !reflect.DeepEqual(got1[i], tt.want1[i]) {
+						t.Errorf("IndicatorValuesService.ListBySourceID() got1[i] = %v, want[i] %v", got1[i], tt.want1[i])
 					}
 				}
 			}
@@ -566,6 +643,13 @@ func TestIndicatorValuesService_ListBySourceID(t *testing.T) {
 func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 	client, save := NewTestClient(t, *update)
 	defer save()
+
+	optIgnoreFields := cmpopts.IgnoreFields(
+		PageSummaryWithLastUpdated{},
+		"Pages",
+		"Total",
+		"LastUpdated",
+	)
 
 	defaultDateParams := &DateParams{
 		DateParamsType: DateParamsRange,
@@ -598,12 +682,12 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 		pages        *PageParams
 	}
 	tests := []struct {
-		name                     string
-		args                     args
-		want                     *PageSummaryWithLastUpdated
-		wantIndicatorValuesCount int
-		wantErr                  bool
-		wantErrRes               *ErrorResponse
+		name       string
+		args       args
+		want       *PageSummaryWithLastUpdated
+		want1      []*IndicatorValue
+		wantErr    bool
+		wantErrRes *ErrorResponse
 	}{
 		{
 			name: "success",
@@ -612,10 +696,10 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 				indicatorIDs: testutils.TestDefaultIndicatorIDs,
 				sourceID:     testutils.TestDefaultSourceID,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  false,
-			wantErrRes:               nil,
+			want:       nil,
+			want1:      nil,
+			wantErr:    false,
+			wantErrRes: nil,
 		},
 		{
 			name: "success with params",
@@ -630,9 +714,42 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 				Page:    intOrString(testutils.TestDefaultPage),
 				PerPage: intOrString(testutils.TestDefaultPerPage),
 			},
-			wantIndicatorValuesCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
-			wantErr:                  false,
-			wantErrRes:               nil,
+			want1: []*IndicatorValue{
+				{
+					Indicator: IDAndValue{
+						ID:    "NY.GDP.MKTP.CD",
+						Value: "GDP (current US$)",
+					},
+					Country: IDAndValue{
+						ID:    "JP",
+						Value: "Japan",
+					},
+					Countryiso3code: "JPN",
+					Date:            "2019",
+					Value:           5.08176954237977e+12,
+					Unit:            "",
+					ObsStatus:       "",
+					Decimal:         0,
+				},
+				{
+					Indicator: IDAndValue{
+						ID:    "NY.GDP.MKTP.CD",
+						Value: "GDP (current US$)",
+					},
+					Country: IDAndValue{
+						ID:    "JP",
+						Value: "Japan",
+					},
+					Countryiso3code: "JPN",
+					Date:            "2018",
+					Value:           4.95480661999519e+12,
+					Unit:            "",
+					ObsStatus:       "",
+					Decimal:         0,
+				},
+			},
+			wantErr:    false,
+			wantErrRes: nil,
 		},
 		{
 			name: "failure because invalid country ids",
@@ -641,9 +758,9 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 				indicatorIDs: testutils.TestDefaultIndicatorIDs,
 				sourceID:     testutils.TestDefaultSourceID,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  true,
+			want:    nil,
+			want1:   nil,
+			wantErr: true,
 			wantErrRes: &ErrorResponse{
 				URL: fmt.Sprintf(
 					"%s%s/countries/%s/indicators/%s?format=json&source=%s",
@@ -671,9 +788,9 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 				indicatorIDs: testutils.TestInvalidIndicatorIDs,
 				sourceID:     testutils.TestDefaultSourceID,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  true,
+			want:    nil,
+			want1:   nil,
+			wantErr: true,
 			wantErrRes: &ErrorResponse{
 				URL: fmt.Sprintf(
 					"%s%s/countries/%s/indicators/%s?format=json&source=%s",
@@ -711,10 +828,10 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 				indicatorIDs: testutils.TestDefaultIndicatorIDs,
 				sourceID:     testutils.TestInvalidSourceID,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  true,
-			wantErrRes:               nil,
+			want:       nil,
+			want1:      nil,
+			wantErr:    true,
+			wantErrRes: nil,
 		},
 		{
 			name: "failure because invalid date params",
@@ -724,10 +841,10 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 				sourceID:     testutils.TestDefaultSourceID,
 				datePatams:   invalidDateParams,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  true,
-			wantErrRes:               nil,
+			want:       nil,
+			want1:      nil,
+			wantErr:    true,
+			wantErrRes: nil,
 		},
 		{
 			name: "failure because invalid page params",
@@ -737,10 +854,10 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 				sourceID:     testutils.TestDefaultSourceID,
 				pages:        invalidPageParams,
 			},
-			want:                     nil,
-			wantIndicatorValuesCount: 0,
-			wantErr:                  true,
-			wantErrRes:               nil,
+			want:       nil,
+			want1:      nil,
+			wantErr:    true,
+			wantErrRes: nil,
 		},
 	}
 	for _, tt := range tests {
@@ -759,39 +876,20 @@ func TestIndicatorValuesService_ListByCountryIDsAndSourceID(t *testing.T) {
 				t.Errorf("IndicatorValuesService.ListByCountryIDsAndSourceID() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if err != nil && tt.wantErrRes != nil {
+			if tt.wantErrRes != nil {
 				if !reflect.DeepEqual(err, tt.wantErrRes) {
-					t.Errorf("IndicatorValuesService.ListByCountryIDsAndSourceID() err = %v, wantErrRes %v", err, tt.wantErrRes)
+					t.Errorf("IndicatorValuesService.ListBySourceID() err = %v, wantErrRes %v", err, tt.wantErrRes)
 				}
 			}
 			if tt.want != nil {
-				if got.Page != tt.want.Page || got.PerPage != tt.want.PerPage {
-					t.Errorf("IndicatorValuesService.ListByCountryIDsAndSourceID() got = %v, want %v", got, tt.want)
+				if !cmp.Equal(got, tt.want, nil, optIgnoreFields) {
+					t.Errorf("IndicatorValuesService.ListBySourceID() got = %+v, want %+v", got, tt.want)
 				}
-				if reflect.TypeOf(got) != reflect.TypeOf(tt.want) {
-					t.Errorf(
-						"IndicatorValuesService.ListByCountryIDsAndSourceID() reflect.TypeOf(got) = %v, reflect.TypeOf(tt.want) %v",
-						reflect.TypeOf(got),
-						reflect.TypeOf(tt.want),
-					)
-				}
-				if len(got1) != tt.wantIndicatorValuesCount {
-					t.Errorf(
-						"invalid length of IndicatorValuesService.ListByCountryIDsAndSourceID() got1 = %v, want %v",
-						got1,
-						tt.wantIndicatorValuesCount,
-					)
-				}
-				if !tt.wantErr {
-					for i := range got1 {
-						if got1[i].Date != tt.args.datePatams.DateRange.Start && got1[i].Date != tt.args.datePatams.DateRange.End {
-							t.Errorf(
-								"invalid date of IndicatorValuesService.ListByCountryIDsAndSourceID() got1 = %v, want %v or %v",
-								got1[i].Date,
-								tt.args.datePatams.DateRange.Start,
-								tt.args.datePatams.DateRange.End,
-							)
-						}
+			}
+			if tt.want1 != nil {
+				for i := range got1 {
+					if !reflect.DeepEqual(got1[i], tt.want1[i]) {
+						t.Errorf("IndicatorValuesService.ListBySourceID() got1[i] = %v, want[i] %v", got1[i], tt.want1[i])
 					}
 				}
 			}

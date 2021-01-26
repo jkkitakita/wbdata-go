@@ -20,50 +20,64 @@ func TestRegionsService_List(t *testing.T) {
 		Page:    testutils.TestInvalidPage,
 		PerPage: testutils.TestDefaultPerPage,
 	}
-	invalidPerPageParams := &PageParams{
-		Page:    testutils.TestDefaultPage,
-		PerPage: testutils.TestInvalidPerPage,
-	}
 
 	type args struct {
 		pages *PageParams
 	}
 	tests := []struct {
-		name             string
-		args             args
-		want             *PageSummary
-		wantRegionsCount int
-		wantErr          bool
+		name    string
+		args    args
+		want    *PageSummary
+		want1   []*Region
+		wantErr bool
 	}{
 		{
 			name: "success",
+			args: args{},
+			want: &PageSummary{
+				Page:    1,
+				Pages:   1,
+				PerPage: 50,
+				Total:   42,
+			},
+			want1:   nil,
+			wantErr: false,
+		},
+		{
+			name: "success with page params",
 			args: args{
 				pages: defaultPageParams,
 			},
 			want: &PageSummary{
-				Page:    intOrString(testutils.TestDefaultPage),
-				PerPage: intOrString(testutils.TestDefaultPerPage),
+				Page:    1,
+				Pages:   21,
+				PerPage: 2,
+				Total:   42,
 			},
-			wantRegionsCount: testutils.TestDefaultPage * testutils.TestDefaultPerPage,
-			wantErr:          false,
+			want1: []*Region{
+				{
+					ID:       "",
+					Code:     "AFR",
+					Iso2Code: "A9",
+					Name:     "Africa",
+				},
+				{
+					ID:       "",
+					Code:     "ARB",
+					Iso2Code: "1A",
+					Name:     "Arab World",
+				},
+			},
+			wantErr: false,
 		},
 		{
 			name: "failure because Page is less than 1",
 			args: args{
 				pages: invalidPageParams,
 			},
-			want:             nil,
-			wantRegionsCount: 0,
-			wantErr:          true,
-		},
-		{
-			name: "failure because PerPage is less than 1",
-			args: args{
-				pages: invalidPerPageParams,
-			},
-			want:             nil,
-			wantRegionsCount: 0,
-			wantErr:          true,
+			want:    nil,
+			want1:   nil,
+			wantErr: true,
 		},
 	}
 	for _, tt := range tests {
@@ -76,13 +90,15 @@ func TestRegionsService_List(t *testing.T) {
 				t.Errorf("RegionsService.List() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if tt.want != nil {
-				if got.Page != tt.want.Page || got.PerPage != tt.want.PerPage {
-					t.Errorf("RegionsService.List() got = %v, want %v", got, tt.want)
-				}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("RegionsService.List() got = %v, want %v", got, tt.want)
 			}
-			if len(got1) != tt.wantRegionsCount {
-				t.Errorf("RegionsService.List() got1 = %v, want %v", got1, tt.wantRegionsCount)
+			if tt.want1 != nil {
+				for i := range got1 {
+					if !reflect.DeepEqual(got1[i], tt.want1[i]) {
+						t.Errorf("RegionsService.List() got1[i] = %v, want[i] %v", got1[i], tt.want1[i])
+					}
+				}
 			}
 		})
 	}

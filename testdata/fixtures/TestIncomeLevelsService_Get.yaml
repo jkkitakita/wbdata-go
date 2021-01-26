@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
-    url: http://api.worldbank.org/v2/incomeLevels/hic?format=json
+    url: http://api.worldbank.org/v2/incomeLevels/HIC?format=json
     method: GET
   response:
     body: '[{"page":"1","pages":"1","per_page":"50","total":"1"},[{"id":"HIC","iso2code":"XD","value":"High
@@ -20,7 +20,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2549804
+      - public, must-revalidate, max-age=2584696
       Connection:
       - keep-alive
       Content-Length:
@@ -28,18 +28,18 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 24 Jan 2021 14:35:06 GMT
+      - Tue, 26 Jan 2021 03:47:24 GMT
       Expires:
-      - Tue, 23 Feb 2021 02:51:50 GMT
+      - Thu, 25 Feb 2021 01:45:40 GMT
       Last-Modified:
-      - Sun, 24 Jan 2021 02:51:50 GMT
+      - Tue, 26 Jan 2021 01:45:40 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
-      - TS01fa65e4=01359ee9766a885599a4e7b2f579a4bf427d970f14335404c93f2318a7d77b5fd5cf0c7c53c64ce722aa1fe9328da95e905b257698;
+      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - TS019266c8=017189f9474a8a43f5ab91fd4cc8cac19a659dee4716200d9fce25e474696dfa68312a3367f77613311b97e511cd3ddc998181bb98;
         Path=/
-      - TS019865bf=01236463214e72e6b6cb31f7977421af51aaeb006bb4184ea5be9ecaf11bc80edfb913818e6453233482c582843405c9ae4efa0910fe44b96ebfe0d20035484ef2da23cc16;
+      - TS019865bf=016ca921732308bf5f2e153d2e7247a29ca1e3b517f78cc0f11c616d7cb10ccba32aa1251c671cc75790d3be21433c0c50be74bc20a058abde3355729ccf0f892b7d1d7110;
         Path=/
     status: 200 OK
     code: 200
@@ -63,7 +63,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2591659
+      - public, must-revalidate, max-age=2584696
       Connection:
       - keep-alive
       Content-Length:
@@ -71,18 +71,18 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 24 Jan 2021 14:35:07 GMT
+      - Tue, 26 Jan 2021 03:47:24 GMT
       Expires:
-      - Tue, 23 Feb 2021 14:29:26 GMT
+      - Thu, 25 Feb 2021 01:45:40 GMT
       Last-Modified:
-      - Sun, 24 Jan 2021 14:29:26 GMT
+      - Tue, 26 Jan 2021 01:45:40 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
       - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
-      - TS01fa65e4=01359ee976040cc1370271ad70f7b5400758af41018db090cd986392e7fea7c742ad1a33039e962a1a335550ed8074b4e943c583ee;
+      - TS01fa65e4=01359ee97656ca2ea1a01fc2c9e5af2809116c2ff9353c5bd076bece10c51c5953fbcebaad6b987cb36262e1213528388959e02e92;
         Path=/
-      - TS019865bf=016ca92173cc9b3266388e7a6a272305448a4ef670f394f6bbb301b4edf9534162af0f3b17f8f51dceea0bbe45587b1270ed4f0d7f62cf1264680584c5759d0dff1eda63df;
+      - TS019865bf=016ca921738f8b3aa936406bb3d6a5078ee630b353921351b637de396270be9003c69126ef2e417aa1105671b6f1f71efef9564d7f8bb636ade71d6d9f2a7a603106949935;
         Path=/
     status: 200 OK
     code: 200

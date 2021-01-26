@@ -7,6 +7,81 @@ interactions:
     headers:
       User-Agent:
       - wbdata-go
+    url: http://api.worldbank.org/v2/regions?format=json
+    method: GET
+  response:
+    body: '[{"page":"1","pages":"1","per_page":"50","total":"42"},[{"id":"","code":"AFR","iso2code":"A9","name":"Africa"},{"id":"","code":"ARB","iso2code":"1A","name":"Arab
+      World"},{"id":"","code":"CAA","iso2code":"C9","name":"Sub-Saharan Africa (IFC
+      classification)"},{"id":"","code":"CEA","iso2code":"C4","name":"East Asia and
+      the Pacific (IFC classification)"},{"id":"","code":"CEB","iso2code":"B8","name":"Central
+      Europe and the Baltics"},{"id":"","code":"CEU","iso2code":"C5","name":"Europe
+      and Central Asia (IFC classification)"},{"id":"","code":"CLA","iso2code":"C6","name":"Latin
+      America and the Caribbean (IFC classification)"},{"id":"","code":"CME","iso2code":"C7","name":"Middle
+      East and North Africa (IFC classification)"},{"id":"","code":"CSA","iso2code":"C8","name":"South
+      Asia (IFC classification)"},{"id":"","code":"CSS","iso2code":"S3","name":"Caribbean
+      small states"},{"id":"","code":"EAP","iso2code":"4E","name":"East Asia & Pacific
+      (excluding high income)"},{"id":"","code":"EAR","iso2code":"V2","name":"Early-demographic
+      dividend"},{"id":"1","code":"EAS","iso2code":"Z4","name":"East Asia & Pacific"},{"id":"","code":"ECA","iso2code":"7E","name":"Europe
+      & Central Asia (excluding high income)"},{"id":"2","code":"ECS","iso2code":"Z7","name":"Europe
+      & Central Asia"},{"id":"","code":"EMU","iso2code":"XC","name":"Euro area"},{"id":"","code":"EUU","iso2code":"EU","name":"European
+      Union"},{"id":"","code":"FCS","iso2code":"F1","name":"Fragile and conflict affected
+      situations"},{"id":"","code":"HPC","iso2code":"XE","name":"Heavily indebted
+      poor countries (HIPC)"},{"id":"","code":"LAC","iso2code":"XJ","name":"Latin
+      America & Caribbean (excluding high income)"},{"id":"3","code":"LCN","iso2code":"ZJ","name":"Latin
+      America & Caribbean "},{"id":"","code":"LDC","iso2code":"XL","name":"Least developed
+      countries: UN classification"},{"id":"","code":"LTE","iso2code":"V3","name":"Late-demographic
+      dividend"},{"id":"","code":"MDE","iso2code":"M1","name":"Middle East (developing
+      only)"},{"id":"4","code":"MEA","iso2code":"ZQ","name":"Middle East & North Africa"},{"id":"","code":"MNA","iso2code":"XQ","name":"Middle
+      East & North Africa (excluding high income)"},{"id":"6","code":"NAC","iso2code":"XU","name":"North
+      America"},{"id":"","code":"NAF","iso2code":"M2","name":"North Africa"},{"id":"","code":"NRS","iso2code":"6X","name":"Non-resource
+      rich Sub-Saharan Africa countries"},{"id":"","code":"OED","iso2code":"OE","name":"OECD
+      members"},{"id":"","code":"OSS","iso2code":"S4","name":"Other small states"},{"id":"","code":"PRE","iso2code":"V1","name":"Pre-demographic
+      dividend"},{"id":"","code":"PSS","iso2code":"S2","name":"Pacific island small
+      states"},{"id":"","code":"PST","iso2code":"V4","name":"Post-demographic dividend"},{"id":"","code":"RRS","iso2code":"R6","name":"Resource
+      rich Sub-Saharan Africa countries"},{"id":"8","code":"SAS","iso2code":"8S","name":"South
+      Asia"},{"id":"","code":"SSA","iso2code":"ZF","name":"Sub-Saharan Africa (excluding
+      high income)"},{"id":"9","code":"SSF","iso2code":"ZG","name":"Sub-Saharan Africa
+      "},{"id":"","code":"SST","iso2code":"S1","name":"Small states"},{"id":"","code":"SXZ","iso2code":"A4","name":"Sub-Saharan
+      Africa excluding South Africa"},{"id":"","code":"WLD","iso2code":"1W","name":"World"},{"id":"","code":"XZN","iso2code":"A5","name":"Sub-Saharan
+      Africa excluding South Africa and Nigeria"}]]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2591226
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "3356"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 26 Jan 2021 03:47:29 GMT
+      Expires:
+      - Thu, 25 Feb 2021 03:34:35 GMT
+      Last-Modified:
+      - Tue, 26 Jan 2021 03:34:35 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
+      Set-Cookie:
+      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - TS019266c8=017189f94760e6fbf7433145d7f315bea5c8205ffe9f4c532d49b901ca168e09bbc4fad6a74948a7a9f817593fad3ef58d2b7a69bb;
+        Path=/
+      - TS019865bf=016ca9217301fbf69fa1b69baffcbf7e7e99920ff0e20be4112e66ee9db67597da3a91381e5b8d05a115fd1efaca8db6c159cca2fa677052f2ca61c413b64b0d0b93c994ad;
+        Path=/
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
     url: http://api.worldbank.org/v2/regions?format=json&page=1&per_page=2
     method: GET
   response:
@@ -20,7 +95,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2555999
+      - public, must-revalidate, max-age=2584703
       Connection:
       - keep-alive
       Content-Length:
@@ -28,18 +103,18 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Sun, 24 Jan 2021 14:35:15 GMT
+      - Tue, 26 Jan 2021 03:47:30 GMT
       Expires:
-      - Tue, 23 Feb 2021 04:35:13 GMT
+      - Thu, 25 Feb 2021 01:45:53 GMT
       Last-Modified:
-      - Sun, 24 Jan 2021 04:35:13 GMT
+      - Tue, 26 Jan 2021 01:45:53 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
       - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
-      - TS019266c8=017189f9474dbdf3afde73a02797b9a14b6cee748bcdbee6c4a46879e592a13cf19d4d23e90170eb659e17010a3aadf633e459097e;
+      - TS01fa65e4=01359ee97690476ad2c5cdfc8069492adfb764849a18c994644fb162cae1f49ace204aa5a65eb07e08c11ce46ca588ad9ff6309610;
         Path=/
-      - TS019865bf=0123646321bd47b8acd50077c638ae850ac81582c947c5315be9f5bc59f45936c4a231a995f60bea874ebff0b52aea5ca34ac1f8e423257d22801686d17f50bb37fc9c23fb;
+      - TS019865bf=0123646321c55c244119116cbb37c145c0921586434e4d655a33fa198725b203d00ebe5033267f026d6fe92581a833f50e91ccd0b6c7e05d4c6554ebdbebf5d786adaddcab;
         Path=/
     status: 200 OK
     code: 200
