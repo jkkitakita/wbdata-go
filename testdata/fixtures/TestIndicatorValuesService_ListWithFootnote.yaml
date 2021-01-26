@@ -1,0 +1,182 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/countries/all/indicators/NY.GDP.MKTP.CD?footnote=y&format=json
+    method: GET
+  response:
+    body: '[{"page":1,"pages":323,"per_page":50,"total":16104,"sourceid":"2","lastupdated":"2020-12-16"},[{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2020","value":null,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2019","value":2817414584665.11,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2018","value":2771384097904.53,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2017","value":2516121177762.82,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2016","value":2469440154484.43,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2015","value":2534723688142.23,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2014","value":2894391168409.53,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2013","value":2856372458851.04,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2012","value":2773499064014.84,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2011","value":2494028778449.34,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2010","value":2103331412247.86,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2009","value":1795740921393.58,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2008","value":2080969850135.39,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2007","value":1639307043044.79,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2006","value":1406002045914.84,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2005","value":1186135399898.53,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2004","value":965100949397.812,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2003","value":821089931822.719,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2002","value":726832740066.549,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2001","value":722917010350.548,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2000","value":735685319268.802,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1999","value":644527010683.065,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1998","value":592264356627.349,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1997","value":614123231689.678,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1996","value":579109082402.504,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1995","value":524626754650.83,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1994","value":488310840410.44,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1993","value":477750218753.597,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1992","value":472395612979.048,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1991","value":441363731387.288,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1990","value":447403057842.308,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1989","value":323313155352.566,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1988","value":308329777739.899,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1987","value":313464339247.535,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1986","value":294002304210.702,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1985","value":307935286171.298,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1984","value":311102902529.672,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1983","value":306718525880.767,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1982","value":326467614158.131,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1981","value":348013579325.699,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1980","value":337548607895.817,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1979","value":248970610830.706,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1978","value":183969539762.573,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1977","value":167530174445.324,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1976","value":145484738304.229,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1975","value":117103149355.725,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1974","value":105711125366.347,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1973","value":55922081751.8977,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1972","value":44182128971.3952,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"1971","value":37045140366.8421,"unit":"","obs_status":"","decimal":0,"footnote":""}]]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2591502
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "11282"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 26 Jan 2021 06:03:41 GMT
+      Expires:
+      - Thu, 25 Feb 2021 05:55:23 GMT
+      Last-Modified:
+      - Tue, 26 Jan 2021 05:55:23 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
+      Set-Cookie:
+      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - TS01fa65e4=01359ee976dbf6fe3f566bc4ac3143f074c2cc0a57addb429ec6b30bfecdd4feed203d618914deb3a62ab8d9db0021a29ee5ada241;
+        Path=/
+      - TS019865bf=016ca921730e520b2a07c6d1dd143a99cea7467016278c642555ab47941e47d0c0df5e11763de3bc2ce7a38836dce1d03b115e18d6e6ddd230d7cdcd3a337c9f0aca0bc6d6;
+        Path=/
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/countries/all/indicators/NY.GDP.MKTP.CD?date=2018%3A2019&footnote=y&format=json&page=1&per_page=2
+    method: GET
+  response:
+    body: '[{"page":1,"pages":264,"per_page":2,"total":528,"sourceid":"2","lastupdated":"2020-12-16"},[{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2019","value":2817414584665.11,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"1A","value":"Arab World"},"countryiso3code":"ARB","date":"2018","value":2771384097904.53,"unit":"","obs_status":"","decimal":0,"footnote":""}]]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2591502
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "541"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 26 Jan 2021 06:03:42 GMT
+      Expires:
+      - Thu, 25 Feb 2021 05:55:24 GMT
+      Last-Modified:
+      - Tue, 26 Jan 2021 05:55:24 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
+      Set-Cookie:
+      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - TS01fa65e4=01359ee9767ab41f44b7c0ed7952c0d979e62509ae4a6fc2a07e3ff021cf04dccb2fb6d9188ed603f0dc24e1bb44ceba8ff7841d6e;
+        Path=/
+      - TS019865bf=01236463216fcd58d5e9eefea7bf65146f1dcab9cfabcea550b08008d3d1b19c491ea573b288d12df0e79d9a8eed745d2eb9088fb593c33fae74e105e79067974982deaf7f;
+        Path=/
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/countries/all/indicators/INVALID.INDICATOR.ID?footnote=y&format=json
+    method: GET
+  response:
+    body: '[{"message":[{"id":"120","key":"Invalid value","value":"The provided parameter
+      value is not valid"}]}]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2591502
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "102"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 26 Jan 2021 06:03:42 GMT
+      Expires:
+      - Thu, 25 Feb 2021 05:55:24 GMT
+      Last-Modified:
+      - Tue, 26 Jan 2021 05:55:24 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
+      Set-Cookie:
+      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - TS01fa65e4=01359ee97672e6b292f96951ca95c674ddc4197d56812817b9dbdce81786d1c264ac07d1e63bc6573d5111cc9c572dbcc238d6c37b;
+        Path=/
+      - TS019865bf=0123646321368c28746b1cad71f80dd6d31d94e38641ee8ff490d9dc34a791935c6dc02c64945b8db3a41114d17d464bfcff1249848954800d8dbf530715f1f5ce0d80e353;
+        Path=/
+    status: 200 OK
+    code: 200
+    duration: ""

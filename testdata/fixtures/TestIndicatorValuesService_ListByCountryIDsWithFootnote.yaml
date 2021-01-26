@@ -1,0 +1,225 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/countries/JPN;USA/indicators/NY.GDP.MKTP.CD?footnote=y&format=json
+    method: GET
+  response:
+    body: '[{"page":1,"pages":3,"per_page":50,"total":122,"sourceid":"2","lastupdated":"2020-12-16"},[{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2020","value":null,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2019","value":5081769542379.77,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2018","value":4954806619995.19,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2017","value":4866864409657.68,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2016","value":4922538141454.62,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2015","value":4389475622588.97,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2014","value":4850413536037.84,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2013","value":5155717056270.83,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2012","value":6203213121334.12,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2011","value":6157459594823.72,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2010","value":5700098114744.41,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2009","value":5231382674593.7,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2008","value":5037908465114.48,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2007","value":4515264514430.57,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2006","value":4530377224970.4,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2005","value":4755410630912.14,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2004","value":4815148854362.11,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2003","value":4445658071221.86,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2002","value":4115116279069.77,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2001","value":4303544259842.72,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2000","value":4887519660744.86,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1999","value":4562078822335.45,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1998","value":4032509760872.94,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1997","value":4414732843544.43,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1996","value":4833712542207.1,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1995","value":5449116304981.1,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1994","value":4907039384469.68,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1993","value":4454143876947.21,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1992","value":3908809463463.86,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1991","value":3584420077100.84,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1990","value":3132817652848.04,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1989","value":3054914166263.18,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1988","value":3071683013178.91,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1987","value":2532808573157.03,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1986","value":2078953333673.55,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1985","value":1398892744820.69,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1984","value":1318381627003.76,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1983","value":1243323592058.83,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1982","value":1134518001884.56,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1981","value":1218988935129.81,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1980","value":1105385973763.87,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1979","value":1055012119526.33,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1978","value":1013612173518.84,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1977","value":721411786536.814,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1976","value":586161858999.671,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1975","value":521541905673.251,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1974","value":479625998613.406,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1973","value":432082670450.719,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1972","value":318031297492.352,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"1971","value":240151807460.241,"unit":"","obs_status":"","decimal":0,"footnote":""}]]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2591813
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "11026"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 26 Jan 2021 06:03:43 GMT
+      Expires:
+      - Thu, 25 Feb 2021 06:00:36 GMT
+      Last-Modified:
+      - Tue, 26 Jan 2021 06:00:36 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
+      Set-Cookie:
+      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - TS019266c8=017189f947c3ecdee860a81532faa4ca0f160643b0eaa20cd64ea6ab101b168e0677d19d78705b0862a28243105679ab2b19626ec4;
+        Path=/
+      - TS019865bf=016ca92173f4d2fb5470c7b570ef44b9bd7ac8e9e21593c83e72575c8f48e1a8f15a892d6c2bd8f47c88aef19f3125e33e731422c2057aa76da39f4785ea6bcbd983a24af8;
+        Path=/
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/countries/JPN;USA/indicators/NY.GDP.MKTP.CD?date=2018%3A2019&footnote=y&format=json&page=1&per_page=2
+    method: GET
+  response:
+    body: '[{"page":1,"pages":2,"per_page":2,"total":4,"sourceid":"2","lastupdated":"2020-12-16"},[{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2019","value":5081769542379.77,"unit":"","obs_status":"","decimal":0,"footnote":""},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+      (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2018","value":4954806619995.19,"unit":"","obs_status":"","decimal":0,"footnote":""}]]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2591814
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "527"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 26 Jan 2021 06:03:43 GMT
+      Expires:
+      - Thu, 25 Feb 2021 06:00:37 GMT
+      Last-Modified:
+      - Tue, 26 Jan 2021 06:00:37 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
+      Set-Cookie:
+      - api_http.cookie=6522b4f228692af12cf8702d3e2ad7ef; Path=/
+      - TS019266c8=017189f9471299af530d00270ca054094b888623d20c6183e995a1858a3195505e411aeabef9499fb36413db579fa55bca6b673145;
+        Path=/
+      - TS019865bf=016ca92173ce978cb55708a690650091c34d38e96570321697a908422ae8d3759dde175adeba03cd2c25b3e2598ecbb136ebaf40058a8196ac82052af05f2ac8c6fadc376c;
+        Path=/
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/countries/ABCDEFG;HIJKLM/indicators/NY.GDP.MKTP.CD?footnote=y&format=json
+    method: GET
+  response:
+    body: '[{"message":[{"id":"120","key":"Invalid value","value":"The provided parameter
+      value is not valid"}]}]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2591814
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "102"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 26 Jan 2021 06:03:43 GMT
+      Expires:
+      - Thu, 25 Feb 2021 06:00:37 GMT
+      Last-Modified:
+      - Tue, 26 Jan 2021 06:00:37 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
+      Set-Cookie:
+      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - TS01fa65e4=01359ee97680435f8133a0c784437a03fe97abbd1f7ae07c1aab76b594f5a46600f0b813b1fce23c821a6f3db3b07ffffa758f4709;
+        Path=/
+      - TS019865bf=01236463218ddf2e96aef65036397c992ac9435af6433376a28f74c3e870c00a7607b971a1d8254b685d6f9da1b49e4b40eea73e1c2a94329dfdda22bda2af47eac70bd467;
+        Path=/
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - wbdata-go
+    url: http://api.worldbank.org/v2/countries/JPN;USA/indicators/INVALID.INDICATOR.ID?footnote=y&format=json
+    method: GET
+  response:
+    body: '[{"message":[{"id":"120","key":"Invalid value","value":"The provided parameter
+      value is not valid"}]}]'
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, must-revalidate, max-age=2591815
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "102"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 26 Jan 2021 06:03:44 GMT
+      Expires:
+      - Thu, 25 Feb 2021 06:00:38 GMT
+      Last-Modified:
+      - Tue, 26 Jan 2021 06:00:38 GMT
+      Request-Context:
+      - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
+      Set-Cookie:
+      - api_http.cookie=5ef47b876c10459d48ce6c9e73808b6f; Path=/
+      - TS019266c8=017189f947d1e82288ab20d8f5932f0b932e166d4bda6df225e851050f4a196bb44a6e5be55a15e46a28286875cf9cd2aa2eab1d07;
+        Path=/
+      - TS019865bf=0123646321bfc157803b2284b7de268a445ffc05037a24c1aa21c12cf8a8a257dfa8ec211717665c8f39907021711b3ece726c4ebe0d70915781796a028be027ecf5813f62;
+        Path=/
+    status: 200 OK
+    code: 200
+    duration: ""
