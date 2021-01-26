@@ -20,6 +20,12 @@ type (
 		ObsStatus       string     `json:"obs_status"`
 		Decimal         int32      `json:"decimal"`
 	}
+
+	// IndicatorValueWithFootnote represents an indicator value with footnote
+	IndicatorValueWithFootnote struct {
+		IndicatorValue
+		Footnote string `json:"footnote"`
+	}
 )
 
 // List returns a Response's Summary and Indicator in all countries
@@ -48,6 +54,42 @@ func (i *IndicatorValuesService) List(
 	if err := datePatams.addDateParams(req); err != nil {
 		return nil, nil, err
 	}
+
+	if err = i.client.do(req, &[]interface{}{summary, &indicatorValues}); err != nil {
+		return nil, nil, err
+	}
+
+	return summary, indicatorValues, nil
+}
+
+// ListWithFootnote returns a Response's Summary and Indicator with footnote in all countries
+func (i *IndicatorValuesService) ListWithFootnote(
+	indicatorID string,
+	datePatams *DateParams,
+	pages *PageParams,
+) (*PageSummaryWithSourceID, []*IndicatorValueWithFootnote, error) {
+	summary := &PageSummaryWithSourceID{}
+	indicatorValues := []*IndicatorValueWithFootnote{}
+
+	path := fmt.Sprintf(
+		"countries/all/indicators/%s",
+		indicatorID,
+	)
+
+	req, err := i.client.NewRequest("GET", path, nil, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	if err := pages.addPageParams(req); err != nil {
+		return nil, nil, err
+	}
+
+	if err := datePatams.addDateParams(req); err != nil {
+		return nil, nil, err
+	}
+
+	addFootNoteParams(req)
 
 	if err = i.client.do(req, &[]interface{}{summary, &indicatorValues}); err != nil {
 		return nil, nil, err
@@ -92,6 +134,44 @@ func (i *IndicatorValuesService) ListByCountryIDs(
 	return summary, indicatorValues, nil
 }
 
+// ListByCountryIDsWithFootnote returns a Response's Summary and Indicator with footnote By country IDs
+func (i *IndicatorValuesService) ListByCountryIDsWithFootnote(
+	countryIDs []string,
+	indicatorID string,
+	datePatams *DateParams,
+	pages *PageParams,
+) (*PageSummaryWithSourceID, []*IndicatorValueWithFootnote, error) {
+	summary := &PageSummaryWithSourceID{}
+	indicatorValues := []*IndicatorValueWithFootnote{}
+
+	path := fmt.Sprintf(
+		"countries/%s/indicators/%s",
+		strings.Join(countryIDs, ";"),
+		indicatorID,
+	)
+
+	req, err := i.client.NewRequest("GET", path, nil, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	if err := pages.addPageParams(req); err != nil {
+		return nil, nil, err
+	}
+
+	if err := datePatams.addDateParams(req); err != nil {
+		return nil, nil, err
+	}
+
+	addFootNoteParams(req)
+
+	if err = i.client.do(req, &[]interface{}{summary, &indicatorValues}); err != nil {
+		return nil, nil, err
+	}
+
+	return summary, indicatorValues, nil
+}
+
 // ListBySourceID returns a Response's Summary and Indicator in all countries By source ID
 func (i *IndicatorValuesService) ListBySourceID(
 	indicatorIDs []string,
@@ -120,6 +200,44 @@ func (i *IndicatorValuesService) ListBySourceID(
 	if err := datePatams.addDateParams(req); err != nil {
 		return nil, nil, err
 	}
+
+	if err = i.client.do(req, &[]interface{}{summary, &indicatorValues}); err != nil {
+		return nil, nil, err
+	}
+
+	return summary, indicatorValues, nil
+}
+
+// ListBySourceIDWithFootnote returns a Response's Summary and Indicator with footnote in all countries By source ID
+func (i *IndicatorValuesService) ListBySourceIDWithFootnote(
+	indicatorIDs []string,
+	sourceID string,
+	datePatams *DateParams,
+	pages *PageParams,
+) (*PageSummaryWithLastUpdated, []*IndicatorValueWithFootnote, error) {
+	summary := &PageSummaryWithLastUpdated{}
+	indicatorValues := []*IndicatorValueWithFootnote{}
+
+	path := fmt.Sprintf(
+		"countries/all/indicators/%s?source=%s",
+		strings.Join(indicatorIDs, ";"),
+		sourceID,
+	)
+
+	req, err := i.client.NewRequest("GET", path, nil, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	if err := pages.addPageParams(req); err != nil {
+		return nil, nil, err
+	}
+
+	if err := datePatams.addDateParams(req); err != nil {
+		return nil, nil, err
+	}
+
+	addFootNoteParams(req)
 
 	if err = i.client.do(req, &[]interface{}{summary, &indicatorValues}); err != nil {
 		return nil, nil, err
@@ -158,6 +276,46 @@ func (i *IndicatorValuesService) ListByCountryIDsAndSourceID(
 	if err := datePatams.addDateParams(req); err != nil {
 		return nil, nil, err
 	}
+
+	if err = i.client.do(req, &[]interface{}{summary, &indicatorValues}); err != nil {
+		return nil, nil, err
+	}
+
+	return summary, indicatorValues, nil
+}
+
+// ListByCountryIDsAndSourceIDWithFootnote returns a Response's Summary and Indicator with footnote By country IDs and source ID
+func (i *IndicatorValuesService) ListByCountryIDsAndSourceIDWithFootnote(
+	countryIDs []string,
+	indicatorIDs []string,
+	sourceID string,
+	datePatams *DateParams,
+	pages *PageParams,
+) (*PageSummaryWithLastUpdated, []*IndicatorValueWithFootnote, error) {
+	summary := &PageSummaryWithLastUpdated{}
+	indicatorValues := []*IndicatorValueWithFootnote{}
+
+	path := fmt.Sprintf(
+		"countries/%s/indicators/%s?source=%s",
+		strings.Join(countryIDs, ";"),
+		strings.Join(indicatorIDs, ";"),
+		sourceID,
+	)
+
+	req, err := i.client.NewRequest("GET", path, nil, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	if err := pages.addPageParams(req); err != nil {
+		return nil, nil, err
+	}
+
+	if err := datePatams.addDateParams(req); err != nil {
+		return nil, nil, err
+	}
+
+	addFootNoteParams(req)
 
 	if err = i.client.do(req, &[]interface{}{summary, &indicatorValues}); err != nil {
 		return nil, nil, err
