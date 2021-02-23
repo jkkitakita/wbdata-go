@@ -53,5 +53,5 @@ jobs:
         run: |
           curl -X POST \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -d '{"ref": "${GITHUB_REF#refs/heads/}", "environment": "release", "required_contexts": []}' \
+            -d '{"ref": "main", "environment": "release", "required_contexts": []}' \
             https://api.github.com/repos/${{ github.repository }}/deployments
