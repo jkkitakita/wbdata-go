@@ -5,6 +5,8 @@ on: [deployment]
 jobs:
   deploy:
     name: deploy ${{ github.event.deployment.environment }} ${{ github.event.deployment.task }}
+    environment:
+      name: production
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
