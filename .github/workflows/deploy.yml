@@ -5,13 +5,23 @@ on:
     branches:
       - main
 
+env:
+  environment: "production"
+
 jobs:
   deploy:
     name: deploy ${{ github.event.deployment.environment }} ${{ github.event.deployment.task }}
     environment:
-      name: production
+      name: ${{ env.environment }}
     runs-on: ubuntu-latest
     steps:
+    - name: start deployment
+      uses: bobheadxi/deployments@master
+      id: deployment
+      with:
+        step: start
+        token: ${{ secrets.GITHUB_TOKEN }}
+        env: ${{ env.environment }}
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Bump version and push tag
@@ -27,10 +37,11 @@ jobs:
         tag_name: ${{ steps.tag_version.outputs.new_tag }}
         release_name: Release ${{ steps.tag_version.outputs.new_tag }}
         body: ${{ steps.tag_version.outputs.changelog }}
-    - uses: bobheadxi/deployments@v0.4.3
+    - name: update deployment status
+      uses: bobheadxi/deployments@master
       if: always()
       with:
         step: finish
         token: ${{ secrets.GITHUB_TOKEN }}
         status: ${{ job.status }}
-        deployment_id: ${{ github.event.deployment.id }}
+        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
