@@ -9,7 +9,7 @@ on:
     paths-ignore:
       - "**/README.md"
 env:
-  GOLANGCI_LINT_VERSION: v1.35.2
+  GOLANGCI_LINT_VERSION: v1.37.1
 
 jobs:
   build:
