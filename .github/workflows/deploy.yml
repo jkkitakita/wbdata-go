@@ -1,20 +1,32 @@
 name: deployment
 
-on: [deployment]
+on:
+  deployment:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'select environment'
+        required: true
+        default: 'production'
+      task:
+        description: 'select task (not use)'
+        required: true
+        default: 'deploy'
 
 env:
   DEPLOY_OWNERS: "@jkkitakita"
 
 jobs:
   deploy:
-    name: deploy ${{ github.event.deployment.environment }} ${{ github.event.deployment.task }}
+    name: deploy ${{ github.event.deployment.environment || github.event.inputs.environment }} ${{ github.event.deployment.task || github.event.inputs.task }}
     runs-on: ubuntu-latest
     steps:
     - uses: bobheadxi/deployments@v0.4.3
+      id: deployment
       with:
         step: start
         token: ${{ secrets.GITHUB_TOKEN }}
-        env: ${{ github.event.deployment.environment }}
+        env: ${{ github.event.deployment.environment || github.event.inputs.environment }}
         deployment_id: ${{ github.event.deployment.id }}
     - name: Checkout code
       uses: actions/checkout@v2
@@ -47,4 +59,4 @@ jobs:
         step: finish
         token: ${{ secrets.GITHUB_TOKEN }}
         status: ${{ job.status }}
-        deployment_id: ${{ github.event.deployment.id }}
+        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
