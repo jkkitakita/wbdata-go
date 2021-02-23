@@ -5,14 +5,10 @@ on:
     branches:
       - main
 
-env:
-  environment: "production"
-
 jobs:
   deploy:
-    name: deploy ${{ github.event.deployment.environment }} ${{ github.event.deployment.task }}
     environment:
-      name: ${{ env.environment }}
+      name: production
     runs-on: ubuntu-latest
     steps:
     - name: start deployment
@@ -21,7 +17,7 @@ jobs:
       with:
         step: start
         token: ${{ secrets.GITHUB_TOKEN }}
-        env: ${{ env.environment }}
+        env: production
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Bump version and push tag
