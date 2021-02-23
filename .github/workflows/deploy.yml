@@ -1,6 +1,9 @@
 name: deployment
 
-on: [deployment]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
