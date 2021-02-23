@@ -50,8 +50,8 @@ jobs:
           fail_ci_if_error: true
       - name: start deployment
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: bobheadxi/deployments@v0.4.3
-        with:
-          step: start
-          token: ${{ secrets.GITHUB_TOKEN }}
-          env: release
+        run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -d '{"ref": "${{ github.ref }}", "environment": "release", "required_contexts": []}' \
+            https://api.github.com/repos/${{ github.repository_owner }}/${{ github.repository }}/deployments
