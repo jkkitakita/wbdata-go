@@ -2,6 +2,9 @@ name: deployment
 
 on: [deployment]
 
+env:
+  DEPLOY_OWNERS: "@jkkitakita"
+
 jobs:
   deploy:
     name: deploy ${{ github.event.deployment.environment }} ${{ github.event.deployment.task }}
@@ -15,18 +18,16 @@ jobs:
         deployment_id: ${{ github.event.deployment.id }}
     - name: Checkout code
       uses: actions/checkout@v2
-    - id: codeowners
-      run: |
-        DEPLOY_OWNERS_REGEX_PATTERN="^* "
-        CODEOWNERS_PAT=".github/CODEOWNERS"
-        DEPLOY_OWNERS=$(sed -ne "/${DEPLOY_OWNERS_REGEX_PATTERN}/p" ${CODEOWNERS_PAT})
-        echo ::set-output name=deploy-owners::$DEPLOY_OWNERS
     - run: |
-        if [[ ! `echo "${{ steps.codeowners.outputs.deploy-owners }}" | grep "${{ github.actor }}"` ]]; then
-          echo "${{ github.actor }} is invalid user for deploy"
-          exit 1
-        fi
-        echo "${{ github.actor }} is valid user for deploy"
+        DEPLOY_OWNERS_ARRAY=(${DEPLOY_OWNERS// / })
+        for _a in ${DEPLOY_OWNERS_ARRAY[@]}; do
+          if [[ "${_a}" == "@${{ github.actor }}" ]]; then
+            echo "@${{ github.actor }} is valid user for deploy"
+            exit 0
+          fi
+        done
+        echo "${{ github.actor }} is invalid user for deploy"
+        exit 1
     - name: Bump version and push tag
       id: tag_version
       uses: mathieudutour/github-tag-action@v5.2
