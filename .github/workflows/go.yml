@@ -48,10 +48,3 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           file: ./coverage.txt
           fail_ci_if_error: true
-      - name: start deployment
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: |
-          curl -X POST \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -d '{"ref": "main", "environment": "production", "required_contexts": []}' \
-            https://api.github.com/repos/${{ github.repository }}/deployments
