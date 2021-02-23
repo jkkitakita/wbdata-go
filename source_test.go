@@ -44,9 +44,7 @@ func TestSourcesService_List(t *testing.T) {
 			args: args{},
 			want: &PageSummary{
 				Page:    1,
-				Pages:   2,
 				PerPage: 50,
-				Total:   63,
 			},
 			want1:   nil,
 			wantErr: false,
@@ -57,10 +55,8 @@ func TestSourcesService_List(t *testing.T) {
 				pages: defaultPageParams,
 			},
 			want: &PageSummary{
-				Page:    1,
-				Pages:   32,
-				PerPage: 2,
-				Total:   63,
+				Page:    intOrString(testutils.TestDefaultPage),
+				PerPage: intOrString(testutils.TestDefaultPerPage),
 			},
 			want1: []*Source{
 				{
@@ -106,7 +102,7 @@ func TestSourcesService_List(t *testing.T) {
 				t.Errorf("SourcesService.List() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if !reflect.DeepEqual(got, tt.want) {
+			if tt.want != nil && (got.Page != tt.want.Page || got.PerPage != tt.want.PerPage) {
 				t.Errorf("SourcesService.List() got = %v, want %v", got, tt.want)
 			}
 			if tt.want1 != nil {
@@ -123,6 +119,11 @@ func TestSourcesService_List(t *testing.T) {
 func TestSourcesService_Get(t *testing.T) {
 	client, save := NewTestClient(t, *update)
 	defer save()
+
+	optIgnoreFields := cmpopts.IgnoreFields(
+		Source{},
+		"LastUpdated",
+	)
 
 	type args struct {
 		sourceID string
@@ -199,7 +200,7 @@ func TestSourcesService_Get(t *testing.T) {
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("SourcesService.Get() got = %v, want %v", got, tt.want)
 			}
-			if !reflect.DeepEqual(got1, tt.want1) {
+			if !cmp.Equal(got1, tt.want1, nil, optIgnoreFields) {
 				t.Errorf("SourcesService.Get() got1 = %v, want %v", got1, tt.want1)
 			}
 		})

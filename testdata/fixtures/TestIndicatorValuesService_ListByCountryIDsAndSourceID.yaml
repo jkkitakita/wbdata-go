@@ -10,7 +10,7 @@ interactions:
     url: https://api.worldbank.org/v2/countries/JPN;USA/indicators/NY.GDP.MKTP.CD;SP.POP.TOTL?format=json&source=2
     method: GET
   response:
-    body: '[{"page":1,"pages":5,"per_page":50,"total":244,"sourceid":null,"lastupdated":"2020-12-16"},[{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+    body: '[{"page":1,"pages":5,"per_page":50,"total":244,"sourceid":null,"lastupdated":"2021-02-17"},[{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
       (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2020","value":null,"scale":"","unit":"","obs_status":"","decimal":0},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
       (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2019","value":5081769542379.77,"unit":"","obs_status":"","decimal":0},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
       (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2018","value":4954806619995.19,"unit":"","obs_status":"","decimal":0},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
@@ -69,26 +69,28 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2590968
+      - public, must-revalidate, max-age=2591947
       Content-Length:
       - "10338"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 26 Jan 2021 14:53:42 GMT
+      - Tue, 23 Feb 2021 05:14:37 GMT
       Expires:
-      - Thu, 25 Feb 2021 14:36:30 GMT
+      - Thu, 25 Mar 2021 05:13:44 GMT
       Last-Modified:
-      - Tue, 26 Jan 2021 14:36:30 GMT
+      - Tue, 23 Feb 2021 05:13:44 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_https.cookieCORS=96906c52f5aa89ac2fd6ca82f58d4294; Path=/; SameSite=None;
+      - api_https.cookieCORS=53177bb75221daa2374b8eb09e8f707d; Path=/; SameSite=None;
         Secure
-      - api_https.cookie=96906c52f5aa89ac2fd6ca82f58d4294; Path=/
-      - TS019266c8=017189f9475726d9899733db488d9bcd1ce4cbc970c3684737fbfaaf21fd83a55c2e4838dff8f729cabdcb9781967b32126cef4152;
+      - api_https.cookie=53177bb75221daa2374b8eb09e8f707d; Path=/
+      - dataapi.cookie=853586186.20480.0000; path=/; Httponly
+      - BIGipServerdataapi.sfarm=1604431882.20480.0000; path=/; Httponly
+      - TS019266c8=017189f947639110a8cc1d61941046e40c99d1040bae1eacbf8e3adc5182e795485efa4dfe67651ae2d1682ac5fe39d307dd0e86d84a8707869d37b6cd32a76650af439daec819b3bb53ed43088dcba8a153998c71;
         Path=/
-      - TS019865bf=016ca92173ca5902f7f179951bc8eb4a6ab402a212b26b9486858e579395282944b9e11ed896a18c7d323be9f4e36fe0eb550b3cdcd805fe7d4803c5b18b540e628a3d3694;
+      - TS019865bf=0123646321497c07fc9999908155f1e28615ca342e7496f7b2f0cde879ca25e3b7c84cb64d9f5c78c128230a4951c8c322372a281658803b004f02584e8d193db5603cdf308b3326be61332e89589b8a4164e6de5282e42e616105acbffc3c55b1d4e24457;
         Path=/
     status: 200 OK
     code: 200
@@ -102,7 +104,7 @@ interactions:
     url: https://api.worldbank.org/v2/countries/JPN;USA/indicators/NY.GDP.MKTP.CD;SP.POP.TOTL?date=2018%3A2019&format=json&page=1&per_page=2&source=2
     method: GET
   response:
-    body: '[{"page":1,"pages":4,"per_page":2,"total":8,"sourceid":null,"lastupdated":"2020-12-16"},[{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
+    body: '[{"page":1,"pages":4,"per_page":2,"total":8,"sourceid":null,"lastupdated":"2021-02-17"},[{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
       (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2019","value":5081769542379.77,"unit":"","obs_status":"","decimal":0},{"indicator":{"id":"NY.GDP.MKTP.CD","value":"GDP
       (current US$)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2018","value":4954806619995.19,"unit":"","obs_status":"","decimal":0}]]'
     headers:
@@ -113,26 +115,28 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2590968
+      - public, must-revalidate, max-age=2591947
       Content-Length:
       - "500"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 26 Jan 2021 14:53:42 GMT
+      - Tue, 23 Feb 2021 05:14:37 GMT
       Expires:
-      - Thu, 25 Feb 2021 14:36:30 GMT
+      - Thu, 25 Mar 2021 05:13:44 GMT
       Last-Modified:
-      - Tue, 26 Jan 2021 14:36:30 GMT
+      - Tue, 23 Feb 2021 05:13:44 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_https.cookieCORS=53177bb75221daa2374b8eb09e8f707d; Path=/; SameSite=None;
+      - api_https.cookieCORS=96906c52f5aa89ac2fd6ca82f58d4294; Path=/; SameSite=None;
         Secure
-      - api_https.cookie=53177bb75221daa2374b8eb09e8f707d; Path=/
-      - TS019266c8=017189f947a771a1581c95529c1832fc28400e6a6913a69a7739b15143b799b50840850d525e8aafcb78a1dd688e938a032942d069;
+      - api_https.cookie=96906c52f5aa89ac2fd6ca82f58d4294; Path=/
+      - dataapi.cookie=853586186.20480.0000; path=/; Httponly
+      - BIGipServerdataapi.sfarm=1604431882.20480.0000; path=/; Httponly
+      - TS019266c8=017189f9474167d68c5d45e2e467ddc5cb1ad86e36f446d8bd62fc956c184ff99431515cccef2d1c75813b2aec90f9c400ffec42dc397aa19e3de1f9a59ffc6468b5f2efe62ca717399cf5b9d8c126db7479e180c4;
         Path=/
-      - TS019865bf=0123646321d573491aa402ed888c9728e7e8b79d53c0b4a16392bde0e7b56d9f19e235e4728c81237c256412eece7cce2c2abb36081ae5ac93c02b0be86856f9178f4eadf0;
+      - TS019865bf=016ca92173bea920620b35808aa5b1a8eb893e14a99a35fc10edd37545b25ce3ba57dd95d3d40f786ebefc8689987130bb4cfa735a49c1fb16ee069401a90cb53b64705d1f78d4f29f960a80f5d4a01e174f47e6475cb54d5b01ea0ee3e9c904ed0910e63f;
         Path=/
     status: 200 OK
     code: 200
@@ -156,26 +160,28 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2590967
+      - public, must-revalidate, max-age=2591947
       Content-Length:
       - "102"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 26 Jan 2021 14:53:43 GMT
+      - Tue, 23 Feb 2021 05:14:37 GMT
       Expires:
-      - Thu, 25 Feb 2021 14:36:30 GMT
+      - Thu, 25 Mar 2021 05:13:44 GMT
       Last-Modified:
-      - Tue, 26 Jan 2021 14:36:30 GMT
+      - Tue, 23 Feb 2021 05:13:44 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_https.cookieCORS=96906c52f5aa89ac2fd6ca82f58d4294; Path=/; SameSite=None;
+      - api_https.cookieCORS=53177bb75221daa2374b8eb09e8f707d; Path=/; SameSite=None;
         Secure
-      - api_https.cookie=96906c52f5aa89ac2fd6ca82f58d4294; Path=/
-      - TS019266c8=017189f947c78ae738d52f20665d9d84ffc1c23740e8afe272e6076f4e65545f17a9b461200c6ea3316ea1dfc0bd656010ce7722dc;
+      - api_https.cookie=53177bb75221daa2374b8eb09e8f707d; Path=/
+      - dataapi.cookie=853586186.20480.0000; path=/; Httponly
+      - BIGipServerdataapi.sfarm=1604431882.20480.0000; path=/; Httponly
+      - TS019266c8=017189f947185bfb8293b9cb005497866e0bb75be1145503600b6d90e16a1ae23a9c8064813fc4315da2ae971572cfc9b4f0abf253b79d727467539017978d84c763e8b728ec56792fef67527da2639ec50c58050f;
         Path=/
-      - TS019865bf=016ca9217300cb7e8ec19f8fd24bae5621d0be448c55239e5b951ff0e082baf5abc9f6a0c0e11f25d22ca236ab81c0492d7aca5a46155ef56429c84a4f447c0b98202e160f;
+      - TS019865bf=0123646321b93e4861491c780a67d6cd532199034430f8a4645cfe982f9d5d0fde993fdfa40704bd09aaa42ffffa09b6c3015a5e5507bfd65db7779ea507c62868b6f70bb6354a941b69023de5aef1f6a1975b306dd9588e66de3f768116c208f28ca9c4e9;
         Path=/
     status: 200 OK
     code: 200
@@ -201,26 +207,28 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2590968
+      - public, must-revalidate, max-age=2591948
       Content-Length:
       - "276"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 26 Jan 2021 14:53:43 GMT
+      - Tue, 23 Feb 2021 05:14:37 GMT
       Expires:
-      - Thu, 25 Feb 2021 14:36:31 GMT
+      - Thu, 25 Mar 2021 05:13:45 GMT
       Last-Modified:
-      - Tue, 26 Jan 2021 14:36:31 GMT
+      - Tue, 23 Feb 2021 05:13:45 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_https.cookieCORS=53177bb75221daa2374b8eb09e8f707d; Path=/; SameSite=None;
+      - api_https.cookieCORS=96906c52f5aa89ac2fd6ca82f58d4294; Path=/; SameSite=None;
         Secure
-      - api_https.cookie=53177bb75221daa2374b8eb09e8f707d; Path=/
-      - TS019266c8=017189f9472c565101fb2cba3eca5e8d06534fc27d8e57b62206ddf8edb77d4286cf960390d9850c88e438fefab1e846018bb29fef;
+      - api_https.cookie=96906c52f5aa89ac2fd6ca82f58d4294; Path=/
+      - dataapi.cookie=853586186.20480.0000; path=/; Httponly
+      - BIGipServerdataapi.sfarm=1604431882.20480.0000; path=/; Httponly
+      - TS019266c8=017189f947200ace951eff53545c99e45bf2002db6f3d58d8ce1fcf9cf411c0b0c478be09da9d400c3b30990820dfbb1cb1b4628ae905922da3fa9116385abcd0ebfb34d5f41da2af4f14e388bb5cb08540a5f7b5d;
         Path=/
-      - TS019865bf=0123646321dbedfbc41bdd7e1eb5f11bfeabda543c68ca3b45741d29314b90f8df25d18bfcb0b86e52ec59d1cd2ff22bafd4931044eff61e8c91c2f7ed867514fa23b0c7b5;
+      - TS019865bf=016ca921735dfd22796508e83648479b49909ced565cc41036782c29b1225da629d48d4c46bbbd98423279dff2d66c61ca3c85db31b0471e2d92a88648f3705c948bce78f6f3789ddf585368a69371d989b74d02c57e6e1966141fcf91f552aa61ff112c8a;
         Path=/
     status: 200 OK
     code: 200
@@ -241,16 +249,18 @@ interactions:
       Content-Type:
       - text/html
       Date:
-      - Tue, 26 Jan 2021 14:53:43 GMT
+      - Tue, 23 Feb 2021 05:14:38 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
       - api_https.cookieCORS=96906c52f5aa89ac2fd6ca82f58d4294; Path=/; SameSite=None;
         Secure
       - api_https.cookie=96906c52f5aa89ac2fd6ca82f58d4294; Path=/
-      - TS01fa65e4=01359ee976583c25aa6a7d931148a89d76527f284db8d1408827318791e8f59f1a55ec9fca6e55eec1f315732a97de66a04acde6a2;
+      - dataapi.cookie=853586186.20480.0000; path=/; Httponly
+      - BIGipServerdataapi.sfarm=1604433930.20480.0000; path=/; Httponly
+      - TS01fa65e4=01359ee97661dcb7c759757557cbb5178cb959b70ff9cf92ef8598c1543af163ae706d27976913afc1de304e7a2118f3e2f6e4b616d8c6b7e199bdeef6a0e19ee97939ca0a380ea7aa2d4707a98396533cdbef965d;
         Path=/
-      - TS019865bf=016ca921739a13bb527ab136bf3983697defdad36ff65427a2b9b0b0ee0d8973e533fd27d468e0626ef08baa34a934c75f1a8c44fb73ca0cda62b8a365d2824248a0cd7ba8;
+      - TS019865bf=016ca921734a422d641a6dfc3205f47993323d133efd4e938d1d95bab2afe15c093bcbcb863e3db3a40ee2278520a37ad32990ae9b96e1453263899f35ee7e45d58e9a5147c95f3e2f0e2cd49e651e8fc3f7270b3764b7edb04e543af1e8a0818179407d02;
         Path=/
     status: 400 Bad Request
     code: 400
