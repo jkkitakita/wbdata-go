@@ -1,6 +1,6 @@
 module github.com/jkkitakita/wbdata-go
 
-go 1.15
+go 1.16
 
 require (
 	github.com/dnaeon/go-vcr v1.2.0

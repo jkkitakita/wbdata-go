@@ -20,28 +20,26 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Cache-Control:
-      - public, must-revalidate, max-age=2591945
+      - public, must-revalidate, max-age=2592000
       Content-Length:
       - "160"
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Tue, 23 Feb 2021 05:14:31 GMT
+      - Sun, 13 Jun 2021 02:49:00 GMT
       Expires:
-      - Thu, 25 Mar 2021 05:13:36 GMT
+      - Tue, 13 Jul 2021 02:49:00 GMT
       Last-Modified:
-      - Tue, 23 Feb 2021 05:13:36 GMT
+      - Sun, 13 Jun 2021 02:49:00 GMT
       Request-Context:
       - appId=cid-v1:da002513-bd8b-4441-9f30-737944134422
       Set-Cookie:
-      - api_https.cookieCORS=53177bb75221daa2374b8eb09e8f707d; Path=/; SameSite=None;
+      - api_https.cookieCORS=286e43d9dbb589273e07f096cd441f82; Path=/; SameSite=None;
         Secure
-      - api_https.cookie=53177bb75221daa2374b8eb09e8f707d; Path=/
-      - dataapi.cookie=853586186.20480.0000; path=/; Httponly
-      - BIGipServerdataapi.sfarm=1604431882.20480.0000; path=/; Httponly
-      - TS019266c8=017189f94756535dce1a375935f3a2087f7a995b47b8ccd7efc910553c96302b76ea85c1248cf80e1f5984665fe6f172b9b5d340b9f1a043068b8523c16cc02e9236c7ab87aaaaf74cb86c851803c5af9e33ab9ba2;
+      - api_https.cookie=286e43d9dbb589273e07f096cd441f82; Path=/
+      - TS019266c8=017189f94725ecd6128782f9525c26d9583b5e5b0b193f834a4856077253199ed7541f2231839fc16bc9fe22cb57949e06a79d9396;
         Path=/
-      - TS019865bf=0123646321c786f75e8ed01e31de75bd8d1fa4ab03e60c46b8524757f541b2fda60508ccda88a5803313bb3177eb59aa5731ae8cf217cbc98b5306962c1b0cd9935e0a643b83f790682dd4d3e8679a0828d7e9612d6dafc92b972e6de6dae64ca69070f9a7;
+      - TS019865bf=0114ae292673097ac9488065587d7b9fddb239d4f57858d1251e9fcf6b741b90c43b99f7e3057d0059f84caa8e5e3b806af851bf9a4dbbf25514388bbb2c752c36ff8e2c06;
         Path=/
     status: 200 OK
     code: 200
