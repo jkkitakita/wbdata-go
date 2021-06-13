@@ -17,6 +17,13 @@ repository:
   enable_automated_security_fixes: true
   enable_vulnerability_alerts: true
 
+labels:
+  - name: bug
+    color: CC0000
+  - name: feature
+    # include the old name to rename and existing label
+    oldname: enhancement
+
 branches:
   - name: main
     protection:
