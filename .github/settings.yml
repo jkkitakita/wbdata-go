@@ -21,8 +21,9 @@ labels:
   - name: bug
     color: CC0000
   - name: feature
-    # include the old name to rename and existing label
-    oldname: enhancement
+    color: 336699
+  - name: document
+    color: 0E8A16
 
 branches:
   - name: main
